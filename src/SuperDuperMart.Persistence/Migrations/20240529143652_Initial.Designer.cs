@@ -11,7 +11,7 @@ using SuperDuperMart.Persistence;
 namespace SuperDuperMart.Persistence.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240529140913_Initial")]
+    [Migration("20240529143652_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,10 +33,6 @@ namespace SuperDuperMart.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -95,6 +91,10 @@ namespace SuperDuperMart.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Material")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

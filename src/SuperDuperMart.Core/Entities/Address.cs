@@ -9,7 +9,6 @@ namespace SuperDuperMart.Core.Entities
         public string? ZipCode { get; set; }
         public required string StreetName { get; set; }
         public required string City { get; set; }
-        public required string Country { get; set; }
 
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } = default!;
