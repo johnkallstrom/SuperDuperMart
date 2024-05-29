@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SuperDuperMart.Persistence;
+using SuperDuperMart.Persistence.Data;
 
 #nullable disable
 
 namespace SuperDuperMart.Persistence.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240529151641_Initial")]
+    [Migration("20240529153424_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
