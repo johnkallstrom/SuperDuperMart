@@ -4,7 +4,6 @@ namespace SuperDuperMart.Core.Entities
 {
     public class Customer
     {
-        [Key]
         public int Id { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
