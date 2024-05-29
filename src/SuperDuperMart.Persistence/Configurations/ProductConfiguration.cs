@@ -10,7 +10,8 @@ namespace SuperDuperMart.Persistence.Configurations
         {
             builder.ToTable("Product");
 
-            builder.Property(p => p.Price).HasColumnType("decimal(5, 2)");
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Price).HasPrecision(5, 2);
         }
     }
 }
