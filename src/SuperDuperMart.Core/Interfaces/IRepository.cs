@@ -1,6 +1,8 @@
-﻿namespace SuperDuperMart.Core.Interfaces
+﻿using SuperDuperMart.Core.Entities;
+
+namespace SuperDuperMart.Core.Interfaces
 {
-    public interface IRepository
+    public interface IRepository<T> where T : BaseEntity
     {
     }
 }

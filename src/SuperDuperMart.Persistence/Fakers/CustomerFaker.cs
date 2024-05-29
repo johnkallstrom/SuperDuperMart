@@ -16,7 +16,9 @@ namespace SuperDuperMart.Persistence.Fakers
                 ZipCode = f.Person.Address.ZipCode,
                 StreetName = f.Person.Address.Street,
                 City = f.Person.Address.City,
+                Created = DateTime.Now
             });
+            RuleFor(c => c.Created, DateTime.Now);
         }
     }
 }

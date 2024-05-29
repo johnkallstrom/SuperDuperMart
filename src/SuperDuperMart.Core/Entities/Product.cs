@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SuperDuperMart.Core.Entities
+﻿namespace SuperDuperMart.Core.Entities
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public string? Description { get; set; }
         public required decimal Price { get; set; }

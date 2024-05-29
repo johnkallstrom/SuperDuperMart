@@ -16,6 +16,8 @@ namespace SuperDuperMart.Persistence.Configurations
                 .HasOne(c => c.Address)
                 .WithOne(a => a.Customer)
                 .HasForeignKey<Address>(a => a.CustomerId);
+
+            builder.Property(c => c.Created).ValueGeneratedOnAdd();
         }
     }
 }

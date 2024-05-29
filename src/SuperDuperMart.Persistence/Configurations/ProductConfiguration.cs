@@ -12,6 +12,8 @@ namespace SuperDuperMart.Persistence.Configurations
 
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Price).HasPrecision(5, 2);
+
+            builder.Property(p => p.Created).ValueGeneratedOnAdd();
         }
     }
 }

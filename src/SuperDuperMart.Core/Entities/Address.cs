@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SuperDuperMart.Core.Entities
+﻿namespace SuperDuperMart.Core.Entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
-        public int Id { get; set; }
         public string? ZipCode { get; set; }
         public required string StreetName { get; set; }
         public required string City { get; set; }
