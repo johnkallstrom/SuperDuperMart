@@ -9,6 +9,8 @@ namespace SuperDuperMart.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.ToTable("Product");
+
+            builder.Property(p => p.Price).HasColumnType("decimal(5, 2)");
         }
     }
 }
