@@ -6,10 +6,10 @@ namespace SuperDuperMart.Core.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string FirstName { get; set; } = default!;
-        public string LastName { get; set; } = default!;
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
         public string Username { get; set; } = default!;
-        public string Email { get; set; } = default!;
+        public required string Email { get; set; }
 
         public Address Address { get; set; } = default!;
     }
