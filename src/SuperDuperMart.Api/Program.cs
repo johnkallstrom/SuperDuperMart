@@ -1,3 +1,4 @@
+using SuperDuperMart.Api.Extensions;
 using SuperDuperMart.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await app.SeedDatabaseAsync();
 }
 
 app.UseHttpsRedirection();
