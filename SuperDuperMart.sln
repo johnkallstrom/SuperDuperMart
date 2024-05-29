@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperDuperMart.Core", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1FC96E8-DF6D-427F-BB58-AD5944C13C75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperDuperMart.Persistence", "src\SuperDuperMart.Persistence\SuperDuperMart.Persistence.csproj", "{036535F1-A775-4B44-8E7D-90AD1E25A079}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{534AC205-42AF-46CE-B1AA-00A839EAD65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{534AC205-42AF-46CE-B1AA-00A839EAD65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534AC205-42AF-46CE-B1AA-00A839EAD65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{036535F1-A775-4B44-8E7D-90AD1E25A079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{036535F1-A775-4B44-8E7D-90AD1E25A079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{036535F1-A775-4B44-8E7D-90AD1E25A079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{036535F1-A775-4B44-8E7D-90AD1E25A079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2DDF8C75-1D09-4207-AB66-3C7889A8E3B0} = {A1FC96E8-DF6D-427F-BB58-AD5944C13C75}
 		{534AC205-42AF-46CE-B1AA-00A839EAD65E} = {A1FC96E8-DF6D-427F-BB58-AD5944C13C75}
+		{036535F1-A775-4B44-8E7D-90AD1E25A079} = {A1FC96E8-DF6D-427F-BB58-AD5944C13C75}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CFE6552-4822-4DD7-91D5-36E9EE154D18}
