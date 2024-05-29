@@ -1,6 +1,6 @@
 ﻿using SuperDuperMart.Persistence.Fakers;
 
-namespace SuperDuperMart.Persistence
+namespace SuperDuperMart.Persistence.Data
 {
     public class DbInitializer
     {

@@ -2,7 +2,7 @@
 using SuperDuperMart.Core.Entities;
 using System.Reflection;
 
-namespace SuperDuperMart.Persistence
+namespace SuperDuperMart.Persistence.Data
 {
     public class SuperDuperMartDbContext : DbContext
     {
