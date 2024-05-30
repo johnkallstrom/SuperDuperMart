@@ -1,11 +1,10 @@
-using SuperDuperMart.Persistence;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddPersistenceServices(builder.Configuration);
 
 var app = builder.Build();
@@ -18,6 +17,7 @@ if (app.Environment.IsDevelopment())
     //await app.SeedDatabaseAsync();
 }
 
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.MapControllers();
 
