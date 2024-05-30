@@ -1,5 +1,4 @@
-﻿using SuperDuperMart.Core.Entities;
-using Bogus;
+﻿using Bogus;
 
 namespace SuperDuperMart.Persistence.Fakers
 {

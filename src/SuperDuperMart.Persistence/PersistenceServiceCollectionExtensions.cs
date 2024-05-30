@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SuperDuperMart.Core.Entities;
-using SuperDuperMart.Core.Interfaces;
 using SuperDuperMart.Persistence.Data;
 using SuperDuperMart.Persistence.Repositories;
 

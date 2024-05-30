@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Core.Entities;
 using System.Reflection;
 
 namespace SuperDuperMart.Persistence.Data

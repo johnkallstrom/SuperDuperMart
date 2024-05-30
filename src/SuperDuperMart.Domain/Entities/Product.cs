@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Core.Entities
+﻿namespace SuperDuperMart.Domain.Entities
 {
     public class Product : BaseEntity
     {

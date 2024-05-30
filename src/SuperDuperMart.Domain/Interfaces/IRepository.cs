@@ -1,6 +1,6 @@
-﻿using SuperDuperMart.Core.Entities;
+﻿using SuperDuperMart.Domain.Entities;
 
-namespace SuperDuperMart.Core.Interfaces
+namespace SuperDuperMart.Domain.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {

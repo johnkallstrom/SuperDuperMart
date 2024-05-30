@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Core.Entities;
-using SuperDuperMart.Core.Interfaces;
 using SuperDuperMart.Persistence.Data;
 
 namespace SuperDuperMart.Persistence.Repositories

@@ -1,4 +1,3 @@
-using SuperDuperMart.Api.Extensions;
 using SuperDuperMart.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);

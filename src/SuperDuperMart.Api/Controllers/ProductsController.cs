@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SuperDuperMart.Core.Interfaces;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -7,19 +6,10 @@ namespace SuperDuperMart.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public ProductsController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
-            var products = _unitOfWork.ProductRepository.Get();
-
-            return Ok(products);
+            return Ok();
         }
 
         [HttpGet("{id}")]
