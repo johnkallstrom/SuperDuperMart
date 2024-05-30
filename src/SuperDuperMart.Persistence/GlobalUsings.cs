@@ -1,2 +1,2 @@
-﻿global using SuperDuperMart.Domain.Entities;
-global using SuperDuperMart.Domain.Interfaces;
+﻿global using SuperDuperMart.Core.Entities;
+global using SuperDuperMart.Core.Interfaces;

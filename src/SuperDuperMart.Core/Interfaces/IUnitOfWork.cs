@@ -1,6 +1,6 @@
-﻿using SuperDuperMart.Domain.Entities;
+﻿using SuperDuperMart.Core.Entities;
 
-namespace SuperDuperMart.Domain.Interfaces
+namespace SuperDuperMart.Core.Interfaces
 {
     public interface IUnitOfWork
     {
