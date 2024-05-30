@@ -12,7 +12,7 @@ using SuperDuperMart.Persistence.Data;
 namespace SuperDuperMart.Persistence.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240529153424_Initial")]
+    [Migration("20240530072415_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -52,6 +52,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

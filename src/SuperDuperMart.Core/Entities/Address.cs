@@ -2,7 +2,7 @@
 {
     public class Address : BaseEntity
     {
-        public string? ZipCode { get; set; }
+        public required string ZipCode { get; set; }
         public required string StreetName { get; set; }
         public required string City { get; set; }
 
