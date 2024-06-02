@@ -13,6 +13,7 @@ namespace SuperDuperMart.Persistence
             services.AddDbContext<SuperDuperMartDbContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("Default"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
