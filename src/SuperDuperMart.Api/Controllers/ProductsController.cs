@@ -6,16 +6,27 @@ namespace SuperDuperMart.Api.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            return Ok();
+            _unitOfWork = unitOfWork;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var products = await _unitOfWork.ProductRepository.GetAsync();
+
+            return Ok(products);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok();
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+
+            return Ok(product);
         }
 
         [HttpPost]

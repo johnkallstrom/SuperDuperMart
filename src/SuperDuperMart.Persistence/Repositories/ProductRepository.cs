@@ -12,11 +12,15 @@ namespace SuperDuperMart.Persistence.Repositories
             _context = context;
         }
 
-        public IEnumerable<Product> Get() => _context.Products.AsNoTracking();
-
-        public Product? GetById(int id)
+        public async Task<IEnumerable<Product>> GetAsync()
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+            var products = await _context.Products.ToListAsync();
+            return products;
+        }
+
+        public async Task<Product?> GetByIdAsync(int id)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
     }

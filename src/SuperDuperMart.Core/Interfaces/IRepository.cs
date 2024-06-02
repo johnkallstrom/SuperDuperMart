@@ -2,9 +2,9 @@
 
 namespace SuperDuperMart.Core.Interfaces
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
-        IEnumerable<T> Get();
-        T? GetById(int id);
+        Task<IEnumerable<TEntity>> GetAsync();
+        Task<TEntity?> GetByIdAsync(int id);
     }
 }
