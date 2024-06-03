@@ -1,8 +1,10 @@
-﻿namespace SuperDuperMart.Core.Interfaces
+﻿using SuperDuperMart.Core.Entities;
+
+namespace SuperDuperMart.Core.Interfaces
 {
     public interface IJwtProvider
     {
-        string GenerateToken();
-        bool ValidateToken();
+        string GenerateToken(User user);
+        bool ValidateToken(string token);
     }
 }

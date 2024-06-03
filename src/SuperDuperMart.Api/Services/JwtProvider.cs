@@ -13,14 +13,14 @@ namespace SuperDuperMart.Api.Services
             _jwtSettings = jwtSettings.Value;
         }
 
-        public string GenerateToken()
+        public string GenerateToken(User user)
         {
             var token = new JwtSecurityToken();
             var handler = new JwtSecurityTokenHandler();
             return handler.WriteToken(token);
         }
 
-        public bool ValidateToken()
+        public bool ValidateToken(string token)
         {
             throw new NotImplementedException();
         }
