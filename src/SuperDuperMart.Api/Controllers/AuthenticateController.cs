@@ -40,7 +40,7 @@ namespace SuperDuperMart.Api.Controllers
             }
 
             string token = _jwtProvider.GenerateToken(user);
-            return Ok(token);
+            return Ok(new { Success = true, Token = token });
         }
     }
 }

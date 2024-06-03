@@ -13,7 +13,7 @@ namespace SuperDuperMart.Persistence.Repositories
             ProductRepository = new ProductRepository(_context);
         }
 
-        public IRepository<User> UserRepository { get; }
+        public IUserRepository UserRepository { get; }
         public IRepository<Product> ProductRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
