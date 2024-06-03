@@ -17,7 +17,7 @@ namespace SuperDuperMart.Persistence
             });
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
-            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
