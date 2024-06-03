@@ -4,15 +4,17 @@ using SuperDuperMart.Api.Models;
 
 namespace SuperDuperMart.Api.Controllers
 {
-    [Route("api/authenticate")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
+        private readonly IRepository<Customer> _customerRepository;
         private readonly IJwtProvider _jwtProvider;
 
-        public AuthenticateController(IJwtProvider jwtProvider)
+        public AuthenticateController(IJwtProvider jwtProvider, IRepository<Customer> customerRepository)
         {
             _jwtProvider = jwtProvider;
+            _customerRepository = customerRepository;
         }
 
         [AllowAnonymous]

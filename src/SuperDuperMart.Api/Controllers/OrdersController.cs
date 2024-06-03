@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Api.Controllers
 {
-    [Route("api/orders")]
+    [Route("api/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
