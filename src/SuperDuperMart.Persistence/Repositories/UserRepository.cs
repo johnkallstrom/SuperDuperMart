@@ -3,7 +3,7 @@ using SuperDuperMart.Persistence.DbContexts;
 
 namespace SuperDuperMart.Persistence.Repositories
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
         private readonly SuperDuperMartDbContext _context;
 
@@ -14,20 +14,20 @@ namespace SuperDuperMart.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetAsync()
         {
-            var customers = await _context.Users.ToListAsync();
-            return customers;
+            var users = await _context.Users.ToListAsync();
+            return users;
         }
 
         public async Task<User?> GetByIdAsync(int id)
         {
-            var customer = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
-            return customer;
+            var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            return user;
         }
 
         public async Task<User?> GetByEmailAsync(string email)
         {
-            var customer = await _context.Users.FirstOrDefaultAsync(c => c.Email == email);
-            return customer;
+            var user = await _context.Users.FirstOrDefaultAsync(c => c.Email == email);
+            return user;
         }
     }
 }
