@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SuperDuperMart.Persistence.Data;
+using SuperDuperMart.Persistence.DbContexts;
 using SuperDuperMart.Persistence.Repositories;
 
 namespace SuperDuperMart.Persistence

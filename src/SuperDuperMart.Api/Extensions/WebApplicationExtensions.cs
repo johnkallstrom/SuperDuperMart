@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Persistence.Data;
+using SuperDuperMart.Persistence.DbContexts;
 
 namespace SuperDuperMart.Api.Extensions
 {

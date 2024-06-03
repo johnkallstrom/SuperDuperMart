@@ -1,6 +1,7 @@
-﻿using SuperDuperMart.Persistence.Fakers;
+﻿using SuperDuperMart.Persistence.DbContexts;
+using SuperDuperMart.Persistence.Fakers;
 
-namespace SuperDuperMart.Persistence.Data
+namespace SuperDuperMart.Persistence
 {
     public class DbInitializer
     {
