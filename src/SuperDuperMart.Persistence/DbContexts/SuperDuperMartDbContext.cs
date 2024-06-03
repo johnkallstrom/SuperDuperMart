@@ -9,7 +9,7 @@ namespace SuperDuperMart.Persistence.DbContexts
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Product> Products { get; set; }
 

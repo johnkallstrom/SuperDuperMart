@@ -4,7 +4,7 @@ namespace SuperDuperMart.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()

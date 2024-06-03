@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Persistence.Fakers
 {
-    public class CustomerFaker : Faker<Customer>
+    public class CustomerFaker : Faker<User>
     {
         public CustomerFaker()
         {
@@ -10,6 +10,7 @@ namespace SuperDuperMart.Persistence.Fakers
             RuleFor(c => c.LastName, f => f.Person.LastName);
             RuleFor(c => c.Username, f => f.Person.UserName);
             RuleFor(c => c.Email, f => f.Person.Email);
+            RuleFor(c => c.PasswordHash, f => f.Internet.Password(length: 15));
             RuleFor(c => c.Address, f => new Address
             {
                 ZipCode = f.Person.Address.ZipCode,

@@ -1,4 +1,4 @@
 ﻿namespace SuperDuperMart.Api.Models
 {
-    public record AuthenticateRequest(string Username, string Password);
+    public record AuthenticateRequest(string Email, string Password);
 }

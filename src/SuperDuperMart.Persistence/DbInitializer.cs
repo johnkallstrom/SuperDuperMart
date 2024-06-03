@@ -20,7 +20,7 @@ namespace SuperDuperMart.Persistence
 
             if (customers != null && customers.Count > 0)
             {
-                await context.Customers.AddRangeAsync(customers);
+                await context.Users.AddRangeAsync(customers);
             }
 
             await context.SaveChangesAsync();

@@ -7,6 +7,6 @@
         public required string City { get; set; }
 
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; } = default!;
+        public User Customer { get; set; } = default!;
     }
 }
