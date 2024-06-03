@@ -21,19 +21,13 @@ namespace SuperDuperMart.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] AuthenticateRequest request)
         {
-            // 1. Find user by email
-            // 2. Check password
-            // 3. Generate token
-            // 4. Send back response
-
             var user = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email);
             if (user is null)
             {
                 return NotFound();
             }
 
-            // Encrypt/Decrypt
-            bool validPassword = user.PasswordHash.Equals(request.Password);
+            bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, request.Password);
             if (!validPassword)
             {
                 return Unauthorized();

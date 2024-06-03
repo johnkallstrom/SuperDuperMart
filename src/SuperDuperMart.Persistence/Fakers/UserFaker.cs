@@ -10,7 +10,7 @@ namespace SuperDuperMart.Persistence.Fakers
             RuleFor(c => c.LastName, f => f.Person.LastName);
             RuleFor(c => c.Username, f => f.Person.UserName);
             RuleFor(c => c.Email, f => f.Person.Email);
-            RuleFor(c => c.PasswordHash, f => f.Internet.Password(length: 15));
+            RuleFor(c => c.Password, f => f.Internet.Password(length: 15));
             RuleFor(c => c.Location, f => new Location
             {
                 ZipCode = f.Person.Address.ZipCode,

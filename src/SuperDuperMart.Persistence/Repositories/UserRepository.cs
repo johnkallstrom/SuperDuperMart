@@ -29,5 +29,7 @@ namespace SuperDuperMart.Persistence.Repositories
             var user = await _context.Users.FirstOrDefaultAsync(c => c.Email == email);
             return user;
         }
+
+        public bool CheckPassword(User user, string password) => user.Password == password;
     }
 }

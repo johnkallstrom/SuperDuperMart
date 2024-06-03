@@ -12,7 +12,7 @@ using SuperDuperMart.Persistence.DbContexts;
 namespace SuperDuperMart.Persistence.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240603143229_Initial")]
+    [Migration("20240603151342_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -125,7 +125,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
