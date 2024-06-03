@@ -8,22 +8,39 @@ namespace SuperDuperMart.Api.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtProvider _jwtProvider;
 
-        public AuthenticateController(IJwtProvider jwtProvider)
+        public AuthenticateController(IJwtProvider jwtProvider, IUnitOfWork unitOfWork)
         {
             _jwtProvider = jwtProvider;
+            _unitOfWork = unitOfWork;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login([FromBody] AuthenticateRequest request)
+        public async Task<IActionResult> Login([FromBody] AuthenticateRequest request)
         {
-            // 1. Get user
-            // 2. Generate token
-            // 3. Send response
+            // 1. Find user by email
+            // 2. Check password
+            // 3. Generate token
+            // 4. Send back response
 
-            return Unauthorized();
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            // Encrypt/Decrypt
+            bool validPassword = user.PasswordHash.Equals(request.Password);
+            if (!validPassword)
+            {
+                return Unauthorized();
+            }
+
+            string token = _jwtProvider.GenerateToken(user);
+            return Ok(token);
         }
     }
 }
