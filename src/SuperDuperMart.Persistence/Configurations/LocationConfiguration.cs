@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace SuperDuperMart.Persistence.Configurations
 {
-    public class AddressConfiguration : IEntityTypeConfiguration<Address>
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {
-        public void Configure(EntityTypeBuilder<Address> builder)
+        public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.ToTable("Address");
+            builder.ToTable("Location");
 
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Created).ValueGeneratedOnAdd();

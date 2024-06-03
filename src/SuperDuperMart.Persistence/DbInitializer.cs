@@ -6,21 +6,21 @@ namespace SuperDuperMart.Persistence
     public class DbInitializer
     {
         private static ProductFaker _productFaker = new();
-        private static CustomerFaker _customerFaker = new();
+        private static UserFaker _userFaker = new();
 
         public static async Task SeedAsync(SuperDuperMartDbContext context)
         {
             var products = _productFaker.Generate(100);
-            var customers = _customerFaker.Generate(50);
+            var users = _userFaker.Generate(50);
 
             if (products != null && products.Count > 0)
             {
                 await context.Products.AddRangeAsync(products);
             }
 
-            if (customers != null && customers.Count > 0)
+            if (users != null && users.Count > 0)
             {
-                await context.Users.AddRangeAsync(customers);
+                await context.Users.AddRangeAsync(users);
             }
 
             await context.SaveChangesAsync();

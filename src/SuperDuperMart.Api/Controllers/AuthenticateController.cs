@@ -8,13 +8,11 @@ namespace SuperDuperMart.Api.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly IRepository<User> _userRepository;
         private readonly IJwtProvider _jwtProvider;
 
-        public AuthenticateController(IJwtProvider jwtProvider, IRepository<User> userRepository)
+        public AuthenticateController(IJwtProvider jwtProvider)
         {
             _jwtProvider = jwtProvider;
-            _userRepository = userRepository;
         }
 
         [AllowAnonymous]

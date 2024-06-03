@@ -1,12 +1,12 @@
 ﻿namespace SuperDuperMart.Core.Entities
 {
-    public class Address : BaseEntity
+    public class Location : BaseEntity
     {
         public required string ZipCode { get; set; }
         public required string StreetName { get; set; }
         public required string City { get; set; }
 
-        public int CustomerId { get; set; }
-        public User Customer { get; set; } = default!;
+        public int UserId { get; set; }
+        public User User { get; set; } = default!;
     }
 }

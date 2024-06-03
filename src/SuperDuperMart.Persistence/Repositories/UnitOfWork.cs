@@ -9,9 +9,11 @@ namespace SuperDuperMart.Persistence.Repositories
         public UnitOfWork(SuperDuperMartDbContext context)
         {
             _context = context;
+            UserRepository = new UserRepository(_context);
             ProductRepository = new ProductRepository(_context);
         }
 
+        public IRepository<User> UserRepository { get; }
         public IRepository<Product> ProductRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();

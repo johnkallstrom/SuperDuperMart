@@ -10,7 +10,7 @@ namespace SuperDuperMart.Persistence.DbContexts
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

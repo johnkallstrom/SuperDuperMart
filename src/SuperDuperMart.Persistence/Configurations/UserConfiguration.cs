@@ -12,9 +12,9 @@ namespace SuperDuperMart.Persistence.Configurations
             builder.HasKey(c => c.Id);
 
             builder
-                .HasOne(c => c.Address)
-                .WithOne(a => a.Customer)
-                .HasForeignKey<Address>(a => a.CustomerId);
+                .HasOne(c => c.Location)
+                .WithOne(a => a.User)
+                .HasForeignKey<Location>(a => a.UserId);
 
             builder.Property(c => c.Created).ValueGeneratedOnAdd();
         }
