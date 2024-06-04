@@ -30,11 +30,11 @@ namespace SuperDuperMart.Api.Controllers
             bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, request.Password);
             if (!validPassword)
             {
-                return BadRequest(new { Success = false, Message = "Incorrect password" });
+                return BadRequest(new { Message = "Incorrect password"} );
             }
 
             string token = _jwtProvider.GenerateToken(user);
-            return Ok(new { Success = true, Token = token });
+            return Ok(new AuthenticateResponse(Success: true, Token: token));
         }
     }
 }
