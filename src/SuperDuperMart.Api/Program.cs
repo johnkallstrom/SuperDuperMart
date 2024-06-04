@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using SuperDuperMart.Api.Authorization;
 using SuperDuperMart.Api.Models;
 using SuperDuperMart.Api.Services;
 
@@ -10,7 +12,8 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddJwtAuthentication(builder.Configuration);
-builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+builder.Services.AddTransient<IJwtProvider, JwtProvider>();
+builder.Services.AddAuthorization();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
 
@@ -25,6 +28,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthentication();
+app.UseAuthorization();
+app.UseJwtMiddleware();
+
 app.UseHttpsRedirection();
 app.MapControllers();
 
