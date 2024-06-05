@@ -23,8 +23,9 @@ namespace SuperDuperMart.Api.Services
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Username),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName),
             };
@@ -41,9 +42,32 @@ namespace SuperDuperMart.Api.Services
             return handler.WriteToken(token);
         }
 
-        public bool ValidateToken(string token)
+        public async Task<(bool IsValid, int? UserId)> ValidateToken(string token)
         {
-            throw new NotImplementedException();
+            var handler = new JwtSecurityTokenHandler();
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+            var parameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = _jwtSettings.Issuer,
+                ValidAudience = _jwtSettings.Audience,
+                IssuerSigningKey = securityKey
+            };
+
+            TokenValidationResult? result = await handler.ValidateTokenAsync(token, parameters);
+            if (result.IsValid)
+            {
+                var claim = result.Claims.FirstOrDefault(c => c.Key.Equals(ClaimTypes.NameIdentifier));
+                var userId = int.Parse(claim.Value.ToString());
+
+                return (IsValid: true, UserId: userId);
+            }
+
+            return (IsValid: false, UserId: null);
         }
     }
 }

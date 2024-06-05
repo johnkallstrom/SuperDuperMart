@@ -5,6 +5,6 @@ namespace SuperDuperMart.Core.Interfaces
     public interface IJwtProvider
     {
         string GenerateToken(User user);
-        bool ValidateToken(string token);
+        Task<(bool IsValid, int? UserId)> ValidateToken(string token);
     }
 }

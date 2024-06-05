@@ -11,14 +11,35 @@
             _jwtProvier = jwtProvier;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext httpContext, IUnitOfWork unitOfWork)
         {
             string? token = httpContext.Request.Headers.Authorization.ToString().Split(' ').Last();
             if (!string.IsNullOrEmpty(token))
             {
+                var validationResult = await _jwtProvier.ValidateToken(token);
+                if (validationResult.IsValid && validationResult.UserId.HasValue)
+                {
+                    User? user = await unitOfWork.UserRepository.GetByIdAsync(validationResult.UserId.Value);
+                    AttachUserToHttpContext(httpContext, user);
+                }
             }
 
             await _next.Invoke(httpContext);
+        }
+
+        private void AttachUserToHttpContext(HttpContext httpContext, User? user)
+        {
+            if (user != null)
+            {
+                httpContext.Items.Add("CurrentUser", new
+                {
+                    user.Id,
+                    user.Email,
+                    user.Username,
+                    user.FirstName,
+                    user.LastName,
+                });
+            }
         }
     }
 
