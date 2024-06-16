@@ -6,5 +6,6 @@ namespace SuperDuperMart.Core.Interfaces
     {
         Task<IEnumerable<TEntity>> GetAsync();
         Task<TEntity?> GetByIdAsync(int id);
+        Task<TEntity> CreateAsync(TEntity entity);
     }
 }

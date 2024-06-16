@@ -23,5 +23,13 @@ namespace SuperDuperMart.Persistence.Repositories
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
+
+        public async Task<Product> CreateAsync(Product entity)
+        {
+            var entry = await _context.Products.AddAsync(entity);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
+        }
     }
 }
