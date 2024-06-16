@@ -1,20 +1,39 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using AutoMapper;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Get()
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            return Ok();
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var users = await _unitOfWork.UserRepository.GetAsync();
+
+            return Ok(_mapper.Map<IEnumerable<UserResponse>>(users));
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok();
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<UserResponse>(user));
         }
 
         [HttpPost]
