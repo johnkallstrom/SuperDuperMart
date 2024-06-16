@@ -1,15 +1,19 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using AutoMapper;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsController(IUnitOfWork unitOfWork)
+        public ProductsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -17,15 +21,19 @@
         {
             var products = await _unitOfWork.ProductRepository.GetAsync();
 
-            return Ok(products);
+            return Ok(_mapper.Map<IEnumerable<ProductResponse>>(products));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
 
-            return Ok(product);
+            return Ok(_mapper.Map<ProductResponse>(product));
         }
 
         [HttpPost]
