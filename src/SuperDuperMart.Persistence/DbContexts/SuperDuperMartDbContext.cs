@@ -17,5 +17,24 @@ namespace SuperDuperMart.Persistence.DbContexts
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is BaseEntity && e.State == EntityState.Added)
+                .ToList();
+
+            foreach (var entry in entries)
+            {
+                var entity = entry.Entity as BaseEntity;
+                if (entity != null)
+                {
+                    entity.Created = DateTime.Now;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }
