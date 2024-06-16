@@ -1,6 +1,3 @@
-using SuperDuperMart.Api.Authorization;
-using SuperDuperMart.Api.Models;
-using SuperDuperMart.Api.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +15,9 @@ builder.Services.AddAuthorization();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -31,6 +31,8 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseJwtMiddleware();
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 app.MapControllers();

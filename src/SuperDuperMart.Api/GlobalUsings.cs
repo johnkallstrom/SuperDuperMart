@@ -6,3 +6,5 @@ global using SuperDuperMart.Core.Interfaces;
 global using SuperDuperMart.Persistence;
 global using SuperDuperMart.Api.Authorization;
 global using SuperDuperMart.Api.Models;
+global using SuperDuperMart.Api.Services;
+global using SuperDuperMart.Api.Exceptions.Handlers;
