@@ -7,5 +7,7 @@
         public required string LastName { get; init; }
         public string? Username { get; init; }
         public required string Email { get; init; }
+
+        public LocationResponse? Location { get; init; }
     }
 }

@@ -14,13 +14,19 @@ namespace SuperDuperMart.Persistence.Repositories
 
         public async Task<IEnumerable<User>> GetAsync()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users
+                .Include(u => u.Location)
+                .ToListAsync();
+
             return users;
         }
 
         public async Task<User?> GetByIdAsync(int id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            var user = await _context.Users
+                .Include(u => u.Location)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             return user;
         }
 

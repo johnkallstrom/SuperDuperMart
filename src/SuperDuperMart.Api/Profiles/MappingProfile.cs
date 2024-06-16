@@ -8,6 +8,7 @@ namespace SuperDuperMart.Api.Profiles
         {
             CreateMap<Product, ProductResponse>().ReverseMap();
             CreateMap<User, UserResponse>().ReverseMap();
+            CreateMap<Location, LocationResponse>().ReverseMap();
         }
     }
 }
