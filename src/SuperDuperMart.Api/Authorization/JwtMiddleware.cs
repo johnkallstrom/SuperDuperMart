@@ -31,7 +31,7 @@
         {
             if (user != null)
             {
-                httpContext.Items.Add("CurrentUser", new
+                httpContext.Items.Add("User", new
                 {
                     user.Id,
                     user.Email,
