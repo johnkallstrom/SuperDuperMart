@@ -14,6 +14,11 @@ namespace SuperDuperMart.Api.Exceptions.Handlers
                 Detail = exception.Message
             };
 
+            if (exception.InnerException != null)
+            {
+                problemDetails.Extensions.Add("error", exception.InnerException.Message);
+            }
+
             httpContext.Response.StatusCode = problemDetails.Status.Value;
             await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
