@@ -1,6 +1,7 @@
 using SuperDuperMart.Api.Authorization;
 using SuperDuperMart.Api.Models;
 using SuperDuperMart.Api.Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddTransient<IJwtProvider, JwtProvider>();
 builder.Services.AddAuthorization();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
