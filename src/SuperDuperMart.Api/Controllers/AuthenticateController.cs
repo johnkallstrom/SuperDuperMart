@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using SuperDuperMart.Api.Models;
+﻿using SuperDuperMart.Api.Models;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -30,7 +28,7 @@ namespace SuperDuperMart.Api.Controllers
             bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, request.Password);
             if (!validPassword)
             {
-                return BadRequest(new { Message = "Incorrect password"} );
+                return BadRequest(new { Message = "Incorrect password" });
             }
 
             string token = _jwtProvider.GenerateToken(user);

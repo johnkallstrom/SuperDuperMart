@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SuperDuperMart.Api.Authorization;
 using SuperDuperMart.Api.Models;
 using SuperDuperMart.Api.Services;

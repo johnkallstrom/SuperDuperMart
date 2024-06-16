@@ -31,11 +31,11 @@ namespace SuperDuperMart.Api.Services
             };
 
             var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer, 
-                audience: _jwtSettings.Audience, 
-                claims: claims, 
-                notBefore: null, 
-                expires: DateTime.Now.AddMinutes(60), 
+                issuer: _jwtSettings.Issuer,
+                audience: _jwtSettings.Audience,
+                claims: claims,
+                notBefore: null,
+                expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: signingCredentials);
 
             var handler = new JwtSecurityTokenHandler();

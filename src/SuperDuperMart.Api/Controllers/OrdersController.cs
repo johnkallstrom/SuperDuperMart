@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

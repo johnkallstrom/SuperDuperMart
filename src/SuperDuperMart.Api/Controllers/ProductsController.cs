@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
