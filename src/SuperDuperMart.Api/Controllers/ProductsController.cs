@@ -19,11 +19,9 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            throw new NotImplementedException();
+            var products = await _unitOfWork.ProductRepository.GetAsync();
 
-            //var products = await _unitOfWork.ProductRepository.GetAsync();
-
-            //return Ok(_mapper.Map<IEnumerable<ProductResponse>>(products));
+            return Ok(_mapper.Map<IEnumerable<ProductResponse>>(products));
         }
 
         [HttpGet("{id}")]
