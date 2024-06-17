@@ -38,9 +38,14 @@ namespace SuperDuperMart.Persistence.Repositories
 
         public bool CheckPassword(User user, string password) => user.Password == password;
 
-        public Task<User> CreateAsync(User entity)
+        public async Task<User> CreateAsync(User entity)
         {
-            throw new NotImplementedException();
+            var entry = await _context.Users.AddAsync(entity);
+            return entry.Entity;
         }
+
+        public void Update(User entity) => _context.Users.Update(entity);
+
+        public void Delete(User entity) => _context.Users.Remove(entity);
     }
 }

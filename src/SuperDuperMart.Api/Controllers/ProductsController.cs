@@ -41,19 +41,40 @@ namespace SuperDuperMart.Api.Controllers
         {
             var product = _mapper.Map<Product>(request);
             var newProduct = await _unitOfWork.ProductRepository.CreateAsync(product);
+            await _unitOfWork.SaveAsync();
 
             return CreatedAtAction(nameof(GetById), new { newProduct.Id }, newProduct);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateRequest request)
         {
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            product = _mapper.Map(source: request, destination: product);
+
+            _unitOfWork.ProductRepository.Update(product);
+            await _unitOfWork.SaveAsync();
+
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.ProductRepository.Delete(product);
+            await _unitOfWork.SaveAsync();
+
             return NoContent();
         }
     }

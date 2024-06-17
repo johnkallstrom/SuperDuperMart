@@ -9,6 +9,7 @@ namespace SuperDuperMart.Api.Profiles
             // Product
             CreateMap<Product, ProductResponse>().ReverseMap();
             CreateMap<ProductCreateRequest, Product>();
+            CreateMap<ProductUpdateRequest, Product>();
 
             // User
             CreateMap<User, UserResponse>().ReverseMap();
