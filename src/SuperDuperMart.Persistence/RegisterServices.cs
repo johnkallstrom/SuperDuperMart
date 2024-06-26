@@ -6,7 +6,7 @@ using SuperDuperMart.Persistence.Repositories;
 
 namespace SuperDuperMart.Persistence
 {
-    public static class PersistenceServiceCollectionExtensions
+    public static class RegisterServices
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {

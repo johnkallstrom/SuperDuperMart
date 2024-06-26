@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Api.Models;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -17,7 +15,7 @@ namespace SuperDuperMart.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] AuthenticateRequest request)
+        public async Task<IActionResult> Login([FromBody] AuthenticateModel request)
         {
             var user = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email);
             if (user is null)
@@ -32,7 +30,7 @@ namespace SuperDuperMart.Api.Controllers
             }
 
             string token = _jwtProvider.GenerateToken(user);
-            return Ok(new AuthenticateResponse(Success: true, Token: token));
+            return Ok(new { Success = true, Token = token });
         }
     }
 }

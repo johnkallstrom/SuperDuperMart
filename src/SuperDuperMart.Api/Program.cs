@@ -1,4 +1,5 @@
-using System.Reflection;
+using SuperDuperMart.Core;
+using SuperDuperMart.Core.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddTransient<IJwtProvider, JwtProvider>();
 builder.Services.AddAuthorization();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddCoreServices();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();

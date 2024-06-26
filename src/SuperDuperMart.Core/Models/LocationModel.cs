@@ -1,6 +1,6 @@
-﻿namespace SuperDuperMart.Api.Models
+﻿namespace SuperDuperMart.Core.Models
 {
-    public record LocationResponse
+    public record LocationModel
     {
         public required string ZipCode { get; init; }
         public required string StreetName { get; init; }

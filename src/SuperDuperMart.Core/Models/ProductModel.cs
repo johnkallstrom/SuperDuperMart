@@ -1,6 +1,6 @@
-﻿namespace SuperDuperMart.Api.Models
+﻿namespace SuperDuperMart.Core.Models
 {
-    public record ProductResponse
+    public record ProductModel
     {
         public int Id { get; init; }
         public required string Name { get; init; }

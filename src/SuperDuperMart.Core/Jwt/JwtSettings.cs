@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Api.Models
+﻿namespace SuperDuperMart.Core.Jwt
 {
     public class JwtSettings
     {
