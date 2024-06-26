@@ -1,6 +1,3 @@
-using SuperDuperMart.Core;
-using SuperDuperMart.Core.Jwt;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();

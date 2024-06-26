@@ -2,9 +2,9 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace SuperDuperMart.Api.Extensions
+namespace SuperDuperMart.Api
 {
-    public static class ServiceCollectionExtensions
+    public static class RegisterServices
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
