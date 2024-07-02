@@ -16,7 +16,7 @@ namespace SuperDuperMart.Core.Dtos.Users
         [DataType(DataType.EmailAddress)]
         public string Email { get; init; } = default!;
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid password")]
         [DataType(DataType.Password)]
         public string Password { get; init; } = default!;
 
