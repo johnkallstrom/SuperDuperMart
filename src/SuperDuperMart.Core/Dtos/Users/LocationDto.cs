@@ -1,6 +1,6 @@
-﻿namespace SuperDuperMart.Core.Models
+﻿namespace SuperDuperMart.Core.Dtos.Users
 {
-    public record LocationModel
+    public record LocationDto
     {
         public required string ZipCode { get; init; }
         public required string StreetName { get; init; }

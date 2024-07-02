@@ -1,6 +1,6 @@
-﻿namespace SuperDuperMart.Core.Models
+﻿namespace SuperDuperMart.Core.Dtos.Users
 {
-    public record UserModel
+    public record UserDto
     {
         public int Id { get; init; }
         public required string FirstName { get; init; }
@@ -8,6 +8,6 @@
         public string? Username { get; init; }
         public required string Email { get; init; }
 
-        public LocationModel? Location { get; init; }
+        public LocationDto? Location { get; init; }
     }
 }

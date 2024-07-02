@@ -22,7 +22,7 @@ namespace SuperDuperMart.Persistence.DbContexts
         {
             var entries = ChangeTracker
                 .Entries()
-                .Where(e => e.Entity is BaseEntity && e.State == EntityState.Added)
+                .Where(e => e.Entity is BaseEntity && e.State == EntityState.Added || e.State == EntityState.Modified)
                 .ToList();
 
             foreach (var entry in entries)
@@ -30,7 +30,8 @@ namespace SuperDuperMart.Persistence.DbContexts
                 var entity = entry.Entity as BaseEntity;
                 if (entity != null)
                 {
-                    entity.Created = DateTime.Now;
+                    if (entry.State == EntityState.Added) entity.Created = DateTime.Now;
+                    if (entry.State == EntityState.Modified) entity.LastModified = DateTime.Now;
                 }
             }
 

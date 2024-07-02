@@ -21,7 +21,7 @@ namespace SuperDuperMart.Api.Controllers
         {
             var products = await _unitOfWork.ProductRepository.GetAsync();
 
-            return Ok(_mapper.Map<IEnumerable<ProductModel>>(products));
+            return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
         [HttpGet("{id}")]
@@ -33,11 +33,11 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ProductModel>(product));
+            return Ok(_mapper.Map<ProductDto>(product));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProductCreateModel request)
+        public async Task<IActionResult> Create([FromBody] ProductCreateDto request)
         {
             var product = _mapper.Map<Product>(request);
             var newProduct = await _unitOfWork.ProductRepository.CreateAsync(product);
@@ -47,7 +47,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateModel request)
+        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateDto request)
         {
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (product is null)

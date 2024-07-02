@@ -21,7 +21,7 @@ namespace SuperDuperMart.Api.Controllers
         {
             var users = await _unitOfWork.UserRepository.GetAsync();
 
-            return Ok(_mapper.Map<IEnumerable<UserModel>>(users));
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
 
         [HttpGet("{id}")]
@@ -33,7 +33,7 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<UserModel>(user));
+            return Ok(_mapper.Map<UserDto>(user));
         }
 
         [HttpPost]

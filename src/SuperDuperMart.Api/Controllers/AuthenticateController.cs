@@ -15,7 +15,7 @@
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] AuthenticateModel request)
+        public async Task<IActionResult> Login([FromBody] LoginDto request)
         {
             var user = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email);
             if (user is null)

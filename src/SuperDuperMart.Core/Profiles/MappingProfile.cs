@@ -1,19 +1,22 @@
-﻿namespace SuperDuperMart.Core.Profiles
+﻿using SuperDuperMart.Core.Dtos.Products;
+using SuperDuperMart.Core.Dtos.Users;
+
+namespace SuperDuperMart.Core.Profiles
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, ProductModel>().ReverseMap();
-            CreateMap<ProductCreateModel, Product>();
-            CreateMap<ProductUpdateModel, Product>();
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductCreateDto, Product>();
+            CreateMap<ProductUpdateDto, Product>();
 
             // User
-            CreateMap<User, UserModel>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
 
             // Location
-            CreateMap<Location, LocationModel>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
         }
     }
 }
