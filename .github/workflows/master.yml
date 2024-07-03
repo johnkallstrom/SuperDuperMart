@@ -27,7 +27,7 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Publish
-      run: dotnet publish ./SuperDuperMart.sln --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+      run: dotnet publish --no-build --output '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
     - name: Deployment
       uses: actions/webapps-deploy@v2
