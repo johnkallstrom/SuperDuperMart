@@ -1,7 +1,4 @@
-﻿using SuperDuperMart.Core.Dtos.Products;
-using SuperDuperMart.Core.Dtos.Users;
-
-namespace SuperDuperMart.Core.Profiles
+﻿namespace SuperDuperMart.Core.Profiles
 {
     public class MappingProfile : Profile
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Core.Dtos.Users
+namespace SuperDuperMart.Core.Models.Users
 {
     public record UserCreateDto
     {

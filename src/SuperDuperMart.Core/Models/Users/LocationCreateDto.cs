@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Core.Dtos.Users
+﻿namespace SuperDuperMart.Core.Models.Users
 {
     public record LocationCreateDto
     {

@@ -2,12 +2,12 @@
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJwtProvider _jwtProvider;
 
-        public AuthenticateController(IJwtProvider jwtProvider, IUnitOfWork unitOfWork)
+        public AuthenticationController(IJwtProvider jwtProvider, IUnitOfWork unitOfWork)
         {
             _jwtProvider = jwtProvider;
             _unitOfWork = unitOfWork;

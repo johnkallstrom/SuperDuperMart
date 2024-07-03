@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Core.Dtos
+﻿namespace SuperDuperMart.Core.Models
 {
     public record LoginDto(string Email, string Password);
 }
