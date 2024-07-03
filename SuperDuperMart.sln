@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperDuperMart.Core", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperDuperMart.UnitTests", "tests\SuperDuperMart.UnitTests\SuperDuperMart.UnitTests.csproj", "{BD08F5C8-6B71-47F1-868D-7D1E02444AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuperDuperMart.Web", "src\SuperDuperMart.Web\SuperDuperMart.Web.csproj", "{34F37038-CCD0-4F96-9DC2-63B2BC024434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperDuperMart.Web", "src\SuperDuperMart.Web\SuperDuperMart.Web.csproj", "{34F37038-CCD0-4F96-9DC2-63B2BC024434}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
