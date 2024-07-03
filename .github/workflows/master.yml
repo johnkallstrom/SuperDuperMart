@@ -26,7 +26,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Publish
+    - name: Publish .\src\SuperDuperMart.Api
       run: dotnet publish --property:PublishDir=${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     - name: Deploy
