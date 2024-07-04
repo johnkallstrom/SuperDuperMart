@@ -1,4 +1,4 @@
-name: Deploy Api 🚀
+name: Deploy Api to Azure
 
 on:
   push:

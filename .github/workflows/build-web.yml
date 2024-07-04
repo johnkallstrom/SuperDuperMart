@@ -1,4 +1,4 @@
-name: Build Web 🐦‍🔥
+name: Build Web Project
 
 on:
   push: 
