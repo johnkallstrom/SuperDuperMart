@@ -1,4 +1,4 @@
-name: Build Web Project
+name: Build Web
 
 on:
   push: 
