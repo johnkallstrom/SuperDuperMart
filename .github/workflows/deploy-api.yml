@@ -1,4 +1,4 @@
-name: Build & Deploy Api 🚀
+name: Deploy Api 🚀
 
 on:
   push:
