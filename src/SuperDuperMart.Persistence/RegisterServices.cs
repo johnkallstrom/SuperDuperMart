@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using SuperDuperMart.Persistence.DbContexts;
 using SuperDuperMart.Persistence.Repositories;
 
@@ -8,11 +10,19 @@ namespace SuperDuperMart.Persistence
 {
     public static class RegisterServices
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddDbContext<SuperDuperMartDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Default"));
+                if (environment.IsDevelopment())
+                {
+                    options.UseSqlServer(configuration.GetConnectionString("Local"));
+                }
+                else
+                {
+                    options.UseSqlServer(configuration.GetConnectionString("Azure"));
+                }
+
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 

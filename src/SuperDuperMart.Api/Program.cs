@@ -12,7 +12,7 @@ builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddTransient<IJwtProvider, JwtProvider>();
 builder.Services.AddAuthorization();
 
-builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddPersistenceServices(builder.Configuration, builder.Environment);
 builder.Services.AddCoreServices();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
