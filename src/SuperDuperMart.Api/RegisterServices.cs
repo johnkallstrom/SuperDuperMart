@@ -43,15 +43,22 @@ namespace SuperDuperMart.Api
                     Scheme = JwtBearerDefaults.AuthenticationScheme
                 });
 
-                //var securityScheme = new OpenApiSecurityScheme
-                //{
-                //    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = JwtBearerDefaults.AuthenticationScheme },
-                //    Name = "Bearer"
-                //};
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = JwtBearerDefaults.AuthenticationScheme },
+                    Name = "Bearer",
+                    Scheme = "oauth2",
+                    In = ParameterLocation.Header
+                };
 
-                //options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                //{
-                //});
+                var values = new List<string>();
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        securityScheme, values
+                    }
+                });
 
                 //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
