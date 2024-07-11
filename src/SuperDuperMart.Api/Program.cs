@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerWithBearerAuthorization();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 namespace SuperDuperMart.Api
@@ -24,6 +26,36 @@ namespace SuperDuperMart.Api
                     ValidAudience = audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
                 };
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddSwaggerWithBearerAuthorization(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme
+                });
+
+                //var securityScheme = new OpenApiSecurityScheme
+                //{
+                //    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = JwtBearerDefaults.AuthenticationScheme },
+                //    Name = "Bearer"
+                //};
+
+                //options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                //{
+                //});
+
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //options.IncludeXmlComments(xmlPath);
             });
 
             return services;
