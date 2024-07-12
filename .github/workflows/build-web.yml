@@ -1,8 +1,11 @@
-﻿name: Build Web 🔨
+﻿name: Deploy Web 🚀
 
 on:
   push: 
     branches: ["master"]
+
+env:
+  AZURE_WEBAPP_NAME: "superdupermart"
 
 jobs:
   build:
@@ -23,3 +26,10 @@ jobs:
 
     - name: Publish
       run: dotnet publish ./src/SuperDuperMart.Web/SuperDuperMart.Web.csproj --configuration Release --output ./publish
+
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./publish
