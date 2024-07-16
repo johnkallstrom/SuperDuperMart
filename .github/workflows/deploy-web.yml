@@ -1,4 +1,4 @@
-﻿name: Publish Web 🌍
+﻿name: Build & Deploy Web 🌐
 
 on:
   push: 
