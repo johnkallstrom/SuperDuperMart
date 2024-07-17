@@ -1,4 +1,4 @@
-﻿name: Build & Deploy Web 🌐
+﻿name: Deploy Web 🌐
 
 on:
   push: 
