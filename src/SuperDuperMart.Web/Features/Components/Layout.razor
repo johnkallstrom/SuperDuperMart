@@ -2,5 +2,21 @@
 
 <Navigation />
 <div class="container py-3">
-    @Body
+    <ErrorBoundary @ref="errorBoundary">
+        <ChildContent>
+            @Body
+        </ChildContent>
+        <ErrorContent>
+            <p class="text-danger">Error! Something went wrong.</p>
+        </ErrorContent>
+    </ErrorBoundary>
 </div>
+
+@code {
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+}

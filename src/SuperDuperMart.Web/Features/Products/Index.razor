@@ -2,39 +2,46 @@
 
 <PageTitle>SuperDuperMart - Products</PageTitle>
 
-@if (Model != null && Model.Count() > 0)
+@if (Loading)
 {
-    <table class="table table-bordered">
-        <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Material</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Price</td>
-                    <td>@product.Material</td>
-                    <td>
-                        <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
-                    </td>
-                    <td>
-                        <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <p>Loading...</p>
 }
 else
 {
-    <p>Loading...</p>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Material</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>@product.Material</td>
+                        <td>
+                            <a class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No products to be found.</p>
+    }
 }
