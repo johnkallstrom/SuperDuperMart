@@ -12,7 +12,7 @@ namespace SuperDuperMart.Web.Features.Products
 
         protected override async Task OnInitializedAsync()
         {
-            var products = await HttpService.GetAsync<IEnumerable<ProductModel>>("/products");
+            var products = await HttpService.GetAsync<IEnumerable<ProductModel>>("products");
             if (products != null)
             {
                 Model = products;
