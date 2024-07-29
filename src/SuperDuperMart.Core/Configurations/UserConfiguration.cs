@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace SuperDuperMart.Persistence.Configurations
+namespace SuperDuperMart.Core.Configurations
 {
     public class UserConfiguration : IEntityTypeConfiguration<User>
     {

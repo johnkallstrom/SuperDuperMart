@@ -1,20 +1,18 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using SuperDuperMart.Persistence.DbContexts;
-using SuperDuperMart.Persistence.Repositories;
+using SuperDuperMart.Core.Data;
+using SuperDuperMart.Core.Repositories;
 
-namespace SuperDuperMart.Persistence
+namespace SuperDuperMart.Core.Extensions
 {
-    public static class RegisterServices
+    public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
         {
             services.AddDbContext<SuperDuperMartDbContext>(options =>
             {
-                if (environment.IsDevelopment())
+                if (isDevelopment)
                 {
                     options.UseSqlServer(configuration.GetConnectionString("Local"));
                 }

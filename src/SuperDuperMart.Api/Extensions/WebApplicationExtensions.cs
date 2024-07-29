@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Persistence.DbContexts;
+using SuperDuperMart.Core.Data;
 
 namespace SuperDuperMart.Api.Extensions
 {
@@ -14,7 +14,7 @@ namespace SuperDuperMart.Api.Extensions
                 await context.Database.EnsureDeletedAsync();
                 await context.Database.MigrateAsync();
 
-                await DbInitializer.SeedAsync(context);
+                await DatabaseInitializer.SeedAsync(context);
             }
         }
     }

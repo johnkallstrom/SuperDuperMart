@@ -1,6 +1,6 @@
 ﻿using Bogus;
 
-namespace SuperDuperMart.Persistence.Fakers
+namespace SuperDuperMart.Core.Fakers
 {
     public class ProductFaker : Faker<Product>
     {

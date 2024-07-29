@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
+using SuperDuperMart.Core.Jwt;
 using System.Text;
 
-namespace SuperDuperMart.Api
+namespace SuperDuperMart.Api.Extensions
 {
-    public static class RegisterServices
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {

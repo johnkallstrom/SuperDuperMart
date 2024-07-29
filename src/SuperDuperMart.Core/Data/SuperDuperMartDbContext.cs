@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace SuperDuperMart.Persistence.DbContexts
+namespace SuperDuperMart.Core.Data
 {
     public class SuperDuperMartDbContext : DbContext
     {

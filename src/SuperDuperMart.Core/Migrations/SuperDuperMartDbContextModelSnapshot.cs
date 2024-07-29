@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SuperDuperMart.Persistence.DbContexts;
+using SuperDuperMart.Core.Data;
 
 #nullable disable
 
-namespace SuperDuperMart.Persistence.Migrations
+namespace SuperDuperMart.Core.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
     partial class SuperDuperMartDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace SuperDuperMart.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -39,6 +39,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("StreetName")
@@ -76,6 +77,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Material")
@@ -116,6 +118,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")

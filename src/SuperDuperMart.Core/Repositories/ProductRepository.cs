@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Persistence.DbContexts;
+using SuperDuperMart.Core.Data;
 
-namespace SuperDuperMart.Persistence.Repositories
+namespace SuperDuperMart.Core.Repositories
 {
     public class ProductRepository : IRepository<Product>
     {

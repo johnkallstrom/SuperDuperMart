@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SuperDuperMart.Persistence.DbContexts;
+using SuperDuperMart.Core.Data;
 
 #nullable disable
 
-namespace SuperDuperMart.Persistence.Migrations
+namespace SuperDuperMart.Core.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240603151342_Initial")]
+    [Migration("20240729085657_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SuperDuperMart.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -42,6 +42,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("StreetName")
@@ -79,6 +80,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Material")
@@ -119,6 +121,7 @@ namespace SuperDuperMart.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastModified")
+                        .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")

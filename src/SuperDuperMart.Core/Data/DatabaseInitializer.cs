@@ -1,9 +1,8 @@
-﻿using SuperDuperMart.Persistence.DbContexts;
-using SuperDuperMart.Persistence.Fakers;
+﻿using SuperDuperMart.Core.Fakers;
 
-namespace SuperDuperMart.Persistence
+namespace SuperDuperMart.Core.Data
 {
-    public class DbInitializer
+    public class DatabaseInitializer
     {
         private static ProductFaker _productFaker = new();
         private static UserFaker _userFaker = new();

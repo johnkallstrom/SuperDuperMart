@@ -1,4 +1,5 @@
 using SuperDuperMart.Api.Extensions;
+using SuperDuperMart.Core.Extensions;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 
-builder.Services.AddPersistenceServices(builder.Configuration, builder.Environment);
+builder.Services.AddCoreServices(builder.Configuration, builder.Environment.IsDevelopment());
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
