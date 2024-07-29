@@ -5,7 +5,7 @@
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, Product>().ReverseMap();
+            CreateMap<Product, ProductModel>().ReverseMap();
             CreateMap<ProductCreateModel, Product>();
             CreateMap<ProductUpdateModel, Product>();
 

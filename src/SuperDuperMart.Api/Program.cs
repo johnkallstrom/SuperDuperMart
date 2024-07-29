@@ -1,4 +1,5 @@
 using SuperDuperMart.Api.Extensions;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +8,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithBearerAuthorization();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
 builder.Services.AddJwtAuthentication(builder.Configuration);
-builder.Services.AddTransient<IJwtProvider, JwtProvider>();
 builder.Services.AddAuthorization();
 
 builder.Services.AddPersistenceServices(builder.Configuration, builder.Environment);
@@ -17,6 +16,8 @@ builder.Services.AddCoreServices();
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 

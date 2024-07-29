@@ -10,6 +10,8 @@ namespace SuperDuperMart.Api
     {
         public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 string? issuer = configuration.GetValue<string>("Jwt:Issuer");
@@ -27,6 +29,8 @@ namespace SuperDuperMart.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
                 };
             });
+
+            services.AddTransient<IJwtProvider, JwtProvider>();
 
             return services;
         }
