@@ -1,4 +1,4 @@
-﻿using SuperDuperMart.Core.Fakers;
+﻿using SuperDuperMart.Core.Data.Fakers;
 
 namespace SuperDuperMart.Core.Data
 {

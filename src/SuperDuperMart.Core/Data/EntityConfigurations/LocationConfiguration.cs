@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace SuperDuperMart.Core.Configurations
+namespace SuperDuperMart.Core.Data.EntityConfigurations
 {
     public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {

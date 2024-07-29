@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperDuperMart.Core.Data;
 
 #nullable disable
 
-namespace SuperDuperMart.Core.Migrations
+namespace SuperDuperMart.Core.Data.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    partial class SuperDuperMartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240729121154_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

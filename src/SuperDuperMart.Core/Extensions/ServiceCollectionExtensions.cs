@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SuperDuperMart.Core.Data;
-using SuperDuperMart.Core.Repositories;
+using SuperDuperMart.Core.Data.Repositories;
 
 namespace SuperDuperMart.Core.Extensions
 {

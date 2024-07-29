@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Core.Data;
 
-namespace SuperDuperMart.Core.Repositories
+namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
