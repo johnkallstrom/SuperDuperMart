@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SuperDuperMart.Models\SuperDuperMart.Models.csproj" />
+    <ProjectReference Include="..\..\SuperDuperMart.Shared\SuperDuperMart.Shared.csproj" />
   </ItemGroup>
 
 </Project>

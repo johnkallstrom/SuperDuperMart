@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Models.Products
+﻿namespace SuperDuperMart.Shared.Models.Products
 {
     public record ProductModel
     {

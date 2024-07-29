@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Models.Products
+namespace SuperDuperMart.Shared.Models.Products
 {
     public record ProductCreateModel
     {

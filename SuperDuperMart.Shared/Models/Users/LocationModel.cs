@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Models.Users
+﻿namespace SuperDuperMart.Shared.Models.Users
 {
     public record LocationModel
     {

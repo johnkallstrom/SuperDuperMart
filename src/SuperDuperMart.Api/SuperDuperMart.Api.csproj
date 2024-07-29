@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SuperDuperMart.Models\SuperDuperMart.Models.csproj" />
+    <ProjectReference Include="..\..\SuperDuperMart.Shared\SuperDuperMart.Shared.csproj" />
     <ProjectReference Include="..\SuperDuperMart.Persistence\SuperDuperMart.Persistence.csproj" />
   </ItemGroup>
 
