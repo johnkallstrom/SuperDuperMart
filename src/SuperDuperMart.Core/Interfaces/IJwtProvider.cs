@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Core.Entities;
-
-namespace SuperDuperMart.Core.Interfaces
+﻿namespace SuperDuperMart.Core.Interfaces
 {
     public interface IJwtProvider
     {

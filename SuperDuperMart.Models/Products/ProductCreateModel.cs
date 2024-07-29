@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Core.Models.Products
+namespace SuperDuperMart.Models.Products
 {
-    public record ProductCreateDto
+    public record ProductCreateModel
     {
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; init; } = default!;

@@ -15,15 +15,15 @@
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginDto request)
+        public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _unitOfWork.UserRepository.GetByEmailAsync(request.Email);
+            var user = await _unitOfWork.UserRepository.GetByEmailAsync(model.Email);
             if (user is null)
             {
                 return NotFound();
             }
 
-            bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, request.Password);
+            bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, model.Password);
             if (!validPassword)
             {
                 return BadRequest(new { Message = "Incorrect password" });

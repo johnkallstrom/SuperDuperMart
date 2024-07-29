@@ -21,7 +21,7 @@ namespace SuperDuperMart.Api.Controllers
         {
             var users = await _unitOfWork.UserRepository.GetAsync();
 
-            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
+            return Ok(_mapper.Map<IEnumerable<UserModel>>(users));
         }
 
         [HttpGet("{id}")]
@@ -33,13 +33,13 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<UserDto>(user));
+            return Ok(_mapper.Map<UserModel>(user));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserCreateDto dto)
+        public async Task<IActionResult> Create([FromBody] UserCreateModel model)
         {
-            var user = _mapper.Map<User>(dto);
+            var user = _mapper.Map<User>(model);
             var createdUser = await _unitOfWork.UserRepository.CreateAsync(user);
 
             return CreatedAtAction(nameof(GetById), new { createdUser.Id }, createdUser);

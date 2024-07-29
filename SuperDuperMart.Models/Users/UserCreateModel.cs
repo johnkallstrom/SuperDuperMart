@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Core.Models.Users
+namespace SuperDuperMart.Models.Users
 {
-    public record UserCreateDto
+    public record UserCreateModel
     {
         [Required(ErrorMessage = "Please enter a firstname")]
         public string FirstName { get; init; } = default!;
@@ -20,6 +20,6 @@ namespace SuperDuperMart.Core.Models.Users
         [DataType(DataType.Password)]
         public string Password { get; init; } = default!;
 
-        public LocationCreateDto Location { get; set; } = default!;
+        public LocationCreateModel Location { get; set; } = default!;
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace SuperDuperMart.Core.Models.Products
+﻿namespace SuperDuperMart.Models.Products
 {
-    public record ProductDto
+    public record ProductModel
     {
         public int Id { get; init; }
         public required string Name { get; init; }
