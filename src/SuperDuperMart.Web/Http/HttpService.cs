@@ -13,10 +13,10 @@ namespace SuperDuperMart.Web.Http
 
         public async Task<TData?> GetAsync<TData>(string url)
         {
-            var response = await _httpClient.GetAsync(url);
-            if (response.IsSuccessStatusCode)
+            var httpResponse = await _httpClient.GetAsync(url);
+            if (httpResponse.IsSuccessStatusCode)
             {
-                var data = await response.Content.ReadFromJsonAsync<TData>();
+                var data = await httpResponse.Content.ReadFromJsonAsync<TData>();
                 if (data != null)
                 {
                     return data;

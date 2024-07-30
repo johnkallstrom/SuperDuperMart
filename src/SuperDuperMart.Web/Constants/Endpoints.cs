@@ -2,6 +2,7 @@
 {
     public static class Endpoints
     {
-        public const string Products = "products";
+        public const string Authentication = "/api/authentication";
+        public const string Products = "/api/products";
     }
 }

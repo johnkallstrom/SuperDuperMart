@@ -13,9 +13,6 @@ namespace SuperDuperMart.Web.Features.Authentication
 
         private async Task Submit()
         {
-            Console.WriteLine($"Email: {Model.Email}");
-            Console.WriteLine($"Password: {Model.Password}");
-            Console.WriteLine($"Is Admin: {Model.IsAdministrator}");
         }
     }
 }
