@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace SuperDuperMart.Web.AuthenticationProviders
 {
@@ -26,7 +27,20 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            return await SetStateAsAuthenticated();
+            var claims = ReadClaimsFromToken(token);
+            return await SetStateAsAuthenticated(claims.ToList());
+        }
+
+        private IEnumerable<Claim> ReadClaimsFromToken(string token)
+        {
+            var handler = new JsonWebTokenHandler();
+            if (handler.CanReadToken(token))
+            {
+                var jsonWebToken = handler.ReadJsonWebToken(token);
+                return jsonWebToken.Claims;
+            }
+
+            return Enumerable.Empty<Claim>();
         }
 
         private async Task<AuthenticationState> SetStateAsAnonymous()
@@ -37,14 +51,8 @@ namespace SuperDuperMart.Web.AuthenticationProviders
             return await Task.FromResult(new AuthenticationState(principal));
         }
 
-        private async Task<AuthenticationState> SetStateAsAuthenticated()
+        private async Task<AuthenticationState> SetStateAsAuthenticated(List<Claim> claims)
         {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, "Mandy Marquardt"),
-                new Claim(ClaimTypes.Role, Roles.Administrator)
-            };
-
             var authenticated = new ClaimsIdentity(claims, authenticationType: "jwt");
             var principal = new ClaimsPrincipal(authenticated);
 

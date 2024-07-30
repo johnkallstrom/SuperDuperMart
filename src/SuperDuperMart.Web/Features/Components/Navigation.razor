@@ -5,20 +5,38 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navigation">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <AuthorizeView>
+            <ul class="navbar-nav me-auto">
+                <AuthorizeView Roles="@Roles.Customer">
                     <Authorized>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/products">Products</NavLink>
                         </li>
                     </Authorized>
                 </AuthorizeView>
+                <AuthorizeView Roles="@Roles.Administrator">
+                    <Authorized>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="/manage/products">Products</NavLink>
+                        </li>
+                    </Authorized>
+                </AuthorizeView>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto">
                 <AuthorizeView>
                     <Authorized>
                         <li class="nav-item dropdown">
-                            <NavLink class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-fill"></i></NavLink>
+                            <NavLink class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <AuthorizeView Roles="@Roles.Customer" Context="Customer">
+                                    <Authorized>
+                                        <i class="bi bi-person-fill"></i>
+                                    </Authorized>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="@Roles.Administrator" Context="Administrator">
+                                    <Authorized>
+                                        <i class="bi bi-person-fill-gear"></i>
+                                    </Authorized>
+                                </AuthorizeView>
+                            </NavLink>
                             <ul class="dropdown-menu">
                                 <li><NavLink class="dropdown-item" href="#" @onclick="Logout">Logout</NavLink></li>
                             </ul>
