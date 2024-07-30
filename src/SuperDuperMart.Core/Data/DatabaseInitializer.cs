@@ -7,7 +7,7 @@ namespace SuperDuperMart.Core.Data
 {
     public class DatabaseInitializer
     {
-        private static readonly string _password = "enterthemart123";
+        private static readonly string _password = "superduper123";
         private static readonly string[] _roles = ["Administrator", "Customer"];
 
         private static Faker _faker = new();
@@ -29,7 +29,8 @@ namespace SuperDuperMart.Core.Data
         public static async Task SeedIdentityAsync(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             await CreateRoles(roleManager);
-            await CreateUsers(userManager, roleManager);
+            await CreateAdministrators(userManager, roleManager);
+            await CreateCustomers(userManager, roleManager);
         }
 
         private static async Task CreateRoles(RoleManager<Role> roleManager)
@@ -43,22 +44,37 @@ namespace SuperDuperMart.Core.Data
             }
         }
 
-        private static async Task CreateUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+        private static async Task CreateCustomers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
-            var users = _userFaker.Generate(50);
-            foreach (var user in users)
+            var customers = _userFaker.Generate(50);
+            foreach (var customer in customers)
             {
-                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, _password);
-                var identityResult = await userManager.CreateAsync(user);
+                customer.PasswordHash = userManager.PasswordHasher.HashPassword(customer, _password);
+                var identityResult = await userManager.CreateAsync(customer);
                 if (identityResult.Succeeded)
                 {
-                    var roles = await roleManager.Roles.ToListAsync();
-                    foreach (var role in roles)
+                    var role = await roleManager.FindByNameAsync("Customer");
+                    if (role != null && !string.IsNullOrWhiteSpace(role.Name))
                     {
-                        if (role != null && !string.IsNullOrWhiteSpace(role.Name))
-                        {
-                            await userManager.AddToRoleAsync(user, role.Name);
-                        }
+                        await userManager.AddToRoleAsync(customer, role.Name);
+                    }
+                }
+            }
+        }
+
+        private static async Task CreateAdministrators(UserManager<User> userManager, RoleManager<Role> roleManager)
+        {
+            var administrators = _userFaker.Generate(10);
+            foreach (var admin in administrators)
+            {
+                admin.PasswordHash = userManager.PasswordHasher.HashPassword(admin, _password);
+                var identityResult = await userManager.CreateAsync(admin);
+                if (identityResult.Succeeded)
+                {
+                    var role = await roleManager.FindByNameAsync("Administrator");
+                    if (role != null && !string.IsNullOrWhiteSpace(role.Name))
+                    {
+                        await userManager.AddToRoleAsync(admin, role.Name);
                     }
                 }
             }
