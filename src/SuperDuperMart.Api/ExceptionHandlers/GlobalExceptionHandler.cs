@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 
-namespace SuperDuperMart.Api.Exceptions.Handlers
+namespace SuperDuperMart.Api.ExceptionHandlers
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {
