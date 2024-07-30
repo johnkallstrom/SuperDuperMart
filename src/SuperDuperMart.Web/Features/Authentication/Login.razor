@@ -22,7 +22,17 @@
                         <InputCheckbox type="checkbox" class="form-check-input" for="Model.IsAdministrator" @bind-Value="Model.IsAdministrator" />
                         <label class="form-check-label" for="Model.IsAdministrator">Administrator</label>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @if (Loading)
+                    {
+                        <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm"></span>
+                            <span>Submitting...</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    }
                 </EditForm>
             </div>
         </div>

@@ -17,15 +17,18 @@ namespace SuperDuperMart.Web.Features.Authentication
         public IAuthHttpService AuthHttpService { get; set; } = default!;
 
         public LoginModel Model { get; set; } = new();
+        public bool Loading { get; set; }
 
         private async Task Submit()
         {
+            Loading = true;
             var result = await AuthHttpService.SendLoginRequest(Model.Email, Model.Password, Model.IsAdministrator);
             if (result.Success)
             {
                 await SessionStorage.SetItemAsStringAsync("token", result.Token);
                 NavigationManager.NavigateTo("/");
             }
+            Loading = false;
         }
     }
 }
