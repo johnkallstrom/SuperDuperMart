@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using SuperDuperMart.Core.Data;
 using SuperDuperMart.Core.Data.Repositories;
 
@@ -24,10 +25,13 @@ namespace SuperDuperMart.Core.Extensions
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
-            services
-                .AddIdentityCore<User>()
-                .AddRoles<Role>()
-                .AddEntityFrameworkStores<SuperDuperMartDbContext>();
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<SuperDuperMartDbContext>();
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
