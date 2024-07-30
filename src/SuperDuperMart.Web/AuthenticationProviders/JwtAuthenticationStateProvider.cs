@@ -7,8 +7,19 @@ namespace SuperDuperMart.Web.AuthenticationProviders
     {
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            await Task.Delay(5000);
+            return await SetStateAsAnonymous();
+        }
 
+        private async Task<AuthenticationState> SetStateAsAnonymous()
+        {
+            var anonymous = new ClaimsIdentity();
+            var principal = new ClaimsPrincipal(anonymous);
+            
+            return await Task.FromResult(new AuthenticationState(principal));
+        }
+
+        private async Task<AuthenticationState> SetStateAsAuthenticated()
+        {
             var authenticated = new ClaimsIdentity(authenticationType: "jwt");
             var principal = new ClaimsPrincipal(authenticated);
 
