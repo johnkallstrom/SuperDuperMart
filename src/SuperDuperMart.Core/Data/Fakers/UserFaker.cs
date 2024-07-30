@@ -6,6 +6,7 @@ namespace SuperDuperMart.Core.Data.Fakers
     {
         public UserFaker()
         {
+            RuleFor(c => c.Avatar, f => f.Internet.Avatar());
             RuleFor(c => c.FirstName, f => f.Person.FirstName);
             RuleFor(c => c.LastName, f => f.Person.LastName);
             RuleFor(c => c.UserName, f => f.Person.UserName);
