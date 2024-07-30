@@ -1,7 +1,7 @@
 ﻿@page "/manage/products/edit/{id:int}"
-@attribute [Authorize]
+@attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
+<PageTitle>SuperDuperMart - Edit @Model?.Name</PageTitle>
 
 @if (Loading)
 {

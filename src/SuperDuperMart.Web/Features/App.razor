@@ -3,9 +3,11 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout)">
                 <Authorizing>
-                    <p>Please wait while authorizing the user...</p>
+                    <p>Please wait while authorizing...</p>
                 </Authorizing>
-                <NotAuthorized><p>You're not logged in.</p></NotAuthorized>
+                <NotAuthorized>
+                    <p>You're not authorized.</p>
+                </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
         <NotFound>

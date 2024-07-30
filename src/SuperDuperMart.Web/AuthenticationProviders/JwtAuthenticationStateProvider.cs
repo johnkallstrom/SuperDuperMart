@@ -39,7 +39,13 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 
         private async Task<AuthenticationState> SetStateAsAuthenticated()
         {
-            var authenticated = new ClaimsIdentity(authenticationType: "jwt");
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "Mandy Marquardt"),
+                new Claim(ClaimTypes.Role, Roles.Administrator)
+            };
+
+            var authenticated = new ClaimsIdentity(claims, authenticationType: "jwt");
             var principal = new ClaimsPrincipal(authenticated);
 
             return await Task.FromResult(new AuthenticationState(principal));

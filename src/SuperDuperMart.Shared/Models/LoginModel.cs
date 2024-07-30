@@ -10,6 +10,5 @@ namespace SuperDuperMart.Shared.Models
         [Required(ErrorMessage = "Please enter a valid password")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = default!;
-        public bool IsAdministrator { get; set; }
     }
 }

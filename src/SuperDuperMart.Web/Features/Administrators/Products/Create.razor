@@ -1,6 +1,4 @@
 ﻿@page "/manage/products/create"
-@attribute [Authorize]
+@attribute [Authorize(Roles = Roles.Administrator)]
 
 <PageTitle>SuperDuperMart - Create Product</PageTitle>
-
-<h3>Create Product Page</h3>

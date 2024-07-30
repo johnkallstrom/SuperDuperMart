@@ -1,5 +1,5 @@
 ﻿@page "/manage/products"
-@attribute [Authorize]
+@attribute [Authorize(Roles = Roles.Administrator)]
 
 <PageTitle>SuperDuperMart - Products</PageTitle>
 
@@ -41,7 +41,7 @@ else
                         <td>@product.Price.ToString("C")</td>
                         <td>@product.Material</td>
                         <td>
-                            <a href="@($"/manage/products/edit/{product.Id}")" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                            <a href="@($"/manage/products/edit/{product.Id}")" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></a>
                         </td>
                         <td>
                             <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger"><i class="bi bi-trash"></i></a>

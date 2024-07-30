@@ -19,20 +19,16 @@
                         <InputText type="password" class="form-control" for="Model.Password" @bind-Value="Model.Password" />
                         <ValidationMessage For="() => Model.Password" />
                     </div>
-                    <div class="mb-3 form-check">
-                        <InputCheckbox type="checkbox" class="form-check-input" for="Model.IsAdministrator" @bind-Value="Model.IsAdministrator" />
-                        <label class="form-check-label" for="Model.IsAdministrator">Administrator</label>
-                    </div>
                     @if (Loading)
                     {
                         <button class="btn btn-primary" type="button" disabled>
                             <span class="spinner-border spinner-border-sm"></span>
-                            <span>Submitting...</span>
+                            <span>Loading...</span>
                         </button>
                     }
                     else
                     {
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     }
                 </EditForm>
             </div>

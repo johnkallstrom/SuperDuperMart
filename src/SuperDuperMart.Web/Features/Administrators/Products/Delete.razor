@@ -1,7 +1,7 @@
 ﻿@page "/manage/products/delete/{id:int}"
-@attribute [Authorize]
+@attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
+<PageTitle>SuperDuperMart - Delete @Model?.Name</PageTitle>
 
 @if (Loading)
 {
