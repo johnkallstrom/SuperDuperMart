@@ -5,7 +5,6 @@ global using SuperDuperMart.Api.Exceptions.Handlers;
 global using SuperDuperMart.Core.Entities;
 global using SuperDuperMart.Core.Interfaces;
 global using SuperDuperMart.Core.Identity;
-global using SuperDuperMart.Shared.Models.Authentication;
 global using SuperDuperMart.Shared.Models.Products;
 global using SuperDuperMart.Shared.Models.Users;
 global using AutoMapper;

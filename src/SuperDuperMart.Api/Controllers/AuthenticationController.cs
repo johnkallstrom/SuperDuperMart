@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -37,8 +38,8 @@ namespace SuperDuperMart.Api.Controllers
             }
 
             var roles = await _userManager.GetRolesAsync(user);
-
             string token = _jwtProvider.GenerateToken(user, roles.ToArray());
+
             return Ok(new { Success = true, Token = token });
         }
     }

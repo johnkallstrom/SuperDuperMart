@@ -1,9 +1,9 @@
 ﻿using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.Models.Authentication;
+using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Web.Http;
 
-namespace SuperDuperMart.Web.Features.Authentication
+namespace SuperDuperMart.Web.Features
 {
     public partial class Login
     {
@@ -22,12 +22,7 @@ namespace SuperDuperMart.Web.Features.Authentication
         private async Task Submit()
         {
             Loading = true;
-            var result = await AuthHttpService.SendLoginRequest(Model.Email, Model.Password, Model.IsAdministrator);
-            if (result.Success)
-            {
-                await SessionStorage.SetItemAsStringAsync("token", result.Token);
-                NavigationManager.NavigateTo("/");
-            }
+            await AuthHttpService.SendLoginRequest(Model.Email, Model.Password, Model.IsAdministrator);
             Loading = false;
         }
     }

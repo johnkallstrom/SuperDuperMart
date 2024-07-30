@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Shared.Models.Authentication
+namespace SuperDuperMart.Shared.Models
 {
     public record LoginModel
     {

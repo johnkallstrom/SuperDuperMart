@@ -1,17 +1,20 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IUnitOfWork unitOfWork, IMapper mapper)
+        public UsersController(IMapper mapper, UserManager<User> userManager)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
