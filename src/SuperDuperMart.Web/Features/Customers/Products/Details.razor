@@ -1,0 +1,21 @@
+﻿@page "/products/{id:int}"
+
+<PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
+
+@if (Loading)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @if (Model != null)
+    {
+        <h3>@Model.Name</h3>
+        <p>@Model.Description</p>
+        <ul>
+            <li>@Model.Price.ToString("C")</li>
+            <li>@Model.Material</li>
+        </ul>
+        <a href="#" class="btn btn-success"><i class="bi bi-cart"></i></a>
+    }
+}

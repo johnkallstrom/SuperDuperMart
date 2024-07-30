@@ -6,21 +6,21 @@
     <div class="col-sm-6 col-lg-5 col-xl-4">
         <div class="card shadow border-0">
             <div class="card-body">
-                <form>
+                <EditForm Model="@Model" OnValidSubmit="Submit">
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control">
+                        <label class="form-label" for="@Model.Email">Email</label>
+                        <InputText type="email" class="form-control" for="@Model.Email" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control">
+                        <label class="form-label" for="@Model.Password">Password</label>
+                        <InputText type="password" class="form-control" for="@Model.Password" />
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input">
-                        <label class="form-check-label">Administrator</label>
+                        <InputCheckbox type="checkbox" class="form-check-input" for="@Model.IsAdministrator" />
+                        <label class="form-check-label" for="@Model.IsAdministrator">Administrator</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                </EditForm>
             </div>
         </div>
     </div>

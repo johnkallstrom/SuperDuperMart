@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Web.Http;
 
-namespace SuperDuperMart.Web.Features.Products.Administrator
+namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Delete
     {
