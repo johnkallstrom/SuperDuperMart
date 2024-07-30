@@ -2,6 +2,7 @@
 {
     public interface IHttpService
     {
-        Task<TData?> GetAsync<TData>(string url);
+        Task<T?> GetAsync<T>(string url);
+        Task<string> PostAsync<T>(string url, T value);
     }
 }

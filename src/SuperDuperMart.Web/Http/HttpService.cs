@@ -11,12 +11,12 @@ namespace SuperDuperMart.Web.Http
             _httpClient = httpClient;
         }
 
-        public async Task<TData?> GetAsync<TData>(string url)
+        public async Task<T?> GetAsync<T>(string url)
         {
             var httpResponse = await _httpClient.GetAsync(url);
             if (httpResponse.IsSuccessStatusCode)
             {
-                var data = await httpResponse.Content.ReadFromJsonAsync<TData>();
+                var data = await httpResponse.Content.ReadFromJsonAsync<T>();
                 if (data != null)
                 {
                     return data;
@@ -24,6 +24,18 @@ namespace SuperDuperMart.Web.Http
             }
 
             return default;
+        }
+
+        public async Task<string> PostAsync<T>(string url, T value)
+        {
+            var httpResponse = await _httpClient.PostAsJsonAsync(url, value);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                string str = await httpResponse.Content.ReadAsStringAsync();
+                return str;
+            }
+
+            return string.Empty;
         }
     }
 }
