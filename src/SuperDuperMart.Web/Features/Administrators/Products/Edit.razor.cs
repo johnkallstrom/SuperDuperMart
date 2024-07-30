@@ -6,6 +6,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
     public partial class Edit
     {
         [Inject]
+        public NavigationManager NavigationManager { get; set; } = default!;
+
+        [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
         [Parameter]
@@ -41,8 +44,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task Submit()
         {
-            Console.WriteLine(Model.Name);
-            Console.WriteLine(Model.Price);
+            await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
+            NavigationManager.NavigateTo("/manage/products");
         }
+        private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }

@@ -6,6 +6,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
     public partial class Delete
     {
         [Inject]
+        public NavigationManager NavigationManager { get; set; } = default!;
+
+        [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
         [Parameter]
@@ -25,5 +28,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             Model = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
             Loading = false;
         }
+
+        private async Task DeleteProduct()
+        {
+            await HttpService.DeleteAsync($"{Endpoints.Products}/{Id}");
+            NavigationManager.NavigateTo("/manage/products");
+        }
+        private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }

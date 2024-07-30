@@ -23,7 +23,7 @@ namespace SuperDuperMart.Web.Features
         {
             Loading = true;
 
-            string? token = await HttpService.PostAsync(Endpoints.Authentication, Model);
+            string? token = await HttpService.PostAndRetrieveStringAsync(Endpoints.Authentication, Model);
             if (!string.IsNullOrEmpty(token))
             {
                 await SessionStorage.SetItemAsStringAsync("token", token);
