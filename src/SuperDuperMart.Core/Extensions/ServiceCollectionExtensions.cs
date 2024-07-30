@@ -24,8 +24,12 @@ namespace SuperDuperMart.Core.Extensions
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
+            services
+                .AddIdentityCore<User>()
+                .AddRoles<Role>()
+                .AddEntityFrameworkStores<SuperDuperMartDbContext>();
+
             services.AddScoped<IRepository<Product>, ProductRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

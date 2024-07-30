@@ -8,9 +8,8 @@ namespace SuperDuperMart.Core.Data.Fakers
         {
             RuleFor(c => c.FirstName, f => f.Person.FirstName);
             RuleFor(c => c.LastName, f => f.Person.LastName);
-            RuleFor(c => c.Username, f => f.Person.UserName);
+            RuleFor(c => c.UserName, f => f.Person.UserName);
             RuleFor(c => c.Email, f => f.Person.Email);
-            RuleFor(c => c.Password, f => f.Internet.Password(length: 15));
             RuleFor(c => c.Location, f => new Location
             {
                 ZipCode = f.Person.Address.ZipCode,
@@ -18,7 +17,6 @@ namespace SuperDuperMart.Core.Data.Fakers
                 City = f.Person.Address.City,
                 Created = DateTime.Now
             });
-            RuleFor(c => c.Created, DateTime.Now);
         }
     }
 }

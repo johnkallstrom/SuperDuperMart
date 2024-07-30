@@ -17,11 +17,6 @@ namespace SuperDuperMart.Core.Data
                 await context.Products.AddRangeAsync(products);
             }
 
-            if (users != null && users.Count > 0)
-            {
-                await context.Users.AddRangeAsync(users);
-            }
-
             await context.SaveChangesAsync();
         }
     }

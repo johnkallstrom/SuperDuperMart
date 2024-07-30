@@ -1,10 +1,7 @@
-﻿using SuperDuperMart.Core.Entities;
-
-namespace SuperDuperMart.Core.Interfaces
+﻿namespace SuperDuperMart.Core.Interfaces
 {
     public interface IUnitOfWork
     {
-        public IUserRepository UserRepository { get; }
         public IRepository<Product> ProductRepository { get; }
         Task SaveAsync();
     }

@@ -15,9 +15,6 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
                 .HasOne(c => c.Location)
                 .WithOne(a => a.User)
                 .HasForeignKey<Location>(a => a.UserId);
-
-            builder.Property(c => c.Created).ValueGeneratedOnAdd();
-            builder.Property(c => c.LastModified).ValueGeneratedOnUpdate();
         }
     }
 }

@@ -17,20 +17,20 @@
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _unitOfWork.UserRepository.GetByEmailAsync(model.Email);
-            if (user is null)
-            {
-                return NotFound();
-            }
+            //var user = await _unitOfWork.UserRepository.GetByEmailAsync(model.Email);
+            //if (user is null)
+            //{
+            //    return NotFound();
+            //}
 
-            bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, model.Password);
-            if (!validPassword)
-            {
-                return BadRequest(new { Message = "Incorrect password" });
-            }
+            //bool validPassword = _unitOfWork.UserRepository.CheckPassword(user, model.Password);
+            //if (!validPassword)
+            //{
+            //    return BadRequest(new { Message = "Incorrect password" });
+            //}
 
-            string token = _jwtProvider.GenerateToken(user);
-            return Ok(new { Success = true, Token = token });
+            //string token = _jwtProvider.GenerateToken(user);
+            return Ok();
         }
     }
 }

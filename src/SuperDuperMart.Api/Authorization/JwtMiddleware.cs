@@ -19,28 +19,28 @@
                 var validationResult = await _jwtProvier.ValidateToken(token);
                 if (validationResult.IsValid && validationResult.UserId.HasValue)
                 {
-                    User? user = await unitOfWork.UserRepository.GetByIdAsync(validationResult.UserId.Value);
-                    AttachUserToHttpContext(httpContext, user);
+                    //User? user = await unitOfWork.UserRepository.GetByIdAsync(validationResult.UserId.Value);
+                    //AttachUserToHttpContext(httpContext, user);
                 }
             }
 
             await _next.Invoke(httpContext);
         }
 
-        private void AttachUserToHttpContext(HttpContext httpContext, User? user)
-        {
-            if (user != null)
-            {
-                httpContext.Items.Add("User", new
-                {
-                    user.Id,
-                    user.Email,
-                    user.Username,
-                    user.FirstName,
-                    user.LastName,
-                });
-            }
-        }
+        //private void AttachUserToHttpContext(HttpContext httpContext, User? user)
+        //{
+        //    if (user != null)
+        //    {
+        //        httpContext.Items.Add("User", new
+        //        {
+        //            user.Id,
+        //            user.Email,
+        //            user.Username,
+        //            user.FirstName,
+        //            user.LastName,
+        //        });
+        //    }
+        //}
     }
 
     public static class JwtMiddlewareExtensions

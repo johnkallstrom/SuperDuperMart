@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
@@ -19,30 +17,19 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var users = await _unitOfWork.UserRepository.GetAsync();
-
-            return Ok(_mapper.Map<IEnumerable<UserModel>>(users));
+            return Ok();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(_mapper.Map<UserModel>(user));
+            return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateModel model)
         {
-            var user = _mapper.Map<User>(model);
-            var createdUser = await _unitOfWork.UserRepository.CreateAsync(user);
-
-            return CreatedAtAction(nameof(GetById), new { createdUser.Id }, createdUser);
+            return Created();
         }
 
         [HttpPut("{id}")]
