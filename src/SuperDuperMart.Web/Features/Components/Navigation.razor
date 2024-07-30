@@ -41,6 +41,10 @@
                                 </AuthorizeView>
                             </NavLink>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <span class="dropdown-item">@context.User.Identity?.Name</span>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><NavLink class="dropdown-item" href="#" @onclick="Logout">Logout</NavLink></li>
                             </ul>
                         </li>
