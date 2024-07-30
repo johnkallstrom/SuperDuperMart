@@ -5,15 +5,15 @@ namespace SuperDuperMart.Shared.Models.Products
     public record ProductCreateModel
     {
         [Required(ErrorMessage = "Please enter a name")]
-        public string Name { get; init; } = default!;
+        public string Name { get; set; } = default!;
 
-        public string? Description { get; init; }
+        public string? Description { get; set; }
 
         [Required(ErrorMessage = "Please enter a price")]
         [DataType(DataType.Currency)]
-        public decimal Price { get; init; }
+        public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Please enter a material")]
-        public string Material { get; init; } = default!;
+        public string Material { get; set; } = default!;
     }
 }

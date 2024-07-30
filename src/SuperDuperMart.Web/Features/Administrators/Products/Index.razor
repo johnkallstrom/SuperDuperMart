@@ -35,15 +35,15 @@ else
                     <tr>
                         <td>@product.Id</td>
                         <td>
-                            <a href="@($"/products/edit/{product.Id}")">@product.Name</a>
+                            <a href="@($"/manage/products/edit/{product.Id}")">@product.Name</a>
                         </td>
                         <td>@product.Price.ToString("C")</td>
                         <td>@product.Material</td>
                         <td>
-                            <a href="@($"/products/edit/{product.Id}")" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
+                            <a href="@($"/manage/products/edit/{product.Id}")" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a>
                         </td>
                         <td>
-                            <a href="@($"/products/delete/{product.Id}")" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                            <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 }
