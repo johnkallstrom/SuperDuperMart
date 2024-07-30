@@ -27,7 +27,7 @@ namespace SuperDuperMart.Web.Features
             if (!string.IsNullOrEmpty(token))
             {
                 await SessionStorage.SetItemAsStringAsync("token", token);
-                NavigationManager.NavigateTo("/");
+                NavigationManager.NavigateTo("/", forceLoad: true);
             }
 
             Loading = false;
