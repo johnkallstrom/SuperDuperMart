@@ -15,7 +15,7 @@ namespace SuperDuperMart.Core.Jwt
             _jwtSettings = jwtSettings.Value;
         }
 
-        public string GenerateToken(User user)
+        public string GenerateToken(User user, string[] roles)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -28,6 +28,11 @@ namespace SuperDuperMart.Core.Jwt
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName),
             };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var token = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,

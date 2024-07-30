@@ -36,7 +36,9 @@ namespace SuperDuperMart.Api.Controllers
                 return BadRequest(new { Message = "Incorrect password" });
             }
 
-            string token = _jwtProvider.GenerateToken(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            string token = _jwtProvider.GenerateToken(user, roles.ToArray());
             return Ok(new { Success = true, Token = token });
         }
     }

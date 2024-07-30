@@ -7,6 +7,7 @@ namespace SuperDuperMart.Core.Data
 {
     public class DatabaseInitializer
     {
+        private static readonly string _password = "enterthemart123";
         private static readonly string[] _roles = ["Administrator", "Customer"];
 
         private static Faker _faker = new();
@@ -47,7 +48,7 @@ namespace SuperDuperMart.Core.Data
             var users = _userFaker.Generate(50);
             foreach (var user in users)
             {
-                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, _faker.Internet.Password());
+                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, _password);
                 var identityResult = await userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {

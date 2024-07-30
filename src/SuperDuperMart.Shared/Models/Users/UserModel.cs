@@ -8,6 +8,7 @@
         public required string LastName { get; init; }
         public string? Username { get; init; }
         public required string Email { get; init; }
+        public List<string> Roles { get; set; } = default!;
 
         public LocationModel? Location { get; init; }
     }
