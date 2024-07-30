@@ -1,0 +1,70 @@
+﻿@page "/manage/users"
+@attribute [Authorize(Roles = Roles.Administrator)]
+
+<PageTitle>SuperDuperMart - Users</PageTitle>
+
+@if (Loading)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-8 col-xl-4">
+                <div class="d-flex">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <button class="btn btn-primary ms-1"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Avatar</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>
+                            <img src="@user.Avatar" width="30px" height="30px" />
+                        </td>
+                        <td>
+                            <a href="@($"/manage/users/{user.Id}")">@user.FirstName @user.LastName</a>
+                        </td>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>
+                            @foreach (var role in user.Roles)
+                            {
+                                @if (!user.Roles.Last().Equals(role))
+                                {
+                                    <span class="me-1">@role, </span>
+                                }
+                                else
+                                {
+                                    <span>@role</span>
+                                }
+                            }
+                        </td>
+                        <td>@user.Location?.City</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No users to be found.</p>
+    }
+}

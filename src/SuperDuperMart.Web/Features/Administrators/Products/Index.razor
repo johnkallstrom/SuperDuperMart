@@ -27,8 +27,7 @@ else
                     <th>Name</th>
                     <th>Price</th>
                     <th>Material</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,8 +42,6 @@ else
                         <td>@product.Material</td>
                         <td>
                             <a href="@($"/manage/products/{product.Id}")" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></a>
-                        </td>
-                        <td>
                             <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
