@@ -9,12 +9,13 @@ namespace SuperDuperMart.Web.Features.Authentication
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public LoginModel Model { get; set; } = default!;
+        public LoginModel Model { get; set; } = new();
 
         private async Task Submit()
         {
-            Console.WriteLine(Model.Email);
-            Console.WriteLine(Model.Password);
+            Console.WriteLine($"Email: {Model.Email}");
+            Console.WriteLine($"Password: {Model.Password}");
+            Console.WriteLine($"Is Admin: {Model.IsAdministrator}");
         }
     }
 }
