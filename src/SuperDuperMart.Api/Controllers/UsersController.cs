@@ -1,26 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UsersController(IMapper mapper, UserManager<User> userManager)
+        public UsersController(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            var users = await _unitOfWork.UserRepository.GetUsersAsync();
+
+            var model = new List<UserModel>();
+            foreach (var user in users)
+            {
+                var mappedUser = _mapper.Map<UserModel>(user);
+                var roles = await _unitOfWork.UserRepository.GetUserRolesAsync(user);
+                mappedUser.Roles = roles;
+
+                model.Add(mappedUser);
+            }
+
+            return Ok(model);
         }
 
         [HttpGet("{id}")]
