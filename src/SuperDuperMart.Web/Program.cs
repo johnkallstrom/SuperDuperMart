@@ -1,3 +1,4 @@
+using Blazored.SessionStorage;
 using SuperDuperMart.Web.Http;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -11,6 +12,9 @@ builder.Services.AddScoped(sp => new HttpClient
 });
 
 builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IAuthHttpService, AuthHttpService>();
+
+builder.Services.AddBlazoredSessionStorage();
 
 var host = builder.Build();
 await host.RunAsync();

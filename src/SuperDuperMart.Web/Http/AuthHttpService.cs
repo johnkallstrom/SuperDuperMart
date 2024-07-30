@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using SuperDuperMart.Shared.Models.Authentication;
+using System.Net.Http.Json;
 
 namespace SuperDuperMart.Web.Http
 {
@@ -11,7 +12,7 @@ namespace SuperDuperMart.Web.Http
             _httpClient = httpClient;
         }
 
-        public async Task SendLoginRequest(string email, string password, bool isAdministrator = false)
+        public async Task<LoginResult> SendLoginRequest(string email, string password, bool isAdministrator = false)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync(Endpoints.Authentication, new 
             { 
@@ -22,8 +23,14 @@ namespace SuperDuperMart.Web.Http
 
             if (httpResponse.IsSuccessStatusCode)
             {
-                // Read content
+                var loginResult = await httpResponse.Content.ReadFromJsonAsync<LoginResult>();
+                if (loginResult != null)
+                {
+                    return loginResult;
+                }
             }
+
+            return new LoginResult { Success = false, Token = null };
         }
     }
 }
