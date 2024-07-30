@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using SuperDuperMart.Core.Extensions;
 using System.Reflection;
 
 namespace SuperDuperMart.Core.Data
 {
-    public class SuperDuperMartDbContext : DbContext
+    public class SuperDuperMartDbContext : IdentityDbContext<User, Role, int>
     {
         public SuperDuperMartDbContext(DbContextOptions options) : base(options)
         {
@@ -14,7 +16,9 @@ namespace SuperDuperMart.Core.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.RenameIdentityDefaultTables();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

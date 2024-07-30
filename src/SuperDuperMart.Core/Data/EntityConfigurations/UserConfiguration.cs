@@ -9,8 +9,6 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
         {
             builder.ToTable("User");
 
-            builder.HasKey(c => c.Id);
-
             builder
                 .HasOne(c => c.Location)
                 .WithOne(a => a.User)
