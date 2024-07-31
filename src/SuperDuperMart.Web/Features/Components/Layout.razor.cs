@@ -8,10 +8,5 @@
         {
             errorBoundary?.Recover();
         }
-
-        protected override void OnInitialized()
-        {
-            Thread.Sleep(5000);
-        }
     }
 }
