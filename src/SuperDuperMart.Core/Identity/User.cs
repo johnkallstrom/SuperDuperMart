@@ -7,6 +7,6 @@
         public string LastName { get; set; } = default!;
 
         public Location Location { get; set; } = default!;
-        public ICollection<Cart> Carts { get; set; } = default!;
+        public Cart Cart { get; set; } = default!;
     }
 }

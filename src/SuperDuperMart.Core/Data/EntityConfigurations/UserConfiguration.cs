@@ -11,9 +11,15 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
 
             // One-to-One relationship with Location
             builder
-                .HasOne(c => c.Location)
-                .WithOne(a => a.User)
-                .HasForeignKey<Location>(a => a.UserId);
+                .HasOne(u => u.Location)
+                .WithOne(l => l.User)
+                .HasForeignKey<Location>(l => l.UserId);
+
+            // One-to-One relationship with Cart
+            builder
+                .HasOne(u => u.Cart)
+                .WithOne(c => c.User)
+                .HasForeignKey<Cart>(c => c.UserId);
         }
     }
 }

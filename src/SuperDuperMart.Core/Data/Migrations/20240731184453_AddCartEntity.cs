@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SuperDuperMart.Core.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Cart : Migration
+    public partial class AddCartEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -38,7 +38,8 @@ namespace SuperDuperMart.Core.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cart_UserId",
                 table: "Cart",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
         }
 
         /// <inheritdoc />

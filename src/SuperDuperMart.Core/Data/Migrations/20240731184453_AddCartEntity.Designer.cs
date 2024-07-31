@@ -12,8 +12,8 @@ using SuperDuperMart.Core.Data;
 namespace SuperDuperMart.Core.Data.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    [Migration("20240731155330_Cart")]
-    partial class Cart
+    [Migration("20240731184453_AddCartEntity")]
+    partial class AddCartEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,7 +158,8 @@ namespace SuperDuperMart.Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Cart", (string)null);
                 });
@@ -400,8 +401,8 @@ namespace SuperDuperMart.Core.Data.Migrations
             modelBuilder.Entity("SuperDuperMart.Core.Entities.Cart", b =>
                 {
                     b.HasOne("SuperDuperMart.Core.Identity.User", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("UserId")
+                        .WithOne("Cart")
+                        .HasForeignKey("SuperDuperMart.Core.Entities.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -421,7 +422,8 @@ namespace SuperDuperMart.Core.Data.Migrations
 
             modelBuilder.Entity("SuperDuperMart.Core.Identity.User", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("Cart")
+                        .IsRequired();
 
                     b.Navigation("Location")
                         .IsRequired();
