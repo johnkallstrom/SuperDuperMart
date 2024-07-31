@@ -3,23 +3,29 @@ using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Blazored.LocalStorage;
 
 namespace SuperDuperMart.Web.AuthenticationProviders
 {
     public class JwtAuthenticationStateProvider : AuthenticationStateProvider
     {
         private readonly HttpClient _httpClient;
+        private readonly ILocalStorageService _localStorage;
         private readonly ISessionStorageService _sessionStorage;
 
-        public JwtAuthenticationStateProvider(ISessionStorageService sessionStorage, HttpClient httpClient)
+        public JwtAuthenticationStateProvider(
+            ISessionStorageService sessionStorage, 
+            HttpClient httpClient, 
+            ILocalStorageService localStorage)
         {
             _sessionStorage = sessionStorage;
             _httpClient = httpClient;
+            _localStorage = localStorage;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string? token = await _sessionStorage.GetItemAsStringAsync("token");
+            string? token = await _localStorage.GetItemAsStringAsync("token");
             if (string.IsNullOrWhiteSpace(token))
             {
                 return await SetStateAsAnonymous();

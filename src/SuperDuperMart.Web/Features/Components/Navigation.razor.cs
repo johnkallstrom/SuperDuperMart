@@ -1,4 +1,5 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features.Components
@@ -9,11 +10,14 @@ namespace SuperDuperMart.Web.Features.Components
         public NavigationManager NavigationManager { get; set; } = default!;
 
         [Inject]
-        public ISessionStorageService SessionStorage { get; set; } = default!;
+        public ILocalStorageService LocalStorage { get; set; } = default!;
+
+        //[Inject]
+        //public ISessionStorageService SessionStorage { get; set; } = default!;
 
         private async Task Logout()
         {
-            await SessionStorage.RemoveItemAsync("token");
+            await LocalStorage.RemoveItemAsync("token");
             NavigationManager.NavigateTo("/", forceLoad: true);
         }
     }

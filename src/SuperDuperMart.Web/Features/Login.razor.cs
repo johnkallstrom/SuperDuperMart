@@ -1,4 +1,5 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Web.Http;
@@ -14,7 +15,10 @@ namespace SuperDuperMart.Web.Features
         public NavigationManager NavigationManager { get; set; } = default!;
 
         [Inject]
-        public ISessionStorageService SessionStorage { get; set; } = default!;
+        public ILocalStorageService LocalStorage { get; set; } = default!;
+
+        //[Inject]
+        //public ISessionStorageService SessionStorage { get; set; } = default!;
 
         public LoginModel Model { get; set; } = new();
         public bool Loading { get; set; }
@@ -26,7 +30,7 @@ namespace SuperDuperMart.Web.Features
             string? token = await HttpService.PostAndRetrieveStringAsync(Endpoints.Authentication, Model);
             if (!string.IsNullOrEmpty(token))
             {
-                await SessionStorage.SetItemAsStringAsync("token", token);
+                await LocalStorage.SetItemAsStringAsync("token", token);
                 NavigationManager.NavigateTo("/", forceLoad: true);
             }
 
