@@ -9,8 +9,9 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
         {
             builder.ToTable("Cart");
 
-            builder.HasKey(a => a.Id);
-            builder.Property(a => a.Created).ValueGeneratedOnAdd();
+            builder.HasKey(c => c.Id);
+            builder.Property(c => c.TotalCost).HasPrecision(5, 2);
+            builder.Property(c => c.Created).ValueGeneratedOnAdd();
 
             // One-to-Many relationship with User
             builder

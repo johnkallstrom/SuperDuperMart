@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperDuperMart.Core.Data;
 
@@ -11,9 +12,11 @@ using SuperDuperMart.Core.Data;
 namespace SuperDuperMart.Core.Data.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    partial class SuperDuperMartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240731155228_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,41 +126,6 @@ namespace SuperDuperMart.Core.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserToken", (string)null);
-                });
-
-            modelBuilder.Entity("SuperDuperMart.Core.Entities.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Purchased")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("SessionId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("TotalCost")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Cart", (string)null);
                 });
 
             modelBuilder.Entity("SuperDuperMart.Core.Entities.Location", b =>
@@ -394,17 +362,6 @@ namespace SuperDuperMart.Core.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SuperDuperMart.Core.Entities.Cart", b =>
-                {
-                    b.HasOne("SuperDuperMart.Core.Identity.User", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("SuperDuperMart.Core.Entities.Location", b =>
                 {
                     b.HasOne("SuperDuperMart.Core.Identity.User", "User")
@@ -418,8 +375,6 @@ namespace SuperDuperMart.Core.Data.Migrations
 
             modelBuilder.Entity("SuperDuperMart.Core.Identity.User", b =>
                 {
-                    b.Navigation("Carts");
-
                     b.Navigation("Location")
                         .IsRequired();
                 });
