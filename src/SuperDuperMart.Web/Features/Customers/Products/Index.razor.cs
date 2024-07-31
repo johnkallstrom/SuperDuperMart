@@ -13,14 +13,14 @@ namespace SuperDuperMart.Web.Features.Customers.Products
 
         protected override async Task OnInitializedAsync()
         {
+            Loading = true;
             await GetProducts();
+            Loading = false;
         }
 
         private async Task GetProducts()
         {
-            Loading = true;
             Model = await HttpService.GetAsync<IEnumerable<ProductModel>>(Endpoints.Products);
-            Loading = false;
         }
     }
 }

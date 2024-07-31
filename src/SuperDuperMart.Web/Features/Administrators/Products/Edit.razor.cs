@@ -20,20 +20,18 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         protected override async Task OnParametersSetAsync()
         {
+            Loading = true;
             await GetProduct();
+            Loading = false;
         }
 
         private async Task GetProduct()
         {
-            Loading = true;
-
             var product = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
             if (product != null)
             {
                 Map(product);
             }
-
-            Loading = false;
         }
 
         private void Map(ProductModel product)

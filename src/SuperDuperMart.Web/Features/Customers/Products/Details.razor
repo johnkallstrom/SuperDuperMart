@@ -3,20 +3,14 @@
 
 <PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
 
-@if (Loading)
+<Spinner Enable="Loading" />
+@if (Model != null)
 {
-    <p>Loading...</p>
-}
-else
-{
-    @if (Model != null)
-    {
-        <h3>@Model.Name</h3>
-        <p>@Model.Description</p>
-        <ul>
-            <li>@Model.Price.ToString("C")</li>
-            <li>@Model.Material</li>
-        </ul>
-        <button type="button" class="btn btn-success"><i class="bi bi-cart"></i> Add</button>
-    }
+    <h3>@Model.Name</h3>
+    <p>@Model.Description</p>
+    <ul>
+        <li>@Model.Price.ToString("C")</li>
+        <li>@Model.Material</li>
+    </ul>
+    <button type="button" class="btn btn-success"><i class="bi bi-cart"></i> Add</button>
 }

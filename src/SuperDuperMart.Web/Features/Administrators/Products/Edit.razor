@@ -3,47 +3,41 @@
 
 <PageTitle>SuperDuperMart - Edit @Model?.Name</PageTitle>
 
-@if (Loading)
+<Spinner Enable="Loading" />
+@if (Model != null)
 {
-    <p>Loading...</p>
-}
-else
-{
-    @if (Model != null)
-    {
-        <Alert Message="Saved!" Display="DisplayAlert" OnCloseButtonClick="ToggleAlert" />
-        <div class="row">
-            <div class="col-sm-8 col-lg-6">
-                <div class="card shadow border-0">
-                    <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="Submit">
-                            <DataAnnotationsValidator />
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Name">Name</label>
-                                <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
-                                <ValidationMessage For="() => Model.Name" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Description">Description</label>
-                                <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
-                                <ValidationMessage For="() => Model.Description" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Price">Price</label>
-                                <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
-                                <ValidationMessage For="() => Model.Price" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Material">Material</label>
-                                <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
-                                <ValidationMessage For="() => Model.Material" />
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
-                        </EditForm>
-                    </div>
+    <Alert Message="Saved!" Display="DisplayAlert" OnCloseButtonClick="ToggleAlert" />
+    <div class="row">
+        <div class="col-sm-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <EditForm Model="@Model" OnValidSubmit="Submit">
+                        <DataAnnotationsValidator />
+                        <div class="mb-3">
+                            <label class="form-label" for="@Model.Name">Name</label>
+                            <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
+                            <ValidationMessage For="() => Model.Name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="@Model.Description">Description</label>
+                            <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
+                            <ValidationMessage For="() => Model.Description" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="@Model.Price">Price</label>
+                            <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
+                            <ValidationMessage For="() => Model.Price" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="@Model.Material">Material</label>
+                            <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
+                            <ValidationMessage For="() => Model.Material" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                    </EditForm>
                 </div>
             </div>
         </div>
-    }
+    </div>
 }

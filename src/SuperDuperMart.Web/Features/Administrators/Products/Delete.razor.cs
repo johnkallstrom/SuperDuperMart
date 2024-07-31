@@ -19,14 +19,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         protected override async Task OnParametersSetAsync()
         {
+            Loading = true;
             await GetProduct();
+            Loading = false;
         }
 
         private async Task GetProduct()
         {
-            Loading = true;
             Model = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
-            Loading = false;
         }
 
         private async Task DeleteProduct()
