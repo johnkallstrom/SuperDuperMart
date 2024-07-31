@@ -3,13 +3,18 @@
 
 <PageTitle>SuperDuperMart - Cart</PageTitle>
 
-<div class="row">
-    <div class="col-sm-8 col-lg-6">
-        <div class="card shadow border-0">
-            <div class="card-body">
-                <p>Your cart is empty.</p>
-                <button class="btn btn-primary btn-lg disabled">Order</button>
+<Spinner Enable="Loading" />
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-sm-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Your cart is empty.</h5>
+                    <p class="card-text">Total: @Model.TotalCost.ToCurrency("sv-SE")</p>
+                    <button class="btn btn-primary btn-lg disabled">Order</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
