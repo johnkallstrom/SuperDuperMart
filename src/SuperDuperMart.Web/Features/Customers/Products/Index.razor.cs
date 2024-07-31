@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Web.Http;
 
 namespace SuperDuperMart.Web.Features.Customers.Products
 {

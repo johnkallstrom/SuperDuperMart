@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features.Components

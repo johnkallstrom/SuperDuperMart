@@ -1,8 +1,6 @@
 ﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models;
-using SuperDuperMart.Web.Http;
 
 namespace SuperDuperMart.Web.Features
 {

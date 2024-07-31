@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Web.Http
+﻿namespace SuperDuperMart.Web.Services.Http
 {
     public interface IHttpService
     {

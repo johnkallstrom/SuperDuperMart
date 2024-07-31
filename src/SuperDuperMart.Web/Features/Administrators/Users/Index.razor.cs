@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models.Users;
-using SuperDuperMart.Web.Http;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace SuperDuperMart.Web.Http
+namespace SuperDuperMart.Web.Services.Http
 {
     public class HttpService : IHttpService
     {

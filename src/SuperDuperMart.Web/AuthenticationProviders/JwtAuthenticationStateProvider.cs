@@ -1,10 +1,8 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
+using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
-using Microsoft.IdentityModel.JsonWebTokens;
-using Blazored.LocalStorage;
-using SuperDuperMart.Web.Services;
 
 namespace SuperDuperMart.Web.AuthenticationProviders
 {
@@ -45,7 +43,7 @@ namespace SuperDuperMart.Web.AuthenticationProviders
         {
             var anonymous = new ClaimsIdentity();
             var principal = new ClaimsPrincipal(anonymous);
-            
+
             return await Task.FromResult(new AuthenticationState(principal));
         }
 
