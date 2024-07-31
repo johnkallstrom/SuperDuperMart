@@ -1,0 +1,15 @@
+﻿@page "/cart/{userId:int}"
+@attribute [Authorize(Roles = Roles.Customer)]
+
+<PageTitle>SuperDuperMart - Cart</PageTitle>
+
+<div class="row">
+    <div class="col-sm-8 col-lg-6">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <p>Your cart is empty.</p>
+                <button class="btn btn-primary btn-lg disabled">Order</button>
+            </div>
+        </div>
+    </div>
+</div>

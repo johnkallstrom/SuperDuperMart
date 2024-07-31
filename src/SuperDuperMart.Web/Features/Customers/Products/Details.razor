@@ -6,11 +6,19 @@
 <Spinner Enable="Loading" />
 @if (Model != null)
 {
-    <h3>@Model.Name</h3>
-    <p>@Model.Description</p>
-    <ul>
-        <li>@Model.Price.ToString("C")</li>
-        <li>@Model.Material</li>
-    </ul>
-    <button type="button" class="btn btn-success"><i class="bi bi-cart"></i> Add</button>
+    <div class="row">
+        <div class="col-sm-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <h3>@Model.Name</h3>
+                    <p>@Model.Description</p>
+                    <ul>
+                        <li>@Model.Price.ToString("C")</li>
+                        <li>@Model.Material</li>
+                    </ul>
+                    <button type="button" class="btn btn-primary"><i class="bi bi-cart"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
 }

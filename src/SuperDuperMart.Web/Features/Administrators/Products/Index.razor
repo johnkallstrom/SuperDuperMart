@@ -33,17 +33,17 @@
                     <td>
                         <a href="@($"/manage/products/{product.Id}")">@product.Name</a>
                     </td>
-                    <td>@product.Price.ToString("C")</td>
+                    <td>@product.Price.ToCurrency("sv-SE")</td>
                     <td>@product.Material</td>
-                    <td>@product.Created.ToDateTimeFormat()</td>
+                    <td>@product.Created.ToSpecifiedDateFormat()</td>
                     <td>
                         @if (product.LastModified.HasValue)
                         {
-                            <span>@product.LastModified.Value.ToDateTimeFormat()</span>
+                            <span>@product.LastModified.Value.ToSpecifiedDateFormat()</span>
                         }
                         else
                         {
-                            <span>@DateTime.MinValue.ToDateTimeFormat()</span>
+                            <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
                         }
                     </td>
                     <td>
