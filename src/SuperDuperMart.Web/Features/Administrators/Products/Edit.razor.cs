@@ -14,6 +14,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Parameter]
         public int Id { get; set; }
 
+        public bool DisplayAlert { get; set; } = false;
         public bool Loading { get; set; }
         public ProductUpdateModel Model { get; set; } = new();
 
@@ -25,6 +26,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task GetProduct()
         {
             Loading = true;
+
             var product = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
             if (product != null)
             {
@@ -45,8 +47,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            NavigationManager.NavigateTo("/manage/products");
+            DisplayAlert = true;
         }
+
+        private void ToggleAlert() => DisplayAlert = !DisplayAlert;
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }
