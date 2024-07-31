@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Shared.Models.Carts;
+using SuperDuperMart.Web.Security;
 using System.Security.Claims;
 
 namespace SuperDuperMart.Web.Features.Customers.Carts
@@ -28,10 +29,10 @@ namespace SuperDuperMart.Web.Features.Customers.Carts
             var authState = await AuthenticationStateTask;
             var principal = authState.User;
 
-            if (principal.Identity != null && principal.Identity.IsAuthenticated)
+            int? userId = principal.FindUserIdentifier();
+            if (userId.HasValue)
             {
-                Claim? claim = principal.FindFirst(ClaimTypes.NameIdentifier);
-                Model = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{claim?.Value}");
+                Model = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId}");
             }
         }
     }
