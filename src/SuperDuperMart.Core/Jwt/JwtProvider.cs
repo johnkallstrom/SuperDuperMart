@@ -22,6 +22,7 @@ namespace SuperDuperMart.Core.Jwt
 
             var claims = new List<Claim>
             {
+                new Claim(ClaimTypes.Uri, user.Avatar),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
