@@ -11,12 +11,3 @@
         </ErrorContent>
     </ErrorBoundary>
 </div>
-
-@code {
-    private ErrorBoundary? errorBoundary;
-
-    protected override void OnParametersSet()
-    {
-        errorBoundary?.Recover();
-    }
-}
