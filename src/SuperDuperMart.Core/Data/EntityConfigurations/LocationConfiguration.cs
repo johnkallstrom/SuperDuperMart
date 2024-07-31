@@ -11,7 +11,6 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
 
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Created).ValueGeneratedOnAdd();
-            builder.Property(a => a.LastModified).ValueGeneratedOnUpdate();
         }
     }
 }

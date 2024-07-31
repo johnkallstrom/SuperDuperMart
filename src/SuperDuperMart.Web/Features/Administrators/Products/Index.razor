@@ -9,9 +9,7 @@
     <div class="row mb-3">
         <div class="col-sm-8 col-xl-4">
             <div class="d-flex">
-      @*           <input type="text" class="form-control" placeholder="Search...">
-                <button class="btn btn-primary ms-1"><i class="bi bi-search"></i></button> *@
-                <a href="@("/manage/products/create")" class="btn btn-success ms-1"><i class="bi bi-plus-circle"></i></a>
+                <a href="@("/manage/products/create")" class="btn btn-success"><i class="bi bi-plus-circle"></i></a>
             </div>
         </div>
     </div>
@@ -22,6 +20,8 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Material</th>
+                <th>Created</th>
+                <th>Modified</th>
                 <th>Manage</th>
             </tr>
         </thead>
@@ -35,6 +35,17 @@
                     </td>
                     <td>@product.Price.ToString("C")</td>
                     <td>@product.Material</td>
+                    <td>@product.Created.ToDateTimeFormat()</td>
+                    <td>
+                        @if (product.LastModified.HasValue)
+                        {
+                            <span>@product.LastModified.Value.ToDateTimeFormat()</span>
+                        }
+                        else
+                        {
+                            <span>@DateTime.MinValue.ToDateTimeFormat()</span>
+                        }
+                    </td>
                     <td>
                         <a href="@($"/manage/products/{product.Id}")" class="btn btn-secondary"><i class="bi bi-pencil-square"></i></a>
                         <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger"><i class="bi bi-trash"></i></a>

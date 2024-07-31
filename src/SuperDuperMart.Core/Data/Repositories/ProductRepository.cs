@@ -29,7 +29,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             return entry.Entity;
         }
 
-        public void Update(Product entity) => _context.Products.Update(entity);
+        public void Update(Product entity)
+        {
+            entity.LastModified = DateTime.Now;
+            _context.Products.Update(entity);
+        }
 
         public void Delete(Product entity) => _context.Products.Remove(entity);
     }

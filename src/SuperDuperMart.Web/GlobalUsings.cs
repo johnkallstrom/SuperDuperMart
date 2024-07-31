@@ -5,3 +5,4 @@ global using SuperDuperMart.Web.Constants;
 global using SuperDuperMart.Web.Features;
 global using SuperDuperMart.Web.Services;
 global using SuperDuperMart.Web.Services.Http;
+global using SuperDuperMart.Shared.Extensions;

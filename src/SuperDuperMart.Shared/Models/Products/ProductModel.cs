@@ -7,5 +7,7 @@
         public string? Description { get; init; }
         public required decimal Price { get; init; }
         public required string Material { get; init; }
+        public DateTime Created { get; set; }
+        public DateTime? LastModified { get; set; }
     }
 }
