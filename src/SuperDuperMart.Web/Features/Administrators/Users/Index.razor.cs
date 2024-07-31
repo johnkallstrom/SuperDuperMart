@@ -14,14 +14,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         protected override async Task OnInitializedAsync()
         {
+            Loading = true;
             await GetUsers();
+            Loading = false;
         }
 
         private async Task GetUsers()
         {
-            Loading = true;
             Model = await HttpService.GetAsync<IEnumerable<UserModel>>(Endpoints.Users);
-            Loading = false;
         }
     }
 }
