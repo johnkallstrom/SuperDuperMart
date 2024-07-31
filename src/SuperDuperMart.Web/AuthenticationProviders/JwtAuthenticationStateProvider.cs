@@ -4,49 +4,41 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Blazored.LocalStorage;
+using SuperDuperMart.Web.Services;
 
 namespace SuperDuperMart.Web.AuthenticationProviders
 {
     public class JwtAuthenticationStateProvider : AuthenticationStateProvider
     {
+        private readonly IJwtHandler _jwtHandler;
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
         private readonly ISessionStorageService _sessionStorage;
 
         public JwtAuthenticationStateProvider(
-            ISessionStorageService sessionStorage, 
-            HttpClient httpClient, 
-            ILocalStorageService localStorage)
+            ISessionStorageService sessionStorage,
+            HttpClient httpClient,
+            ILocalStorageService localStorage,
+            IJwtHandler jwtHandler)
         {
             _sessionStorage = sessionStorage;
             _httpClient = httpClient;
             _localStorage = localStorage;
+            _jwtHandler = jwtHandler;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             string? token = await _localStorage.GetItemAsStringAsync("token");
-            if (string.IsNullOrWhiteSpace(token))
+            if (string.IsNullOrWhiteSpace(token) || _jwtHandler.HasTokenExpired(token))
             {
                 return await SetStateAsAnonymous();
             }
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var claims = ReadClaimsFromToken(token);
+            var claims = _jwtHandler.ReadClaimsFromToken(token);
             return await SetStateAsAuthenticated(claims.ToList());
-        }
-
-        private IEnumerable<Claim> ReadClaimsFromToken(string token)
-        {
-            var handler = new JsonWebTokenHandler();
-            if (handler.CanReadToken(token))
-            {
-                var jsonWebToken = handler.ReadJsonWebToken(token);
-                return jsonWebToken.Claims;
-            }
-
-            return Enumerable.Empty<Claim>();
         }
 
         private async Task<AuthenticationState> SetStateAsAnonymous()

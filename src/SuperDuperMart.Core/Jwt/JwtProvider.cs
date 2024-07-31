@@ -39,7 +39,7 @@ namespace SuperDuperMart.Core.Jwt
                 audience: _jwtSettings.Audience,
                 claims: claims,
                 notBefore: null,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.UtcNow.AddMinutes(60),
                 signingCredentials: signingCredentials);
 
             var handler = new JwtSecurityTokenHandler();
