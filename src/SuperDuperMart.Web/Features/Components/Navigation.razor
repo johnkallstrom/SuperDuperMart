@@ -45,7 +45,16 @@
                             </NavLink>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <span class="dropdown-header">@context.User.Identity?.Name</span>
+                                    <h6 class="dropdown-header">@context.User.Identity?.Name</h6>
+                                </li>
+                                <li>
+                                    @{
+                                        string? email = context.User.FindEmail();
+                                        if (!string.IsNullOrEmpty(email))
+                                        {
+                                            <small class="dropdown-item text-muted disabled">@email</small>
+                                        }
+                                    }
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><NavLink class="dropdown-item" href="#" @onclick="Logout">Logout</NavLink></li>
