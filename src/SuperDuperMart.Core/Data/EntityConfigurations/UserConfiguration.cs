@@ -9,6 +9,7 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
         {
             builder.ToTable("User");
 
+            // One-to-One relationship with Location
             builder
                 .HasOne(c => c.Location)
                 .WithOne(a => a.User)
