@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
-    public class CartRepository : IRepository<Cart>
+    public class CartRepository : ICartRepository
     {
         private readonly SuperDuperMartDbContext _context;
 
@@ -25,6 +25,15 @@ namespace SuperDuperMart.Core.Data.Repositories
             var cart = await _context.Carts
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(c => c.Id == id);
+
+            return cart;
+        }
+
+        public async Task<Cart?> GetByUserIdAsync(int userId)
+        {
+            var cart = await _context.Carts
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
             return cart;
         }

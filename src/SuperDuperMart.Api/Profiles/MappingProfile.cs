@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Api.Profiles
+﻿using SuperDuperMart.Shared.Models.Carts;
+
+namespace SuperDuperMart.Api.Profiles
 {
     public class MappingProfile : Profile
     {
@@ -14,6 +16,9 @@
 
             // Location
             CreateMap<Location, LocationModel>().ReverseMap();
+
+            // Cart
+            CreateMap<Cart, CartModel>().ReverseMap();
         }
     }
 }

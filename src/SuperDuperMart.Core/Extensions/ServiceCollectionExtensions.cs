@@ -35,6 +35,7 @@ namespace SuperDuperMart.Core.Extensions
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

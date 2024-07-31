@@ -9,12 +9,15 @@
         {
             _context = context;
             _userManager = userManager;
-            UserRepository = new UserRepository(_context, _userManager);
+
+            CartRepository = new CartRepository(_context);
             ProductRepository = new ProductRepository(_context);
+            UserRepository = new UserRepository(_context, _userManager);
         }
 
-        public IUserRepository UserRepository { get; }
+        public ICartRepository CartRepository { get; }
         public IRepository<Product> ProductRepository { get; }
+        public IUserRepository UserRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
     }

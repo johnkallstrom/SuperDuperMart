@@ -33,7 +33,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.SeedDatabaseAsync();
+    //await app.SeedDatabaseAsync();
 }
 
 app.UseSwagger();
