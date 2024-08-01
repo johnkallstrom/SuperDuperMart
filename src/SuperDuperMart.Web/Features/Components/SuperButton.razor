@@ -14,7 +14,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-primary">@Label</button>
+                <button type="button" class="btn btn-primary" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Secondary)
@@ -28,7 +28,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-secondary">@Label</button>
+                <button type="button" class="btn btn-secondary" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Success)
@@ -42,7 +42,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-success">@Label</button>
+                <button type="button" class="btn btn-success" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Danger)
@@ -56,7 +56,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-danger">@Label</button>
+                <button type="button" class="btn btn-danger" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Warning)
@@ -70,7 +70,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-warning">@Label</button>
+                <button type="button" class="btn btn-warning" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Light)
@@ -84,7 +84,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-light">@Label</button>
+                <button type="button" class="btn btn-light" @onclick=Click>@Label</button>
             }
         }
         @if (Color == Color.Dark)
@@ -98,7 +98,7 @@
             }
             else
             {
-                <button type="button" class="btn btn-dark">@Label</button>
+                <button type="button" class="btn btn-dark" @onclick=Click>@Label</button>
             }
         }
         break;
@@ -212,7 +212,7 @@
         }
         else
         {
-            <button class="btn btn-primary">@Label</button>
+            <button class="btn btn-primary" @onclick=Click>@Label</button>
         }
         break;
 }

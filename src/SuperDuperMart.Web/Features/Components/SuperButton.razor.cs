@@ -3,12 +3,15 @@ using SuperDuperMart.Web.Enums;
 
 namespace SuperDuperMart.Web.Features.Components
 {
-    public partial class Button
+    public partial class SuperButton
     {
         [Parameter, EditorRequired]
         public string Label { get; set; } = default!;
 
-        [Parameter, EditorRequired]
+        [Parameter]
+        public EventCallback OnClick { get; set; }
+
+        [Parameter]
         public ButtonType Type { get; set; }
 
         [Parameter]
@@ -16,5 +19,7 @@ namespace SuperDuperMart.Web.Features.Components
 
         [Parameter]
         public bool Loading { get; set; }
+
+        private async Task Click() => await OnClick.InvokeAsync();
     }
 }
