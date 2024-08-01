@@ -24,8 +24,8 @@ namespace SuperDuperMart.Web.Features
         private async Task Submit()
         {
             Loading = true;
+            await Task.Delay(3000);
 
-            await Task.Delay(5000);
             string? token = await HttpService.PostAndRetrieveStringAsync(Endpoints.Authentication, Model);
             if (!string.IsNullOrEmpty(token))
             {
