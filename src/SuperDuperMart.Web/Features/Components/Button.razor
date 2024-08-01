@@ -1,0 +1,218 @@
+﻿@using SuperDuperMart.Web.Enums;
+
+@switch (Type)
+{
+    case ButtonType.Button:
+        @if (Color == Color.Primary)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-primary" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-primary">@Label</button>
+            }
+        }
+        @if (Color == Color.Secondary)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-secondary" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-secondary">@Label</button>
+            }
+        }
+        @if (Color == Color.Success)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-success" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-success">@Label</button>
+            }
+        }
+        @if (Color == Color.Danger)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-danger" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-danger">@Label</button>
+            }
+        }
+        @if (Color == Color.Warning)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-warning" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-warning">@Label</button>
+            }
+        }
+        @if (Color == Color.Light)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-light" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-light">@Label</button>
+            }
+        }
+        @if (Color == Color.Dark)
+        {
+            @if (Loading)
+            {
+                <button type="button" class="btn btn-dark" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-dark">@Label</button>
+            }
+        }
+        break;
+    case ButtonType.Submit:
+        @if (Color == Color.Primary)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-primary" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">@Label</button>
+            }
+        }
+        @if (Color == Color.Secondary)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-secondary" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-secondary">@Label</button>
+            }
+        }
+        @if (Color == Color.Success)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-success" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success">@Label</button>
+            }
+        }
+        @if (Color == Color.Danger)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-danger" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-danger">@Label</button>
+            }
+        }
+        @if (Color == Color.Warning)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-warning" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-warning">@Label</button>
+            }
+        }
+        @if (Color == Color.Light)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-light" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-light">@Label</button>
+            }
+        }
+        @if (Color == Color.Dark)
+        {
+            @if (Loading)
+            {
+                <button type="submit" class="btn btn-dark" disabled>
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span role="status">@Label</span>
+                </button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-dark">@Label</button>
+            }
+        }
+        break;
+    default:
+        @if (Loading)
+        {
+            <button class="btn btn-primary" disabled>
+                <span class="spinner-border spinner-border-sm"></span>
+                <span role="status">@Label</span>
+            </button>
+        }
+        else
+        {
+            <button class="btn btn-primary">@Label</button>
+        }
+        break;
+}
