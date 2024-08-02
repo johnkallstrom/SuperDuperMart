@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.SessionStorage;
+﻿using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -8,51 +7,66 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 {
     public class JwtAuthenticationStateProvider : AuthenticationStateProvider
     {
-        private readonly IJwtHandler _jwtHandler;
+        private readonly string _authenticationType = "jwt";
+
         private readonly HttpClient _httpClient;
-        private readonly ILocalStorageService _localStorage;
+        private readonly IJwtHandler _jwtHandler;
         private readonly ISessionStorageService _sessionStorage;
 
         public JwtAuthenticationStateProvider(
-            ISessionStorageService sessionStorage,
             HttpClient httpClient,
-            ILocalStorageService localStorage,
+            ISessionStorageService sessionStorage,
             IJwtHandler jwtHandler)
         {
             _sessionStorage = sessionStorage;
             _httpClient = httpClient;
-            _localStorage = localStorage;
             _jwtHandler = jwtHandler;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string? token = await _localStorage.GetItemAsStringAsync("token");
+            string? token = await _sessionStorage.GetItemAsStringAsync("token");
             if (string.IsNullOrWhiteSpace(token) || _jwtHandler.HasTokenExpired(token))
             {
-                return await SetStateAsAnonymous();
+                var identity = new ClaimsIdentity();
+                var anonymous = new ClaimsPrincipal();
+
+                return await Task.FromResult(new AuthenticationState(anonymous));
             }
+            else
+            {
+                var claims = _jwtHandler.ReadClaimsFromToken(token);
+
+                var identity = new ClaimsIdentity(claims, _authenticationType);
+                var authenticated = new ClaimsPrincipal(identity);
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                return await Task.FromResult(new AuthenticationState(authenticated));
+            }
+        }
+
+        public async Task BeginUserSession(string token)
+        {
+            await _sessionStorage.SetItemAsStringAsync("token", token);
+            var claims = _jwtHandler.ReadClaimsFromToken(token);
+
+            var identity = new ClaimsIdentity(claims, authenticationType: _authenticationType);
+            var authenticated = new ClaimsPrincipal(identity);
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var claims = _jwtHandler.ReadClaimsFromToken(token);
-            return await SetStateAsAuthenticated(claims.ToList());
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(authenticated)));
         }
 
-        private async Task<AuthenticationState> SetStateAsAnonymous()
+        public async Task EndUserSession()
         {
-            var anonymous = new ClaimsIdentity();
-            var principal = new ClaimsPrincipal(anonymous);
+            await _sessionStorage.RemoveItemAsync("token");
 
-            return await Task.FromResult(new AuthenticationState(principal));
-        }
+            var identity = new ClaimsIdentity();
+            var anonymous = new ClaimsPrincipal(identity);
 
-        private async Task<AuthenticationState> SetStateAsAuthenticated(List<Claim> claims)
-        {
-            var authenticated = new ClaimsIdentity(claims, authenticationType: "jwt");
-            var principal = new ClaimsPrincipal(authenticated);
-
-            return await Task.FromResult(new AuthenticationState(principal));
+            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(anonymous)));
         }
     }
 }
