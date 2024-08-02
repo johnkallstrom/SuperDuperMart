@@ -3,41 +3,53 @@
 
 <PageTitle>SuperDuperMart - Edit @Model?.Name</PageTitle>
 
-<Spinner Enable="Loading" />
-@if (Model != null)
+@if (_loading)
 {
-    <Alert Message="Saved!" Display="DisplayAlert" OnCloseButtonClick="ToggleAlert" />
-    <div class="row">
-        <div class="col-sm-8 col-lg-6">
-            <div class="card shadow border-0">
-                <div class="card-body">
-                    <EditForm Model="@Model" OnValidSubmit="Submit">
-                        <DataAnnotationsValidator />
-                        <div class="mb-3">
-                            <label class="form-label" for="@Model.Name">Name</label>
-                            <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
-                            <ValidationMessage For="() => Model.Name" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="@Model.Description">Description</label>
-                            <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
-                            <ValidationMessage For="() => Model.Description" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="@Model.Price">Price</label>
-                            <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
-                            <ValidationMessage For="() => Model.Price" />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="@Model.Material">Material</label>
-                            <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
-                            <ValidationMessage For="() => Model.Material" />
-                        </div>
-                        <SuperButton Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
-                        <SuperButton Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
-                    </EditForm>
+    <Spinner />
+}
+else
+{
+    @if (_alertSuccess)
+    {
+        <SuperAlert Message="Successfully updated product."
+                    Color="Color.Success"
+                    OnCloseButtonClick="ToggleAlert" />
+    }
+
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-sm-8 col-lg-6">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <EditForm Model="@Model" OnValidSubmit="Submit">
+                            <DataAnnotationsValidator />
+                            <div class="mb-3">
+                                <label class="form-label" for="@Model.Name">Name</label>
+                                <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
+                                <ValidationMessage For="() => Model.Name" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="@Model.Description">Description</label>
+                                <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
+                                <ValidationMessage For="() => Model.Description" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="@Model.Price">Price</label>
+                                <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
+                                <ValidationMessage For="() => Model.Price" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="@Model.Material">Material</label>
+                                <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
+                                <ValidationMessage For="() => Model.Material" />
+                            </div>
+                            <SuperButton Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
+                            <SuperButton Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
+                        </EditForm>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 }

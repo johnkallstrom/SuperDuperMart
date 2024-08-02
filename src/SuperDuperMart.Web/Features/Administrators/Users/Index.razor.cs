@@ -8,19 +8,19 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public bool Loading { get; set; }
         public IEnumerable<UserModel>? Model { get; set; } = default!;
+
+        private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
-            Loading = true;
             await GetUsers();
-            Loading = false;
         }
 
         private async Task GetUsers()
         {
             Model = await HttpService.GetAsync<IEnumerable<UserModel>>(Endpoints.Users);
+            _loading = false;
         }
     }
 }

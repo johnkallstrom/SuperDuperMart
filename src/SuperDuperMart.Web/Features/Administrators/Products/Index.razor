@@ -3,47 +3,53 @@
 
 <PageTitle>SuperDuperMart - Products</PageTitle>
 
-<Spinner Enable="Loading" />
-@if (Model != null && Model.Count() > 0)
+@if (_loading)
 {
-    <a href="@("/manage/products/create")" class="btn btn-dark btn-sm mb-2"><i class="bi bi-plus-square"></i></a>
-    <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Material</th>
-                <th>Created</th>
-                <th>Modified</th>
-                <th>Manage</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
+    <Spinner />
+}
+else
+{
+    @if (Model != null && Model.Count() > 0)
+    {
+        <a href="@("/manage/products/create")" class="btn btn-dark btn-sm mb-2"><i class="bi bi-plus-square"></i></a>
+        <table class="table table-bordered">
+            <thead class="table-light">
                 <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Price.ToCurrency("sv-SE")</td>
-                    <td>@product.Material</td>
-                    <td>@product.Created.ToSpecifiedDateFormat()</td>
-                    <td>
-                        @if (product.LastModified.HasValue)
-                        {
-                            <span>@product.LastModified.Value.ToSpecifiedDateFormat()</span>
-                        }
-                        else
-                        {
-                            <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
-                        }
-                    </td>
-                    <td>
-                        <a href="@($"/manage/products/{product.Id}")" class="btn btn-dark btn-sm"><i class="bi bi-pencil-square"></i></a>
-                        <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
-                    </td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Material</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Manage</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price.ToCurrency("sv-SE")</td>
+                        <td>@product.Material</td>
+                        <td>@product.Created.ToSpecifiedDateFormat()</td>
+                        <td>
+                            @if (product.LastModified.HasValue)
+                            {
+                                <span>@product.LastModified.Value.ToSpecifiedDateFormat()</span>
+                            }
+                            else
+                            {
+                                <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="@($"/manage/products/{product.Id}")" class="btn btn-dark btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a href="@($"/manage/products/delete/{product.Id}")" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }

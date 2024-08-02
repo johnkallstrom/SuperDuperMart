@@ -7,16 +7,19 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public bool Loading { get; set; }
         public IEnumerable<ProductModel>? Model { get; set; } = default!;
+
+        private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
-            Loading = true;
             await GetProducts();
-            Loading = false;
         }
 
-        private async Task GetProducts() => Model = await HttpService.GetAsync<IEnumerable<ProductModel>>(Endpoints.Products);
+        private async Task GetProducts()
+        {
+            Model = await HttpService.GetAsync<IEnumerable<ProductModel>>(Endpoints.Products);
+            _loading = false;
+        }
     }
 }

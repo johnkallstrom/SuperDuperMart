@@ -13,15 +13,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Parameter]
         public int Id { get; set; }
 
-        public bool DisplayAlert { get; set; } = false;
-        public bool Loading { get; set; }
+        private bool _alertSuccess;
+        private bool _loading = true;
+
         public ProductUpdateModel Model { get; set; } = new();
 
         protected override async Task OnParametersSetAsync()
         {
-            Loading = true;
             await GetProduct();
-            Loading = false;
         }
 
         private async Task GetProduct()
@@ -30,6 +29,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             if (product != null)
             {
                 Map(product);
+                _loading = false;
             }
         }
 
@@ -44,10 +44,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            DisplayAlert = true;
+            _alertSuccess = true;
         }
 
-        private void ToggleAlert() => DisplayAlert = !DisplayAlert;
+        private void ToggleAlert() => _alertSuccess = !_alertSuccess;
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }

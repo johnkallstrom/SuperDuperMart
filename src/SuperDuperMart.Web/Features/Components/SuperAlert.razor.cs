@@ -2,16 +2,16 @@
 
 namespace SuperDuperMart.Web.Features.Components
 {
-    public partial class Alert
+    public partial class SuperAlert
     {
         [Parameter, EditorRequired]
-        public bool Display { get; set; }
+        public string Message { get; set; } = "Empty.";
 
         [Parameter, EditorRequired]
-        public string Message { get; set; } = default!;
+        public EventCallback OnCloseButtonClick { get; set; }
 
         [Parameter]
-        public EventCallback OnCloseButtonClick { get; set; }
+        public Color Color { get; set; } = Color.Light;
 
         private async Task Close() => await OnCloseButtonClick.InvokeAsync();
     }

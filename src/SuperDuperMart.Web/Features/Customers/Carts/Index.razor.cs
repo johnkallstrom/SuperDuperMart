@@ -14,14 +14,12 @@ namespace SuperDuperMart.Web.Features.Customers.Carts
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
+        private bool _loading = true;
         public CartModel? Model { get; set; } = default!;
-        public bool Loading { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
-            Loading = true;
             await GetCart();
-            Loading = false;
         }
 
         private async Task GetCart()
@@ -33,6 +31,7 @@ namespace SuperDuperMart.Web.Features.Customers.Carts
             if (userId.HasValue)
             {
                 Model = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId}");
+                _loading = false;
             }
         }
     }

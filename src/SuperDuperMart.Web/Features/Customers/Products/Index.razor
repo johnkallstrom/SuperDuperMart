@@ -3,15 +3,21 @@
 
 <PageTitle>SuperDuperMart - Products</PageTitle>
 
-<Spinner Enable="Loading" />
-@if (Model != null && Model.Count() > 0)
+@if (_loading)
 {
-    <div class="row">
-        <div class="col-sm-8">
-            @foreach (var product in Model)
-            {
-                <ProductCard Product="product" />
-            }
+    <Spinner />
+}
+else
+{
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="row">
+            <div class="col-sm-8">
+                @foreach (var product in Model)
+                {
+                    <ProductCard Product="product" />
+                }
+            </div>
         </div>
-    </div>
+    }
 }
