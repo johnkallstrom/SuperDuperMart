@@ -1,11 +1,11 @@
 ﻿@using System.Globalization
 
-<a href="@($"/products/{Product.Id}")" class="text-decoration-none">
-    <div class="card shadow border-0 mb-3">
-        <div class="card-body">
-            <h5 class="card-title">@Product.Name</h5>
-            <p class="card-text">@Product.Description</p>
-            <a type="button" class="btn btn-primary"><i class="bi bi-cart"></i> @Product.Price.ToCurrency("sv-SE")</a>
-        </div>
+<div class="card shadow border-0 mb-3">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="@($"/products/{Product.Id}")" class="text-decoration-none">@Product.Name</a>
+        </h5>
+        <p class="card-text">@Product.Description</p>
+        <a type="button" class="btn btn-primary"><i class="bi bi-cart"></i> @Product.Price.ToCurrency("sv-SE")</a>
     </div>
-</a>
+</div>
