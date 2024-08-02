@@ -1,4 +1,3 @@
-using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Web.AuthenticationProviders;
@@ -14,14 +13,9 @@ builder.Services.AddScoped(sp => new HttpClient
 });
 
 builder.Services.AddScoped<IHttpService, HttpService>();
-
 builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddBlazoredLocalStorage();
-
 builder.Services.AddAuthorizationCore();
-builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 
-var host = builder.Build();
-await host.RunAsync();
+await builder.Build().RunAsync();

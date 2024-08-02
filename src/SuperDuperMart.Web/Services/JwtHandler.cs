@@ -26,7 +26,10 @@ namespace SuperDuperMart.Web.Services
             if (handler.CanReadToken(token))
             {
                 var jsonWebToken = handler.ReadJsonWebToken(token);
-                return jsonWebToken.Claims;
+                if (jsonWebToken != null)
+                {
+                    return jsonWebToken.Claims;
+                }
             }
 
             return Enumerable.Empty<Claim>();

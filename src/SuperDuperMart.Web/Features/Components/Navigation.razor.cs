@@ -1,7 +1,6 @@
-﻿using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.Routing;
+using SuperDuperMart.Web.AuthenticationProviders;
 
 namespace SuperDuperMart.Web.Features.Components
 {
@@ -13,35 +12,16 @@ namespace SuperDuperMart.Web.Features.Components
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
-        [Inject]
-        public ILocalStorageService LocalStorage { get; set; } = default!;
+        private readonly string _redirectUrl = "/";
 
-        //[Inject]
-        //public ISessionStorageService SessionStorage { get; set; } = default!;
-
-        protected override void OnInitialized()
+        private async Task HandleLogout()
         {
-            AuthenticationStateProvider.AuthenticationStateChanged += AuthenticationStateChanged;
-            NavigationManager.LocationChanged += LocationChanged;
-        }
-
-        private async void AuthenticationStateChanged(Task<AuthenticationState> task)
-        {
-            var state = await task;
-            Console.WriteLine($"Is Authenticated: {state.User.Identity?.IsAuthenticated}");
-        }
-
-        private void LocationChanged(object? sender, LocationChangedEventArgs e)
-        {
-            string locationChangedBy = e.IsNavigationIntercepted ? "HTML" : "Code";
-            Console.WriteLine($"Location: {e.Location}");
-            Console.WriteLine($"Changed By: {locationChangedBy}");
-        }
-
-        private async Task Logout()
-        {
-            await LocalStorage.RemoveItemAsync("token");
-            NavigationManager.NavigateTo("/");
+            var jwtAuthenticationStateProvider = AuthenticationStateProvider as JwtAuthenticationStateProvider;
+            if (jwtAuthenticationStateProvider != null)
+            {
+                await jwtAuthenticationStateProvider.EndUserSession();
+                NavigationManager.NavigateTo(_redirectUrl);
+            }
         }
     }
 }
