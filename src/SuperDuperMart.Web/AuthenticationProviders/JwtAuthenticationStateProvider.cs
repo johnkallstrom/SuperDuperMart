@@ -46,7 +46,7 @@ namespace SuperDuperMart.Web.AuthenticationProviders
             }
         }
 
-        public async Task BeginUserSession(string token)
+        public async Task MarkStateAsAuthenticated(string token)
         {
             await _sessionStorage.SetItemAsStringAsync("token", token);
             var claims = _jwtHandler.ReadClaimsFromToken(token);
@@ -59,7 +59,7 @@ namespace SuperDuperMart.Web.AuthenticationProviders
             NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(authenticated)));
         }
 
-        public async Task EndUserSession()
+        public async Task MarkStateAsAnonymous()
         {
             await _sessionStorage.RemoveItemAsync("token");
 
