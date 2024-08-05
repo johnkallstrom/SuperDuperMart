@@ -16,18 +16,21 @@ namespace SuperDuperMart.Web.Features
 
 
         private readonly string _redirectUrl = "/";
+        private bool _loading = false;
+
         public LoginModel Model { get; set; } = new();
-        public bool Loading { get; set; }
 
         private async Task Submit()
         {
-            Loading = true;
+            _loading = true;
+            string? token = await HttpService.PostAndRetrieveStringAsync(Endpoints.Authentication, Model); 
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                await AuthenticationService.BeginUserSessionAsync(token);
+                NavigationManager.NavigateTo(_redirectUrl);
+            }
 
-            string? token = await HttpService.PostAndRetrieveStringAsync(Endpoints.Authentication, Model);
-            await AuthenticationService.BeginUserSessionAsync(token);
-            NavigationManager.NavigateTo(_redirectUrl);
-
-            Loading = false;
+            _loading = false;
         }
     }
 }
