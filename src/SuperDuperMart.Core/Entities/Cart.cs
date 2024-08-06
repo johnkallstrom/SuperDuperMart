@@ -8,5 +8,7 @@
 
         public int UserId { get; set; }
         public User User { get; set; } = default!;
+
+        public ICollection<CartItem> CartItems { get; set; } = [];
     }
 }
