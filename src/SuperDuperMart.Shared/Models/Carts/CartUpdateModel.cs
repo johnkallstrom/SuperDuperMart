@@ -15,5 +15,7 @@ namespace SuperDuperMart.Shared.Models.Carts
 
         [Required(ErrorMessage = "Please enter a user id")]
         public int UserId { get; set; }
+
+        public List<CartItemModel> Items { get; set; } = default!;
     }
 }

@@ -98,5 +98,20 @@ namespace SuperDuperMart.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("user/{userId}")]
+        public async Task<IActionResult> DeleteByUserId(int userId)
+        {
+            Cart? cart = await _unitOfWork.CartRepository.GetByUserIdAsync(userId);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.CartRepository.Delete(cart);
+            await _unitOfWork.SaveAsync();
+
+            return NoContent();
+        }
     }
 }
