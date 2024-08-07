@@ -13,7 +13,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             _userManager = userManager;
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync()
+        public async Task<IEnumerable<User>> GetAsync()
         {
             var users = await _context.Users
                 .Include(u => u.Location)
@@ -22,7 +22,16 @@ namespace SuperDuperMart.Core.Data.Repositories
             return users;
         }
 
-        public async Task<List<string>> GetUserRolesAsync(User user)
+        public async Task<User?> GetByIdAsync(int id)
+        {
+            var user = await _context.Users
+                .Include(u => u.Location)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            return user;
+        }
+
+        public async Task<List<string>> GetRolesAsync(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
             return roles.ToList();

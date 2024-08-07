@@ -19,6 +19,7 @@ namespace SuperDuperMart.Api.Profiles
 
             // Cart
             CreateMap<Cart, CartModel>().ReverseMap();
+            CreateMap<CartCreateModel, Cart>();
         }
     }
 }

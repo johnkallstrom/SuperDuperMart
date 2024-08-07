@@ -2,7 +2,8 @@
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetUsersAsync();
-        Task<List<string>> GetUserRolesAsync(User user);
+        Task<IEnumerable<User>> GetAsync();
+        Task<User?> GetByIdAsync(int id);
+        Task<List<string>> GetRolesAsync(User user);
     }
 }

@@ -39,5 +39,59 @@ namespace SuperDuperMart.Api.Controllers
 
             return Ok(_mapper.Map<CartModel>(cart));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CartCreateModel model)
+        {
+            User? user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            var cart = _mapper.Map<Cart>(model);
+            var createdCart = await _unitOfWork.CartRepository.CreateAsync(cart);
+            await _unitOfWork.SaveAsync();
+
+            return CreatedAtAction(nameof(GetById), new { createdCart.Id }, createdCart);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateModel model)
+        {
+            Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            User? user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            cart = _mapper.Map(source: model, destination: cart);
+
+            _unitOfWork.CartRepository.Update(cart);
+            await _unitOfWork.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.CartRepository.Delete(cart);
+            await _unitOfWork.SaveAsync();
+
+            return NoContent();
+        }
     }
 }
