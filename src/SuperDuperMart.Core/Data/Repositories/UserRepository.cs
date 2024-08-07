@@ -36,5 +36,10 @@ namespace SuperDuperMart.Core.Data.Repositories
             var roles = await _userManager.GetRolesAsync(user);
             return roles.ToList();
         }
+
+        public async Task<bool> HasCartAsync(User user)
+        {
+            return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
+        }
     }
 }

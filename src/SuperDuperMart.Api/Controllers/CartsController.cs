@@ -49,6 +49,11 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
+            if (await _unitOfWork.UserRepository.HasCartAsync(user))
+            {
+                return BadRequest(new { Message = $"Cart already exists on user with id: {model.UserId}" });
+            }
+
             var cart = _mapper.Map<Cart>(model);
             var createdCart = await _unitOfWork.CartRepository.CreateAsync(cart);
             await _unitOfWork.SaveAsync();
