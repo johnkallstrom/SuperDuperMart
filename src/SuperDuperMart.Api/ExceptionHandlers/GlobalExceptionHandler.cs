@@ -14,6 +14,11 @@ namespace SuperDuperMart.Api.ExceptionHandlers
                 Detail = exception.Message
             };
 
+            if (!string.IsNullOrWhiteSpace(exception.Source))
+            {
+                problemDetails.Extensions.Add("source", exception.Source);
+            }
+
             if (exception.InnerException != null)
             {
                 problemDetails.Extensions.Add("error", exception.InnerException.Message);
