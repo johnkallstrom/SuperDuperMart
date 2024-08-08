@@ -11,6 +11,17 @@ namespace SuperDuperMart.Core.Data.Repositories
             _context = context;
         }
 
+        public async Task AddItemAsync(CartItem item)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
+            if (product is null)
+            {
+                throw new EntityNotFoundException(nameof(product), item.ProductId);
+            }
+
+            await _context.CartItems.AddAsync(item);
+        }
+
         public async Task<IEnumerable<Cart>> GetAsync()
         {
             var carts = await _context.Carts
@@ -24,6 +35,7 @@ namespace SuperDuperMart.Core.Data.Repositories
         {
             var cart = await _context.Carts
                 .Include(c => c.User)
+                .Include(c => c.CartItems)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             return cart;

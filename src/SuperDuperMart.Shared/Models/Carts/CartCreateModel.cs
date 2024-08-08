@@ -9,10 +9,6 @@ namespace SuperDuperMart.Shared.Models.Carts
 
         public bool Purchased { get; set; }
 
-        [Required(ErrorMessage = "Please enter total cost")]
-        [DataType(DataType.Currency)]
-        public decimal TotalCost { get; set; }
-
         [Required(ErrorMessage = "Please enter a user id")]
         public int UserId { get; set; }
 
