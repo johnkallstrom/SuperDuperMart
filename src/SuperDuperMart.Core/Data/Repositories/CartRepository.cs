@@ -36,6 +36,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             var cart = await _context.Carts
                 .Include(c => c.User)
                 .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             return cart;

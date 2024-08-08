@@ -1,8 +1,10 @@
-﻿namespace SuperDuperMart.Shared.Models.Carts
+﻿using SuperDuperMart.Shared.Models.Products;
+
+namespace SuperDuperMart.Shared.Models.Carts
 {
     public class CartItemModel
     {
-        public int ProductId { get; set; }
+        public ProductModel Product { get; set; } = default!;
         public int Quantity { get; set; }
     }
 }
