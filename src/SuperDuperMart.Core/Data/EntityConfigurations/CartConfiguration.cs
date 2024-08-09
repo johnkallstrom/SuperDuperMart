@@ -10,7 +10,7 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
             builder.ToTable("Cart");
 
             builder.HasKey(c => c.Id);
-            builder.Property(c => c.TotalCost).HasPrecision(5, 2);
+            builder.Property(c => c.TotalCost).HasPrecision(14, 2);
             builder.Property(c => c.Created).ValueGeneratedOnAdd();
         }
     }

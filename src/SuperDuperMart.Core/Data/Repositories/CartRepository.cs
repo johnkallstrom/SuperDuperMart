@@ -41,7 +41,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Cart?> GetByUserIdAsync(int userId)
         {
-            var cart = await _context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
 
             return cart;
         }
