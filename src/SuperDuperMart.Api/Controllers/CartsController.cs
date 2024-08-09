@@ -78,12 +78,6 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            User? user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
-            if (user is null)
-            {
-                return NotFound();
-            }
-
             cart = _mapper.Map(source: model, destination: cart);
 
             _unitOfWork.CartRepository.Update(cart);

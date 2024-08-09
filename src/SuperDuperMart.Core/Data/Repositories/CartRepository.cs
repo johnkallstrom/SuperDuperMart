@@ -11,17 +11,6 @@ namespace SuperDuperMart.Core.Data.Repositories
             _context = context;
         }
 
-        public async Task AddItemAsync(CartItem item)
-        {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
-            if (product is null)
-            {
-                throw new EntityNotFoundException(nameof(product), item.ProductId);
-            }
-
-            await _context.CartItems.AddAsync(item);
-        }
-
         public async Task<IEnumerable<Cart>> GetAsync()
         {
             var carts = await _context.Carts
@@ -54,7 +43,7 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Cart> CreateAsync(Cart entity)
         {
-            decimal totalCost = 0;
+            decimal total = 0;
             if (entity.CartItems != null && entity.CartItems.Count() > 0)
             {
                 foreach (var item in entity.CartItems)
@@ -62,12 +51,12 @@ namespace SuperDuperMart.Core.Data.Repositories
                     var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
                     if (product != null)
                     {
-                        totalCost += product.Price * item.Quantity;
+                        total += product.Price * item.Quantity;
                     }
                 }
             }
 
-            entity.TotalCost = totalCost;
+            entity.TotalCost = total;
 
             var entry = await _context.Carts.AddAsync(entity);
             return entry.Entity;
@@ -75,6 +64,21 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public void Update(Cart entity)
         {
+            decimal total = 0;
+            if (entity.CartItems != null && entity.CartItems.Count() > 0)
+            {
+                foreach (var item in entity.CartItems)
+                {
+                    var product = _context.Products.FirstOrDefault(p => p.Id == item.ProductId);
+                    if (product != null)
+                    {
+                        total += product.Price * item.Quantity;
+                    }
+                }
+            }
+
+            entity.TotalCost = total;
+
             entity.LastModified = DateTime.Now;
             _context.Carts.Update(entity);
         }
