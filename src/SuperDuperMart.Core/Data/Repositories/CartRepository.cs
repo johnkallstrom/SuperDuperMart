@@ -24,7 +24,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<IEnumerable<Cart>> GetAsync()
         {
-            var carts = await _context.Carts.ToListAsync();
+            var carts = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .ToListAsync();
 
             return carts;
         }
