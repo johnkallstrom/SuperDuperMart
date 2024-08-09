@@ -79,6 +79,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
             entity.TotalCost = total;
 
+            // 1. Find all items that exist on this cart in db
+            // 2. Filter out the items that do not exist in db
+            // 3. Add these items to db
+
             entity.LastModified = DateTime.Now;
             _context.Carts.Update(entity);
         }
