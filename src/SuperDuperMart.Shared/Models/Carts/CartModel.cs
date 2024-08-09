@@ -10,7 +10,6 @@ namespace SuperDuperMart.Shared.Models.Carts
         public decimal TotalCost { get; set; }
         public DateTime Created { get; set; }
         public DateTime? LastModified { get; set; }
-        public List<CartItemModel> Items { get; set; } = default!;
-        public UserModel User { get; set; } = default!;
+        public List<CartItemModel> Items { get; set; } = new();
     }
 }
