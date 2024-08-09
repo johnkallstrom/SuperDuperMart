@@ -64,10 +64,12 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public void Update(Cart entity)
         {
-            decimal total = 0;
             if (entity.CartItems != null && entity.CartItems.Count() > 0)
             {
-                foreach (var item in entity.CartItems)
+                decimal total = 0;
+                var newItems = entity.CartItems.ToList();
+
+                foreach (var item in newItems)
                 {
                     var product = _context.Products.FirstOrDefault(p => p.Id == item.ProductId);
                     if (product != null)
@@ -75,13 +77,17 @@ namespace SuperDuperMart.Core.Data.Repositories
                         total += product.Price * item.Quantity;
                     }
                 }
+
+                entity.TotalCost = total;
+
+                var existingItems = _context.CartItems
+                    .Where(ci => ci.CartId == entity.Id)
+                    .ToList();
+
+                entity.CartItems = newItems
+                    .Except(existingItems)
+                    .ToList();
             }
-
-            entity.TotalCost = total;
-
-            // 1. Find all items that exist on this cart in db
-            // 2. Filter out the items that do not exist in db
-            // 3. Add these items to db
 
             entity.LastModified = DateTime.Now;
             _context.Carts.Update(entity);
