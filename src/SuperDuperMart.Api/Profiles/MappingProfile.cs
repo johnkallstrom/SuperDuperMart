@@ -24,9 +24,7 @@ namespace SuperDuperMart.Api.Profiles
 
             CreateMap<CartCreateModel, Cart>()
                 .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.Items));
-
-            CreateMap<CartUpdateModel, Cart>()
-                .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.Items));
+            CreateMap<CartUpdateModel, Cart>();
 
             // CartItem
             CreateMap<CartItem, CartItemModel>();
