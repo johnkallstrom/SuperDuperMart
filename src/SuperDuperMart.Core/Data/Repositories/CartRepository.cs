@@ -11,6 +11,10 @@ namespace SuperDuperMart.Core.Data.Repositories
             _context = context;
         }
 
+        public async Task AddItemAsync(CartItem item)
+        {
+        }
+
         public async Task<IEnumerable<Cart>> GetAsync()
         {
             var carts = await _context.Carts
@@ -43,21 +47,6 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Cart> CreateAsync(Cart entity)
         {
-            if (entity.CartItems != null && entity.CartItems.Count() > 0)
-            {
-                decimal totalCost = 0;
-                foreach (var item in entity.CartItems)
-                {
-                    var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == item.ProductId);
-                    if (product != null)
-                    {
-                        totalCost += product.Price * item.Quantity;
-                    }
-                }
-
-                entity.TotalCost = totalCost;
-            }
-
             var entry = await _context.Carts.AddAsync(entity);
             return entry.Entity;
         }

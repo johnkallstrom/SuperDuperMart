@@ -22,13 +22,11 @@ namespace SuperDuperMart.Api.Profiles
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems))
                 .ReverseMap();
 
-            CreateMap<CartCreateModel, Cart>()
-                .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.Items));
+            CreateMap<CartCreateModel, Cart>();
             CreateMap<CartUpdateModel, Cart>();
 
             // CartItem
             CreateMap<CartItem, CartItemModel>();
-            CreateMap<CartItemAddModel, CartItem>();
         }
     }
 }

@@ -1,10 +1,17 @@
 using SuperDuperMart.Api.Extensions;
 using SuperDuperMart.Core.Extensions;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerWithBearerAuthorization();
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
