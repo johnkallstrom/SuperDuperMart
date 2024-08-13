@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.Models
+﻿namespace SuperDuperMart.Core.Results
 {
     public class Result
     {
