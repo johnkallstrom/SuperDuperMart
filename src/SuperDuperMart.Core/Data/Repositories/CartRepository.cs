@@ -106,29 +106,6 @@ namespace SuperDuperMart.Core.Data.Repositories
             _context.Carts.Update(entity);
         }
 
-        //public async Task<Result> UpdateTotalCostAsync(Cart cart)
-        //{
-        //    decimal? totalCost = null;
-
-        //    if (items != null && items.Count() > 0)
-        //    {
-        //        foreach (var item in cart.CartItems)
-        //        {
-        //            totalCost = item.Product?.Price * item.Quantity;
-        //        }
-        //    }
-
-        //    if (totalCost.HasValue)
-        //    {
-        //        cart.TotalCost = totalCost.Value;
-        //        cart.LastModified = DateTime.Now;
-
-        //        _context.Carts.Update(cart);
-        //    }
-
-        //    return Result.Ok();
-        //}
-
         public void Delete(Cart entity) => _context.Carts.Remove(entity);
     }
 }
