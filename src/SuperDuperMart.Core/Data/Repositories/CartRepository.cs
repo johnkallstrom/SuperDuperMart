@@ -77,8 +77,9 @@ namespace SuperDuperMart.Core.Data.Repositories
             {
                 cartItem.Quantity++;
                 _context.CartItems.Update(cartItem);
-                await _context.SaveChangesAsync();
             }
+
+            await _context.SaveChangesAsync();
 
             var items = await _context.CartItems
                 .Include(ci => ci.Product)
