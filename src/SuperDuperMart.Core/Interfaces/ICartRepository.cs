@@ -3,7 +3,9 @@
     public interface ICartRepository : IRepository<Cart>
     {
         Task<IEnumerable<CartItem>> GetItemsAsync(Cart cart);
+        Task<CartItem?> GetItemByIdAsync(int cartId, int productId);
         Task AddItemAsync(CartItem item);
+        void DeleteItem(CartItem item);
         Task<Cart?> GetByUserIdAsync(int userId);
     }
 }

@@ -58,6 +58,38 @@ namespace SuperDuperMart.Api.Controllers
         [HttpDelete("{cartId}/items/delete/{productId}")]
         public async Task<IActionResult> DeleteItem(int cartId, int productId)
         {
+            Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            Product? product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            CartItem? item = await _unitOfWork.CartRepository.GetItemByIdAsync(cart.Id, product.Id);
+            if (item is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.CartRepository.DeleteItem(item);
+            await _unitOfWork.SaveAsync();
+
+            decimal totalCost = 0;
+            var cartItems = await _unitOfWork.CartRepository.GetItemsAsync(cart);
+            foreach (var cartItem in cartItems)
+            {
+                totalCost += cartItem.Product.Price * cartItem.Quantity;
+            }
+
+            cart.TotalCost = totalCost;
+            _unitOfWork.CartRepository.Update(cart);
+            await _unitOfWork.SaveAsync();
+
             return Ok();
         }
 

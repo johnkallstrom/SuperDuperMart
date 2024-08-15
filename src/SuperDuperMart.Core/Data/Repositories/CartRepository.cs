@@ -37,6 +37,12 @@ namespace SuperDuperMart.Core.Data.Repositories
             return cartItems;
         }
 
+        public async Task<CartItem?> GetItemByIdAsync(int cartId, int productId)
+        {
+            var cartItem = await _context.CartItems.FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
+            return cartItem;
+        }
+
         public async Task<IEnumerable<Cart>> GetAsync()
         {
             var carts = await _context.Carts.ToListAsync();
@@ -68,5 +74,18 @@ namespace SuperDuperMart.Core.Data.Repositories
         }
 
         public void Delete(Cart entity) => _context.Carts.Remove(entity);
+
+        public void DeleteItem(CartItem item)
+        {
+            if (item.Quantity == 1)
+            {
+                _context.CartItems.Remove(item);
+            }
+            else
+            {
+                item.Quantity--;
+                _context.CartItems.Update(item);
+            }
+        }
     }
 }
