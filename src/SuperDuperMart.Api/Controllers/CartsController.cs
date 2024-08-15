@@ -116,9 +116,18 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id, bool includeItems = false)
         {
-            var cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+            Cart? cart = default;
+            if (includeItems)
+            {
+                cart = await _unitOfWork.CartRepository.GetByIdWithItemsAsync(id);
+            }
+            else
+            {
+                cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+            }
+
             if (cart is null)
             {
                 return NotFound();
@@ -128,7 +137,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetByUserId(int userId)
+        public async Task<IActionResult> GetByUserId(int userId, bool includeItems = false)
         {
             var cart = await _unitOfWork.CartRepository.GetByUserIdAsync(userId);
             if (cart is null)

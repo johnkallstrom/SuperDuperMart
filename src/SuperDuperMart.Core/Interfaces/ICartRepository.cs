@@ -7,5 +7,6 @@
         Task AddItemAsync(CartItem item);
         void DeleteItem(CartItem item);
         Task<Cart?> GetByUserIdAsync(int userId);
+        Task<Cart?> GetByIdWithItemsAsync(int cartId);
     }
 }
