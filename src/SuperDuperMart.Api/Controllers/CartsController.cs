@@ -16,6 +16,51 @@ namespace SuperDuperMart.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpPost("{cartId}/items/add/{productId}")]
+        public async Task<IActionResult> AddItem(int cartId, int productId)
+        {
+            Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            Product? product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            var item = new CartItem
+            {
+                CartId = cart.Id,
+                ProductId = productId,
+                Quantity = 1
+            };
+
+            await _unitOfWork.CartRepository.AddItemAsync(item);
+            await _unitOfWork.SaveAsync();
+
+            decimal totalCost = 0;
+            var cartItems = await _unitOfWork.CartRepository.GetItemsAsync(cart);
+            foreach (var cartItem in cartItems)
+            {
+                totalCost += cartItem.Product.Price * cartItem.Quantity;
+            }
+
+            cart.TotalCost = totalCost;
+            _unitOfWork.CartRepository.Update(cart);
+            await _unitOfWork.SaveAsync();
+
+            return Ok();
+        }
+
+        [HttpDelete("{cartId}/items/delete/{productId}")]
+        public async Task<IActionResult> DeleteItem(int cartId, int productId)
+        {
+            return Ok();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -27,7 +72,13 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet("{id}/items")]
         public async Task<IActionResult> GetItems(int id)
         {
-            var cartItems = await _unitOfWork.CartRepository.GetCartItemsAsync(id);
+            var cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+            if (cart is null)
+            {
+                return NotFound();
+            }
+
+            var cartItems = await _unitOfWork.CartRepository.GetItemsAsync(cart);
 
             return Ok(_mapper.Map<IEnumerable<CartItemModel>>(cartItems));
         }
@@ -75,13 +126,6 @@ namespace SuperDuperMart.Api.Controllers
             await _unitOfWork.SaveAsync();
 
             return CreatedAtAction(nameof(GetById), new { createdCart.Id }, createdCart);
-        }
-
-        [HttpPost("{id}/items/add/{productId}")]
-        public async Task<IActionResult> AddItem(int id, int productId)
-        {
-            var result = await _unitOfWork.CartRepository.AddItemAsync(id, productId);
-            return Ok(result);
         }
 
         [HttpPut("{id}")]

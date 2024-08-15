@@ -9,19 +9,11 @@ namespace SuperDuperMart.Core.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration, bool isDevelopment)
+        public static IServiceCollection AddCoreServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<SuperDuperMartDbContext>(options =>
             {
-                if (isDevelopment)
-                {
-                    options.UseSqlServer(configuration.GetConnectionString("Local"));
-                }
-                else
-                {
-                    options.UseSqlServer(configuration.GetConnectionString("Azure"));
-                }
-
+                options.UseSqlServer(configuration.GetConnectionString("Local"));
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 

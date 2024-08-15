@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 
-builder.Services.AddCoreServices(builder.Configuration, builder.Environment.IsDevelopment());
+builder.Services.AddCoreServices(builder.Configuration);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
