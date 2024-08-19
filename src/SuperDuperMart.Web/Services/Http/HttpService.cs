@@ -26,6 +26,7 @@ namespace SuperDuperMart.Web.Services.Http
             return default;
         }
 
+        public async Task PostAsync(string url) => await _httpClient.PostAsync(url, null);
         public async Task PostAsync<T>(string url, T value) => await _httpClient.PostAsJsonAsync(url, value);
 
         public async Task<string> PostAndRetrieveStringAsync<T>(string url, T value)
