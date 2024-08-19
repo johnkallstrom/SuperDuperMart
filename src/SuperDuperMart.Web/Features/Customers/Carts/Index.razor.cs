@@ -30,7 +30,7 @@ namespace SuperDuperMart.Web.Features.Customers.Carts
             int? userId = principal.FindUserIdentifier();
             if (userId.HasValue)
             {
-                Model = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId}");
+                Model = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId}?includeItems=true");
                 _loading = false;
             }
         }
