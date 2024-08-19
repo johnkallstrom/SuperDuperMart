@@ -81,6 +81,16 @@ namespace SuperDuperMart.Core.Data.Repositories
             return cart;
         }
 
+        public async Task<Cart?> GetByUserIdWithItemsAsync(int userId)
+        {
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            return cart;
+        }
+
         public async Task<Cart> CreateAsync(Cart entity)
         {
             var entry = await _context.Carts.AddAsync(entity);
