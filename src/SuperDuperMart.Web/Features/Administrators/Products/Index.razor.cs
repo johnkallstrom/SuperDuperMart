@@ -18,7 +18,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProducts()
         {
-            Model = await HttpService.GetAsync<IEnumerable<ProductModel>>(Endpoints.Products);
+            Model = await HttpService.GetAsync<IEnumerable<ProductModel>>($"{Endpoints.Products}?currentPage=1&pageSize=10");
             _loading = false;
         }
     }
