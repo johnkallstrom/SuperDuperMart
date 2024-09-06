@@ -20,30 +20,42 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] ProductQueryParams parameters)
         {
-            int currentPage = parameters.CurrentPage.HasValue ? parameters.CurrentPage.Value : 0;
-            int pageSize = parameters.PageSize.HasValue ? parameters.PageSize.Value : 0;
-            int totalPages = 0;
+            var model = Enumerable.Empty<ProductModel>();
 
-            if (currentPage > 0 && pageSize > 0)
+            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
             {
-                int count = await _unitOfWork.ProductRepository.CountAsync();
-                totalPages = count / pageSize;
+                int currentPage = parameters.CurrentPage.Value;
+                int pageSize = parameters.PageSize.Value;
+
+                int totalProducts = await _unitOfWork.ProductRepository.CountAsync();
+                int totalPages = totalProducts / pageSize;
+
+                if (currentPage <= 0)
+                {
+                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page '{currentPage}' can't be a negative number"]));
+                }
+
+                if (currentPage > totalPages)
+                {
+                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page can't be greater than the total pages of {totalPages}"]));
+                }
+
+                var pagedProducts = await _unitOfWork.ProductRepository.GetAsync(parameters);
+                model = _mapper.Map<IEnumerable<ProductModel>>(pagedProducts);
+
+                var result = PaginatedResult<ProductModel>.Ok(
+                    currentPage,
+                    pageSize,
+                    totalPages,
+                    model);
+
+                return Ok(result);
             }
 
-            if (currentPage > totalPages)
-            {
-                return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page can't be greater than the total pages of {totalPages}"]));
-            }
+            var products = await _unitOfWork.ProductRepository.GetAsync();
+            model = _mapper.Map<IEnumerable<ProductModel>>(products);
 
-            var products = await _unitOfWork.ProductRepository.GetAsync(parameters);
-
-            var result = PaginatedResult<ProductModel>.Ok(
-                currentPage,
-                pageSize,
-                totalPages,
-                _mapper.Map<IEnumerable<ProductModel>>(products));
-
-            return Ok(result);
+            return Ok(model);
         }
 
         [HttpGet("{id}")]
