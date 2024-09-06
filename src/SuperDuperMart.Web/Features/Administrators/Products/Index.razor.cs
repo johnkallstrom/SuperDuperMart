@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
@@ -7,7 +8,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public IEnumerable<ProductModel>? Model { get; set; } = default!;
+        public PaginatedModel<ProductModel>? Model { get; set; } = default!;
 
         private bool _loading = true;
         private int _currentPage = 1;
@@ -20,7 +21,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProducts()
         {
-            Model = await HttpService.GetAsync<IEnumerable<ProductModel>>($"{Endpoints.Products}?currentPage={_currentPage}&pageSize={_pageSize}");
+            Model = await HttpService.GetAsync<PaginatedModel<ProductModel>>($"{Endpoints.Products}?currentPage={_currentPage}&pageSize={_pageSize}");
             _loading = false;
         }
 

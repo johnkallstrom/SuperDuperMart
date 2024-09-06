@@ -37,7 +37,7 @@ namespace SuperDuperMart.Api.Controllers
 
                 if (currentPage > totalPages)
                 {
-                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page can't be greater than the total pages of {totalPages}"]));
+                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page '{currentPage}' can't be greater than the total pages of {totalPages}"]));
                 }
 
                 var pagedProducts = await _unitOfWork.ProductRepository.GetAsync(parameters);
