@@ -3,5 +3,6 @@
 }
 
 .page-link:hover {
+    cursor: pointer;
     color: #212529
 }

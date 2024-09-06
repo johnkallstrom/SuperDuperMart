@@ -30,11 +30,6 @@ namespace SuperDuperMart.Core.Data.Repositories
                     .Take(parameters.PageSize.Value);
             }
 
-            if (!string.IsNullOrWhiteSpace(parameters.SearchTerm))
-            {
-                products = products.Where(p => p.Name.Contains(parameters.SearchTerm) || p.Material.Contains(parameters.SearchTerm));
-            }
-
             return await products.ToListAsync();
         }
 
@@ -63,5 +58,7 @@ namespace SuperDuperMart.Core.Data.Repositories
         }
 
         public void Delete(Product entity) => _context.Products.Remove(entity);
+
+        public async Task<int> CountAsync() => await _context.Products.CountAsync();
     }
 }

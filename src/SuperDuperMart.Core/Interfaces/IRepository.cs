@@ -8,6 +8,7 @@ namespace SuperDuperMart.Core.Interfaces
         Task<IEnumerable<TEntity>> GetAsync(IQueryParams parameters);
         Task<TEntity?> GetByIdAsync(int id);
         Task<TEntity?> GetByIdAsync<TProperty>(int id, Expression<Func<TEntity, TProperty>> include);
+        Task<int> CountAsync();
         Task<TEntity> CreateAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

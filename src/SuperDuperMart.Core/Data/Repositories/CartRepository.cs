@@ -50,7 +50,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             return carts;
         }
 
-        public Task<IEnumerable<Cart>> GetAsync(IQueryParams parameters)
+        public Task<PaginatedResult<Cart>> GetAsync(IQueryParams parameters)
         {
             throw new NotImplementedException();
         }
@@ -122,5 +122,12 @@ namespace SuperDuperMart.Core.Data.Repositories
                 _context.CartItems.Update(item);
             }
         }
+
+        Task<IEnumerable<Cart>> IRepository<Cart>.GetAsync(IQueryParams parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> CountAsync() => await _context.Carts.CountAsync();
     }
 }

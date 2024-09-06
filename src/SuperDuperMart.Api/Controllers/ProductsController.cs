@@ -1,4 +1,5 @@
 ﻿using SuperDuperMart.Api.Parameters;
+using SuperDuperMart.Core.Results;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -19,8 +20,30 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] ProductQueryParams parameters)
         {
+            int currentPage = parameters.CurrentPage.HasValue ? parameters.CurrentPage.Value : 0;
+            int pageSize = parameters.PageSize.HasValue ? parameters.PageSize.Value : 0;
+            int totalPages = 0;
+
+            if (currentPage > 0 && pageSize > 0)
+            {
+                int count = await _unitOfWork.ProductRepository.CountAsync();
+                totalPages = count / pageSize;
+            }
+
+            if (currentPage > totalPages)
+            {
+                return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page can't be greater than the total pages of {totalPages}"]));
+            }
+
             var products = await _unitOfWork.ProductRepository.GetAsync(parameters);
-            return Ok(_mapper.Map<IEnumerable<ProductModel>>(products));
+
+            var result = PaginatedResult<ProductModel>.Ok(
+                currentPage,
+                pageSize,
+                totalPages,
+                _mapper.Map<IEnumerable<ProductModel>>(products));
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
