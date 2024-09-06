@@ -50,6 +50,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             return carts;
         }
 
+        public Task<IEnumerable<Cart>> GetAsync(IQueryParams parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Cart?> GetByIdAsync(int id)
         {
             var cart = await _context.Carts.FirstOrDefaultAsync(c => c.Id == id);

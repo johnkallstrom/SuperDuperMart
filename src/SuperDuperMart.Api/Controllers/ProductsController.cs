@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using SuperDuperMart.Api.Parameters;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
@@ -15,10 +17,9 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] ProductQueryParams parameters)
         {
-            var products = await _unitOfWork.ProductRepository.GetAsync();
-
+            var products = await _unitOfWork.ProductRepository.GetAsync(parameters);
             return Ok(_mapper.Map<IEnumerable<ProductModel>>(products));
         }
 

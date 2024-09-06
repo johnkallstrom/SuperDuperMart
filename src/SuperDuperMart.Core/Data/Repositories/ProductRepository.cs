@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
@@ -16,6 +17,25 @@ namespace SuperDuperMart.Core.Data.Repositories
         {
             var products = await _context.Products.ToListAsync();
             return products;
+        }
+
+        public async Task<IEnumerable<Product>> GetAsync(IQueryParams parameters)
+        {
+            var products = _context.Products.AsQueryable();
+
+            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
+            {
+                products = products
+                    .Skip((parameters.CurrentPage.Value - 1) * parameters.PageSize.Value)
+                    .Take(parameters.PageSize.Value);
+            }
+
+            if (!string.IsNullOrWhiteSpace(parameters.SearchTerm))
+            {
+                products = products.Where(p => p.Name.Contains(parameters.SearchTerm) || p.Material.Contains(parameters.SearchTerm));
+            }
+
+            return await products.ToListAsync();
         }
 
         public async Task<Product?> GetByIdAsync(int id)
