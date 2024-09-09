@@ -5,7 +5,7 @@ namespace SuperDuperMart.Core.Interfaces
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<IEnumerable<TEntity>> GetAsync();
-        Task<IEnumerable<TEntity>> GetAsync(IQueryParams parameters);
+        Task<(IEnumerable<TEntity> Data, int Pages)> GetPaginatedAsync(int currentPage, int pageSize);
         Task<TEntity?> GetByIdAsync(int id);
         Task<TEntity?> GetByIdAsync<TProperty>(int id, Expression<Func<TEntity, TProperty>> include);
         Task<int> CountAsync();

@@ -8,11 +8,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<ProductModel>? Model { get; set; } = default!;
+        public Paginated<ProductModel> Model { get; set; } = new(currentPage: 1, pageSize: 10);
 
         private bool _loading = true;
-        private int _currentPage = 1;
-        private int _pageSize = 10;
 
         protected override async Task OnInitializedAsync()
         {
@@ -21,19 +19,26 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProducts()
         {
-            Model = await HttpService.GetAsync<PaginatedModel<ProductModel>>($"{Endpoints.Products}?currentPage={_currentPage}&pageSize={_pageSize}");
+            string? url = $"{Endpoints.Products}?currentPage={Model.CurrentPage}&pageSize={Model.PageSize}";
+
+            var paginatedResult = await HttpService.GetAsync<Paginated<ProductModel>>(url);
+            if (paginatedResult != null)
+            {
+                Model = paginatedResult;
+            }
+
             _loading = false;
         }
 
         private async Task Previous(int currentPage)
         {
-            _currentPage = currentPage;
+            Model.CurrentPage = currentPage;
             await GetProducts();
         }
 
         private async Task Next(int currentPage)
         {
-            _currentPage = currentPage;
+            Model.CurrentPage = currentPage;
             await GetProducts();
         }
     }

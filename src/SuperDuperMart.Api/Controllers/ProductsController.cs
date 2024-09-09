@@ -1,7 +1,4 @@
-﻿using SuperDuperMart.Api.Parameters;
-using SuperDuperMart.Core.Results;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
@@ -18,44 +15,23 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] ProductQueryParams parameters)
+        public async Task<IActionResult> Get(int? currentPage, int? pageSize)
         {
-            var model = Enumerable.Empty<ProductModel>();
-
-            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
+            if (currentPage.HasValue && pageSize.HasValue)
             {
-                int currentPage = parameters.CurrentPage.Value;
-                int pageSize = parameters.PageSize.Value;
+                var paginatedResult = await _unitOfWork.ProductRepository.GetPaginatedAsync(currentPage.Value, pageSize.Value);
 
-                int totalProducts = await _unitOfWork.ProductRepository.CountAsync();
-                int totalPages = totalProducts / pageSize;
-
-                if (currentPage <= 0)
+                return Ok(new
                 {
-                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page '{currentPage}' can't be a negative number"]));
-                }
-
-                if (currentPage > totalPages)
-                {
-                    return BadRequest(PaginatedResult<ProductModel>.Failure([$"The current page '{currentPage}' can't be greater than the total pages of {totalPages}"]));
-                }
-
-                var pagedProducts = await _unitOfWork.ProductRepository.GetAsync(parameters);
-                model = _mapper.Map<IEnumerable<ProductModel>>(pagedProducts);
-
-                var result = PaginatedResult<ProductModel>.Ok(
-                    currentPage,
-                    pageSize,
-                    totalPages,
-                    model);
-
-                return Ok(result);
+                    CurrentPage = currentPage.Value,
+                    PageSize = pageSize.Value,
+                    TotalPages = paginatedResult.Pages,
+                    Data = _mapper.Map<IEnumerable<ProductModel>>(paginatedResult.Data)
+                });
             }
 
             var products = await _unitOfWork.ProductRepository.GetAsync();
-            model = _mapper.Map<IEnumerable<ProductModel>>(products);
-
-            return Ok(model);
+            return Ok(_mapper.Map<IEnumerable<ProductModel>>(products));
         }
 
         [HttpGet("{id}")]

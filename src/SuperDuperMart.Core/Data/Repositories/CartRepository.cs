@@ -50,11 +50,6 @@ namespace SuperDuperMart.Core.Data.Repositories
             return carts;
         }
 
-        public Task<PaginatedResult<Cart>> GetAsync(IQueryParams parameters)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Cart?> GetByIdAsync(int id)
         {
             var cart = await _context.Carts.FirstOrDefaultAsync(c => c.Id == id);
@@ -123,11 +118,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             }
         }
 
-        Task<IEnumerable<Cart>> IRepository<Cart>.GetAsync(IQueryParams parameters)
+        public async Task<int> CountAsync() => await _context.Carts.CountAsync();
+
+        public Task<(IEnumerable<Cart> Data, int Pages)> GetPaginatedAsync(int currentPage, int pageSize)
         {
             throw new NotImplementedException();
         }
-
-        public async Task<int> CountAsync() => await _context.Carts.CountAsync();
     }
 }

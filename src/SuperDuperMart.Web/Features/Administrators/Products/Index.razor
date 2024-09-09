@@ -9,7 +9,7 @@
 }
 else
 {
-    @if (Model != null && Model.Count() > 0)
+    @if (Model?.Data != null && Model?.Data.Count() > 0)
     {
         <a href="@("/manage/products/create")" class="btn btn-dark btn-sm mb-2"><i class="bi bi-plus"></i></a>
         <table class="table table-bordered">
@@ -25,7 +25,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in Model)
+                @foreach (var product in Model.Data)
                 {
                     <tr>
                         <td>@product.Id</td>
@@ -51,6 +51,10 @@ else
                 }
             </tbody>
         </table>
-        <Pagination OnPreviousClick="Previous" OnNextClick="Next" />
+        <Pagination 
+            CurrentPage="Model.CurrentPage"
+            TotalPages="Model.TotalPages" 
+            OnPreviousClick="Previous" 
+            OnNextClick="Next" />
     }
 }

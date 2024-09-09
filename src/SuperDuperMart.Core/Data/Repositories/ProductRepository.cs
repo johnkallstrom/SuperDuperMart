@@ -19,18 +19,21 @@ namespace SuperDuperMart.Core.Data.Repositories
             return products;
         }
 
-        public async Task<IEnumerable<Product>> GetAsync(IQueryParams parameters)
+        public async Task<(IEnumerable<Product> Data, int Pages)> GetPaginatedAsync(int currentPage, int pageSize)
         {
-            var products = _context.Products.AsQueryable();
-
-            if (parameters.CurrentPage.HasValue && parameters.PageSize.HasValue)
+            if (currentPage <= 0)
             {
-                products = products
-                    .Skip((parameters.CurrentPage.Value - 1) * parameters.PageSize.Value)
-                    .Take(parameters.PageSize.Value);
+                return (Data: Enumerable.Empty<Product>(), Pages: 0);
             }
 
-            return await products.ToListAsync();
+            int pages = (await _context.Products.CountAsync()) / pageSize;
+
+            var products = await _context.Products
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (Data: products, Pages: pages);
         }
 
         public async Task<Product?> GetByIdAsync(int id)

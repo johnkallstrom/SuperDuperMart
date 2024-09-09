@@ -5,22 +5,28 @@ namespace SuperDuperMart.Web.Features.Components
     public partial class Pagination
     {
         [Parameter, EditorRequired]
-        public EventCallback<int> OnPreviousClick { get; set; }
+        public int CurrentPage { get; set; }
 
         [Parameter, EditorRequired]
+        public int TotalPages { get; set; }
+
+        [Parameter]
+        public EventCallback<int> OnPreviousClick { get; set; }
+
+        [Parameter]
         public EventCallback<int> OnNextClick { get; set; }
 
-        private int _currentPage = 1;
+        public int _firstPage { get; set; } = 1;
 
         private async Task Previous()
         {
-            _currentPage -= 1;
-            await OnPreviousClick.InvokeAsync(_currentPage);
+            CurrentPage -= 1;
+            await OnPreviousClick.InvokeAsync(CurrentPage);
         }
         private async Task Next()
         {
-            _currentPage += 1;
-            await OnNextClick.InvokeAsync(_currentPage);
+            CurrentPage += 1;
+            await OnNextClick.InvokeAsync(CurrentPage);
         }
     }
 }
