@@ -31,6 +31,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             return user;
         }
 
+        public Task<(IEnumerable<User> Users, int Pages)> GetPaginatedAsync(int currentPage, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<string>> GetRolesAsync(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
