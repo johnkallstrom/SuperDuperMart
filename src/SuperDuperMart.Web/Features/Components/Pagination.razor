@@ -1,6 +1,6 @@
 ﻿<nav>
     <ul class="pagination">
-        @if (CurrentPage <= _firstPage)
+        @if (PageNumber <= _firstPage)
         {
             <li class="page-item disabled">
                 <a class="page-link" @onclick=Previous>
@@ -16,7 +16,7 @@
                 </a>
             </li>
         }
-        @if (CurrentPage >= TotalPages)
+        @if (PageNumber >= Pages)
         {
             <li class="page-item disabled">
                 <a class="page-link" @onclick=Next>

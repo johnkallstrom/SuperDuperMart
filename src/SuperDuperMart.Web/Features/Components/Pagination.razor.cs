@@ -5,10 +5,10 @@ namespace SuperDuperMart.Web.Features.Components
     public partial class Pagination
     {
         [Parameter, EditorRequired]
-        public int CurrentPage { get; set; }
+        public int PageNumber { get; set; }
 
         [Parameter, EditorRequired]
-        public int TotalPages { get; set; }
+        public int Pages { get; set; }
 
         [Parameter]
         public EventCallback<int> OnPreviousClick { get; set; }
@@ -20,13 +20,13 @@ namespace SuperDuperMart.Web.Features.Components
 
         private async Task Previous()
         {
-            CurrentPage -= 1;
-            await OnPreviousClick.InvokeAsync(CurrentPage);
+            PageNumber -= 1;
+            await OnPreviousClick.InvokeAsync(PageNumber);
         }
         private async Task Next()
         {
-            CurrentPage += 1;
-            await OnNextClick.InvokeAsync(CurrentPage);
+            PageNumber += 1;
+            await OnNextClick.InvokeAsync(PageNumber);
         }
     }
 }

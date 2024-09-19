@@ -8,7 +8,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public Paginated<ProductModel> Model { get; set; } = new(currentPage: 1, pageSize: 10);
+        public PaginatedModel<ProductModel>? Model { get; set; } = new(pageNumber: 1, pageSize: 10);
 
         private bool _loading = true;
 
@@ -19,27 +19,29 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProducts()
         {
-            string? url = $"{Endpoints.Products}?currentPage={Model.CurrentPage}&pageSize={Model.PageSize}";
+            string? url = $"{Endpoints.Products}?pageNumber={Model?.PageNumber}&pageSize={Model?.PageSize}";
 
-            var paginatedResult = await HttpService.GetAsync<Paginated<ProductModel>>(url);
-            if (paginatedResult != null)
-            {
-                Model = paginatedResult;
-            }
+            Model = await HttpService.GetAsync<PaginatedModel<ProductModel>>(url);
 
             _loading = false;
         }
 
-        private async Task Previous(int currentPage)
+        private async Task Previous(int pageNumber)
         {
-            Model.CurrentPage = currentPage;
-            await GetProducts();
+            if (Model != null)
+            {
+                Model.PageNumber = pageNumber;
+                await GetProducts();
+            }
         }
 
-        private async Task Next(int currentPage)
+        private async Task Next(int pageNumber)
         {
-            Model.CurrentPage = currentPage;
-            await GetProducts();
+            if (Model != null)
+            {
+                Model.PageNumber = pageNumber;
+                await GetProducts();
+            }
         }
     }
 }

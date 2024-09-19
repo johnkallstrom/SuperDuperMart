@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using SuperDuperMart.Shared.Models;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
@@ -20,10 +22,13 @@
             if (pageNumber.HasValue && pageSize.HasValue)
             {
                 var result = await _unitOfWork.ProductRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
-                return Ok(new 
-                { 
+
+                return Ok(new PaginatedModel<ProductModel>
+                {
+                    PageNumber = pageNumber.Value,
+                    PageSize = pageSize.Value,
                     Pages = result.Pages,
-                    Products = _mapper.Map<IEnumerable<ProductModel>>(result.Data)
+                    Data = _mapper.Map<IEnumerable<ProductModel>>(result.Data)
                 });
             }
 
