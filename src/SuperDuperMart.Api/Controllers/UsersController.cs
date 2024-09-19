@@ -15,8 +15,18 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int? pageNumber, int? pageSize)
         {
+            if (pageNumber.HasValue && pageSize.HasValue)
+            {
+                var result = await _unitOfWork.UserRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
+                return Ok(new
+                {
+                    Pages = result.Pages,
+                    Users = _mapper.Map<IEnumerable<UserModel>>(result.Data)
+                });
+            }
+
             var users = await _unitOfWork.UserRepository.GetAsync();
             return Ok(_mapper.Map<IEnumerable<UserModel>>(users));
         }

@@ -22,9 +22,24 @@ namespace SuperDuperMart.Core.Data.Repositories
             return users;
         }
 
-        public Task<(int Pages, IEnumerable<User> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<(int Pages, IEnumerable<User> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
         {
-            throw new NotImplementedException();
+            if (pageNumber <= 0)
+            {
+                return (Pages: 0, Data: Enumerable.Empty<User>());
+            }
+
+
+            int count = await _context.Users.CountAsync();
+            decimal pages = Math.Ceiling((decimal)count / pageSize);
+
+            var users = await _context.Users
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Include(u => u.Location)
+                .ToListAsync();
+
+            return (Pages: (int)pages, Data: users);
         }
 
         public async Task<User?> GetByIdAsync(int id)

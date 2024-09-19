@@ -23,7 +23,7 @@
                 return Ok(new 
                 { 
                     Pages = result.Pages,
-                    Products = result.Data
+                    Products = _mapper.Map<IEnumerable<ProductModel>>(result.Data)
                 });
             }
 
