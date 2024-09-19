@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository<User>
     {
         private readonly UserManager<User> _userManager;
         private readonly SuperDuperMartDbContext _context;
@@ -22,6 +22,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             return users;
         }
 
+        public Task<(int Pages, IEnumerable<User> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<User?> GetByIdAsync(int id)
         {
             var user = await _context.Users
@@ -31,20 +36,24 @@ namespace SuperDuperMart.Core.Data.Repositories
             return user;
         }
 
-        public Task<(IEnumerable<User> Users, int Pages)> GetPaginatedAsync(int currentPage, int pageSize)
+        public async Task<bool> HasCartAsync(User user)
+        {
+            return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
+        }
+
+        public Task<User> CreateAsync(User user)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<string>> GetRolesAsync(User user)
+        public void Update(User user)
         {
-            var roles = await _userManager.GetRolesAsync(user);
-            return roles.ToList();
+            throw new NotImplementedException();
         }
 
-        public async Task<bool> HasCartAsync(User user)
+        public void Delete(User user)
         {
-            return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
+            throw new NotImplementedException();
         }
     }
 }

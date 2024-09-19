@@ -17,7 +17,7 @@
 
         public ICartRepository CartRepository { get; }
         public IRepository<Product> ProductRepository { get; }
-        public IUserRepository UserRepository { get; }
+        public IUserRepository<User> UserRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();
     }

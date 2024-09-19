@@ -26,7 +26,7 @@ namespace SuperDuperMart.Core.Extensions
             }).AddEntityFrameworkStores<SuperDuperMartDbContext>();
 
             services.AddScoped<IRepository<Product>, ProductRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRepository<User>, UserRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
