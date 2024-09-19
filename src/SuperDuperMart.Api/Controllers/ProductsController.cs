@@ -22,7 +22,7 @@
                 var result = await _unitOfWork.ProductRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
                 return Ok(new 
                 { 
-                    TotalPages = result.Pages,
+                    Pages = result.Pages,
                     Products = result.Data
                 });
             }
