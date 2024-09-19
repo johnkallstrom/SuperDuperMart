@@ -35,6 +35,8 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
             return Ok();
         }
 
