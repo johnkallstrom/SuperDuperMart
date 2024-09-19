@@ -15,18 +15,15 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int? currentPage, int? pageSize)
+        public async Task<IActionResult> Get(int? pageNumber, int? pageSize)
         {
-            if (currentPage.HasValue && pageSize.HasValue)
+            if (pageNumber.HasValue && pageSize.HasValue)
             {
-                var paginatedResult = await _unitOfWork.ProductRepository.GetPaginatedAsync(currentPage.Value, pageSize.Value);
-
-                return Ok(new
-                {
-                    CurrentPage = currentPage.Value,
-                    PageSize = pageSize.Value,
-                    TotalPages = paginatedResult.Pages,
-                    Data = _mapper.Map<IEnumerable<ProductModel>>(paginatedResult.Data)
+                var result = await _unitOfWork.ProductRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
+                return Ok(new 
+                { 
+                    TotalPages = result.Pages,
+                    Products = result.Data
                 });
             }
 

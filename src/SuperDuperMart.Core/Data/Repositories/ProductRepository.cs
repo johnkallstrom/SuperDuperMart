@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
@@ -19,21 +18,22 @@ namespace SuperDuperMart.Core.Data.Repositories
             return products;
         }
 
-        public async Task<(IEnumerable<Product> Data, int Pages)> GetPaginatedAsync(int currentPage, int pageSize)
+        public async Task<(int Pages, IEnumerable<Product> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
         {
-            if (currentPage <= 0)
+            if (pageNumber <= 0)
             {
-                return (Data: Enumerable.Empty<Product>(), Pages: 0);
+                return (Pages: 0, Data: Enumerable.Empty<Product>());
             }
 
-            int pages = (await _context.Products.CountAsync()) / pageSize;
+            int count = await _context.Products.CountAsync();
+            decimal pages = Math.Ceiling((decimal)count / pageSize);
 
             var products = await _context.Products
-                .Skip((currentPage - 1) * pageSize)
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
 
-            return (Data: products, Pages: pages);
+            return (Pages: (int)pages, Data: products);
         }
 
         public async Task<Product?> GetByIdAsync(int id)
@@ -61,7 +61,5 @@ namespace SuperDuperMart.Core.Data.Repositories
         }
 
         public void Delete(Product entity) => _context.Products.Remove(entity);
-
-        public async Task<int> CountAsync() => await _context.Products.CountAsync();
     }
 }
