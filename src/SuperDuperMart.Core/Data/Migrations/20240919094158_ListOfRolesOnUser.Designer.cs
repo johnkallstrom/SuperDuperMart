@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperDuperMart.Core.Data;
 
@@ -11,9 +12,11 @@ using SuperDuperMart.Core.Data;
 namespace SuperDuperMart.Core.Data.Migrations
 {
     [DbContext(typeof(SuperDuperMartDbContext))]
-    partial class SuperDuperMartDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240919094158_ListOfRolesOnUser")]
+    partial class ListOfRolesOnUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
