@@ -17,8 +17,7 @@ namespace SuperDuperMart.Api.Extensions
                 await context.Database.EnsureDeletedAsync();
                 await context.Database.MigrateAsync();
 
-                await DatabaseInitializer.SeedAsync(context);
-                await DatabaseInitializer.SeedIdentityAsync(userManager, roleManager);
+                await DatabaseInitializer.SeedAsync(context, userManager, roleManager);
             }
         }
     }
