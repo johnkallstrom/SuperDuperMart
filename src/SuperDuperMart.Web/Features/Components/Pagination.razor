@@ -1,36 +1,22 @@
 ﻿<nav>
     <ul class="pagination">
-        @if (PageNumber <= _firstPage)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" @onclick=Previous>
-                    <i class="bi bi-caret-left"></i>
-                </a>
-            </li>
-        }
-        else
+        <li class=@(IsPreviousDisabled ? "page-item disabled" : "page-item")>
+            <a class="page-link" @onclick=Previous>
+                <i class="bi bi-caret-left"></i>
+            </a>
+        </li>
+
+        @for (int number = 1; number <= Pages; number++)
         {
             <li class="page-item">
-                <a class="page-link" @onclick=Previous>
-                    <i class="bi bi-caret-left"></i>
-                </a>
+                <a class="page-link" @onclick="(async () => await OnPageClick.InvokeAsync(number))">@number</a>
             </li>
         }
-        @if (PageNumber >= Pages)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" @onclick=Next>
-                    <i class="bi bi-caret-right"></i>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" @onclick=Next>
-                    <i class="bi bi-caret-right"></i>
-                </a>
-            </li>
-        }
+
+        <li class=@(IsNextDisabled ? "page-item disabled" : "page-item")>
+            <a class="page-link" @onclick=Next>
+                <i class="bi bi-caret-right"></i>
+            </a>
+        </li>
     </ul>
 </nav>

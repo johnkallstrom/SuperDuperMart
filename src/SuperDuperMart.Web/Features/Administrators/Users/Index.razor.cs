@@ -36,6 +36,16 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             await GetUsers();
         }
 
+        private async Task Page(int pageNumber)
+        {
+            if (Model != null)
+            {
+                Model.PageNumber = pageNumber;
+            }
+
+            await GetUsers();
+        }
+
         private async Task Next(int pageNumber)
         {
             if (Model != null)

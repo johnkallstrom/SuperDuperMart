@@ -35,6 +35,17 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             }
         }
 
+        private async Task Page(int pageNumber)
+        {
+            if (Model != null)
+            {
+                Model.PageNumber = pageNumber;
+            }
+
+            await GetProducts();
+        }
+
+
         private async Task Next(int pageNumber)
         {
             if (Model != null)
