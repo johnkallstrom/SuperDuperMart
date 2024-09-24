@@ -11,6 +11,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         public PaginatedModel<ProductModel> Model { get; set; } = new(pageNumber: 1, pageSize: 10);
 
         private bool _loading = true;
+        private int[] _pageSizeOptions = [10, 25, 50, 75, 100];
 
         protected override async Task OnInitializedAsync()
         {
@@ -28,6 +29,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             }
 
             _loading = false;
+        }
+
+        private async Task HandlePageSizeSelection(int pageSize)
+        {
+            Model.PageSize = pageSize;
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
 
         private async Task HandlePreviousClick(int pageNumber)
