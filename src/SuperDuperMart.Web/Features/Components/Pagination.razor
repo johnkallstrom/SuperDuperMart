@@ -1,6 +1,6 @@
 ﻿<nav>
     <ul class="pagination">
-        <li class=@(IsPreviousDisabled ? "page-item disabled" : "page-item")>
+        <li class=@(DisablePrevious ? "page-item disabled" : "page-item")>
             <a class="page-link" @onclick=Previous>
                 <i class="bi bi-caret-left"></i>
             </a>
@@ -9,11 +9,11 @@
         @for (int number = 1; number <= Pages; number++)
         {
             <li class="page-item">
-                <a class="page-link" @onclick="(async () => await OnPageClick.InvokeAsync(number))">@number</a>
+                <a class="page-link" @onclick="async () => await Page(number)">@number</a>
             </li>
         }
 
-        <li class=@(IsNextDisabled ? "page-item disabled" : "page-item")>
+        <li class=@(DisableNext ? "page-item disabled" : "page-item")>
             <a class="page-link" @onclick=Next>
                 <i class="bi bi-caret-right"></i>
             </a>

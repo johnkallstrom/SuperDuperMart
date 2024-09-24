@@ -19,7 +19,7 @@ namespace SuperDuperMart.Web.Features.Components
         [Parameter]
         public EventCallback<int> OnNextClick { get; set; }
 
-        public bool IsPreviousDisabled
+        public bool DisablePrevious
         {
             get
             {
@@ -27,7 +27,7 @@ namespace SuperDuperMart.Web.Features.Components
             }
         }
 
-        public bool IsNextDisabled
+        public bool DisableNext
         {
             get
             {
@@ -39,6 +39,12 @@ namespace SuperDuperMart.Web.Features.Components
         {
             PageNumber -= 1;
             await OnPreviousClick.InvokeAsync(PageNumber);
+        }
+
+        private async Task Page(int number)
+        {
+            PageNumber = number;
+            await OnPageClick.InvokeAsync(PageNumber);
         }
 
         private async Task Next()
