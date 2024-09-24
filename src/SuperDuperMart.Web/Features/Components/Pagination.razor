@@ -1,20 +1,21 @@
 ﻿<nav>
     <ul class="pagination">
         <li class=@(DisablePrevious ? "page-item disabled" : "page-item")>
-            <a class="page-link" @onclick=Previous>
+            <a class="page-link" @onclick="async () => await OnPreviousClick.InvokeAsync(PageNumber -= 1)">
                 <i class="bi bi-caret-left"></i>
             </a>
         </li>
 
-        @for (int number = 1; number <= Pages; number++)
+        @for (int i = 1; i <= Pages; i++)
         {
+            int pageNumber = i;
             <li class="page-item">
-                <a class="page-link" @onclick="async () => await Page(number)">@number</a>
+                <a class="page-link" @onclick="async () => await OnPageClick.InvokeAsync(pageNumber)">@pageNumber</a>
             </li>
         }
 
         <li class=@(DisableNext ? "page-item disabled" : "page-item")>
-            <a class="page-link" @onclick=Next>
+            <a class="page-link" @onclick="async () => await OnNextClick.InvokeAsync(PageNumber += 1)">
                 <i class="bi bi-caret-right"></i>
             </a>
         </li>

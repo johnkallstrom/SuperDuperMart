@@ -8,51 +8,45 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<ProductModel>? Model { get; set; } = new(pageNumber: 1, pageSize: 10);
+        public PaginatedModel<ProductModel> Model { get; set; } = new(pageNumber: 1, pageSize: 10);
 
         private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
-            await GetProducts();
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task GetProducts()
+        private async Task GetProducts(int pageNumber, int pageSize)
         {
-            string? url = $"{Endpoints.Products}?pageNumber={Model?.PageNumber}&pageSize={Model?.PageSize}";
+            string? url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            Model = await HttpService.GetAsync<PaginatedModel<ProductModel>>(url);
+            var data = await HttpService.GetAsync<PaginatedModel<ProductModel>>(url);
+            if (data != null)
+            {
+                Model = data;
+            }
 
             _loading = false;
         }
 
-        private async Task Previous(int pageNumber)
+        private async Task HandlePreviousClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-                await GetProducts();
-            }
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task Page(int pageNumber)
+        private async Task HandlePageClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-            }
-
-            await GetProducts();
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
 
 
-        private async Task Next(int pageNumber)
+        private async Task HandleNextClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-                await GetProducts();
-            }
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
     }
 }

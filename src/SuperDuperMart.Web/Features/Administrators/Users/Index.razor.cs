@@ -9,51 +9,44 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<UserModel>? Model { get; set; } = new(pageNumber: 1, pageSize: 10);
+        public PaginatedModel<UserModel> Model { get; set; } = new(pageNumber: 1, pageSize: 10);
+
         private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
-            await GetUsers();
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task GetUsers()
+        private async Task GetUsers(int pageNumber, int pageSize)
         {
-            string url = $"{Endpoints.Users}?pageNumber={Model?.PageNumber}&pageSize={Model?.PageSize}";
+            string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            Model = await HttpService.GetAsync<PaginatedModel<UserModel>>(url);
+            var data = await HttpService.GetAsync<PaginatedModel<UserModel>>(url);
+            if (data != null)
+            {
+                Model = data;
+            }
 
             _loading = false;
         }
 
-        private async Task Previous(int pageNumber)
+        private async Task HandlePreviousClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-            }
-
-            await GetUsers();
+            Model.PageNumber = pageNumber;
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task Page(int pageNumber)
+        private async Task HandlePageClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-            }
-
-            await GetUsers();
+            Model.PageNumber = pageNumber;
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task Next(int pageNumber)
+        private async Task HandleNextClick(int pageNumber)
         {
-            if (Model != null)
-            {
-                Model.PageNumber = pageNumber;
-            }
-
-            await GetUsers();
+            Model.PageNumber = pageNumber;
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
     }
 }

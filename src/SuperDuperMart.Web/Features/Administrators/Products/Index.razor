@@ -54,8 +54,8 @@ else
         <Pagination 
             PageNumber="Model.PageNumber"
             Pages="Model.Pages" 
-            OnPreviousClick="Previous"
-            OnPageClick="Page"
-            OnNextClick="Next" />
+            OnPreviousClick="HandlePreviousClick"
+            OnPageClick="HandlePageClick"
+            OnNextClick="HandleNextClick" />
     }
 }

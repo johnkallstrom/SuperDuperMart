@@ -34,23 +34,5 @@ namespace SuperDuperMart.Web.Features.Components
                 return PageNumber >= Pages;
             }
         }
-
-        private async Task Previous()
-        {
-            PageNumber -= 1;
-            await OnPreviousClick.InvokeAsync(PageNumber);
-        }
-
-        private async Task Page(int number)
-        {
-            PageNumber = number;
-            await OnPageClick.InvokeAsync(PageNumber);
-        }
-
-        private async Task Next()
-        {
-            PageNumber += 1;
-            await OnNextClick.InvokeAsync(PageNumber);
-        }
     }
 }
