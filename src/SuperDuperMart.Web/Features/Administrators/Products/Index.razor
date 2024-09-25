@@ -14,12 +14,12 @@ else
         <div class="row mb-3">
             <div class="col-sm-2">
                 <label class="form-label">Size per page</label>
-                <InputSelect class="form-select form-select-sm" @bind-Value=Model.PageSize>
+                <select class="form-select form-select-sm" @onchange=HandlePageSizeChange>
                     @foreach (var pageSize in _pageSizeOptions)
                     {
                         <option value="@pageSize">@pageSize</option>
                     }
-                </InputSelect>
+                </select>
             </div>
             <div class="col-sm-2 align-self-end">
                 <a href="@("/manage/products/create")" class="btn btn-dark btn-sm">

@@ -31,10 +31,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             _loading = false;
         }
 
-        private async Task HandlePageSizeSelection(int pageSize)
+        private void HandlePageSizeChange(ChangeEventArgs args)
         {
-            Model.PageSize = pageSize;
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            int value = int.Parse(args.Value.ToString());
+            Model.PageSize = value;
         }
 
         private async Task HandlePreviousClick(int pageNumber)
@@ -48,7 +48,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             Model.PageNumber = pageNumber;
             await GetProducts(Model.PageNumber, Model.PageSize);
         }
-
 
         private async Task HandleNextClick(int pageNumber)
         {
