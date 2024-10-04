@@ -31,10 +31,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             _loading = false;
         }
 
-        private void HandlePageSizeChange(ChangeEventArgs args)
+        private async void HandlePageSizeChange()
         {
-            int value = int.Parse(args.Value.ToString());
-            Model.PageSize = value;
+            await GetProducts(Model.PageNumber, Model.PageSize);
+            StateHasChanged();
         }
 
         private async Task HandlePreviousClick(int pageNumber)
