@@ -1,8 +1,22 @@
-﻿.page-link {
-    color: #212529;
+﻿:root {
+    --dark: #212529;
+}
+
+.page-link {
+    color: var(--dark);
 }
 
 .page-link:hover {
     cursor: pointer;
-    color: #212529
+    color: var(--dark);
+}
+
+.active {
+    --bs-pagination-active-color: #FFF;
+    --bs-pagination-active-bg: #212529;
+    --bs-pagination-active-border-color: #212529;
+}
+
+.active > .page-link, .page-link.active:hover {
+    color: #FFF;
 }
