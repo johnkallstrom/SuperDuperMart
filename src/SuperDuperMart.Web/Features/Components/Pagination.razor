@@ -9,7 +9,7 @@
         @for (int i = 1; i <= Pages; i++)
         {
             int pageNumber = i;
-            <li class="page-item">
+            <li class=@(PageNumber == pageNumber ? "page-item active" : "page-item")>
                 <a class="page-link" @onclick="async () => await OnPageClick.InvokeAsync(pageNumber)">@pageNumber</a>
             </li>
         }
