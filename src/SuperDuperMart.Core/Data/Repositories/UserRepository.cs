@@ -56,11 +56,18 @@ namespace SuperDuperMart.Core.Data.Repositories
             return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
         }
 
-        public async Task<IdentityResult> CreateAsync(User user, string password)
+        public async Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(User user, string password)
         {
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, password);
             var identityResult = await _userManager.CreateAsync(user);
-            return identityResult;
+           
+            if (!identityResult.Succeeded)
+            {
+                var errors = identityResult.Errors.Select(x => x.Description).ToList();
+                return (Succeeded: false, Errors: errors);
+            }
+
+            return (Succeeded: true, Errors: Enumerable.Empty<string>());
         }
 
         public void Update(User user)

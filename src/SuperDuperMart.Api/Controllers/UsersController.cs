@@ -51,7 +51,11 @@ namespace SuperDuperMart.Api.Controllers
             var user = _mapper.Map<User>(model);
 
             var result = await _unitOfWork.UserRepository.CreateAsync(user, model.Password);
-            return Ok(result);
+            return Ok(new 
+            { 
+                result.Succeeded, 
+                result.Errors 
+            });
         }
 
         [HttpPut("{id}")]
