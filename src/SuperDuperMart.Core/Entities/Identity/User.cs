@@ -2,9 +2,9 @@
 {
     public class User : IdentityUser<int>
     {
-        public string Avatar { get; set; } = default!;
-        public string FirstName { get; set; } = default!;
-        public string LastName { get; set; } = default!;
+        public string? Avatar { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public List<string> Roles { get; set; } = [];
 
         public Location Location { get; set; } = default!;

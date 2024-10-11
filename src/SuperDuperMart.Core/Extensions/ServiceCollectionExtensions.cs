@@ -20,6 +20,7 @@ namespace SuperDuperMart.Core.Extensions
 
             services.AddIdentity<User, Role>(options =>
             {
+                options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
