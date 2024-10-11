@@ -9,7 +9,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<UserModel> Model { get; set; } = new(pageNumber: 1, pageSize: 10);
+        public PaginatedModel<UserModel> Model { get; set; } = new(pageNumber: 1, pageSize: 25);
 
         private bool _loading = true;
 

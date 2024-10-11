@@ -8,10 +8,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<ProductModel> Model { get; set; } = new(pageNumber: 1, pageSize: 10);
+        public PaginatedModel<ProductModel> Model { get; set; } = new(pageNumber: 1, pageSize: 25);
 
         private bool _loading = true;
-        private int[] _pageSizeOptions = [10, 25, 50, 75, 100];
 
         protected override async Task OnInitializedAsync()
         {
