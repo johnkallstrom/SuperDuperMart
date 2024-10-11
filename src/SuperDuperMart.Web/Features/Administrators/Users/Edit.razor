@@ -1,6 +1,10 @@
 ﻿@page "/manage/users/{id:int}"
 @attribute [Authorize(Roles = Roles.Administrator)]
 
+@{
+    var placeHolderImage = "https://placehold.co/600x400";
+}
+
 <PageTitle>SuperDuperMart - Edit User</PageTitle>
 
 <EditForm Model="@Model" OnValidSubmit="Submit">
@@ -20,6 +24,9 @@
                             <a class="nav-link" href="#">Roles</a>
                         </li>
                     </ul>
+                </div>
+                <div class="col-sm-4 mt-3 mx-3">
+                    <img src=@(!string.IsNullOrWhiteSpace(Model.Avatar) ? Model.Avatar : placeHolderImage) class="img-fluid rounded">
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
