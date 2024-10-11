@@ -2,3 +2,37 @@
 @attribute [Authorize(Roles = Roles.Administrator)]
 
 <PageTitle>SuperDuperMart - Create User</PageTitle>
+
+<div class="row">
+    <div class="col-sm-8 col-lg-6">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <EditForm Model="@Model" OnValidSubmit="Submit">
+                    <DataAnnotationsValidator />
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Username">Username</label>
+                        <InputText type="text" class="form-control" for="Model.Username" @bind-Value="Model.Username" />
+                        <ValidationMessage For="() => Model.Username" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Email">Email</label>
+                        <InputText type="email" class="form-control" for="Model.Email" @bind-Value="Model.Email" />
+                        <ValidationMessage For="() => Model.Email" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Password">Password</label>
+                        <InputText type="password" class="form-control" for="Model.Password" @bind-Value="Model.Password" />
+                        <ValidationMessage For="() => Model.Password" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.ConfirmPassword">Confirm password</label>
+                        <InputText type="password" class="form-control" for="Model.ConfirmPassword" @bind-Value="Model.ConfirmPassword" />
+                        <ValidationMessage For="() => Model.ConfirmPassword" />
+                    </div>
+                    <SuperButton Type="ButtonType.Submit" Label="Create" Color="Color.Dark" />
+                    <SuperButton Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
