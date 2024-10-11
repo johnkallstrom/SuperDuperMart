@@ -45,7 +45,13 @@ namespace SuperDuperMart.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateModel model)
         {
-            return Created();
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = _mapper.Map<User>(model);
+            var createdUser = await _unitOfWork.UserRepository.CreateAsync(user);
+            await _unitOfWork.SaveAsync();
+
+            return CreatedAtAction(nameof(GetById), new { createdUser.Id }, createdUser);
         }
 
         [HttpPut("{id}")]

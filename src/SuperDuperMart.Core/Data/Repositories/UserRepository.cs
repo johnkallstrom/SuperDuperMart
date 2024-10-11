@@ -29,7 +29,6 @@ namespace SuperDuperMart.Core.Data.Repositories
                 return (Pages: 0, Data: Enumerable.Empty<User>());
             }
 
-
             int count = await _context.Users.CountAsync();
             decimal pages = Math.Ceiling((decimal)count / pageSize);
 
