@@ -17,7 +17,7 @@ namespace SuperDuperMart.Shared.Models.Users
         public string Password { get; set; } = default!;
 
         [Required(ErrorMessage = "Please enter a valid confirm password")]
-        //[Compare(nameof(Password), ErrorMessage = "Please provide matching passwords")]
+        [Compare(nameof(Password), ErrorMessage = "Please provide matching passwords")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = default!;
     }
