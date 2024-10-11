@@ -1,0 +1,11 @@
+﻿:root {
+    --dark: #212529;
+}
+
+.nav-link {
+    color: var(--dark);
+}
+
+.nav-link:hover {
+    color: var(--dark);
+}

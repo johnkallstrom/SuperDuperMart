@@ -2,3 +2,60 @@
 @attribute [Authorize(Roles = Roles.Administrator)]
 
 <PageTitle>SuperDuperMart - Edit User</PageTitle>
+
+<EditForm Model="@Model" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Roles</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Avatar">Avatar</label>
+                        <InputText type="text" class="form-control" for="Model.Avatar" @bind-Value="Model.Avatar" />
+                        <ValidationMessage For="() => Model.Avatar" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.FirstName">First name</label>
+                        <InputText type="text" class="form-control" for="Model.FirstName" @bind-Value="Model.FirstName" />
+                        <ValidationMessage For="() => Model.FirstName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.LastName">Last name</label>
+                        <InputText type="text" class="form-control" for="Model.LastName" @bind-Value="Model.LastName" />
+                        <ValidationMessage For="() => Model.LastName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Location.StreetName">Street name</label>
+                        <InputText type="text" class="form-control" for="Model.Location.StreetName" @bind-Value="Model.Location.StreetName" />
+                        <ValidationMessage For="() => Model.Location.StreetName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Location.ZipCode">Zip code</label>
+                        <InputText type="text" class="form-control" for="Model.Location.ZipCode" @bind-Value="Model.Location.StreetName" />
+                        <ValidationMessage For="() => Model.Location.ZipCode" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="@Model.Location.City">City</label>
+                        <InputText type="text" class="form-control" for="Model.Location.City" @bind-Value="Model.Location.City" />
+                        <ValidationMessage For="() => Model.Location.ZipCode" />
+                    </div>
+                    <SuperButton Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
+                    <SuperButton Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+</EditForm>
