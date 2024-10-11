@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Core.Data.Repositories
+﻿using SuperDuperMart.Core.Entities.Identity;
+
+namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

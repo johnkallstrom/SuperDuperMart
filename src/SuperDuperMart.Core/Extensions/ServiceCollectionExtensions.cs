@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SuperDuperMart.Core.Data;
 using SuperDuperMart.Core.Data.Repositories;
+using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Extensions
 {

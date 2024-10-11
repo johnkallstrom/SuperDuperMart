@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -55,9 +56,15 @@ namespace SuperDuperMart.Core.Data.Repositories
             return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
         }
 
-        public Task<User> CreateAsync(User user)
+        public async Task<User> CreateAsync(User user)
         {
             throw new NotImplementedException();
+        }
+
+        public bool DoPasswordsMatch(string password, string confirmPassword)
+        {
+            if (password.Equals(confirmPassword)) return true;
+            else return false;
         }
 
         public void Update(User user)

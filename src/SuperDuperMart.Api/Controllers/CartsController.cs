@@ -1,4 +1,5 @@
-﻿using SuperDuperMart.Shared.Models.Carts;
+﻿using SuperDuperMart.Core.Entities.Identity;
+using SuperDuperMart.Shared.Models.Carts;
 
 namespace SuperDuperMart.Api.Controllers
 {

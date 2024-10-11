@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Data.Fakers
 {

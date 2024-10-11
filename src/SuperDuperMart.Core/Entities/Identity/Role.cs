@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Core.Identity
+﻿namespace SuperDuperMart.Core.Entities.Identity
 {
     public class Role : IdentityRole<int>
     {

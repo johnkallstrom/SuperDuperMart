@@ -1,4 +1,5 @@
-﻿using SuperDuperMart.Shared.Models.Carts;
+﻿using SuperDuperMart.Core.Entities.Identity;
+using SuperDuperMart.Shared.Models.Carts;
 
 namespace SuperDuperMart.Api.Profiles
 {
@@ -13,6 +14,7 @@ namespace SuperDuperMart.Api.Profiles
 
             // User
             CreateMap<User, UserModel>().ReverseMap();
+            CreateMap<UserCreateModel, User>().ReverseMap();
 
             // Location
             CreateMap<Location, LocationModel>().ReverseMap();

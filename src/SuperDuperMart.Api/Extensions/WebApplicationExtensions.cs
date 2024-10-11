@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SuperDuperMart.Core.Data;
+using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Api.Extensions
 {

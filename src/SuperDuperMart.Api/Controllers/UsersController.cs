@@ -1,4 +1,5 @@
-﻿using SuperDuperMart.Shared.Models;
+﻿using SuperDuperMart.Core.Entities.Identity;
+using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -45,7 +46,11 @@ namespace SuperDuperMart.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateModel model)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            bool matchingPasswords = _unitOfWork.UserRepository.DoPasswordsMatch(model.Password, model.ConfirmPassword);
+            if (!matchingPasswords)
+            {
+                return BadRequest(new { Message = "The passwords you entered do not match"});
+            }
 
             var user = _mapper.Map<User>(model);
             var createdUser = await _unitOfWork.UserRepository.CreateAsync(user);

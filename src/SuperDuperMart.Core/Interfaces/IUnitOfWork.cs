@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Core.Interfaces
+﻿using SuperDuperMart.Core.Entities.Identity;
+
+namespace SuperDuperMart.Core.Interfaces
 {
     public interface IUnitOfWork
     {

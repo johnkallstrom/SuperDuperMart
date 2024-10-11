@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Data.EntityConfigurations
 {

@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Core.Entities
+﻿using SuperDuperMart.Core.Entities.Identity;
+
+namespace SuperDuperMart.Core.Entities
 {
     public class Cart : BaseEntity
     {

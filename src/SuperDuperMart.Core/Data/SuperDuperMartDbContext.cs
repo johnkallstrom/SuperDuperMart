@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SuperDuperMart.Core.Entities.Identity;
 using SuperDuperMart.Core.Extensions;
 using System.Reflection;
 
