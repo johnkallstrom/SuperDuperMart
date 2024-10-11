@@ -6,5 +6,6 @@ namespace SuperDuperMart.Web.Services
     {
         IEnumerable<Claim> ReadClaimsFromToken(string token);
         bool HasTokenExpired(string token);
+        int GetTokenExpirationTimeInMinutes(string token);
     }
 }
