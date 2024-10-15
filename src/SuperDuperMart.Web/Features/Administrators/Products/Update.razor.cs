@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
-    public partial class Edit
+    public partial class Update
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
