@@ -6,14 +6,22 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
     public partial class Index
     {
         [Inject]
+        public IConfiguration Configuration { get; set; } = default!;
+
+        [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<ProductModel> Model { get; set; } = new(pageNumber: 1, pageSize: 25);
+        public PaginatedModel<ProductModel> Model { get; set; } = default!;
 
         private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
+            int pageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
+            int pageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
+
+            Model = new(pageNumber, pageSize);
+
             await GetProducts(Model.PageNumber, Model.PageSize);
         }
 

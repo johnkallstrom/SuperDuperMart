@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
 using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Shared.Models.Users;
 
@@ -7,14 +8,22 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
     public partial class Index
     {
         [Inject]
+        public IConfiguration Configuration { get; set; } = default!;
+
+        [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<UserModel> Model { get; set; } = new(pageNumber: 1, pageSize: 25);
+        public PaginatedModel<UserModel> Model { get; set; } = default!;
 
         private bool _loading = true;
 
         protected override async Task OnInitializedAsync()
         {
+            int pageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
+            int pageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
+
+            Model = new(pageNumber, pageSize);
+
             await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
