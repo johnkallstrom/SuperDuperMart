@@ -14,10 +14,12 @@ namespace SuperDuperMart.Api.Profiles
 
             // User
             CreateMap<User, UserModel>().ReverseMap();
-            CreateMap<UserCreateModel, User>().ReverseMap();
+            CreateMap<UserCreateModel, User>();
+            CreateMap<UserUpdateModel, User>();
 
             // Location
             CreateMap<Location, LocationModel>().ReverseMap();
+            CreateMap<LocationUpdateModel, Location>();
 
             // Cart
             CreateMap<Cart, CartModel>()

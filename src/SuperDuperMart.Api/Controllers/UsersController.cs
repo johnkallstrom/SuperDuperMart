@@ -59,8 +59,17 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateModel model)
         {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            user = _mapper.Map(source: model, destination: user);
+            await _unitOfWork.UserRepository.UpdateAsync(user);
+
             return NoContent();
         }
 

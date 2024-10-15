@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Core.Entities.Identity;
-
-namespace SuperDuperMart.Core.Interfaces
+﻿namespace SuperDuperMart.Core.Interfaces
 {
     public interface IUserRepository<TUser> where TUser : IdentityUser<int>
     {
@@ -9,7 +7,7 @@ namespace SuperDuperMart.Core.Interfaces
         Task<TUser?> GetByIdAsync(int id);
         Task<bool> HasCartAsync(User user);
         Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
-        void Update(TUser user);
+        Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(TUser user);
         void Delete(TUser user);
     }
 }

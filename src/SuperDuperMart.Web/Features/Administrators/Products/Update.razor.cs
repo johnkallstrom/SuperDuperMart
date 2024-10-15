@@ -13,7 +13,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Parameter]
         public int Id { get; set; }
 
-        private bool _alertSuccess;
+        private bool _alert;
         private bool _loading = true;
 
         public ProductUpdateModel Model { get; set; } = new();
@@ -44,10 +44,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            _alertSuccess = true;
+            _alert = true;
         }
 
-        private void ToggleAlert() => _alertSuccess = !_alertSuccess;
+        private void ToggleAlert() => _alert = !_alert;
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }

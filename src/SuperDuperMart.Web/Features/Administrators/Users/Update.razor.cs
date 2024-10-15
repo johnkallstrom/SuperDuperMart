@@ -23,6 +23,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task Submit()
         {
+            await HttpService.PutAsync($"{Endpoints.Users}/{Id}", Model);
         }
 
         private async Task GetUser()
@@ -37,7 +38,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private void Map(UserModel user)
         {
             Model.Avatar = user.Avatar;
-            Model.Username = user.Username ?? "";
             Model.FirstName = user.FirstName;
             Model.LastName = user.LastName;
             Model.Location.StreetName = user.Location?.StreetName;

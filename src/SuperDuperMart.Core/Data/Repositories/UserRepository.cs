@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -64,15 +63,22 @@ namespace SuperDuperMart.Core.Data.Repositories
             if (!identityResult.Succeeded)
             {
                 var errors = identityResult.Errors.Select(x => x.Description).ToList();
-                return (Succeeded: false, Errors: errors);
+                return (false, errors);
             }
 
-            return (Succeeded: true, Errors: Enumerable.Empty<string>());
+            return (true, Enumerable.Empty<string>());
         }
 
-        public void Update(User user)
+        public async Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            var identityResult = await _userManager.UpdateAsync(user);
+            if (!identityResult.Succeeded)
+            {
+                var errors = identityResult.Errors.Select(x => x.Description).ToList();
+                return (false, errors);
+            }
+
+            return (true, Enumerable.Empty<string>());
         }
 
         public void Delete(User user)
