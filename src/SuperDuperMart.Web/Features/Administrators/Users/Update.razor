@@ -1,7 +1,7 @@
 ﻿@page "/manage/users/{id:int}"
 @attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - Update User</PageTitle>
+<PageTitle>SuperDuperMart - Update @($"{Model?.FirstName} {Model?.LastName}")</PageTitle>
 
 <EditForm Model="@Model" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
