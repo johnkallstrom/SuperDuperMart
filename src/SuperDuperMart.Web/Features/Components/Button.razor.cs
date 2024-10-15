@@ -3,7 +3,7 @@ using SuperDuperMart.Web.Enums;
 
 namespace SuperDuperMart.Web.Features.Components
 {
-    public partial class SuperButton
+    public partial class Button
     {
         [Parameter, EditorRequired]
         public string Label { get; set; } = default!;

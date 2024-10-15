@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Web.Features.Components
 {
-    public partial class SuperAlert
+    public partial class Alert
     {
         [Parameter, EditorRequired]
         public string Message { get; set; } = "Empty.";
