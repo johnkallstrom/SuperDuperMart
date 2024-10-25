@@ -81,8 +81,16 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            _unitOfWork.UserRepository.Delete(user);
+
             return NoContent();
         }
     }
