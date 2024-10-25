@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
-    public class LocationRepository : IRepository<Location>
+    public class LocationRepository : ILocationRepository
     {
         private readonly SuperDuperMartDbContext _context;
 
@@ -20,6 +20,12 @@ namespace SuperDuperMart.Core.Data.Repositories
         public async Task<Location?> GetByIdAsync(int id)
         {
             var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == id);
+            return location;
+        }
+
+        public async Task<Location?> GetByUserIdAsync(int userId)
+        {
+            var location = await _context.Locations.FirstOrDefaultAsync(l => l.UserId == userId);
             return location;
         }
 

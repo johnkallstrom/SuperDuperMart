@@ -67,6 +67,13 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
+            if (user.Location is not null)
+            {
+                user.Location = _mapper.Map(source: model.Location, destination: user.Location);
+                _unitOfWork.LocationRepository.Update(user.Location);
+                await _unitOfWork.SaveAsync();
+            }
+
             user = _mapper.Map(source: model, destination: user);
             await _unitOfWork.UserRepository.UpdateAsync(user);
 

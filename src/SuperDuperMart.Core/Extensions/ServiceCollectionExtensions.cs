@@ -25,6 +25,7 @@ namespace SuperDuperMart.Core.Extensions
                 options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<SuperDuperMartDbContext>();
 
+            services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IPaginatedRepository<Product>, ProductRepository>();
             services.AddScoped<IUserRepository<User>, UserRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
