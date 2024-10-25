@@ -1,12 +1,10 @@
-﻿using SuperDuperMart.Core.Entities.Identity;
-
-namespace SuperDuperMart.Core.Interfaces
+﻿namespace SuperDuperMart.Core.Interfaces
 {
     public interface IUnitOfWork
     {
         public ICartRepository CartRepository { get; }
         public IUserRepository<User> UserRepository { get; }
-        public IRepository<Product> ProductRepository { get; }
+        public IPaginatedRepository<Product> ProductRepository { get; }
         Task SaveAsync();
     }
 }

@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using SuperDuperMart.Core.Data;
 using SuperDuperMart.Core.Data.Repositories;
-using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Extensions
 {
@@ -27,7 +25,7 @@ namespace SuperDuperMart.Core.Extensions
                 options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<SuperDuperMartDbContext>();
 
-            services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IPaginatedRepository<Product>, ProductRepository>();
             services.AddScoped<IUserRepository<User>, UserRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();

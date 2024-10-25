@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
-    public class ProductRepository : IRepository<Product>
+    public class ProductRepository : IPaginatedRepository<Product>
     {
         private readonly SuperDuperMartDbContext _context;
 
@@ -39,12 +38,6 @@ namespace SuperDuperMart.Core.Data.Repositories
         public async Task<Product?> GetByIdAsync(int id)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-            return product;
-        }
-
-        public async Task<Product?> GetByIdAsync<TProperty>(int id, Expression<Func<Product, TProperty>> include)
-        {
-            var product = await _context.Products.Include(include).FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
 

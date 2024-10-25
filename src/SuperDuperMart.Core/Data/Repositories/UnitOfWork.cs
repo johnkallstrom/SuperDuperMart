@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Core.Entities.Identity;
-
-namespace SuperDuperMart.Core.Data.Repositories
+﻿namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -18,7 +16,7 @@ namespace SuperDuperMart.Core.Data.Repositories
         }
 
         public ICartRepository CartRepository { get; }
-        public IRepository<Product> ProductRepository { get; }
+        public IPaginatedRepository<Product> ProductRepository { get; }
         public IUserRepository<User> UserRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -50,23 +49,9 @@ namespace SuperDuperMart.Core.Data.Repositories
             return carts;
         }
 
-        public Task<(int Pages, IEnumerable<Cart> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Cart?> GetByIdAsync(int id)
         {
             var cart = await _context.Carts.FirstOrDefaultAsync(c => c.Id == id);
-            return cart;
-        }
-
-        public async Task<Cart?> GetByIdAsync<TProperty>(int id, Expression<Func<Cart, TProperty>> include)
-        {
-            var cart = await _context.Carts
-                .Include(include)
-                .FirstOrDefaultAsync(c => c.Id == id);
-
             return cart;
         }
 
