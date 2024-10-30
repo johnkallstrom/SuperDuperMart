@@ -14,6 +14,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Parameter]
         public int Id { get; set; }
 
+        private bool _alert;
+        private bool _loading = true;
+
         public UserUpdateModel Model { get; set; } = new();
 
         protected override async Task OnParametersSetAsync()
@@ -24,6 +27,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Users}/{Id}", Model);
+            _alert = true;
         }
 
         private async Task GetUser()
@@ -32,6 +36,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             if (user != null)
             {
                 Map(user);
+                _loading = false;
             }
         }
 
@@ -45,6 +50,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             Model.Location.City = user.Location?.City;
         }
 
+        private void ToggleAlert() => _alert = !_alert;
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");
     }
 }
