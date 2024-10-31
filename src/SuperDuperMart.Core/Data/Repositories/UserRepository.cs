@@ -45,6 +45,7 @@ namespace SuperDuperMart.Core.Data.Repositories
         {
             var user = await _context.Users
                 .Include(u => u.Location)
+                .Include(u => u.Cart)
                 .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
@@ -81,9 +82,16 @@ namespace SuperDuperMart.Core.Data.Repositories
             return (true, Enumerable.Empty<string>());
         }
 
-        public void Delete(User user)
+        public async Task<(bool Succeeded, IEnumerable<string> Errors)> DeleteAsync(User user)
         {
-            throw new NotImplementedException();
+            var identityResult = await _userManager.DeleteAsync(user);
+            if (!identityResult.Succeeded)
+            {
+                var errors = identityResult.Errors.Select(x => x.Description).ToList();
+                return (false, errors);
+            }
+
+            return (true, Enumerable.Empty<string>());
         }
     }
 }

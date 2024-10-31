@@ -89,7 +89,18 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            _unitOfWork.UserRepository.Delete(user);
+            if (user.Location is not null)
+            {
+                _unitOfWork.LocationRepository.Delete(user.Location);
+            }
+
+            if (user.Cart is not null)
+            {
+                _unitOfWork.CartRepository.Delete(user.Cart);
+            }
+
+            await _unitOfWork.SaveAsync();
+            await _unitOfWork.UserRepository.DeleteAsync(user);
 
             return NoContent();
         }

@@ -8,6 +8,6 @@
         Task<bool> HasCartAsync(User user);
         Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
         Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(TUser user);
-        void Delete(TUser user);
+        Task<(bool Succeeded, IEnumerable<string> Errors)> DeleteAsync(TUser user);
     }
 }
