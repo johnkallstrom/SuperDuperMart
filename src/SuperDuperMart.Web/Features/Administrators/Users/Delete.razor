@@ -1,4 +1,31 @@
 ﻿@page "/manage/users/delete/{id:int}"
 @attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - Delete User</PageTitle>
+<PageTitle>SuperDuperMart - Delete @($"{Model?.FirstName} {Model?.LastName}")</PageTitle>
+
+@if (_loading)
+{
+    <Spinner />
+}
+else
+{
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-sm-6 col-lg-5 col-xl-4">
+                <div class="card shadow border-0">
+                    <div class="card-body">
+                        <ul>
+                            <li>@Model.FirstName @Model.LastName</li>
+                            <li>@Model.Email</li>
+                            <li>@string.Join("", Model.Roles)</li>
+                        </ul>
+                        <p>Are you sure you want to delete this user?</p>
+                        <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" OnClick="DeleteUser" />
+                        <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
