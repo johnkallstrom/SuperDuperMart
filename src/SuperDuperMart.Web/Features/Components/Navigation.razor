@@ -53,10 +53,10 @@
                                 </li>
                                 <li>
                                     @{
-                                        string? email = context.User.FindEmail();
-                                        if (!string.IsNullOrEmpty(email))
+                                        string? role = context.User.FindRole();
+                                        if (!string.IsNullOrEmpty(role))
                                         {
-                                            <small class="dropdown-item text-muted disabled">@email</small>
+                                            <small class="dropdown-item text-muted disabled">@role</small>                                            
                                         }
                                     }
                                 </li>
