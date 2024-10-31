@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.Models.Users;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {
     public partial class Update
     {
+        [Inject]
+        public IToastService ToastService { get; set; } = default!;
+
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
@@ -14,7 +17,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Parameter]
         public int Id { get; set; }
 
-        private bool _alert;
         private bool _loading = true;
 
         public UserUpdateModel Model { get; set; } = new();
@@ -27,7 +29,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Users}/{Id}", Model);
-            _alert = true;
+            ToastService.ShowWarning("Saved");
         }
 
         private async Task GetUser()
@@ -50,7 +52,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             Model.Location.City = user.Location?.City;
         }
 
-        private void ToggleAlert() => _alert = !_alert;
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");
     }
 }

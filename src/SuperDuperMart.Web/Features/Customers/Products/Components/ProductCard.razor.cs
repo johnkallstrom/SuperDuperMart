@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Shared.Models.Carts;
 
@@ -6,6 +7,9 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
 {
     public partial class ProductCard
     {
+        [Inject]
+        public IToastService ToastService { get; set; } = default!;
+
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
 
@@ -31,6 +35,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
                 if (cart != null && Product != null)
                 {
                     await HttpService.PostAsync($"{Endpoints.Carts}/{cart.Id}/items/add/{Product.Id}");
+                    ToastService.ShowWarning($"{Product.Name} added to cart");
                 }
             }
 

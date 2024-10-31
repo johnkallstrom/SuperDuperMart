@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Update
     {
+        [Inject]
+        public IToastService ToastService { get; set; } = default!;
+
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
@@ -13,7 +17,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Parameter]
         public int Id { get; set; }
 
-        private bool _alert;
         private bool _loading = true;
 
         public ProductUpdateModel Model { get; set; } = new();
@@ -44,10 +47,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            _alert = true;
+            ToastService.ShowWarning("Saved");
         }
 
-        private void ToggleAlert() => _alert = !_alert;
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
     }
 }
