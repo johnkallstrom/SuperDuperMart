@@ -1,4 +1,4 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features
@@ -9,7 +9,7 @@ namespace SuperDuperMart.Web.Features
         public IJwtHandler JwtHandler { get; set; } = default!;
 
         [Inject]
-        public ISessionStorageService SessionStorage { get; set; } = default!;
+        public ILocalStorageService LocalStorage { get; set; } = default!;
 
         public int TokenExpirationTimeInMinutes { get; set; }
 
@@ -20,7 +20,7 @@ namespace SuperDuperMart.Web.Features
 
         private async Task<int> GetTokenExpirationTime()
         {
-            string? token = await SessionStorage.GetItemAsStringAsync("token");
+            string? token = await LocalStorage.GetItemAsStringAsync("token");
             return JwtHandler.GetTokenExpirationTimeInMinutes(token);
         }
     }

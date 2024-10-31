@@ -1,4 +1,4 @@
-﻿using Blazored.SessionStorage;
+﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -11,21 +11,21 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 
         private readonly HttpClient _httpClient;
         private readonly IJwtHandler _jwtHandler;
-        private readonly ISessionStorageService _sessionStorage;
+        private readonly ILocalStorageService _localStorage;
 
         public JwtAuthenticationStateProvider(
             HttpClient httpClient,
-            ISessionStorageService sessionStorage,
-            IJwtHandler jwtHandler)
+            IJwtHandler jwtHandler,
+            ILocalStorageService localStorage)
         {
-            _sessionStorage = sessionStorage;
             _httpClient = httpClient;
             _jwtHandler = jwtHandler;
+            _localStorage = localStorage;
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            string? token = await _sessionStorage.GetItemAsStringAsync("token");
+            string? token = await _localStorage.GetItemAsStringAsync("token");
             if (string.IsNullOrWhiteSpace(token) || _jwtHandler.HasTokenExpired(token))
             {
                 var identity = new ClaimsIdentity();
@@ -48,7 +48,7 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 
         public async Task MarkStateAsAuthenticated(string token)
         {
-            await _sessionStorage.SetItemAsStringAsync("token", token);
+            await _localStorage.SetItemAsStringAsync("token", token);
             var claims = _jwtHandler.ReadClaimsFromToken(token);
 
             var identity = new ClaimsIdentity(claims, authenticationType: _authenticationType);
@@ -61,7 +61,7 @@ namespace SuperDuperMart.Web.AuthenticationProviders
 
         public async Task MarkStateAsAnonymous()
         {
-            await _sessionStorage.RemoveItemAsync("token");
+            await _localStorage.RemoveItemAsync("token");
 
             var identity = new ClaimsIdentity();
             var anonymous = new ClaimsPrincipal(identity);
