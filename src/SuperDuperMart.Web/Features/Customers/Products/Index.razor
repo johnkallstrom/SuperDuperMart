@@ -11,13 +11,13 @@ else
 {
     @if (Model != null && Model.Count() > 0)
     {
-        <div class="row">
-            <div class="col-sm-8">
-                @foreach (var product in Model)
-                {
+        <div class="row row-cols-4 gy-4">
+            @foreach (var product in Model)
+            {
+                <div class="col">
                     <ProductCard Product="product" />
-                }
-            </div>
+                </div>
+            }
         </div>
     }
 }
