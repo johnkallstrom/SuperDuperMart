@@ -1,0 +1,14 @@
+﻿@{
+    var price = (Item.Product.Price * Item.Quantity);
+}
+
+<div class="card shadow border-0 mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Item.Product.Name</h5>
+        <input type="number" class="form-control" value="@Item.Quantity" />
+        <p class="card-text">@price.ToCurrency("sv-SE")</p>
+        <button class="btn btn-sm btn-danger">
+            <i class="bi bi-trash"></i>
+        </button>
+    </div>
+</div>

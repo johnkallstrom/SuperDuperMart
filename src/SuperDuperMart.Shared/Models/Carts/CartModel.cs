@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Shared.Models.Users;
-
-namespace SuperDuperMart.Shared.Models.Carts
+﻿namespace SuperDuperMart.Shared.Models.Carts
 {
     public class CartModel
     {
