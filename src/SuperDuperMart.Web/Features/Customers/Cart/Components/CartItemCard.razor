@@ -6,7 +6,7 @@
     <div class="card-body">
         <h5 class="card-title">@Item.Product.Name</h5>
         <p class="card-text">@($"{price.ToCurrency("sv-SE")} x{Item.Quantity}")</p>
-        <button class="btn btn-sm btn-danger">
+        <button class="btn btn-sm btn-danger" @onclick=DeleteCartItem>
             <i class="bi bi-trash"></i>
         </button>
     </div>
