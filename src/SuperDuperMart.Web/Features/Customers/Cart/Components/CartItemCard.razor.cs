@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Shared.Models.Carts;
 
 namespace SuperDuperMart.Web.Features.Customers.Cart.Components
 {
     public partial class CartItemCard
     {
+        [CascadingParameter]
+        public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
@@ -13,10 +17,18 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
 
         private async Task DeleteCartItem()
         {
-            int cartId = 1;
-            int productId = Item.Product.Id;
+            var authState = await AuthenticationStateTask;
+            var user = authState.User;
 
-            await HttpService.DeleteAsync($"{Endpoints.Carts}/{cartId}/items/delete/{productId}");
+            int? userId = user.FindUserIdentifier();
+            if (userId.HasValue)
+            {
+                CartModel? cart = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId.Value}");
+                if (cart != null && Item != null)
+                {
+                    await HttpService.DeleteAsync($"{Endpoints.Carts}/{cart.Id}/items/delete/{Item.Product.Id}");
+                }
+            }
         }
     }
 }

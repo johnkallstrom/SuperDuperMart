@@ -47,7 +47,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            ToastService.ShowWarning("Saved");
+            ToastService.ShowInfo("Saved");
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");

@@ -5,7 +5,7 @@
 <div class="card shadow border-0 mb-3 w-50">
     <div class="card-body">
         <h5 class="card-title">@Item.Product.Name</h5>
-        <p class="card-text">@($"{price.ToCurrency("sv-SE")} x{Item.Quantity}")</p>
+        <p class="card-text mb-2">@($"{price.ToCurrency("sv-SE")} x{Item.Quantity}")</p>
         <button class="btn btn-sm btn-danger" @onclick=DeleteCartItem>
             <i class="bi bi-trash"></i>
         </button>

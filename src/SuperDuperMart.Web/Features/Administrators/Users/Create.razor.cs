@@ -19,7 +19,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task Submit()
         {
             await HttpService.PostAsync($"{Endpoints.Users}", Model);
-            ToastService.ShowWarning("Created");
+            ToastService.ShowInfo("Created");
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");

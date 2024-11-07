@@ -21,7 +21,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
 
         private bool _loading = false;
 
-        private async Task AddToCart()
+        private async Task AddProductToCart()
         {
             _loading = true;
 
@@ -35,7 +35,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
                 if (cart != null && Product != null)
                 {
                     await HttpService.PostAsync($"{Endpoints.Carts}/{cart.Id}/items/add/{Product.Id}");
-                    ToastService.ShowWarning($"{Product.Name} added to cart");
+                    ToastService.ShowInfo($"{Product.Name} added to cart");
                 }
             }
 

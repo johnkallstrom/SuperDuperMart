@@ -29,7 +29,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Users}/{Id}", Model);
-            ToastService.ShowWarning("Saved");
+            ToastService.ShowInfo("Saved");
         }
 
         private async Task GetUser()
