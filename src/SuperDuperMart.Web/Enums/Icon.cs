@@ -5,6 +5,7 @@
         Plus,
         Pencil,
         Dash,
-        Trash
+        Trash,
+        None
     }
 }
