@@ -10,6 +10,9 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
         public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
 
         [Parameter]
+        public EventCallback OnAdd { get; set; }
+
+        [Parameter]
         public EventCallback OnDelete { get; set; }
 
         [Inject]
@@ -17,6 +20,23 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
 
         [Parameter, EditorRequired]
         public CartItemModel Item { get; set; } = default!;
+
+        private async Task AddCartItem()
+        {
+            var authState = await AuthenticationStateTask;
+            var user = authState.User;
+
+            int? userId = user.FindUserIdentifier();
+            if (userId.HasValue)
+            {
+                CartModel? cart = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId.Value}");
+                if (cart != null && Item != null)
+                {
+                    await HttpService.PostAsync($"{Endpoints.Carts}/{cart.Id}/items/add/{Item.Product.Id}");
+                    await OnAdd.InvokeAsync();
+                }
+            }
+        }
 
         private async Task DeleteCartItem()
         {
