@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Web.Enums;
 
 namespace SuperDuperMart.Web.Features.Components
 {
     public partial class Button
     {
+        [Parameter]
+        public Icon Icon { get; set; }
+
         [Parameter, EditorRequired]
         public string Label { get; set; } = default!;
 
