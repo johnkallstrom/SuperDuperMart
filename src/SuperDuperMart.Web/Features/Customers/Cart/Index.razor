@@ -24,7 +24,7 @@ else
                         {
                             @foreach (var item in Model.Items)
                             {
-                                <CartItemCard Item="item" />
+                                <CartItemCard Item="item" OnDelete="GetCart" />
                             }
                             <p class="card-text">Total: @Model.TotalCost.ToCurrency("sv-SE")</p>
                         }

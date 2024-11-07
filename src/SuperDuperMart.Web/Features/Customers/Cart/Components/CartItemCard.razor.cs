@@ -9,6 +9,9 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
         [CascadingParameter]
         public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
 
+        [Parameter]
+        public EventCallback OnDelete { get; set; }
+
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
@@ -27,6 +30,7 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
                 if (cart != null && Item != null)
                 {
                     await HttpService.DeleteAsync($"{Endpoints.Carts}/{cart.Id}/items/delete/{Item.Product.Id}");
+                    await OnDelete.InvokeAsync();
                 }
             }
         }
