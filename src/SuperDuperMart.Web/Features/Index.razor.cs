@@ -1,10 +1,17 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.Toast;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Features.Components;
+using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features
 {
     public partial class Index
     {
+        [Inject]
+        public IToastService ToastService { get; set; } = default!;
+
         [Inject]
         public IJwtHandler JwtHandler { get; set; } = default!;
 

@@ -1,5 +1,7 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazored.Toast;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
@@ -47,7 +49,11 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
-            ToastService.ShowInfo("Saved");
+
+            var parameters = new ToastParameters();
+            parameters.Add(nameof(InfoToast.Message), $"Updated product");
+
+            ToastService.ShowToast<InfoToast>(parameters);
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");

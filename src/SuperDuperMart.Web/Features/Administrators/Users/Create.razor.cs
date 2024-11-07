@@ -1,5 +1,7 @@
-﻿using Blazored.Toast.Services;
+﻿using Blazored.Toast;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {
@@ -19,7 +21,11 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task Submit()
         {
             await HttpService.PostAsync($"{Endpoints.Users}", Model);
-            ToastService.ShowInfo("Created");
+
+            var parameters = new ToastParameters();
+            parameters.Add(nameof(InfoToast.Message), "Saved new user");
+
+            ToastService.ShowToast<InfoToast>(parameters);
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");
