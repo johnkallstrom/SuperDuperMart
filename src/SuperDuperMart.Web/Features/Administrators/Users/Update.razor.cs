@@ -53,6 +53,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             Model.Avatar = user.Avatar;
             Model.FirstName = user.FirstName;
             Model.LastName = user.LastName;
+            Model.Username = user.Username;
+            Model.Email = user.Email;
             Model.Location.StreetName = user.Location?.StreetName;
             Model.Location.ZipCode = user.Location?.ZipCode;
             Model.Location.City = user.Location?.City;
