@@ -29,7 +29,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task DeleteUser()
         {
-            await HttpService.DeleteAsync($"{Endpoints.Products}/{Id}");
+            await HttpService.DeleteAsync($"{Endpoints.Users}/{Id}");
             NavigationManager.NavigateTo("/manage/users");
         }
 
