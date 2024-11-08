@@ -16,7 +16,7 @@ else
                 <div class="card shadow">
                     <h5 class="card-header">Profile</h5>
                     <div class="card-body">
-                        <EditForm Model="@Model" OnSubmit="Submit">
+                        <EditForm Model="@Model" OnValidSubmit="Submit">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <label class="form-label" for="@Model.Avatar">Avatar</label>
@@ -49,6 +49,7 @@ else
                                 <ValidationMessage For="() => Model.Location.City" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
+                            <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
                         </EditForm>
                     </div>
                 </div>
@@ -57,7 +58,7 @@ else
                 <div class="card shadow">
                     <h5 class="card-header">Account</h5>
                     <div class="card-body">
-                        <EditForm Model="@Model" OnSubmit="Submit">
+                        <EditForm Model="@Model" OnValidSubmit="Submit">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <label class="form-label" for="@Model.Username">Username</label>

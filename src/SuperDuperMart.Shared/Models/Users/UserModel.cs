@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Shared.Models.Users
+﻿using SuperDuperMart.Shared.Models.Locations;
+
+namespace SuperDuperMart.Shared.Models.Users
 {
     public record UserModel
     {

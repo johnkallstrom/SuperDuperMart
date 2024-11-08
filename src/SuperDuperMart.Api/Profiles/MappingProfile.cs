@@ -1,5 +1,6 @@
 ﻿using SuperDuperMart.Core.Entities.Identity;
 using SuperDuperMart.Shared.Models.Carts;
+using SuperDuperMart.Shared.Models.Locations;
 
 namespace SuperDuperMart.Api.Profiles
 {

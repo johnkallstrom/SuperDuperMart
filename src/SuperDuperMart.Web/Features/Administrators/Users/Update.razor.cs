@@ -33,7 +33,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             await HttpService.PutAsync($"{Endpoints.Users}/{Id}", Model);
 
             var parameters = new ToastParameters();
-            parameters.Add(nameof(InfoToast.Message), $"Updated user");
+            parameters.Add(nameof(InfoToast.Message), $"Saved");
 
             ToastService.ShowToast<InfoToast>(parameters);
         }
