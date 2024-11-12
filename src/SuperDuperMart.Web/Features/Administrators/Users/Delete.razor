@@ -18,7 +18,7 @@ else
                         <ul>
                             <li>@Model.FirstName @Model.LastName</li>
                             <li>@Model.Email</li>
-                            <li>@string.Join("", Model.Roles)</li>
+                            <li>@Model.Role</li>
                         </ul>
                         <p>Are you sure you want to delete this user?</p>
                         <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" OnClick="DeleteUser" />

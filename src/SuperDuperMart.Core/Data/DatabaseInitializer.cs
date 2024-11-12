@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Microsoft.AspNetCore.Identity;
 using SuperDuperMart.Core.Data.Fakers;
 using SuperDuperMart.Core.Entities.Identity;
 
@@ -35,19 +36,28 @@ namespace SuperDuperMart.Core.Data
             foreach (var user in users)
             {
                 user.PasswordHash = userManager.PasswordHasher.HashPassword(user, _password);
+
                 var identityResult = await userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {
-                    foreach (var role in user.Roles)
-                    {
-                        if (!await roleManager.RoleExistsAsync(role))
-                        {
-                            await roleManager.CreateAsync(new Role { Name = role });
-                        }
-
-                        await userManager.AddToRoleAsync(user, role);
-                    }
+                    await AddToRole(user, userManager, roleManager);
                 }
+            }
+        }
+
+        private static async Task AddToRole(
+            User user, 
+            UserManager<User> userManager, 
+            RoleManager<Role> roleManager)
+        {
+            if (!string.IsNullOrEmpty(user.Role))
+            {
+                if (!await roleManager.RoleExistsAsync(user.Role))
+                {
+                    await roleManager.CreateAsync(new Role { Name = user.Role });
+                }
+
+                await userManager.AddToRoleAsync(user, user.Role);
             }
         }
     }

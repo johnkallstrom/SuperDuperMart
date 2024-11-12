@@ -27,12 +27,7 @@ namespace SuperDuperMart.Api.Authorization
                     User? user = await userManager.FindByIdAsync(validationResult.UserId.Value.ToString());
                     if (user != null)
                     {
-                        var roles = await userManager.GetRolesAsync(user);
-
-                        var mappedUser = _mapper.Map<UserModel>(user);
-                        mappedUser.Roles = roles.ToList();
-
-                        httpContext.Items.Add("User", mappedUser);
+                        httpContext.Items.Add("User", _mapper.Map<UserModel>(user));
                     }
                 }
             }

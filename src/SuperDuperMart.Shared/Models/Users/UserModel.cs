@@ -4,14 +4,14 @@ namespace SuperDuperMart.Shared.Models.Users
 {
     public record UserModel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public string? Avatar { get; set; }
-        public required string FirstName { get; init; }
-        public required string LastName { get; init; }
-        public string? Username { get; init; }
-        public required string Email { get; init; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string Username { get; set; } = default!;
+        public string Email { get; set; } = default!;
+        public string? Role { get; set; }
 
-        public LocationModel? Location { get; init; }
-        public List<string> Roles { get; set; } = default!;
+        public LocationModel? Location { get; set; }
     }
 }
