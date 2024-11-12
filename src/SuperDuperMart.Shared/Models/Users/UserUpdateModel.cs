@@ -18,6 +18,6 @@ namespace SuperDuperMart.Shared.Models.Users
 
         public LocationUpdateModel Location { get; set; } = new();
 
-        public int RoleId { get; set; }
+        public int SelectedRoleId { get; set; }
     }
 }

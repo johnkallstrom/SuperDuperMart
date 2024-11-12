@@ -70,26 +70,15 @@ else
                                 <InputText type="text" class="form-control" for="Model.Email" @bind-Value="Model.Email" />
                                 <ValidationMessage For="() => Model.Email" />
                             </div>
-                            <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
-                        </EditForm>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row gy-3">
-            <div class="col-sm-8 col-lg-6">
-                <div class="card shadow">
-                    <h5 class="card-header">Permissions</h5>
-                    <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="Submit">
-                            <DataAnnotationsValidator />
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.RoleId">Role</label>
-                                <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.RoleId">
-                                    <option value="1" selected>Customer</option>
-                                    <option value="2">Administrator</option>
+                                <label class="form-label" for="@Model.SelectedRoleId">Role</label>
+                                <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.SelectedRoleId">
+                                    @foreach (var role in RoleOptions)
+                                    {
+                                        <option value="@role.Id">@role.Name</option>
+                                    }
                                 </InputSelect>
-                                <ValidationMessage For="() => Model.RoleId" />
+                                <ValidationMessage For="() => Model.SelectedRoleId" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                         </EditForm>

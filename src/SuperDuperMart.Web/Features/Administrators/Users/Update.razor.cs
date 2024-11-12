@@ -22,10 +22,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private bool _loading = true;
 
         public UserUpdateModel Model { get; set; } = new();
+        public List<RoleModel> RoleOptions { get; set; } = new();
 
         protected override async Task OnParametersSetAsync()
         {
             await GetUser();
+            await GetRoles();
         }
 
         private async Task Submit()
@@ -45,6 +47,15 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             {
                 Map(user);
                 _loading = false;
+            }
+        }
+
+        private async Task GetRoles()
+        {
+            var roles = await HttpService.GetAsync<IEnumerable<RoleModel>>(Endpoints.Roles);
+            if (roles != null && roles.Count() > 0)
+            {
+                RoleOptions = roles.ToList();
             }
         }
 
