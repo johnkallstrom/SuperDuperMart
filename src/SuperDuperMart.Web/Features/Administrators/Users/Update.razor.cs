@@ -52,10 +52,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetRoles()
         {
-            var roles = await HttpService.GetAsync<IEnumerable<RoleModel>>(Endpoints.Roles);
-            if (roles != null && roles.Count() > 0)
+            var allRoles = await HttpService.GetAsync<IEnumerable<RoleModel>>(Endpoints.Roles);
+            if (allRoles != null && allRoles.Count() > 0)
             {
-                RoleOptions = roles.ToList();
+                RoleOptions = allRoles.ToList();
             }
         }
 
@@ -69,6 +69,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             Model.Location.StreetName = user.Location?.StreetName;
             Model.Location.ZipCode = user.Location?.ZipCode;
             Model.Location.City = user.Location?.City;
+            Model.Roles = user.Roles;
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");

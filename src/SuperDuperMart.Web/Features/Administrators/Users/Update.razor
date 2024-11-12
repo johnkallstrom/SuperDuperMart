@@ -71,14 +71,14 @@ else
                                 <ValidationMessage For="() => Model.Email" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.SelectedRoleId">Role</label>
-                                <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.SelectedRoleId">
+                                <label class="form-label" for="@Model.Roles">Roles</label>
+                                <InputSelect class="form-control" for="Model.Roles" @bind-Value="Model.Roles">
                                     @foreach (var role in RoleOptions)
                                     {
                                         <option value="@role.Id">@role.Name</option>
                                     }
                                 </InputSelect>
-                                <ValidationMessage For="() => Model.SelectedRoleId" />
+                                <ValidationMessage For="() => Model.Roles" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                         </EditForm>
