@@ -18,6 +18,9 @@ namespace SuperDuperMart.Api.Profiles
             CreateMap<UserCreateModel, User>();
             CreateMap<UserUpdateModel, User>();
 
+            // Role
+            CreateMap<Role, RoleModel>().ReverseMap();
+
             // Location
             CreateMap<Location, LocationModel>().ReverseMap();
             CreateMap<LocationUpdateModel, Location>();

@@ -17,5 +17,7 @@ namespace SuperDuperMart.Shared.Models.Users
         public string Email { get; set; } = default!;
 
         public LocationUpdateModel Location { get; set; } = new();
+
+        public int RoleId { get; set; }
     }
 }
