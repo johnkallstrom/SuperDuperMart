@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SuperDuperMart.Core.Entities.Identity;
 using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Api.Controllers

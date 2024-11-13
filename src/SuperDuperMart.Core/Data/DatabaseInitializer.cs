@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using Microsoft.AspNetCore.Identity;
 using SuperDuperMart.Core.Data.Fakers;
-using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Core.Data
 {

@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Core.Entities.Identity
+﻿namespace SuperDuperMart.Core.Entities
 {
     public class User : IdentityUser<int>
     {

@@ -1,5 +1,4 @@
-﻿using SuperDuperMart.Core.Entities.Identity;
-using SuperDuperMart.Shared.Models;
+﻿using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Api.Filters;
 
 namespace SuperDuperMart.Api.Controllers

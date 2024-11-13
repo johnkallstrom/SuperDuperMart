@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SuperDuperMart.Core.Entities.Identity;
 
 namespace SuperDuperMart.Api.Authorization
 {
