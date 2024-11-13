@@ -2,9 +2,9 @@
 
 namespace SuperDuperMart.Shared.Models.Carts
 {
-    public class CartItemModel
+    public class CartItemDto
     {
-        public ProductModel Product { get; set; } = default!;
+        public ProductDto Product { get; set; } = default!;
         public int Quantity { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedModel<UserModel> Model { get; set; } = default!;
+        public PaginatedDto<UserDto> Model { get; set; } = default!;
 
         private bool _loading = true;
 
@@ -31,7 +31,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         {
             string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            var data = await HttpService.GetAsync<PaginatedModel<UserModel>>(url);
+            var data = await HttpService.GetAsync<PaginatedDto<UserDto>>(url);
             if (data != null)
             {
                 Model = data;

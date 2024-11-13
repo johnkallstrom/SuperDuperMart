@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Shared.Models
 {
-    public record LoginModel
+    public record LoginDto
     {
         [Required(ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; } = default!;

@@ -11,7 +11,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products
         public int Id { get; set; }
 
         private bool _loading = true;
-        public ProductModel? Model { get; set; } = default!;
+        public ProductDto? Model { get; set; } = default!;
 
         protected override async Task OnParametersSetAsync()
         {
@@ -20,7 +20,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products
 
         private async Task GetProduct()
         {
-            Model = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
+            Model = await HttpService.GetAsync<ProductDto>($"{Endpoints.Products}/{Id}");
             _loading = false;
         }
     }

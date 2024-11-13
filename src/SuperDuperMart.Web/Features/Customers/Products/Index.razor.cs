@@ -8,7 +8,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products
         public IHttpService HttpService { get; set; } = default!;
 
         private bool _loading = true;
-        public IEnumerable<ProductModel>? Model { get; set; } = default!;
+        public IEnumerable<ProductDto>? Model { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {
@@ -17,7 +17,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products
 
         private async Task GetProducts()
         {
-            Model = await HttpService.GetAsync<IEnumerable<ProductModel>>(Endpoints.Products);
+            Model = await HttpService.GetAsync<IEnumerable<ProductDto>>(Endpoints.Products);
             _loading = false;
         }
     }

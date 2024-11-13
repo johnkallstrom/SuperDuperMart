@@ -10,7 +10,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public UserCreateModel Model { get; set; } = new();
+        public UserCreateDto Model { get; set; } = new();
 
         private async Task Submit()
         {

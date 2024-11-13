@@ -18,7 +18,7 @@ namespace SuperDuperMart.Web.Features
         private readonly string _redirectUrl = "/";
         private bool _loading = false;
 
-        public LoginModel Model { get; set; } = new();
+        public LoginDto Model { get; set; } = new();
 
         private async Task Submit()
         {

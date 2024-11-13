@@ -18,7 +18,7 @@
         public async Task<IActionResult> Get()
         {
             var roles = await _unitOfWork.RoleRepository.GetAsync();
-            return Ok(_mapper.Map<IEnumerable<RoleModel>>(roles));
+            return Ok(_mapper.Map<IEnumerable<RoleDto>>(roles));
         }
     }
 }

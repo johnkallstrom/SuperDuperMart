@@ -16,7 +16,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public ProductCreateModel Model { get; set; } = new();
+        public ProductCreateDto Model { get; set; } = new();
 
         private async Task Submit()
         {

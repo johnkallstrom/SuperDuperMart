@@ -21,7 +21,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private bool _loading = true;
 
-        public ProductUpdateModel Model { get; set; } = new();
+        public ProductUpdateDto Model { get; set; } = new();
 
         protected override async Task OnParametersSetAsync()
         {
@@ -30,7 +30,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProduct()
         {
-            var product = await HttpService.GetAsync<ProductModel>($"{Endpoints.Products}/{Id}");
+            var product = await HttpService.GetAsync<ProductDto>($"{Endpoints.Products}/{Id}");
             if (product != null)
             {
                 Map(product);
@@ -38,7 +38,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             }
         }
 
-        private void Map(ProductModel product)
+        private void Map(ProductDto product)
         {
             Model.Name = product.Name;
             Model.Description = product.Description;

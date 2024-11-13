@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SuperDuperMart.Shared.Models.Locations;
 
 namespace SuperDuperMart.Shared.Models.Users
 {
-    public record UserUpdateModel
+    public record UserUpdateDto
     {
         public string? Avatar { get; set; }
         public string? FirstName { get; set; }
@@ -18,6 +17,6 @@ namespace SuperDuperMart.Shared.Models.Users
 
         public string? Role { get; set; }
 
-        public LocationUpdateModel Location { get; set; } = new();
+        public LocationDto Location { get; set; } = new();
     }
 }

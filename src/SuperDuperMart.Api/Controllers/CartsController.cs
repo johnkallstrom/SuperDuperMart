@@ -99,7 +99,7 @@ namespace SuperDuperMart.Api.Controllers
         {
             var carts = await _unitOfWork.CartRepository.GetAsync();
 
-            return Ok(_mapper.Map<IEnumerable<CartModel>>(carts));
+            return Ok(_mapper.Map<IEnumerable<CartDto>>(carts));
         }
 
         [HttpGet("{id}/items")]
@@ -113,7 +113,7 @@ namespace SuperDuperMart.Api.Controllers
 
             var cartItems = await _unitOfWork.CartRepository.GetItemsAsync(cart);
 
-            return Ok(_mapper.Map<IEnumerable<CartItemModel>>(cartItems));
+            return Ok(_mapper.Map<IEnumerable<CartItemDto>>(cartItems));
         }
 
         [HttpGet("{id}")]
@@ -134,7 +134,7 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<CartModel>(cart));
+            return Ok(_mapper.Map<CartDto>(cart));
         }
 
         [HttpGet("user/{userId}")]
@@ -155,11 +155,11 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<CartModel>(cart));
+            return Ok(_mapper.Map<CartDto>(cart));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CartCreateModel model)
+        public async Task<IActionResult> Create([FromBody] CartCreateDto model)
         {
             User? user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
             if (user is null)
@@ -180,7 +180,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateModel model)
+        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateDto model)
         {
             Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
             if (cart is null)

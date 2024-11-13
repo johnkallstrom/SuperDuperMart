@@ -19,7 +19,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
         public IHttpService HttpService { get; set; } = default!;
 
         [Parameter, EditorRequired]
-        public ProductModel Product { get; set; } = default!;
+        public ProductDto Product { get; set; } = default!;
 
         private bool _loading = false;
 
@@ -33,7 +33,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
             int? userId = user.FindUserIdentifier();
             if (userId.HasValue)
             {
-                CartModel? cart = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId.Value}");
+                CartDto? cart = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{userId.Value}");
                 if (cart != null && Product != null)
                 {
                     await HttpService.PostAsync($"{Endpoints.Carts}/{cart.Id}/items/add/{Product.Id}");

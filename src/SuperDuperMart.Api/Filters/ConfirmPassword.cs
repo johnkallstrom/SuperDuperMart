@@ -9,11 +9,11 @@ namespace SuperDuperMart.Api.Filters
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            UserCreateModel? model = null;
+            UserCreateDto? model = null;
 
             if (context.ActionArguments.TryGetValue("model", out object? value))
             {
-                model = value as UserCreateModel;
+                model = value as UserCreateDto;
             }
 
             if (model != null)

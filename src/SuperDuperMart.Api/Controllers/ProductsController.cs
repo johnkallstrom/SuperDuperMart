@@ -23,17 +23,17 @@ namespace SuperDuperMart.Api.Controllers
             {
                 var result = await _unitOfWork.ProductRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
 
-                return Ok(new PaginatedModel<ProductModel>
+                return Ok(new PaginatedDto<ProductDto>
                 {
                     PageNumber = pageNumber.Value,
                     PageSize = pageSize.Value,
                     Pages = result.Pages,
-                    Data = _mapper.Map<IEnumerable<ProductModel>>(result.Data)
+                    Data = _mapper.Map<IEnumerable<ProductDto>>(result.Data)
                 });
             }
 
             var products = await _unitOfWork.ProductRepository.GetAsync();
-            return Ok(_mapper.Map<IEnumerable<ProductModel>>(products));
+            return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
         [HttpGet("{id}")]
@@ -45,11 +45,11 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<ProductModel>(product));
+            return Ok(_mapper.Map<ProductDto>(product));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProductCreateModel model)
+        public async Task<IActionResult> Create([FromBody] ProductCreateDto model)
         {
             var product = _mapper.Map<Product>(model);
             var newProduct = await _unitOfWork.ProductRepository.CreateAsync(product);
@@ -59,7 +59,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateModel model)
+        public async Task<IActionResult> Update(int id, [FromBody] ProductUpdateDto model)
         {
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (product is null)

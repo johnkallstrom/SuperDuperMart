@@ -1,6 +1,5 @@
 ﻿using SuperDuperMart.Core.Entities.Identity;
 using SuperDuperMart.Shared.Models.Carts;
-using SuperDuperMart.Shared.Models.Locations;
 
 namespace SuperDuperMart.Api.Profiles
 {
@@ -9,32 +8,31 @@ namespace SuperDuperMart.Api.Profiles
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, ProductModel>().ReverseMap();
-            CreateMap<ProductCreateModel, Product>();
-            CreateMap<ProductUpdateModel, Product>();
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductCreateDto, Product>();
+            CreateMap<ProductUpdateDto, Product>();
 
             // User
-            CreateMap<User, UserModel>().ReverseMap();
-            CreateMap<UserCreateModel, User>();
-            CreateMap<UserUpdateModel, User>();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<UserCreateDto, User>();
+            CreateMap<UserUpdateDto, User>();
 
             // Role
-            CreateMap<Role, RoleModel>().ReverseMap();
+            CreateMap<Role, RoleDto>().ReverseMap();
 
             // Location
-            CreateMap<Location, LocationModel>().ReverseMap();
-            CreateMap<LocationUpdateModel, Location>();
+            CreateMap<Location, LocationDto>().ReverseMap();
 
             // Cart
-            CreateMap<Cart, CartModel>()
+            CreateMap<Cart, CartDto>()
                 .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.CartItems))
                 .ReverseMap();
 
-            CreateMap<CartCreateModel, Cart>();
-            CreateMap<CartUpdateModel, Cart>();
+            CreateMap<CartCreateDto, Cart>();
+            CreateMap<CartUpdateDto, Cart>();
 
             // CartItem
-            CreateMap<CartItem, CartItemModel>();
+            CreateMap<CartItem, CartItemDto>();
         }
     }
 }

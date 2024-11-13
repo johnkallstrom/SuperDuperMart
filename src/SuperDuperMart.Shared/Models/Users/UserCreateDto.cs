@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Shared.Models.Users
 {
-    public record UserCreateModel
+    public record UserCreateDto
     {
 
         [Required(ErrorMessage = "Please enter username")]

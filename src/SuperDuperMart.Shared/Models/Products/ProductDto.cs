@@ -1,6 +1,6 @@
 ﻿namespace SuperDuperMart.Shared.Models.Products
 {
-    public record ProductModel
+    public record ProductDto
     {
         public int Id { get; init; }
         public required string Name { get; init; }

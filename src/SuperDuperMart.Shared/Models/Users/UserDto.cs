@@ -1,8 +1,6 @@
-﻿using SuperDuperMart.Shared.Models.Locations;
-
-namespace SuperDuperMart.Shared.Models.Users
+﻿namespace SuperDuperMart.Shared.Models.Users
 {
-    public record UserModel
+    public record UserDto
     {
         public int Id { get; set; }
         public string? Avatar { get; set; }
@@ -12,6 +10,6 @@ namespace SuperDuperMart.Shared.Models.Users
         public string Email { get; set; } = default!;
         public string? Role { get; set; }
 
-        public LocationModel? Location { get; set; }
+        public LocationDto? Location { get; set; }
     }
 }

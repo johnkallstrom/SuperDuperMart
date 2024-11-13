@@ -19,7 +19,7 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
         public IHttpService HttpService { get; set; } = default!;
 
         [Parameter, EditorRequired]
-        public CartItemModel Item { get; set; } = default!;
+        public CartItemDto Item { get; set; } = default!;
 
         private async Task AddCartItem()
         {
@@ -29,7 +29,7 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
             int? userId = user.FindUserIdentifier();
             if (userId.HasValue)
             {
-                CartModel? cart = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId.Value}");
+                CartDto? cart = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{userId.Value}");
                 if (cart != null && Item != null)
                 {
                     await HttpService.PostAsync($"{Endpoints.Carts}/{cart.Id}/items/add/{Item.Product.Id}");
@@ -46,7 +46,7 @@ namespace SuperDuperMart.Web.Features.Customers.Cart.Components
             int? userId = user.FindUserIdentifier();
             if (userId.HasValue)
             {
-                CartModel? cart = await HttpService.GetAsync<CartModel>($"{Endpoints.Carts}/user/{userId.Value}");
+                CartDto? cart = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{userId.Value}");
                 if (cart != null && Item != null)
                 {
                     await HttpService.DeleteAsync($"{Endpoints.Carts}/{cart.Id}/items/delete/{Item.Product.Id}");

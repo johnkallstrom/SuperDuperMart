@@ -6,7 +6,7 @@ namespace SuperDuperMart.Api.Authorization
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = context.HttpContext.Items["User"] as UserModel;
+            var user = context.HttpContext.Items["User"] as UserDto;
             if (user == null)
             {
                 context.Result = new UnauthorizedResult();

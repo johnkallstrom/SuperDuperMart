@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Shared.Models.Carts
 {
-    public class CartUpdateModel
+    public class CartUpdateDto
     {
         [Required(ErrorMessage = "Please enter a session id")]
         public Guid SessionId { get; set; }

@@ -21,8 +21,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private bool _loading = true;
 
-        public UserUpdateModel Model { get; set; } = new();
-        public List<RoleModel> RoleOptions { get; set; } = new();
+        public UserUpdateDto Model { get; set; } = new();
+        public List<RoleDto> RoleOptions { get; set; } = new();
 
         protected override async Task OnParametersSetAsync()
         {
@@ -42,7 +42,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetUser()
         {
-            var user = await HttpService.GetAsync<UserModel>($"{Endpoints.Users}/{Id}");
+            var user = await HttpService.GetAsync<UserDto>($"{Endpoints.Users}/{Id}");
             if (user != null)
             {
                 Map(user);
@@ -52,14 +52,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetRoles()
         {
-            var allRoles = await HttpService.GetAsync<IEnumerable<RoleModel>>(Endpoints.Roles);
+            var allRoles = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
             if (allRoles != null && allRoles.Count() > 0)
             {
                 RoleOptions = allRoles.ToList();
             }
         }
 
-        private void Map(UserModel user)
+        private void Map(UserDto user)
         {
             Model.Avatar = user.Avatar;
             Model.FirstName = user.FirstName;

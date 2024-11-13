@@ -14,7 +14,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         public int Id { get; set; }
 
         private bool _loading = true;
-        public UserModel? Model { get; set; } = default!;
+        public UserDto? Model { get; set; } = default!;
 
         protected override async Task OnParametersSetAsync()
         {
@@ -23,7 +23,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetUser()
         {
-            Model = await HttpService.GetAsync<UserModel>($"{Endpoints.Users}/{Id}");
+            Model = await HttpService.GetAsync<UserDto>($"{Endpoints.Users}/{Id}");
             _loading = false;
         }
 

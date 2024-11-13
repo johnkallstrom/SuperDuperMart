@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Shared.Models.Products
 {
-    public record ProductUpdateModel
+    public record ProductUpdateDto
     {
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; } = default!;

@@ -24,29 +24,29 @@ namespace SuperDuperMart.Api.Controllers
             if (pageNumber.HasValue && pageSize.HasValue)
             {
                 var result = await _unitOfWork.UserRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
-                return Ok(new PaginatedModel<UserModel>
+                return Ok(new PaginatedDto<UserDto>
                 {
                     PageNumber = pageNumber.Value,
                     PageSize = pageSize.Value,
                     Pages = result.Pages,
-                    Data = _mapper.Map<IEnumerable<UserModel>>(result.Data)
+                    Data = _mapper.Map<IEnumerable<UserDto>>(result.Data)
                 });
             }
 
             var users = await _unitOfWork.UserRepository.GetAsync();
-            return Ok(_mapper.Map<IEnumerable<UserModel>>(users));
+            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-            return Ok(_mapper.Map<UserModel>(user));
+            return Ok(_mapper.Map<UserDto>(user));
         }
 
         [ConfirmPassword]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserCreateModel model)
+        public async Task<IActionResult> Create([FromBody] UserCreateDto model)
         {
             var user = _mapper.Map<User>(model);
 
@@ -59,7 +59,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateModel model)
+        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto model)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user is null)
