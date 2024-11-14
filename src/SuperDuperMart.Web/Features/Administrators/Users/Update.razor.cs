@@ -50,6 +50,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
                 Model.LastName = user.LastName;
                 Model.Username = user.Username;
                 Model.Email = user.Email;
+                Model.RoleId = user.Role.Id;
                 Model.Location = user.Location;
 
                 _loading = false;

@@ -72,7 +72,7 @@ else
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="@Model.RoleId">Role</label>
-                                        <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.RoleId">
+                                <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.RoleId">
                                     @foreach (var role in Roles)
                                     {
                                         <option value="@role.Id">@role.Name</option>

@@ -19,7 +19,7 @@
             LocationRepository = new LocationRepository(_context);
             CartRepository = new CartRepository(_context);
             ProductRepository = new ProductRepository(_context);
-            UserRepository = new UserRepository(_context, _userManager);
+            UserRepository = new UserRepository(_context, _userManager, _roleManager);
         }
 
         public IRoleRepository<Role> RoleRepository { get; set; }

@@ -4,13 +4,18 @@ namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UserRepository : IUserRepository<User>
     {
+        private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly SuperDuperMartDbContext _context;
 
-        public UserRepository(SuperDuperMartDbContext context, UserManager<User> userManager)
+        public UserRepository(
+            SuperDuperMartDbContext context, 
+            UserManager<User> userManager, 
+            RoleManager<Role> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IEnumerable<User>> GetAsync()
@@ -94,9 +99,27 @@ namespace SuperDuperMart.Core.Data.Repositories
             return (true, Enumerable.Empty<string>());
         }
 
-        public async Task<IEnumerable<string>> GetRolesAsync(User user)
+        public async Task<Role?> GetPrimaryRoleAsync(User user)
         {
-            return await _userManager.GetRolesAsync(user);
+            var roles = await GetRolesAsync(user);
+            return roles.FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<Role>> GetRolesAsync(User user)
+        {
+            var listOfRoleNames = await _userManager.GetRolesAsync(user);
+
+            var roles = new List<Role>();
+            foreach (var roleName in listOfRoleNames)
+            {
+                var role = await _roleManager.FindByNameAsync(roleName);
+                if (role is not null)
+                {
+                    roles.Add(role);
+                }
+            }
+
+            return roles;
         }
     }
 }

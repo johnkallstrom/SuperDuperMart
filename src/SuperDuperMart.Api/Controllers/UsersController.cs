@@ -46,7 +46,10 @@ namespace SuperDuperMart.Api.Controllers
             }
 
             var dto = _mapper.Map<UserDto>(user);
-            dto.Roles = await _unitOfWork.UserRepository.GetRolesAsync(user);
+
+            var role = await _unitOfWork.UserRepository.GetPrimaryRoleAsync(user);
+            dto.Role = _mapper.Map<RoleDto>(role);
+
             return Ok(dto);
         }
 

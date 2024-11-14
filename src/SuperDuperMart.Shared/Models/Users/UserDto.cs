@@ -9,7 +9,7 @@
         public string Username { get; set; } = default!;
         public string Email { get; set; } = default!;
 
-        public IEnumerable<string> Roles { get; set; } = [];
+        public RoleDto Role { get; set; } = default!;
         public LocationDto Location { get; set; } = default!;
     }
 }
