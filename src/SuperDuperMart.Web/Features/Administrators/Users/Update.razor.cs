@@ -69,7 +69,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             Model.Location.StreetName = user.Location?.StreetName;
             Model.Location.ZipCode = user.Location?.ZipCode;
             Model.Location.City = user.Location?.City;
-            Model.Role = user.Role;
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");

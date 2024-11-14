@@ -4,8 +4,6 @@ namespace SuperDuperMart.Core.Data.Fakers
 {
     public class UserFaker : Faker<User>
     {
-        private IEnumerable<string> _roles = ["Administrator", "Customer"];
-
         public UserFaker()
         {
             RuleFor(u => u.Avatar, f => f.Image.PicsumUrl());
@@ -13,7 +11,6 @@ namespace SuperDuperMart.Core.Data.Fakers
             RuleFor(u => u.LastName, f => f.Person.LastName);
             RuleFor(u => u.UserName, f => f.Person.UserName);
             RuleFor(u => u.Email, f => f.Person.Email);
-            RuleFor(u => u.Role, f => f.PickRandom(_roles));
             RuleFor(u => u.Location, f => new Location
             {
                 ZipCode = f.Person.Address.ZipCode,

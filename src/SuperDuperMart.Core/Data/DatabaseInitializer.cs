@@ -1,11 +1,11 @@
 ﻿using Bogus;
-using Microsoft.AspNetCore.Identity;
 using SuperDuperMart.Core.Data.Fakers;
 
 namespace SuperDuperMart.Core.Data
 {
     public class DatabaseInitializer
     {
+        private static readonly string[] _roles = ["Customer", "Administrator"];
         private static readonly string _password = "superduper123";
 
         private static Faker _faker = new();
@@ -39,24 +39,17 @@ namespace SuperDuperMart.Core.Data
                 var identityResult = await userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {
-                    await AddToRole(user, userManager, roleManager);
-                }
-            }
-        }
+                    string role = _faker.PickRandom(_roles);
+                    if (!string.IsNullOrEmpty(role))
+                    {
+                        if (!await roleManager.RoleExistsAsync(role))
+                        {
+                            await roleManager.CreateAsync(new Role { Name = role });
+                        }
 
-        private static async Task AddToRole(
-            User user, 
-            UserManager<User> userManager, 
-            RoleManager<Role> roleManager)
-        {
-            if (!string.IsNullOrEmpty(user.Role))
-            {
-                if (!await roleManager.RoleExistsAsync(user.Role))
-                {
-                    await roleManager.CreateAsync(new Role { Name = user.Role });
+                        await userManager.AddToRoleAsync(user, role);
+                    }
                 }
-
-                await userManager.AddToRoleAsync(user, user.Role);
             }
         }
     }
