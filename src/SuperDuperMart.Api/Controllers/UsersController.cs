@@ -40,7 +40,14 @@ namespace SuperDuperMart.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-            return Ok(_mapper.Map<UserDto>(user));
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            var dto = _mapper.Map<UserDto>(user);
+            dto.Roles = await _unitOfWork.UserRepository.GetRolesAsync(user);
+            return Ok(dto);
         }
 
         [ConfirmPassword]

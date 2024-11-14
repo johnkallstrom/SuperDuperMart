@@ -15,8 +15,7 @@ namespace SuperDuperMart.Shared.Models.Users
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = default!;
 
-        public string? Role { get; set; }
-
+        public int RoleId { get; set; } = 1;
         public LocationDto Location { get; set; } = new();
     }
 }

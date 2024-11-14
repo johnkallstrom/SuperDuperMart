@@ -33,17 +33,13 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             var product = await HttpService.GetAsync<ProductDto>($"{Endpoints.Products}/{Id}");
             if (product != null)
             {
-                Map(product);
+                Model.Name = product.Name;
+                Model.Description = product.Description;
+                Model.Price = product.Price;
+                Model.Material = product.Material;
+
                 _loading = false;
             }
-        }
-
-        private void Map(ProductDto product)
-        {
-            Model.Name = product.Name;
-            Model.Description = product.Description;
-            Model.Price = product.Price;
-            Model.Material = product.Material;
         }
 
         private async Task Submit()

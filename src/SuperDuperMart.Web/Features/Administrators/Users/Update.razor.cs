@@ -22,7 +22,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private bool _loading = true;
 
         public UserUpdateDto Model { get; set; } = new();
-        public List<RoleDto> RoleOptions { get; set; } = new();
+        public IEnumerable<RoleDto> Roles { get; set; } = [];
 
         protected override async Task OnParametersSetAsync()
         {
@@ -45,30 +45,24 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             var user = await HttpService.GetAsync<UserDto>($"{Endpoints.Users}/{Id}");
             if (user != null)
             {
-                Map(user);
+                Model.Avatar = user.Avatar;
+                Model.FirstName = user.FirstName;
+                Model.LastName = user.LastName;
+                Model.Username = user.Username;
+                Model.Email = user.Email;
+                Model.Location = user.Location;
+
                 _loading = false;
             }
         }
 
         private async Task GetRoles()
         {
-            var allRoles = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
-            if (allRoles != null && allRoles.Count() > 0)
+            var data = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
+            if (data != null && data.Count() > 0)
             {
-                RoleOptions = allRoles.ToList();
+                Roles = data;
             }
-        }
-
-        private void Map(UserDto user)
-        {
-            Model.Avatar = user.Avatar;
-            Model.FirstName = user.FirstName;
-            Model.LastName = user.LastName;
-            Model.Username = user.Username;
-            Model.Email = user.Email;
-            Model.Location.StreetName = user.Location?.StreetName;
-            Model.Location.ZipCode = user.Location?.ZipCode;
-            Model.Location.City = user.Location?.City;
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/users");

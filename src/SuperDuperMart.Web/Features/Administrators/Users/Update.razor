@@ -1,5 +1,5 @@
 ﻿@page "/manage/users/{id:int}"
-@attribute [Authorize(Roles = Roles.Administrator)]
+@attribute [Authorize(Roles = Constants.Roles.Administrator)]
 
 <PageTitle>SuperDuperMart - Update @($"{Model?.FirstName} {Model?.LastName}")</PageTitle>
 
@@ -71,14 +71,14 @@ else
                                 <ValidationMessage For="() => Model.Email" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Role">Role</label>
-                                <InputSelect class="form-control" for="Model.Role" @bind-Value="Model.Role">
-                                    @foreach (var role in RoleOptions)
+                                <label class="form-label" for="@Model.RoleId">Role</label>
+                                        <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.RoleId">
+                                    @foreach (var role in Roles)
                                     {
-                                        <option value="@role.Name">@role.Name</option>
+                                        <option value="@role.Id">@role.Name</option>
                                     }
                                 </InputSelect>
-                                <ValidationMessage For="() => Model.Role" />
+                                <ValidationMessage For="() => Model.RoleId" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                         </EditForm>

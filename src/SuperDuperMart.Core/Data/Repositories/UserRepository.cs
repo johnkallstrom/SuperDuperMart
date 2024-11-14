@@ -93,5 +93,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
             return (true, Enumerable.Empty<string>());
         }
+
+        public async Task<IEnumerable<string>> GetRolesAsync(User user)
+        {
+            return await _userManager.GetRolesAsync(user);
+        }
     }
 }
