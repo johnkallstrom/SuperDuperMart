@@ -121,5 +121,27 @@ namespace SuperDuperMart.Core.Data.Repositories
 
             return roles;
         }
+
+        public async Task<(bool Succeeded, IEnumerable<string> Errors)> ClearRolesAsync(User user)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            var identityResult = await _userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!identityResult.Succeeded)
+            {
+                var errors = identityResult.Errors.Select(x => x.Description).ToList();
+                return (false, errors);
+            }
+
+            return (true, Enumerable.Empty<string>());
+        }
+
+        public async Task AddToRoleAsync(User user, string role)
+        {
+            if (!string.IsNullOrEmpty(role) && await _roleManager.RoleExistsAsync(role))
+            {
+                await _userManager.AddToRoleAsync(user, role);
+            }
+        }
     }
 }

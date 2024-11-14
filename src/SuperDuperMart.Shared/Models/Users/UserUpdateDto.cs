@@ -15,7 +15,9 @@ namespace SuperDuperMart.Shared.Models.Users
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = default!;
 
-        public int RoleId { get; set; } = 1;
+        [Required(ErrorMessage = "Please choose a role")]
+        public int RoleId { get; set; }
+
         public LocationDto Location { get; set; } = new();
     }
 }

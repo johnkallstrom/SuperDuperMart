@@ -86,6 +86,18 @@ namespace SuperDuperMart.Api.Controllers
             user = _mapper.Map(source: model, destination: user);
             await _unitOfWork.UserRepository.UpdateAsync(user);
 
+            var role = await _unitOfWork.RoleRepository.GetByIdAsync(model.RoleId);
+            if (role is null)
+            {
+                return NotFound();
+            }
+
+            var result = await _unitOfWork.UserRepository.ClearRolesAsync(user);
+            if (result.Succeeded)
+            {
+                await _unitOfWork.UserRepository.AddToRoleAsync(user, role.Name);
+            }
+
             return NoContent();
         }
 
