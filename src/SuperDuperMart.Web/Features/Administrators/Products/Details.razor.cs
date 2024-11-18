@@ -5,7 +5,7 @@ using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
-    public partial class Update
+    public partial class Details
     {
         [Inject]
         public IToastService ToastService { get; set; } = default!;

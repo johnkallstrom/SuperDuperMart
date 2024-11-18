@@ -5,7 +5,7 @@ using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {
-    public partial class Update
+    public partial class Details
     {
         [Inject]
         public IAuthenticationService AuthenticationService { get; set; } = default!;

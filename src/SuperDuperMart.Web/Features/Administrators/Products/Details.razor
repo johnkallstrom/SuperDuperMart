@@ -1,7 +1,7 @@
-﻿@page "/manage/products/{id:int}"
+﻿@page "/manage/products/details/{id:int}"
 @attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - Update @Model?.Name</PageTitle>
+<PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
 
 @if (_loading)
 {
@@ -38,6 +38,7 @@ else
                                 <ValidationMessage For="() => Model.Material" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
+                            <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" />
                             <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
                         </EditForm>
                     </div>

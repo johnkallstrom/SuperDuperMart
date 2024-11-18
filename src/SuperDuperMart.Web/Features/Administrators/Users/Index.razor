@@ -14,7 +14,7 @@ else
         <div class="row mb-3">
             <div class="col-sm-2">
                 <a href="@("/manage/users/create")" class="btn btn-dark btn-sm">
-                    <i class="bi bi-plus"></i>
+                    <i class="bi bi-plus-circle"></i>
                 </a>
             </div>
         </div>
@@ -26,7 +26,7 @@ else
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Manage</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,8 +41,7 @@ else
                         <td>@user.Username</td>
                         <td>@user.Email</td>
                         <td>
-                            <a href="@($"/manage/users/{user.Id}")" class="btn btn-dark btn-sm"><i class="bi bi-pencil"></i></a>
-                            <a href="@($"/manage/users/delete/{user.Id}")" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                            <a href="@($"/manage/users/details/{user.Id}")" class="btn btn-dark btn-sm"><i class="bi bi-pencil"></i></a>
                         </td>
                     </tr>
                 }
