@@ -1,19 +1,22 @@
 ﻿using Bogus;
+using Microsoft.Extensions.Configuration;
 using SuperDuperMart.Core.Data.Fakers;
 
 namespace SuperDuperMart.Core.Data
 {
     public class DatabaseInitializer
     {
-        private static readonly string[] _roles = ["Customer", "Administrator"];
-        private static readonly string _password = "superduper123";
+        private static readonly string SECTION = "InitializationData";
+        private static readonly string KEY_ROLES = "SystemRoles";
+        private static readonly string KEY_PASSWORD = "DefaultPassword";
 
         private static Faker _faker = new();
         private static ProductFaker _productFaker = new();
         private static UserFaker _userFaker = new();
 
         public static async Task SeedAsync(
-            SuperDuperMartDbContext context, 
+            SuperDuperMartDbContext context,
+            IConfiguration configuration,
             UserManager<User> userManager, 
             RoleManager<Role> roleManager)
         {
@@ -26,20 +29,28 @@ namespace SuperDuperMart.Core.Data
 
             await context.SaveChangesAsync();
 
-            await CreateUsers(userManager, roleManager);
+            await CreateUsers(userManager, roleManager, configuration);
         }
 
-        private static async Task CreateUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+        private static async Task CreateUsers(
+            UserManager<User> userManager, 
+            RoleManager<Role> roleManager, 
+            IConfiguration configuration)
         {
+            var section = configuration.GetSection($"{SECTION}:{KEY_ROLES}");
+            var roles = section.Get<string[]>();
+
+            string? defaultPassword = configuration.GetValue<string>($"{SECTION}:{KEY_PASSWORD}");
+
             var users = _userFaker.Generate(100);
             foreach (var user in users)
             {
-                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, _password);
+                user.PasswordHash = userManager.PasswordHasher.HashPassword(user, defaultPassword);
 
                 var identityResult = await userManager.CreateAsync(user);
                 if (identityResult.Succeeded)
                 {
-                    string role = _faker.PickRandom(_roles);
+                    string role = _faker.PickRandom(roles);
                     if (!string.IsNullOrEmpty(role))
                     {
                         if (!await roleManager.RoleExistsAsync(role))
