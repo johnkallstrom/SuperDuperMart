@@ -15,6 +15,7 @@ else
             <div class="col-sm-8 col-lg-6">
                 <div class="card shadow">
                     <h5 class="card-header">Profile</h5>
+                            <img src="@Model.Avatar" class="card-img-top rounded mx-3 mt-3 w-50">
                     <div class="card-body">
                         <EditForm Model="@Model" OnValidSubmit="Submit">
                             <DataAnnotationsValidator />
