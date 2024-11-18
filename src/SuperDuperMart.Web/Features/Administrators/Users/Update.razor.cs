@@ -8,6 +8,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
     public partial class Update
     {
         [Inject]
+        public IAuthenticationService AuthenticationService { get; set; } = default!;
+
+        [Inject]
         public IToastService ToastService { get; set; } = default!;
 
         [Inject]
@@ -19,7 +22,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Parameter]
         public int Id { get; set; }
 
-        private bool _disableRoleInput = false;
+        public bool IsCurrentUserBeingUpdated { get; set; } = false;
+
         private bool _loading = true;
 
         public UserUpdateDto Model { get; set; } = new();
@@ -29,6 +33,20 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         {
             await GetUser();
             await GetRoles();
+            await DetermineIfCurrentUserIsBeingUpdated();
+        }
+
+        private async Task DetermineIfCurrentUserIsBeingUpdated()
+        {
+            int userToUpdateId = Id;
+
+            var currentUser = await AuthenticationService.GetCurrentUserAsync();
+            int? currentUserId = currentUser.FindUserIdentifier();
+
+            if (currentUserId.HasValue)
+            {
+                IsCurrentUserBeingUpdated = userToUpdateId.Equals(currentUserId.Value);
+            }
         }
 
         private async Task Submit()
