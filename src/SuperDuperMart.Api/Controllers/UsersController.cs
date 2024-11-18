@@ -1,5 +1,6 @@
 ﻿using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Api.Filters;
+using SuperDuperMart.Shared.Models.Users;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -23,12 +24,24 @@ namespace SuperDuperMart.Api.Controllers
             if (pageNumber.HasValue && pageSize.HasValue)
             {
                 var result = await _unitOfWork.UserRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
+
+                var dtos = new List<UserDto>();
+                foreach (var user in result.Data)
+                {
+                    var role = await _unitOfWork.UserRepository.GetPrimaryRoleAsync(user);
+
+                    var dto = _mapper.Map<UserDto>(user);
+                    dto.Role = _mapper.Map<RoleDto>(role);
+
+                    dtos.Add(dto);
+                }
+
                 return Ok(new PaginatedDto<UserDto>
                 {
                     PageNumber = pageNumber.Value,
                     PageSize = pageSize.Value,
                     Pages = result.Pages,
-                    Data = _mapper.Map<IEnumerable<UserDto>>(result.Data)
+                    Data = dtos
                 });
             }
 
@@ -45,9 +58,9 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            var dto = _mapper.Map<UserDto>(user);
-
             var role = await _unitOfWork.UserRepository.GetPrimaryRoleAsync(user);
+
+            var dto = _mapper.Map<UserDto>(user);
             dto.Role = _mapper.Map<RoleDto>(role);
 
             return Ok(dto);
