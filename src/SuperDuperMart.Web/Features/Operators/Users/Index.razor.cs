@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models;
 
-namespace SuperDuperMart.Web.Features.Administrators.Products
+namespace SuperDuperMart.Web.Features.Operators.Users
 {
     public partial class Index
     {
@@ -11,7 +11,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedDto<ProductDto> Model { get; set; } = default!;
+        public PaginatedDto<UserDto> Model { get; set; } = default!;
 
         private bool _loading = true;
 
@@ -22,14 +22,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
             Model = new(pageNumber, pageSize);
 
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task GetProducts(int pageNumber, int pageSize)
+        private async Task GetUsers(int pageNumber, int pageSize)
         {
-            string? url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={pageSize}";
+            string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            var data = await HttpService.GetAsync<PaginatedDto<ProductDto>>(url);
+            var data = await HttpService.GetAsync<PaginatedDto<UserDto>>(url);
             if (data != null)
             {
                 Model = data;
@@ -41,19 +41,19 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task HandlePreviousClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
         private async Task HandlePageClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
         private async Task HandleNextClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            await GetUsers(Model.PageNumber, Model.PageSize);
         }
     }
 }

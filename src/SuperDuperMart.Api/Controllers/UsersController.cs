@@ -1,6 +1,5 @@
 ﻿using SuperDuperMart.Shared.Models;
 using SuperDuperMart.Api.Filters;
-using SuperDuperMart.Shared.Models.Users;
 
 namespace SuperDuperMart.Api.Controllers
 {

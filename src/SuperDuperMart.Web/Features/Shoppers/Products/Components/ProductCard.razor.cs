@@ -1,11 +1,10 @@
 ﻿using Blazored.Toast;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Shared.Models.Carts;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
-namespace SuperDuperMart.Web.Features.Customers.Products.Components
+namespace SuperDuperMart.Web.Features.Shoppers.Products.Components
 {
     public partial class ProductCard
     {

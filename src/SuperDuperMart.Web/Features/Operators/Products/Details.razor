@@ -1,5 +1,5 @@
 ﻿@page "/manage/products/details/{id:int}"
-@attribute [Authorize(Roles = Roles.Administrator)]
+@attribute [Authorize(Roles = Roles.Operator)]
 
 <PageTitle>SuperDuperMart - @Model?.Name</PageTitle>
 

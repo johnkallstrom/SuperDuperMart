@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace SuperDuperMart.Web.Features.Customers.Products
+namespace SuperDuperMart.Web.Features.Shoppers.Products
 {
     public partial class Details
     {

@@ -1,7 +1,6 @@
 using SuperDuperMart.Api.Extensions;
 using SuperDuperMart.Core.Extensions;
 using System.Reflection;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,7 +39,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.SeedDatabaseAsync();
+    //await app.SeedDatabaseAsync();
 }
 
 app.UseSwagger();
