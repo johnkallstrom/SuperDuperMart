@@ -6,8 +6,8 @@ namespace SuperDuperMart.Web.Features.Customers.Cart
 {
     public partial class Index
     {
-        [CascadingParameter]
-        public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+        [Inject]
+        public IAuthenticationService AuthenticationService { get; set; } = default!;
 
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
@@ -22,10 +22,9 @@ namespace SuperDuperMart.Web.Features.Customers.Cart
 
         private async Task GetCart()
         {
-            var authState = await AuthenticationStateTask;
-            var principal = authState.User;
+            var user = await AuthenticationService.GetCurrentUserAsync();
+            int? userId = user.FindUserIdentifier();
 
-            int? userId = principal.FindUserIdentifier();
             if (userId.HasValue)
             {
                 Model = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{userId}?includeItems=true");

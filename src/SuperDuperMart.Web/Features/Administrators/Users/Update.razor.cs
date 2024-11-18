@@ -19,6 +19,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Parameter]
         public int Id { get; set; }
 
+        private bool _disableRoleInput = false;
         private bool _loading = true;
 
         public UserUpdateDto Model { get; set; } = new();

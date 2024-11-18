@@ -10,10 +10,10 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
     public partial class ProductCard
     {
         [Inject]
-        public IToastService ToastService { get; set; } = default!;
+        public IAuthenticationService AuthenticationService { get; set; } = default!;
 
-        [CascadingParameter]
-        public Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+        [Inject]
+        public IToastService ToastService { get; set; } = default!;
 
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
@@ -27,8 +27,7 @@ namespace SuperDuperMart.Web.Features.Customers.Products.Components
         {
             _loading = true;
 
-            var authState = await AuthenticationStateTask;
-            var user = authState.User;
+            var user = await AuthenticationService.GetCurrentUserAsync();
 
             int? userId = user.FindUserIdentifier();
             if (userId.HasValue)
