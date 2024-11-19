@@ -7,3 +7,4 @@ global using SuperDuperMart.Core.Interfaces;
 global using SuperDuperMart.Shared.Models.Products;
 global using SuperDuperMart.Shared.Models.Users;
 global using AutoMapper;
+global using SuperDuperMart.Core.Parameters;

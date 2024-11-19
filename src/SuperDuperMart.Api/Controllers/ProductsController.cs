@@ -1,8 +1,4 @@
-﻿using SuperDuperMart.Core.Parameters;
-using SuperDuperMart.Core.Results;
-using SuperDuperMart.Shared.Models;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
