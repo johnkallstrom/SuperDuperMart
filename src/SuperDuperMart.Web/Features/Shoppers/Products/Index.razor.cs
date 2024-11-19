@@ -38,8 +38,22 @@ namespace SuperDuperMart.Web.Features.Shoppers.Products
             _loading = false;
         }
 
-        private async Task HandleGetMoreProductsClick()
+        private async Task HandlePreviousClick(int pageNumber)
         {
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
+        }
+
+        private async Task HandlePageClick(int pageNumber)
+        {
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
+        }
+
+        private async Task HandleNextClick(int pageNumber)
+        {
+            Model.PageNumber = pageNumber;
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
     }
 }
