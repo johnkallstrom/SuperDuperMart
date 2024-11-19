@@ -6,7 +6,7 @@
             </a>
         </li>
 
-        @for (int i = 1; i <= Pages; i++)
+        @for (int i = 1; i <= TotalPages; i++)
         {
             int pageNumber = i;
             <li class=@(PageNumber == pageNumber ? "page-item active" : "page-item")>

@@ -35,11 +35,11 @@ namespace SuperDuperMart.Api.Controllers
                     dtos.Add(dto);
                 }
 
-                return Ok(new PaginatedDto<UserDto>
+                return Ok(new ResultDto<UserDto>
                 {
                     PageNumber = pageNumber.Value,
                     PageSize = pageSize.Value,
-                    Pages = result.Pages,
+                    TotalPages = result.Pages,
                     Data = dtos
                 });
             }

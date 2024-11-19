@@ -8,7 +8,7 @@ namespace SuperDuperMart.Web.Features.Components
         public int PageNumber { get; set; }
 
         [Parameter, EditorRequired]
-        public int Pages { get; set; }
+        public int TotalPages { get; set; }
 
         [Parameter]
         public EventCallback<int> OnPreviousClick { get; set; }
@@ -31,7 +31,7 @@ namespace SuperDuperMart.Web.Features.Components
         {
             get
             {
-                return PageNumber >= Pages;
+                return PageNumber >= TotalPages;
             }
         }
     }

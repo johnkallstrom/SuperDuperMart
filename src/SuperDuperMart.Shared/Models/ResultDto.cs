@@ -1,17 +1,18 @@
 ﻿namespace SuperDuperMart.Shared.Models
 {
-    public class PaginatedDto<T>
+    public class ResultDto<T>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public int Pages { get; set; }
+        public int TotalPages { get; set; }
+        public int TotalRecords { get; set; }
         public IEnumerable<T> Data { get; set; } = [];
 
-        public PaginatedDto()
+        public ResultDto()
         {
         }
 
-        public PaginatedDto(int pageNumber, int pageSize)
+        public ResultDto(int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;

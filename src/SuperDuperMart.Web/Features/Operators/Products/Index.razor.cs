@@ -11,7 +11,7 @@ namespace SuperDuperMart.Web.Features.Operators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public PaginatedDto<ProductDto> Model { get; set; } = default!;
+        public ResultDto<ProductDto> Model { get; set; } = default!;
 
         private bool _loading = true;
 
@@ -29,10 +29,10 @@ namespace SuperDuperMart.Web.Features.Operators.Products
         {
             string? url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            var data = await HttpService.GetAsync<PaginatedDto<ProductDto>>(url);
-            if (data != null)
+            var result = await HttpService.GetAsync<ResultDto<ProductDto>>(url);
+            if (result != null)
             {
-                Model = data;
+                Model = result;
             }
 
             _loading = false;

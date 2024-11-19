@@ -1,4 +1,5 @@
 ﻿using SuperDuperMart.Core.Parameters;
+using SuperDuperMart.Core.Results;
 using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Api.Controllers
@@ -20,8 +21,8 @@ namespace SuperDuperMart.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] QueryParams parameters)
         {
-            var products = await _unitOfWork.ProductRepository.GetAsync(parameters);
-            return Ok(products);
+            var result = await _unitOfWork.ProductRepository.GetAsync(parameters);
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
