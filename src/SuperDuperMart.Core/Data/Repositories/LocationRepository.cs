@@ -17,6 +17,11 @@ namespace SuperDuperMart.Core.Data.Repositories
             return locations;
         }
 
+        public Task<Result<Location>> GetAsync(IQueryParams parameters)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Location?> GetByIdAsync(int id)
         {
             var location = await _context.Locations.FirstOrDefaultAsync(l => l.Id == id);

@@ -25,7 +25,7 @@
         public IRoleRepository<Role> RoleRepository { get; set; }
         public ILocationRepository LocationRepository { get; set; }
         public ICartRepository CartRepository { get; }
-        public IPaginatedRepository<Product> ProductRepository { get; }
+        public IRepository<Product> ProductRepository { get; }
         public IUserRepository<User> UserRepository { get; }
 
         public async Task SaveAsync() => await _context.SaveChangesAsync();

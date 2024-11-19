@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
-    public class ProductRepository : IPaginatedRepository<Product>
+    public class ProductRepository : IRepository<Product>
     {
         private readonly SuperDuperMartDbContext _context;
 
@@ -17,22 +17,32 @@ namespace SuperDuperMart.Core.Data.Repositories
             return products;
         }
 
-        public async Task<(int Pages, IEnumerable<Product> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<Result<Product>> GetAsync(IQueryParams parameters)
         {
-            if (pageNumber <= 0)
+            var products = Enumerable.Empty<Product>();
+            int totalRecords = await _context.Products.CountAsync();
+
+            if (!parameters.PageNumber.HasValue || 
+                !parameters.PageSize.HasValue || 
+                parameters.PageNumber.Value <= 0)
             {
-                return (Pages: 0, Data: Enumerable.Empty<Product>());
+                products = await _context.Products.ToListAsync();
+                return new Result<Product>(totalRecords, products);
             }
 
-            int count = await _context.Products.CountAsync();
-            decimal pages = Math.Ceiling((decimal)count / pageSize);
+            decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
 
-            var products = await _context.Products
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
+            products = await _context.Products
+                .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
+                .Take(parameters.PageSize.Value)
                 .ToListAsync();
 
-            return (Pages: (int)pages, Data: products);
+            return new Result<Product>(
+                parameters.PageNumber.Value, 
+                parameters.PageSize.Value, 
+                (int)totalPages, 
+                totalRecords, 
+                products);
         }
 
         public async Task<Product?> GetByIdAsync(int id)

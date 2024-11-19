@@ -3,6 +3,7 @@
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
         Task<IEnumerable<TEntity>> GetAsync();
+        Task<Result<TEntity>> GetAsync(IQueryParams parameters);
         Task<TEntity?> GetByIdAsync(int id);
         Task<TEntity> CreateAsync(TEntity entity);
         void Update(TEntity entity);

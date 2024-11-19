@@ -1,4 +1,5 @@
-﻿using SuperDuperMart.Shared.Models;
+﻿using SuperDuperMart.Core.Parameters;
+using SuperDuperMart.Shared.Models;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -17,23 +18,10 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int? pageNumber, int? pageSize)
+        public async Task<IActionResult> Get([FromQuery] QueryParams parameters)
         {
-            if (pageNumber.HasValue && pageSize.HasValue)
-            {
-                var result = await _unitOfWork.ProductRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
-
-                return Ok(new PaginatedDto<ProductDto>
-                {
-                    PageNumber = pageNumber.Value,
-                    PageSize = pageSize.Value,
-                    Pages = result.Pages,
-                    Data = _mapper.Map<IEnumerable<ProductDto>>(result.Data)
-                });
-            }
-
-            var products = await _unitOfWork.ProductRepository.GetAsync();
-            return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
+            var products = await _unitOfWork.ProductRepository.GetAsync(parameters);
+            return Ok(products);
         }
 
         [HttpGet("{id}")]
