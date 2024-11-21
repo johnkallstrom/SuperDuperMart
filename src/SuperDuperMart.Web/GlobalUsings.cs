@@ -9,3 +9,4 @@ global using SuperDuperMart.Web.Services.Http;
 global using SuperDuperMart.Shared.Extensions;
 global using SuperDuperMart.Web.Enums;
 global using SuperDuperMart.Web.Security;
+global using AutoMapper;

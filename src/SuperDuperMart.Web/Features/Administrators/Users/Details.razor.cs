@@ -8,6 +8,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
     public partial class Details
     {
         [Inject]
+        public IMapper Mapper { get; set; } = default!;
+
+        [Inject]
         public IAuthenticationService AuthenticationService { get; set; } = default!;
 
         [Inject]
@@ -24,7 +27,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         public bool IsCurrentUserBeingUpdated { get; set; } = false;
 
-        private bool _loading = true;
+        private bool Loading = true;
 
         public UserUpdateDto Model { get; set; } = new();
         public IEnumerable<RoleDto> Roles { get; set; } = [];
@@ -61,27 +64,20 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetUser()
         {
-            var user = await HttpService.GetAsync<UserDto>($"{Endpoints.Users}/{Id}");
-            if (user != null)
+            var userDto = await HttpService.GetAsync<UserDto>($"{Endpoints.Users}/{Id}");
+            if (userDto != null)
             {
-                Model.Avatar = user.Avatar;
-                Model.FirstName = user.FirstName;
-                Model.LastName = user.LastName;
-                Model.Username = user.Username;
-                Model.Email = user.Email;
-                Model.RoleId = user.Role is not null ? user.Role.Id : 0;
-                Model.Location = user.Location;
-
-                _loading = false;
+                Model = Mapper.Map<UserUpdateDto>(userDto);
+                Loading = false;
             }
         }
 
         private async Task GetRoles()
         {
-            var data = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
-            if (data != null && data.Count() > 0)
+            var roleDtos = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
+            if (roleDtos != null && roleDtos.Count() > 0)
             {
-                Roles = data;
+                Roles = roleDtos;
             }
         }
 
