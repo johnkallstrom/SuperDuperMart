@@ -20,7 +20,7 @@ else
                         <img src="@Model.Avatar" class="card-img-top rounded mx-3 mt-3 w-50">
                     }
                     <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="Submit">
+                        <EditForm Model="@Model" OnValidSubmit="UpdateUser">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <label class="form-label">Avatar</label>
@@ -53,7 +53,7 @@ else
                                 <ValidationMessage For="() => Model.City" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
-                            <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" />
+                            <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" OnClick="DeleteUser" />
                             <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
                         </EditForm>
                     </div>
@@ -63,7 +63,7 @@ else
                 <div class="card shadow">
                     <h5 class="card-header">Account</h5>
                     <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="Submit">
+                        <EditForm Model="@Model" OnValidSubmit="UpdateUser">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <label class="form-label">Username</label>
