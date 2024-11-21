@@ -18,6 +18,8 @@ namespace SuperDuperMart.Shared.Models.Users
         [Required(ErrorMessage = "Please choose a role")]
         public int RoleId { get; set; }
 
-        public LocationDto Location { get; set; } = new();
+        public string? ZipCode { get; set; }
+        public string? StreetName { get; set; }
+        public string? City { get; set; }
     }
 }

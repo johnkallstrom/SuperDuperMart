@@ -15,39 +15,42 @@ else
             <div class="col-sm-8 col-lg-6">
                 <div class="card shadow">
                     <h5 class="card-header">Profile</h5>
-                            <img src="@Model.Avatar" class="card-img-top rounded mx-3 mt-3 w-50">
+                    @if (!string.IsNullOrWhiteSpace(Model.Avatar))
+                    {
+                        <img src="@Model.Avatar" class="card-img-top rounded mx-3 mt-3 w-50">
+                    }
                     <div class="card-body">
                         <EditForm Model="@Model" OnValidSubmit="Submit">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Avatar">Avatar</label>
-                                <InputText type="text" class="form-control" for="Model.Avatar" @bind-Value="Model.Avatar" />
+                                <label class="form-label">Avatar</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.Avatar" />
                                 <ValidationMessage For="() => Model.Avatar" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.FirstName">First name</label>
-                                <InputText type="text" class="form-control" for="Model.FirstName" @bind-Value="Model.FirstName" />
+                                <label class="form-label">First name</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.FirstName" />
                                 <ValidationMessage For="() => Model.FirstName" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.LastName">Last name</label>
-                                <InputText type="text" class="form-control" for="Model.LastName" @bind-Value="Model.LastName" />
+                                <label class="form-label">Last name</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.LastName" />
                                 <ValidationMessage For="() => Model.LastName" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Location.StreetName">Street name</label>
-                                <InputText type="text" class="form-control" for="Model.Location.StreetName" @bind-Value="Model.Location.StreetName" />
-                                <ValidationMessage For="() => Model.Location.StreetName" />
+                                <label class="form-label">Street name</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.StreetName" />
+                                <ValidationMessage For="() => Model.StreetName" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Location.ZipCode">Zip code</label>
-                                <InputText type="text" class="form-control" for="Model.Location.ZipCode" @bind-Value="Model.Location.ZipCode" />
-                                <ValidationMessage For="() => Model.Location.ZipCode" />
+                                <label class="form-label">Zip code</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.ZipCode" />
+                                <ValidationMessage For="() => Model.ZipCode" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Location.City">City</label>
-                                <InputText type="text" class="form-control" for="Model.Location.City" @bind-Value="Model.Location.City" />
-                                <ValidationMessage For="() => Model.Location.City" />
+                                <label class="form-label">City</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.City" />
+                                <ValidationMessage For="() => Model.City" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                             <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" />
@@ -63,18 +66,18 @@ else
                         <EditForm Model="@Model" OnValidSubmit="Submit">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Username">Username</label>
-                                <InputText type="text" class="form-control" for="Model.Username" @bind-Value="Model.Username" />
+                                <label class="form-label">Username</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.Username" />
                                 <ValidationMessage For="() => Model.Username" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.Email">Email</label>
-                                <InputText type="text" class="form-control" for="Model.Email" @bind-Value="Model.Email" />
+                                <label class="form-label">Email</label>
+                                <InputText type="text" class="form-control" @bind-Value="Model.Email" />
                                 <ValidationMessage For="() => Model.Email" />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label" for="@Model.RoleId">Role</label>
-                                <InputSelect class="form-control" for="Model.RoleId" @bind-Value="Model.RoleId" disabled="@(IsCurrentUserBeingUpdated)">
+                                <label class="form-label">Role</label>
+                                <InputSelect class="form-control" @bind-Value="Model.RoleId" disabled="@(IsCurrentUserBeingUpdated)">
                                     @foreach (var role in Roles)
                                     {
                                         <option value="@role.Id">@role.Name</option>

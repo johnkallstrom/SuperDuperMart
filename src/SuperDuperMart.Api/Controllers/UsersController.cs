@@ -73,28 +73,50 @@ namespace SuperDuperMart.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto model)
         {
+            // Get user 
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
             if (user is null)
             {
                 return NotFound();
             }
 
-            if (user.Location is not null)
+            // Create new or update existing location
+            if (user.Location is null)
             {
-                user.Location = _mapper.Map(source: model.Location, destination: user.Location);
+                var newLocation = new Location
+                {
+                    StreetName = model.StreetName,
+                    ZipCode = model.ZipCode,
+                    City = model.City,
+                    UserId = user.Id
+                };
+
+                await _unitOfWork.LocationRepository.CreateAsync(newLocation);
+            }
+            else
+            {
+                user.Location.StreetName = model.StreetName;
+                user.Location.ZipCode = model.ZipCode;
+                user.Location.City = model.City;
+                
                 _unitOfWork.LocationRepository.Update(user.Location);
-                await _unitOfWork.SaveAsync();
             }
 
+            // Save location changes to database
+            await _unitOfWork.SaveAsync();
+
+            // Update user
             user = _mapper.Map(source: model, destination: user);
             await _unitOfWork.UserRepository.UpdateAsync(user);
 
+            // Get role
             var role = await _unitOfWork.RoleRepository.GetByIdAsync(model.RoleId);
             if (role is null)
             {
                 return NotFound();
             }
 
+            // Clear all existing roles and add new
             var result = await _unitOfWork.UserRepository.ClearRolesAsync(user);
             if (result.Succeeded)
             {
