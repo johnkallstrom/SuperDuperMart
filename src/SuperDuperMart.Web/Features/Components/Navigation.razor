@@ -6,14 +6,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav me-auto">
-                <AuthorizeView Roles="@Roles.Shopper">
+                <AuthorizeView Roles="@Roles.Member">
                     <Authorized>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/products">Products</NavLink>
                         </li>
                     </Authorized>
                 </AuthorizeView>
-                <AuthorizeView Roles="@Roles.Operator">
+                <AuthorizeView Roles="@Roles.Administrator">
                     <Authorized>
                         <li class="nav-item">
                             <NavLink class="nav-link" href="/manage/products">Products</NavLink>
@@ -27,7 +27,7 @@
             <ul class="navbar-nav ms-auto">
                 <AuthorizeView>
                     <Authorized>
-                        <AuthorizeView Roles="@Roles.Shopper" Context="Shopper">
+                        <AuthorizeView Roles="@Roles.Member" Context="Shopper">
                             <Authorized>
                                 <li class="nav-item">
                                     <NavLink class="nav-link" href="/cart"><i class="bi bi-cart-fill"></i></NavLink>
@@ -36,12 +36,12 @@
                         </AuthorizeView>
                         <li class="nav-item dropdown dropstart">
                             <NavLink class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <AuthorizeView Roles="@Roles.Shopper" Context="Shopper">
+                                <AuthorizeView Roles="@Roles.Member" Context="Shopper">
                                     <Authorized>
                                         <i class="bi bi-person-fill"></i>
                                     </Authorized>
                                 </AuthorizeView>
-                                <AuthorizeView Roles="@Roles.Operator" Context="Operator">
+                                <AuthorizeView Roles="@Roles.Administrator" Context="Operator">
                                     <Authorized>
                                         <i class="bi bi-person-fill-gear"></i>
                                     </Authorized>

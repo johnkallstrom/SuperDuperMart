@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models.Carts;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
-namespace SuperDuperMart.Web.Features.Shoppers.Products.Components
+namespace SuperDuperMart.Web.Features.Members.Products.Components
 {
     public partial class ProductCard
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models;
 
-namespace SuperDuperMart.Web.Features.Operators.Users
+namespace SuperDuperMart.Web.Features.Administrators.Users
 {
     public partial class Index
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models.Carts;
 
-namespace SuperDuperMart.Web.Features.Shoppers.Cart.Components
+namespace SuperDuperMart.Web.Features.Members.Cart.Components
 {
     public partial class CartItemCard
     {

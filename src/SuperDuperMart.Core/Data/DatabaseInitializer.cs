@@ -6,9 +6,9 @@ namespace SuperDuperMart.Core.Data
 {
     public class DatabaseInitializer
     {
-        private static readonly string SECTION = "InitializationData";
-        private static readonly string KEY_ROLES = "SystemRoles";
-        private static readonly string KEY_PASSWORD = "DefaultPassword";
+        private static readonly string SECTION = "DatabaseInitilization:Users";
+        private static readonly string KEY_ROLES = "Roles";
+        private static readonly string KEY_PASSWORD = "Password";
 
         private static Faker _faker = new();
         private static ProductFaker _productFaker = new();

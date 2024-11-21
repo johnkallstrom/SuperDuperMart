@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Shared.Models;
 
-namespace SuperDuperMart.Web.Features.Operators.Products
+namespace SuperDuperMart.Web.Features.Members.Products
 {
     public partial class Index
     {
@@ -11,9 +11,9 @@ namespace SuperDuperMart.Web.Features.Operators.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public ResultDto<ProductDto> Model { get; set; } = default!;
-
         private bool _loading = true;
+
+        public ResultDto<ProductDto> Model { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {

@@ -3,7 +3,7 @@ using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
-namespace SuperDuperMart.Web.Features.Operators.Products
+namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Details
     {
