@@ -29,10 +29,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         {
             string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            var data = await HttpService.GetAsync<PagedListDto<UserDto>>(url);
-            if (data != null)
+            var result = await HttpService.GetAsync<PagedListDto<UserDto>>(url);
+            if (result != null)
             {
-                Model = data;
+                Model = result;
             }
 
             _loading = false;

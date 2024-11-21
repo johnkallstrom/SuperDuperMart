@@ -3,7 +3,7 @@
     public interface IUserRepository<TUser> where TUser : IdentityUser<int>
     {
         Task<IEnumerable<TUser>> GetAsync();
-        Task<(int Pages, IEnumerable<TUser> Data)> GetPaginatedAsync(int pageNumber, int pageSize);
+        Task<PagedList<TUser>> GetAsync(IQueryParams parameters);
         Task<TUser?> GetByIdAsync(int id);
         Task<bool> HasCartAsync(User user);
         Task<Role?> GetPrimaryRoleAsync(User user);

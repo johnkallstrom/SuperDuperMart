@@ -18,34 +18,25 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int? pageNumber, int? pageSize)
+        public async Task<IActionResult> Get([FromQuery] QueryParams parameters)
         {
-            if (pageNumber.HasValue && pageSize.HasValue)
+            var pagedList = await _unitOfWork.UserRepository.GetAsync(parameters);
+            var pagedListDto = _mapper.Map<PagedListDto<UserDto>>(pagedList);
+
+            var userDtos = new List<UserDto>();
+            foreach (var user in pagedList.Data)
             {
-                var result = await _unitOfWork.UserRepository.GetPaginatedAsync(pageNumber.Value, pageSize.Value);
+                var role = await _unitOfWork.UserRepository.GetPrimaryRoleAsync(user);
 
-                var dtos = new List<UserDto>();
-                foreach (var user in result.Data)
-                {
-                    var role = await _unitOfWork.UserRepository.GetPrimaryRoleAsync(user);
+                var dto = _mapper.Map<UserDto>(user);
+                dto.Role = _mapper.Map<RoleDto>(role);
 
-                    var dto = _mapper.Map<UserDto>(user);
-                    dto.Role = _mapper.Map<RoleDto>(role);
-
-                    dtos.Add(dto);
-                }
-
-                return Ok(new PagedListDto<UserDto>
-                {
-                    PageNumber = pageNumber.Value,
-                    PageSize = pageSize.Value,
-                    TotalPages = result.Pages,
-                    Data = dtos
-                });
+                userDtos.Add(dto);
             }
 
-            var users = await _unitOfWork.UserRepository.GetAsync();
-            return Ok(_mapper.Map<IEnumerable<UserDto>>(users));
+            pagedListDto.Data = userDtos;
+
+            return Ok(pagedListDto);
         }
 
         [HttpGet("{id}")]

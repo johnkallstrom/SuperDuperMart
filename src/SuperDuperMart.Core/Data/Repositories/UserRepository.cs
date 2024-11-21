@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SuperDuperMart.Core.Entities;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -27,23 +28,32 @@ namespace SuperDuperMart.Core.Data.Repositories
             return users;
         }
 
-        public async Task<(int Pages, IEnumerable<User> Data)> GetPaginatedAsync(int pageNumber, int pageSize)
+        public async Task<PagedList<User>> GetAsync(IQueryParams parameters)
         {
-            if (pageNumber <= 0)
+            var users = Enumerable.Empty<User>();
+            var totalRecords = await _context.Users.CountAsync();
+
+            if (!parameters.PageNumber.HasValue ||
+                !parameters.PageSize.HasValue ||
+                parameters.PageNumber.Value <= 0)
             {
-                return (Pages: 0, Data: Enumerable.Empty<User>());
+                users = await _context.Users.ToListAsync();
+                return new PagedList<User>(totalRecords, users);
             }
 
-            int count = await _context.Users.CountAsync();
-            decimal pages = Math.Ceiling((decimal)count / pageSize);
+            decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
 
-            var users = await _context.Users
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .Include(u => u.Location)
+            users = await _context.Users
+                .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
+                .Take(parameters.PageSize.Value)
                 .ToListAsync();
 
-            return (Pages: (int)pages, Data: users);
+            return new PagedList<User>(
+                parameters.PageNumber.Value,
+                parameters.PageSize.Value,
+                (int)totalPages,
+                totalRecords,
+                users);
         }
 
         public async Task<User?> GetByIdAsync(int id)
