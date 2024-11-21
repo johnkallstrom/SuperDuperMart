@@ -27,7 +27,7 @@
             <ul class="navbar-nav ms-auto">
                 <AuthorizeView>
                     <Authorized>
-                        <AuthorizeView Roles="@Roles.Member" Context="Shopper">
+                        <AuthorizeView Roles="@Roles.Member" Context="Member">
                             <Authorized>
                                 <li class="nav-item">
                                     <NavLink class="nav-link" href="/cart"><i class="bi bi-cart-fill"></i></NavLink>
@@ -36,12 +36,12 @@
                         </AuthorizeView>
                         <li class="nav-item dropdown dropstart">
                             <NavLink class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <AuthorizeView Roles="@Roles.Member" Context="Shopper">
+                                <AuthorizeView Roles="@Roles.Member" Context="Member">
                                     <Authorized>
                                         <i class="bi bi-person-fill"></i>
                                     </Authorized>
                                 </AuthorizeView>
-                                <AuthorizeView Roles="@Roles.Administrator" Context="Operator">
+                                <AuthorizeView Roles="@Roles.Administrator" Context="Administrator">
                                     <Authorized>
                                         <i class="bi bi-person-fill-gear"></i>
                                     </Authorized>
