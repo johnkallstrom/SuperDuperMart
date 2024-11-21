@@ -69,7 +69,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
                 Model.LastName = user.LastName;
                 Model.Username = user.Username;
                 Model.Email = user.Email;
-                Model.RoleId = user.Role.Id;
+                Model.RoleId = user.Role is not null ? user.Role.Id : 0;
                 Model.Location = user.Location;
 
                 _loading = false;
