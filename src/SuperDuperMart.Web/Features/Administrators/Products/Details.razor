@@ -15,7 +15,7 @@ else
             <div class="col-sm-8 col-lg-6">
                 <div class="card shadow">
                     <div class="card-body">
-                        <EditForm Model="@Model" OnValidSubmit="Submit">
+                        <EditForm Model="@Model" OnValidSubmit="UpdateProduct">
                             <DataAnnotationsValidator />
                             <div class="mb-3">
                                 <label class="form-label" for="@Model.Name">Name</label>
@@ -38,7 +38,7 @@ else
                                 <ValidationMessage For="() => Model.Material" />
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
-                            <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" />
+                            <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" OnClick="DeleteProduct" />
                             <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />
                         </EditForm>
                     </div>

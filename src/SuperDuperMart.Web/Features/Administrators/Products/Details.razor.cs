@@ -42,7 +42,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             }
         }
 
-        private async Task Submit()
+        private async Task UpdateProduct()
         {
             await HttpService.PutAsync($"{Endpoints.Products}/{Id}", Model);
 
@@ -50,6 +50,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             parameters.Add(nameof(InfoToast.Message), $"Updated product");
 
             ToastService.ShowToast<InfoToast>(parameters);
+        }
+
+        private async Task DeleteProduct()
+        {
+            await HttpService.DeleteAsync($"{Endpoints.Products}/{Id}");
+            NavigationManager.NavigateTo("/manage/products");
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
