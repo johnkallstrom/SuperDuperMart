@@ -35,7 +35,7 @@ namespace SuperDuperMart.Api.Controllers
                     dtos.Add(dto);
                 }
 
-                return Ok(new ResultDto<UserDto>
+                return Ok(new PagedListDto<UserDto>
                 {
                     PageNumber = pageNumber.Value,
                     PageSize = pageSize.Value,

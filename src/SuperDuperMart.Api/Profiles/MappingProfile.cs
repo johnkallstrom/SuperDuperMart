@@ -1,4 +1,6 @@
-﻿using SuperDuperMart.Shared.Models.Carts;
+﻿using SuperDuperMart.Core.Results;
+using SuperDuperMart.Shared.Models;
+using SuperDuperMart.Shared.Models.Carts;
 
 namespace SuperDuperMart.Api.Profiles
 {
@@ -32,6 +34,9 @@ namespace SuperDuperMart.Api.Profiles
 
             // CartItem
             CreateMap<CartItem, CartItemDto>();
+
+            // Results
+            CreateMap(typeof(PagedList<>), typeof(PagedListDto<>));
         }
     }
 }

@@ -49,7 +49,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             return carts;
         }
 
-        public Task<Result<Cart>> GetAsync(IQueryParams parameters)
+        public Task<PagedList<Cart>> GetAsync(IQueryParams parameters)
         {
             throw new NotImplementedException();
         }

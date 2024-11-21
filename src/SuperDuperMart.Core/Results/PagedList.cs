@@ -1,6 +1,6 @@
 ﻿namespace SuperDuperMart.Core.Results
 {
-    public class Result<T>
+    public class PagedList<T>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
@@ -8,18 +8,18 @@
         public int TotalRecords { get; set; }
         public IEnumerable<T> Data { get; set; } = [];
 
-        public Result(IEnumerable<T> data)
+        public PagedList(IEnumerable<T> data)
         {
             Data = data;
         }
 
-        public Result(int totalRecords, IEnumerable<T> data)
+        public PagedList(int totalRecords, IEnumerable<T> data)
         {
             TotalRecords = totalRecords;
             Data = data;
         }
 
-        public Result(
+        public PagedList(
             int pageNumber, 
             int pageSize, 
             int totalPages, 

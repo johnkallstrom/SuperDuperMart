@@ -17,7 +17,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             return locations;
         }
 
-        public Task<Result<Location>> GetAsync(IQueryParams parameters)
+        public Task<PagedList<Location>> GetAsync(IQueryParams parameters)
         {
             throw new NotImplementedException();
         }

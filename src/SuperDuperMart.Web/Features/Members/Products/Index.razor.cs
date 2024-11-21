@@ -13,7 +13,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private bool _loading = true;
 
-        public ResultDto<ProductDto> Model { get; set; } = default!;
+        public PagedListDto<ProductDto> Model { get; set; } = default!;
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,7 +29,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
         {
             string? url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={pageSize}";
 
-            var result = await HttpService.GetAsync<ResultDto<ProductDto>>(url);
+            var result = await HttpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (result != null)
             {
                 Model = result;

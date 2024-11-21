@@ -17,7 +17,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             return products;
         }
 
-        public async Task<Result<Product>> GetAsync(IQueryParams parameters)
+        public async Task<PagedList<Product>> GetAsync(IQueryParams parameters)
         {
             var products = Enumerable.Empty<Product>();
             int totalRecords = await _context.Products.CountAsync();
@@ -27,7 +27,7 @@ namespace SuperDuperMart.Core.Data.Repositories
                 parameters.PageNumber.Value <= 0)
             {
                 products = await _context.Products.ToListAsync();
-                return new Result<Product>(totalRecords, products);
+                return new PagedList<Product>(totalRecords, products);
             }
 
             decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
@@ -37,7 +37,7 @@ namespace SuperDuperMart.Core.Data.Repositories
                 .Take(parameters.PageSize.Value)
                 .ToListAsync();
 
-            return new Result<Product>(
+            return new PagedList<Product>(
                 parameters.PageNumber.Value, 
                 parameters.PageSize.Value, 
                 (int)totalPages, 

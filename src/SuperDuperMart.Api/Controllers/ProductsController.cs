@@ -1,4 +1,6 @@
-﻿namespace SuperDuperMart.Api.Controllers
+﻿using SuperDuperMart.Shared.Models;
+
+namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
@@ -17,8 +19,8 @@
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] QueryParams parameters)
         {
-            var result = await _unitOfWork.ProductRepository.GetAsync(parameters);
-            return Ok(result);
+            var pagedList = await _unitOfWork.ProductRepository.GetAsync(parameters);
+            return Ok(_mapper.Map<PagedListDto<ProductDto>>(pagedList));
         }
 
         [HttpGet("{id}")]
