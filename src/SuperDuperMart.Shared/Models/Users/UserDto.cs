@@ -10,6 +10,6 @@
         public string Email { get; set; } = default!;
 
         public RoleDto? Role { get; set; }
-        public LocationDto Location { get; set; } = default!;
+        public LocationDto? Location { get; set; }
     }
 }

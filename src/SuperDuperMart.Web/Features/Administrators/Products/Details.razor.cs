@@ -1,4 +1,5 @@
-﻿using Blazored.Toast;
+﻿using AutoMapper;
+using Blazored.Toast;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Web.Features.Components.Toasts;
@@ -7,6 +8,9 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Details
     {
+        [Inject]
+        public IMapper Mapper { get; set; } = default!;
+
         [Inject]
         public IToastService ToastService { get; set; } = default!;
 
@@ -19,7 +23,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         [Parameter]
         public int Id { get; set; }
 
-        private bool _loading = true;
+        public bool Loading { get; set; } = true;
 
         public ProductUpdateDto Model { get; set; } = new();
 
@@ -30,15 +34,11 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetProduct()
         {
-            var product = await HttpService.GetAsync<ProductDto>($"{Endpoints.Products}/{Id}");
-            if (product != null)
+            var productDto = await HttpService.GetAsync<ProductDto>($"{Endpoints.Products}/{Id}");
+            if (productDto != null)
             {
-                Model.Name = product.Name;
-                Model.Description = product.Description;
-                Model.Price = product.Price;
-                Model.Material = product.Material;
-
-                _loading = false;
+                Model = Mapper.Map<ProductUpdateDto>(productDto);
+                Loading = false;
             }
         }
 
