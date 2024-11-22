@@ -4,9 +4,6 @@ namespace SuperDuperMart.Shared.Models.Carts
 {
     public class CartCreateDto
     {
-        [Required(ErrorMessage = "Please enter a session id")]
-        public Guid SessionId { get; set; }
-
         public bool Purchased { get; set; }
 
         [Required(ErrorMessage = "Please enter a user id")]

@@ -2,7 +2,6 @@
 {
     public class Cart : BaseEntity
     {
-        public Guid SessionId { get; set; }
         public bool Purchased { get; set; }
         public decimal TotalCost { get; set; }
 
