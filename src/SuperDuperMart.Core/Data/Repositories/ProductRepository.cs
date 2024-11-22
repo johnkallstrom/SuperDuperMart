@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
     public class ProductRepository : IRepository<Product>
     {
+        private readonly Faker _faker = new();
         private readonly SuperDuperMartDbContext _context;
 
         public ProductRepository(SuperDuperMartDbContext context)
@@ -53,6 +55,8 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Product> CreateAsync(Product entity)
         {
+            entity.Image = _faker.Image.PlaceholderUrl(width: 640, height: 480);
+
             var entry = await _context.Products.AddAsync(entity);
             return entry.Entity;
         }

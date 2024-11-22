@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Bogus;
+using Microsoft.EntityFrameworkCore;
 using SuperDuperMart.Core.Entities;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UserRepository : IUserRepository<User>
     {
+        private readonly Faker _faker = new();
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly SuperDuperMartDbContext _context;
@@ -73,8 +75,9 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(User user, string password)
         {
-            user.Created = DateTime.Now;
+            user.Avatar = _faker.Image.PlaceholderUrl(width: 640, height: 480);
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, password);
+            user.Created = DateTime.Now;
 
             var identityResult = await _userManager.CreateAsync(user);
             if (!identityResult.Succeeded)
