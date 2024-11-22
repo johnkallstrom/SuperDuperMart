@@ -87,6 +87,8 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(User user)
         {
+            user.LastModified = DateTime.Now;
+
             var identityResult = await _userManager.UpdateAsync(user);
             if (!identityResult.Succeeded)
             {
