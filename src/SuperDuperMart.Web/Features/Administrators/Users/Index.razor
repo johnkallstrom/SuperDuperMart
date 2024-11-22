@@ -41,7 +41,9 @@ else
                         </td>
                         <td>@user.FirstName @user.LastName</td>
                         <td>@user.Email</td>
-                        <td>@user.Role?.Name</td>
+                        <td>
+                            <span class="@(user.Role?.Name == "Member" ? $"badge text-bg-warning" : $"badge text-bg-dark")">@user.Role?.Name</span>
+                        </td>
                         <td>@user.Created.ToCustomDateTimeFormat()</td>
                         <td>
                             @if (user.LastModified.HasValue)
