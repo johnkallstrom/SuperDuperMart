@@ -42,15 +42,15 @@ else
                         <td>@user.FirstName @user.LastName</td>
                         <td>@user.Email</td>
                         <td>@user.Role?.Name</td>
-                        <td>@user.Created.ToSpecifiedDateFormat()</td>
+                        <td>@user.Created.ToCustomDateTimeFormat()</td>
                         <td>
                             @if (user.LastModified.HasValue)
                             {
-                                <span>@user.LastModified.Value.ToSpecifiedDateFormat()</span>
+                                <span>@user.LastModified.Value.ToCustomDateTimeFormat()</span>
                             }
                             else
                             {
-                                <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
+                                <span>@DateTime.MinValue.ToCustomDateTimeFormat()</span>
                             }
                         </td>
                         <td>

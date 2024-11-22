@@ -2,12 +2,12 @@
 {
     public static class DateTimeFormatting
     {
-        public static string ToSpecifiedDateFormat(this DateTime date)
+        public static string ToCustomDateTimeFormat(this DateTime date)
         {
-            return date.ToString("dd-MM-yyyy HH:mm:ss");
+            return date.ToString("HH:mm:ss dd-MM-yyyy");
         }
 
-        public static string ToDateFormat(this DateTime date)
+        public static string ToCustomDateFormat(this DateTime date)
         {
             return date.ToString("dd-MM-yyyy");
         }

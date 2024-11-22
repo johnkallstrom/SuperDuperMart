@@ -42,15 +42,15 @@ else
                         <td>@product.Name</td>
                         <td>@product.Price.ToCurrency("sv-SE")</td>
                         <td>@product.Material</td>
-                        <td>@product.Created.ToSpecifiedDateFormat()</td>
+                        <td>@product.Created.ToCustomDateTimeFormat()</td>
                         <td>
                             @if (product.LastModified.HasValue)
                             {
-                                <span>@product.LastModified.Value.ToSpecifiedDateFormat()</span>
+                                <span>@product.LastModified.Value.ToCustomDateTimeFormat()</span>
                             }
                             else
                             {
-                                <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
+                                <span>@DateTime.MinValue.ToCustomDateTimeFormat()</span>
                             }
                         </td>
                         <td>
