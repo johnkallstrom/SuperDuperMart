@@ -6,6 +6,7 @@ namespace SuperDuperMart.Core.Data.Fakers
     {
         public ProductFaker()
         {
+            RuleFor(p => p.Image, f => f.Image.PlaceholderUrl(width: 640, height: 480));
             RuleFor(p => p.Name, f => f.Commerce.ProductName());
             RuleFor(p => p.Description, f => f.Commerce.ProductDescription());
             RuleFor(p => p.Price, f => decimal.Parse(f.Commerce.Price()));

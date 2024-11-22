@@ -24,9 +24,10 @@ else
                     <th>#</th>
                     <th>Avatar</th>
                     <th>Name</th>
-                    <th>Username</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Created</th>
+                    <th>Modified</th>
                     <th>Details</th>
                 </tr>
             </thead>
@@ -39,9 +40,19 @@ else
                             <img src="@user.Avatar" width="30" height="30" />
                         </td>
                         <td>@user.FirstName @user.LastName</td>
-                        <td>@user.Username</td>
                         <td>@user.Email</td>
                         <td>@user.Role?.Name</td>
+                        <td>@user.Created.ToSpecifiedDateFormat()</td>
+                        <td>
+                            @if (user.LastModified.HasValue)
+                            {
+                                <span>@user.LastModified.Value.ToSpecifiedDateFormat()</span>
+                            }
+                            else
+                            {
+                                <span>@DateTime.MinValue.ToSpecifiedDateFormat()</span>
+                            }
+                        </td>
                         <td>
                             <a href="@($"/manage/users/details/{user.Id}")" class="btn btn-dark btn-sm"><i class="bi bi-pencil"></i></a>
                         </td>

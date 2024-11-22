@@ -22,6 +22,7 @@ else
             <thead class="table-light">
                 <tr>
                     <th>#</th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Material</th>
@@ -35,6 +36,9 @@ else
                 {
                     <tr>
                         <td>@product.Id</td>
+                        <td>
+                            <img src="@product.Image" width="30" height="30" />
+                        </td>
                         <td>@product.Name</td>
                         <td>@product.Price.ToCurrency("sv-SE")</td>
                         <td>@product.Material</td>
