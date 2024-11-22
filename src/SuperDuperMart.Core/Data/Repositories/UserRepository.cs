@@ -73,9 +73,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(User user, string password)
         {
+            user.Created = DateTime.Now;
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, password);
+
             var identityResult = await _userManager.CreateAsync(user);
-           
             if (!identityResult.Succeeded)
             {
                 var errors = identityResult.Errors.Select(x => x.Description).ToList();
