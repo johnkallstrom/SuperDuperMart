@@ -4,6 +4,8 @@ namespace SuperDuperMart.Shared.Models.Products
 {
     public record ProductUpdateDto
     {
+        public string? Image { get; set; }
+
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; } = default!;
 
