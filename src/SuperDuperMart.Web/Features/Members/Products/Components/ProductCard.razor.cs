@@ -20,11 +20,11 @@ namespace SuperDuperMart.Web.Features.Members.Products.Components
         [Parameter, EditorRequired]
         public ProductDto Product { get; set; } = default!;
 
-        private bool _loading = false;
+        private bool Loading = false;
 
         private async Task AddProductToCart()
         {
-            _loading = true;
+            Loading = true;
 
             var user = await AuthenticationService.GetCurrentUserAsync();
 
@@ -43,7 +43,7 @@ namespace SuperDuperMart.Web.Features.Members.Products.Components
                 }
             }
 
-            _loading = false;
+            Loading = false;
         }
     }
 }

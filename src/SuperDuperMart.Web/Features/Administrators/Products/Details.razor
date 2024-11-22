@@ -17,7 +17,7 @@ else
                     <h5 class="card-header">Product</h5>
                     @if (!string.IsNullOrWhiteSpace(Model.Image))
                     {
-                        <img src="@Model.Image" class="card-img-top rounded mx-3 mt-3 w-50">
+                        <img src="@Model.Image" class="card-img-top rounded mx-3 mt-3 w-50" alt="product-image">
                     }
                     <div class="card-body">
                         <EditForm Model="@Model" OnValidSubmit="UpdateProduct">
