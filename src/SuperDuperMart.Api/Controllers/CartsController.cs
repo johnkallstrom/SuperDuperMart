@@ -1,4 +1,4 @@
-﻿using SuperDuperMart.Shared.Models.Carts;
+﻿using SuperDuperMart.Shared.DataTransferObjects.Carts;
 
 namespace SuperDuperMart.Api.Controllers
 {

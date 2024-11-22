@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Shared.Models
+namespace SuperDuperMart.Shared.DataTransferObjects
 {
     public record LoginDto
     {

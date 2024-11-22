@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.Models.Users
+﻿namespace SuperDuperMart.Shared.DataTransferObjects.Users
 {
     public class LocationDto
     {

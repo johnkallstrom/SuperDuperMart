@@ -1,7 +1,7 @@
 ﻿global using Microsoft.AspNetCore.Components.Web;
 global using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-global using SuperDuperMart.Shared.Models.Products;
-global using SuperDuperMart.Shared.Models.Users;
+global using SuperDuperMart.Shared.DataTransferObjects.Products;
+global using SuperDuperMart.Shared.DataTransferObjects.Users;
 global using SuperDuperMart.Web.Constants;
 global using SuperDuperMart.Web.Features;
 global using SuperDuperMart.Web.Services;

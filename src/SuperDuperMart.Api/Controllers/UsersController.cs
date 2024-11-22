@@ -1,4 +1,4 @@
-﻿using SuperDuperMart.Shared.Models;
+﻿using SuperDuperMart.Shared.DataTransferObjects;
 using SuperDuperMart.Api.Filters;
 
 namespace SuperDuperMart.Api.Controllers

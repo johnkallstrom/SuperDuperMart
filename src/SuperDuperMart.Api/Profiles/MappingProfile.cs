@@ -1,6 +1,6 @@
 ﻿using SuperDuperMart.Core.Results;
-using SuperDuperMart.Shared.Models;
-using SuperDuperMart.Shared.Models.Carts;
+using SuperDuperMart.Shared.DataTransferObjects;
+using SuperDuperMart.Shared.DataTransferObjects.Carts;
 
 namespace SuperDuperMart.Api.Profiles
 {

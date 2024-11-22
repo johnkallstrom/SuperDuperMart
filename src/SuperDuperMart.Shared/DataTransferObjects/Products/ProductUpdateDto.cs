@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Shared.Models.Products
+namespace SuperDuperMart.Shared.DataTransferObjects.Products
 {
     public record ProductUpdateDto
     {

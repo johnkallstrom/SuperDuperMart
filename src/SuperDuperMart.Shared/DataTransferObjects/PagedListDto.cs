@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.Models
+﻿namespace SuperDuperMart.Shared.DataTransferObjects
 {
     public class PagedListDto<T>
     {

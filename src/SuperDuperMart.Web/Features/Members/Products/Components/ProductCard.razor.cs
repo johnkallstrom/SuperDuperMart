@@ -1,7 +1,7 @@
 ﻿using Blazored.Toast;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.Models.Carts;
+using SuperDuperMart.Shared.DataTransferObjects.Carts;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Members.Products.Components

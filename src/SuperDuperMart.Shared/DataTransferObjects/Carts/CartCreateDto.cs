@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Shared.Models.Carts
+namespace SuperDuperMart.Shared.DataTransferObjects.Carts
 {
     public class CartCreateDto
     {
