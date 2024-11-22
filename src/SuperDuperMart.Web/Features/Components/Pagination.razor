@@ -1,23 +1,15 @@
 ﻿<nav>
-    <ul class="pagination mb-0">
+    <ul class="pagination mb-2">
         <li class=@(DisablePrevious ? "page-item disabled" : "page-item")>
             <a class="page-link" @onclick="async () => await OnPreviousClick.InvokeAsync(PageNumber -= 1)">
                 <i class="bi bi-caret-left"></i>
             </a>
         </li>
-
-        @for (int i = 1; i <= TotalPages; i++)
-        {
-            int pageNumber = i;
-            <li class=@(PageNumber == pageNumber ? "page-item active" : "page-item")>
-                <a class="page-link" @onclick="async () => await OnPageClick.InvokeAsync(pageNumber)">@pageNumber</a>
-            </li>
-        }
-
         <li class=@(DisableNext ? "page-item disabled" : "page-item")>
             <a class="page-link" @onclick="async () => await OnNextClick.InvokeAsync(PageNumber += 1)">
                 <i class="bi bi-caret-right"></i>
             </a>
         </li>
     </ul>
+    <small class="text-muted">Shows page @(PageNumber) of @(TotalPages)</small>
 </nav>
