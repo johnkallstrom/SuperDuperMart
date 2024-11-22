@@ -1,4 +1,4 @@
-﻿<nav>
+﻿<nav class="@(NavCssClasses)">
     <ul class="pagination mb-2">
         <li class=@(DisablePrevious ? "page-item disabled" : "page-item")>
             <a class="page-link" @onclick="async () => await OnPreviousClick.InvokeAsync(PageNumber -= 1)">

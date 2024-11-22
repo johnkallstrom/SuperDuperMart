@@ -44,12 +44,6 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             await GetUsers(Model.PageNumber, Model.PageSize);
         }
 
-        private async Task HandlePageClick(int pageNumber)
-        {
-            Model.PageNumber = pageNumber;
-            await GetUsers(Model.PageNumber, Model.PageSize);
-        }
-
         private async Task HandleNextClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;

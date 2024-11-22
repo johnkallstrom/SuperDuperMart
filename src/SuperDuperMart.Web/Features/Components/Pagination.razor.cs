@@ -11,13 +11,15 @@ namespace SuperDuperMart.Web.Features.Components
         public int TotalPages { get; set; }
 
         [Parameter]
+        public Position Position { get; set; }
+
+        [Parameter]
         public EventCallback<int> OnPreviousClick { get; set; }
 
         [Parameter]
-        public EventCallback<int> OnPageClick { get; set; }
-
-        [Parameter]
         public EventCallback<int> OnNextClick { get; set; }
+
+        public string NavCssClasses { get; set; } = "d-flex flex-column";
 
         public bool DisablePrevious
         {
@@ -32,6 +34,22 @@ namespace SuperDuperMart.Web.Features.Components
             get
             {
                 return PageNumber >= TotalPages;
+            }
+        }
+
+        protected override void OnInitialized()
+        {
+            switch (Position)
+            {
+                case Position.Start:
+                    NavCssClasses = $"{NavCssClasses} align-items-start";
+                    break;
+                case Position.Center:
+                    NavCssClasses = $"{NavCssClasses} align-items-center";
+                    break;
+                case Position.End:
+                    NavCssClasses = $"{NavCssClasses} align-items-end";
+                    break;
             }
         }
     }
