@@ -24,9 +24,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             var query = _context.Products.AsQueryable();
             int totalRecords = await _context.Products.CountAsync();
 
-            if (string.IsNullOrWhiteSpace(parameters.SortBy) ||
-                string.IsNullOrWhiteSpace(parameters.SortOrder) || 
-                !parameters.PageNumber.HasValue || 
+            if (!parameters.PageNumber.HasValue || 
                 !parameters.PageSize.HasValue || 
                 parameters.PageNumber.Value <= 0)
             {
