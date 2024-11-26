@@ -1,12 +1,18 @@
-﻿using Blazored.Toast;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
+using Blazored.Toast;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Features.Components.Modals;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {
     public partial class Details
     {
+        [CascadingParameter]
+        public IModalService ModalService { get; set; } = default!;
+
         [Inject]
         public IMapper Mapper { get; set; } = default!;
 
@@ -61,8 +67,19 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task DeleteUser()
         {
-            await HttpService.DeleteAsync($"{Endpoints.Users}/{Id}");
-            NavigationManager.NavigateTo("/manage/users");
+            var modalParameters = new ModalParameters
+            {
+                { nameof(DeleteConfirmationModal.Message), $"Are you sure you want to delete {Model.FirstName} {Model.LastName}?" }
+            };
+
+            var modalReference = ModalService.Show<DeleteConfirmationModal>(modalParameters);
+            var modalResult = await modalReference.Result;
+
+            if (modalResult.Confirmed)
+            {
+                await HttpService.DeleteAsync($"{Endpoints.Users}/{Id}");
+                NavigationManager.NavigateTo("/manage/users");
+            }
         }
 
         private async Task GetRoles()
