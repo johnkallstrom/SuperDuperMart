@@ -21,30 +21,46 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<PagedList<Product>> GetAsync(IQueryParams parameters)
         {
-            var products = Enumerable.Empty<Product>();
+            var query = _context.Products.AsQueryable();
             int totalRecords = await _context.Products.CountAsync();
 
-            if (!parameters.PageNumber.HasValue || 
+            if (string.IsNullOrWhiteSpace(parameters.SortBy) ||
+                string.IsNullOrWhiteSpace(parameters.SortOrder) || 
+                !parameters.PageNumber.HasValue || 
                 !parameters.PageSize.HasValue || 
                 parameters.PageNumber.Value <= 0)
             {
-                products = await _context.Products.ToListAsync();
+                var products = await _context.Products.ToListAsync();
                 return new PagedList<Product>(totalRecords, products);
             }
 
             decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
 
-            products = await _context.Products
+            switch(parameters.SortBy)
+            {
+                case nameof(Product.Created):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.Created) : query.OrderBy(p => p.Created);
+                    break;
+                case nameof(Product.Name):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.Name) : query.OrderBy(p => p.Name);
+                    break;
+                case nameof(Product.Price):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.Price) : query.OrderBy(p => p.Price);
+                    break;
+            }
+
+            query = query
                 .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
-                .Take(parameters.PageSize.Value)
-                .ToListAsync();
+                .Take(parameters.PageSize.Value);
+
+            var data = await query.ToListAsync();
 
             return new PagedList<Product>(
-                parameters.PageNumber.Value, 
-                parameters.PageSize.Value, 
-                (int)totalPages, 
-                totalRecords, 
-                products);
+                parameters.PageNumber.Value,
+                parameters.PageSize.Value,
+                (int)totalPages,
+                totalRecords,
+                data);
         }
 
         public async Task<Product?> GetByIdAsync(int id)
