@@ -1,13 +1,18 @@
-﻿using AutoMapper;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Features.Components.Modals;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Details
     {
+        [CascadingParameter]
+        public IModalService ModalService { get; set; } = default!;
+
         [Inject]
         public IMapper Mapper { get; set; } = default!;
 
@@ -54,8 +59,20 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task DeleteProduct()
         {
-            await HttpService.DeleteAsync($"{Endpoints.Products}/{Id}");
-            NavigationManager.NavigateTo("/manage/products");
+            var modalParameters = new ModalParameters
+            {
+                { nameof(DeleteConfirmationModal.Message), $"Are you sure you want to delete {Model.Name}?" }
+            };
+
+            var modalReference = ModalService.Show<DeleteConfirmationModal>(modalParameters);
+            var modalResult = await modalReference.Result;
+
+            if (modalResult.Confirmed)
+            {
+
+                await HttpService.DeleteAsync($"{Endpoints.Products}/{Id}");
+                NavigationManager.NavigateTo("/manage/products");
+            }
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");
