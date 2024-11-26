@@ -1,5 +1,4 @@
 using Blazored.LocalStorage;
-using Blazored.SessionStorage;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Authorization;
 using SuperDuperMart.Web.AuthenticationProviders;
@@ -16,7 +15,6 @@ builder.Services.AddScoped(sp => new HttpClient
 });
 
 builder.Services.AddScoped<IHttpService, HttpService>();
-builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredToast();
 builder.Services.AddAuthorizationCore();
