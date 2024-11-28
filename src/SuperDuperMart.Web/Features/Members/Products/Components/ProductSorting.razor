@@ -4,7 +4,7 @@
         <select class="form-select" value="@SelectedSortBy" @onchange="async (ChangeEventArgs args) => await OnSortChange.InvokeAsync(args.Value?.ToString())">
             @foreach (var option in Options)
             {
-                <option value="@($"{option.Value} {option.Order}")">@option.Text</option>
+                <option value="@option.Value">@option.Text</option>
             }
         </select>
     </div>

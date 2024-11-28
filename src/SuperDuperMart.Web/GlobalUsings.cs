@@ -7,6 +7,7 @@ global using SuperDuperMart.Web.Features;
 global using SuperDuperMart.Web.Services;
 global using SuperDuperMart.Web.Services.Http;
 global using SuperDuperMart.Shared.Extensions;
-global using SuperDuperMart.Shared.Enums;
 global using SuperDuperMart.Web.Security;
+global using SuperDuperMart.Web.Rendering;
+global using SuperDuperMart.Web.Rendering.Enums;
 global using AutoMapper;

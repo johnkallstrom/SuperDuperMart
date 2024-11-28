@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Web.Rendering;
 
 namespace SuperDuperMart.Web.Features.Members.Products.Components
 {
@@ -10,17 +9,17 @@ namespace SuperDuperMart.Web.Features.Members.Products.Components
 
         public string SelectedSortBy { get; set; } = default!;
 
-        public List<SelectSortOption> Options { get; set; } = new();
+        public List<SelectOption> Options { get; set; } = new();
 
         protected override void OnInitialized()
         {
-            Options = new List<SelectSortOption>
+            Options = new List<SelectOption>
             {
-                new SelectSortOption("Latest", "Created", SortOrder.Descending),
-                new SelectSortOption("Name (A-Z)", "Name", SortOrder.Ascending),
-                new SelectSortOption("Name (Z-A)", "Name", SortOrder.Descending),
-                new SelectSortOption("Price Low", "Price", SortOrder.Ascending),
-                new SelectSortOption("Price High", "Price", SortOrder.Descending),
+                new SelectOption("Latest", "Created Desc"),
+                new SelectOption("Name (A-Z)", "Name Asc"),
+                new SelectOption("Name (Z-A)", "Name Desc"),
+                new SelectOption("Price Low", "Price Asc"),
+                new SelectOption("Price High", "Price Desc")
             };
         }
     }

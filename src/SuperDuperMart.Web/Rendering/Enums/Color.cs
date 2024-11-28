@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Web.Rendering
+﻿namespace SuperDuperMart.Web.Rendering.Enums
 {
     public enum Color
     {

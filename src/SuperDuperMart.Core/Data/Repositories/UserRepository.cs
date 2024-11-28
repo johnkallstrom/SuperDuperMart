@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
-using SuperDuperMart.Core.Entities;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {

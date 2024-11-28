@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace SuperDuperMart.Web.Profiles
+﻿namespace SuperDuperMart.Web.Profiles
 {
     public class MappingProfile : Profile
     {

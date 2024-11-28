@@ -6,6 +6,7 @@ namespace SuperDuperMart.Web.Services.Http
     {
         Task<PagedListDto<ProductDto>> GetAsync();
         Task<PagedListDto<ProductDto>> GetAsync(int pageNumber);
+        Task<PagedListDto<ProductDto>> GetAsync(string sortBy, string sortOrder);
         Task<PagedListDto<ProductDto>> GetAsync(int pageNumber, string sortBy, string sortOrder);
     }
 }

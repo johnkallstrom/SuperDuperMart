@@ -7,18 +7,21 @@ namespace SuperDuperMart.Web.Services.Http
         private readonly IConfiguration _configuration;
         private readonly IHttpService _httpService;
 
+        private readonly int _defaultPageNumber;
+        private readonly int _defaultPageSize;
+
         public ProductHttpService(IHttpService httpService, IConfiguration configuration)
         {
             _httpService = httpService;
             _configuration = configuration;
+
+            _defaultPageNumber = _configuration.GetValue<int>("Pagination:Default:PageNumber");
+            _defaultPageSize = _configuration.GetValue<int>("Pagination:Default:PageSize");
         }
 
         public async Task<PagedListDto<ProductDto>> GetAsync()
         {
-            int defaultPageNumber = _configuration.GetValue<int>("Pagination:Default:PageNumber");
-            int defaultPageSize = _configuration.GetValue<int>("Pagination:Default:PageSize");
-
-            string url = $"{Endpoints.Products}?pageNumber={defaultPageNumber}&pageSize={defaultPageSize}";
+            string url = $"{Endpoints.Products}?pageNumber={_defaultPageNumber}&pageSize={_defaultPageSize}";
 
             var data = await _httpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (data is null)
@@ -31,9 +34,20 @@ namespace SuperDuperMart.Web.Services.Http
 
         public async Task<PagedListDto<ProductDto>> GetAsync(int pageNumber)
         {
-            int defaultPageSize = _configuration.GetValue<int>("Pagination:Default:PageSize");
+            string url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={_defaultPageSize}";
 
-            string url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={defaultPageSize}";
+            var data = await _httpService.GetAsync<PagedListDto<ProductDto>>(url);
+            if (data is null)
+            {
+                throw new Exception("Failed to fetch from api");
+            }
+
+            return data;
+        }
+
+        public async Task<PagedListDto<ProductDto>> GetAsync(string sortBy, string sortOrder)
+        {
+            string url = $"{Endpoints.Products}?pageNumber={_defaultPageNumber}&pageSize={_defaultPageSize}&sortBy={sortBy}&sortOrder={sortOrder}";
 
             var data = await _httpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (data is null)
@@ -46,9 +60,7 @@ namespace SuperDuperMart.Web.Services.Http
 
         public async Task<PagedListDto<ProductDto>> GetAsync(int pageNumber, string sortBy, string sortOrder)
         {
-            int defaultPageSize = _configuration.GetValue<int>("Pagination:Default:PageSize");
-
-            string url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={defaultPageSize}&sortBy={sortBy}&sortOrder={sortOrder}";
+            string url = $"{Endpoints.Products}?pageNumber={pageNumber}&pageSize={_defaultPageSize}&sortBy={sortBy}&sortOrder={sortOrder}";
 
             var data = await _httpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (data is null)

@@ -10,38 +10,35 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private bool Loading = true;
 
+        public string SortBy { get; set; } = "Created";
+        public string SortOrder { get; set; } = "Desc";
+
         public PagedListDto<ProductDto> Model { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
-            Model = await ProductHttpService.GetAsync();
+            Model = await ProductHttpService.GetAsync(SortBy, SortOrder);
             Loading = false;
         }
 
-        private async Task HandleSortByChange(string value)
+        private async Task HandleSortChange(string value)
         {
-            if (!string.IsNullOrWhiteSpace(value))
-            {
-                string[] words = value.Split(' ');
+            SortBy = value.Split(' ').First();
+            SortOrder = value.Split(' ').Last();
 
-                string sortBy = words[0];
-                string sortOrder = words[1];
-
-                Console.WriteLine(sortBy);
-                Console.WriteLine(sortOrder);
-            }
+            Model = await ProductHttpService.GetAsync(Model.PageNumber, SortBy, SortOrder);
         }
 
         private async Task HandlePreviousClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-            Model = await ProductHttpService.GetAsync(Model.PageNumber);
+            Model = await ProductHttpService.GetAsync(Model.PageNumber, SortBy, SortOrder);
         }
 
         private async Task HandleNextClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-            Model = await ProductHttpService.GetAsync(Model.PageNumber);
+            Model = await ProductHttpService.GetAsync(Model.PageNumber, SortBy, SortOrder);
         }
     }
 }
