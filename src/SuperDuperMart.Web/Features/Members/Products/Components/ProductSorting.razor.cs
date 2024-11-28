@@ -1,9 +1,14 @@
-﻿using SuperDuperMart.Shared.DataTransferObjects;
-
-namespace SuperDuperMart.Web.Features.Members.Products.Components
+﻿namespace SuperDuperMart.Web.Features.Members.Products.Components
 {
     public partial class ProductSorting
     {
-        public SortingDto Model { get; set; } = new(sortBy: "Created", sortOrder: "Desc");
+        public string SortBy { get; set; } = default!;
+
+        public List<string> Options { get; set; } = new List<string>
+        {
+            { "Latest" },
+            { "Price" },
+            { "Name" },
+        };
     }
 }

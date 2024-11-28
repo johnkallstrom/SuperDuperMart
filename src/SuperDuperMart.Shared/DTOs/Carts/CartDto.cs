@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.DataTransferObjects.Carts
+﻿namespace SuperDuperMart.Shared.DTOs.Carts
 {
     public class CartDto
     {

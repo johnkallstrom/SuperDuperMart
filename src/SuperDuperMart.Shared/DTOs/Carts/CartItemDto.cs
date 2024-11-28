@@ -1,6 +1,6 @@
-﻿using SuperDuperMart.Shared.DataTransferObjects.Products;
+﻿using SuperDuperMart.Shared.DTOs.Products;
 
-namespace SuperDuperMart.Shared.DataTransferObjects.Carts
+namespace SuperDuperMart.Shared.DTOs.Carts
 {
     public class CartItemDto
     {

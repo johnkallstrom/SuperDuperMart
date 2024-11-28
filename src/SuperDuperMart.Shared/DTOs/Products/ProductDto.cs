@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.DataTransferObjects.Products
+﻿namespace SuperDuperMart.Shared.DTOs.Products
 {
     public record ProductDto
     {

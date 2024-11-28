@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.DataTransferObjects;
+using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Web.Features.Members.Products
 {
@@ -10,7 +10,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private bool Loading = true;
 
-        public PagedListDto<ProductDto> Model { get; set; } = default!;
+        public PagedListDto<ProductDto> Model { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {

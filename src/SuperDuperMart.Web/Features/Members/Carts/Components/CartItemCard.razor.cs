@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.DataTransferObjects.Carts;
+using SuperDuperMart.Shared.DTOs.Carts;
 
 namespace SuperDuperMart.Web.Features.Members.Carts.Components
 {

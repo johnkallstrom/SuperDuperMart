@@ -1,19 +1,14 @@
-﻿<div class="row mb-3">
-    <div class="col-sm-2">
-        <EditForm Model="Model">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="mb-3">
-                <label class="form-label">Sort By</label>
-                <InputSelect class="form-select" @bind-Value="Model.SortBy">
-                    <option value="Created">Latest</option>
-                    <option value="Name">Name (A-Z)</option>
-                    <option value="Name">Name (Z-A)</option>
-                    <option value="Price">Price High</option>
-                    <option value="Price">Price Low</option>
-                </InputSelect>
-            </div>
-            <Button Type="ButtonType.Submit" Label="Apply" Color="Color.Dark" />
-        </EditForm>
+﻿<div class="d-flex flex-row mb-3">
+    <div class="me-2">
+        <label class="form-label">Sort By</label>
+        <select class="form-select">
+            @foreach (var option in Options)
+            {
+                <option value="@option">@option</option>
+            }
+        </select>
+    </div>
+    <div class="align-self-end">
+        <button type="submit" class="btn btn-dark"><span>Apply</span></button>
     </div>
 </div>

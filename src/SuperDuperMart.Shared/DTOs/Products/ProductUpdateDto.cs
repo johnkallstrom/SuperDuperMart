@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SuperDuperMart.Shared.DataTransferObjects.Products
+namespace SuperDuperMart.Shared.DTOs.Products
 {
-    public record ProductCreateDto
+    public record ProductUpdateDto
     {
+        public string? Image { get; set; }
+
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; } = default!;
 

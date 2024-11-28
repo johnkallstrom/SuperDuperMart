@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.DataTransferObjects
+﻿namespace SuperDuperMart.Shared.DTOs
 {
     public class PagedListDto<T>
     {

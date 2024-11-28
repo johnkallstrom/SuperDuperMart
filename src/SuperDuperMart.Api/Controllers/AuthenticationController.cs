@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using SuperDuperMart.Shared.DataTransferObjects;
+using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Api.Controllers
 {

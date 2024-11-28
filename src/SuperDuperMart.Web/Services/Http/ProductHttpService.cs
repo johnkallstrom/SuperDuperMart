@@ -1,4 +1,4 @@
-﻿using SuperDuperMart.Shared.DataTransferObjects;
+﻿using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Web.Services.Http
 {
