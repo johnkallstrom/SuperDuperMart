@@ -1,14 +1,10 @@
 ﻿<div class="d-flex flex-row mb-3">
     <div class="me-2">
-        <label class="form-label">Sort By</label>
-        <select class="form-select">
+        <select class="form-select" value="@SortBy" @onchange="HandleSortByChange">
             @foreach (var option in Options)
             {
                 <option value="@option">@option</option>
             }
         </select>
-    </div>
-    <div class="align-self-end">
-        <button type="submit" class="btn btn-dark"><span>Apply</span></button>
     </div>
 </div>

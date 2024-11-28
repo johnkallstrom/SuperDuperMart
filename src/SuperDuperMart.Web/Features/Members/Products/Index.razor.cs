@@ -18,6 +18,13 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Loading = false;
         }
 
+        private async Task HandleSortByChange(string sortBy)
+        {
+            string sortOrder = "Desc";
+
+            Model = await ProductHttpService.GetAsync(Model.PageNumber, sortBy, sortOrder);
+        }
+
         private async Task HandlePreviousClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
