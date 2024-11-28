@@ -28,7 +28,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         protected override async Task OnInitializedAsync()
         {
-            InitializeDefaultValues();
+            ReadDefaultValuesFromConfiguration();
             await GetProducts();
             Loading = false;
         }
@@ -64,7 +64,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
             }
         }
 
-        private void InitializeDefaultValues()
+        private void ReadDefaultValuesFromConfiguration()
         {
             SortBy = Configuration.GetValue<string>("Sorting:Products:Default:By");
             SortOrder = Configuration.GetValue<string>("Sorting:Products:Default:Order");
