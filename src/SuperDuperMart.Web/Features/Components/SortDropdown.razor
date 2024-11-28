@@ -1,7 +1,7 @@
 ﻿<div class="d-flex flex-row mb-3">
     <div class="me-2">
         <label class="form-label">Sort By</label>
-        <select class="form-select" value="@SelectedSortOption" @onchange="HandleSortChange">
+        <select class="form-select" value="@SelectedOption" @onchange="HandleSelection">
             @foreach (var option in Options)
             {
                 <option value="@option.Value">@option.Text</option>

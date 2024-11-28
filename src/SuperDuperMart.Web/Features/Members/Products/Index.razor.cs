@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using SuperDuperMart.Shared.DTOs;
+using SuperDuperMart.Web.Rendering.Enums;
 
 namespace SuperDuperMart.Web.Features.Members.Products
 {
@@ -13,8 +15,17 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private bool Loading = true;
 
-        public string SortBy { get; set; } = "Created";
-        public string SortOrder { get; set; } = "Desc";
+        public string SelectedSortBy { get; set; } = "Created";
+        public string SelectedSortOrder { get; set; } = "Desc";
+
+        public List<SelectOption> SortOptions { get; set; } = new()
+        {
+            new SelectOption("Latest", "Created", SortOrder.Descending),
+            new SelectOption("Name (A-Z)", "Name", SortOrder.Ascending),
+            new SelectOption("Name (Z-A)", "Name", SortOrder.Descending),
+            new SelectOption("Price Low", "Price", SortOrder.Ascending),
+            new SelectOption("Price High", "Price", SortOrder.Descending)
+        };
 
         public PagedListDto<ProductDto> Model { get; set; } = new();
 
@@ -27,10 +38,20 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Loading = false;
         }
 
-        private async Task HandleSortChange((string SortBy, string SortOrder) selection)
+        private async Task HandleSortSelection((string Value, SortOrder Order) selection)
         {
-            SortBy = selection.SortBy;
-            SortOrder = selection.SortOrder;
+            SelectedSortBy = selection.Value;
+
+            switch(selection.Order)
+            {
+                case SortOrder.Ascending:
+                    SelectedSortOrder = "Asc";
+                    break;
+                case SortOrder.Descending:
+                    SelectedSortOrder = "Desc";
+                    break;
+            }
+
             await GetProducts();
         }
 
@@ -48,7 +69,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private async Task GetProducts()
         {
-            string url = $"{Endpoints.Products}?pageNumber={Model.PageNumber}&pageSize={Model.PageSize}&sortBy={SortBy}&sortOrder={SortOrder}";
+            string url = $"{Endpoints.Products}?pageNumber={Model.PageNumber}&pageSize={Model.PageSize}&sortBy={SelectedSortBy}&sortOrder={SelectedSortOrder}";
 
             var data = await HttpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (data != null)
