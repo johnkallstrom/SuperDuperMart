@@ -23,6 +23,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IProductHttpService, ProductHttpService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

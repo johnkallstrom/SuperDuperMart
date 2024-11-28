@@ -3,7 +3,7 @@
 
 <PageTitle>SuperDuperMart - Products</PageTitle>
 
-@if (_loading)
+@if (Loading)
 {
     <Spinner />
 }
@@ -11,18 +11,7 @@ else
 {
     @if (Model != null)
     {
-        <div class="d-flex flex-row mb-3">
-            <div class="me-auto">
-                <label class="form-label">Sort By</label>
-                <select class="form-select" value="@SortBy" @onchange="HandleSortChange">
-                    <option value="Created">Latest</option>
-                    <option value="Name">Name (A-Z)</option>
-                    <option value="Name">Name (Z-A)</option>
-                    <option value="Price">Price High</option>
-                    <option value="Price">Price Low</option>
-                </select>
-            </div>
-        </div>
+        <ProductSorting />
         <div class="row row-cols-4 gy-4">
             @foreach (var product in Model.Data)
             {

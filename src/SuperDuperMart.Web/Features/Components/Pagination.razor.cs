@@ -5,7 +5,7 @@ namespace SuperDuperMart.Web.Features.Components
     public partial class Pagination
     {
         [Parameter, EditorRequired]
-        public int PageNumber { get; set; }
+        public int PageNumber { get; set; } = 1;
 
         [Parameter, EditorRequired]
         public int TotalPages { get; set; }
