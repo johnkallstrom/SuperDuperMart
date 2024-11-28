@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Configuration;
 using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Web.Features.Members.Products
@@ -10,7 +9,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
         public IConfiguration Configuration { get; set; } = default!;
 
         [Inject]
-        public IProductHttpService ProductHttpService { get; set; } = default!;
+        public IHttpService HttpService { get; set; } = default!;
 
         private bool Loading = true;
 
@@ -24,48 +23,38 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Model.PageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
             Model.PageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
 
-
-            Model = await ProductHttpService.GetAsync(
-                Model.PageNumber, 
-                Model.PageSize, 
-                SortBy, 
-                SortOrder);
-
+            await GetProducts();
             Loading = false;
         }
 
-        private async Task HandleSortChange(string value)
+        private async Task HandleSortChange((string SortBy, string SortOrder) selection)
         {
-            SortBy = value.Split(' ').First();
-            SortOrder = value.Split(' ').Last();
-
-            Model = await ProductHttpService.GetAsync(
-                Model.PageNumber, 
-                Model.PageSize, 
-                SortBy, 
-                SortOrder);
+            SortBy = selection.SortBy;
+            SortOrder = selection.SortOrder;
+            await GetProducts();
         }
 
         private async Task HandlePreviousClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
-
-            Model = await ProductHttpService.GetAsync(
-                Model.PageNumber, 
-                Model.PageSize, 
-                SortBy, 
-                SortOrder);
+            await GetProducts();
         }
 
         private async Task HandleNextClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;
+            await GetProducts();
+        }
 
-            Model = await ProductHttpService.GetAsync(
-                Model.PageNumber, 
-                Model.PageSize, 
-                SortBy, 
-                SortOrder);
+        private async Task GetProducts()
+        {
+            string url = $"{Endpoints.Products}?pageNumber={Model.PageNumber}&pageSize={Model.PageSize}&sortBy={SortBy}&sortOrder={SortOrder}";
+
+            var data = await HttpService.GetAsync<PagedListDto<ProductDto>>(url);
+            if (data != null)
+            {
+                Model = data;
+            }
         }
     }
 }

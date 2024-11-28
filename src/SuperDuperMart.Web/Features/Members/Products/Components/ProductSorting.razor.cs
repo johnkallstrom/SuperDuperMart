@@ -5,9 +5,9 @@ namespace SuperDuperMart.Web.Features.Members.Products.Components
     public partial class ProductSorting
     {
         [Parameter]
-        public EventCallback<string> OnSortChange { get; set; } = default!;
+        public EventCallback<(string SortBy, string SortOrder)> OnSortChange { get; set; } = default!;
 
-        public string SelectedSortBy { get; set; } = default!;
+        public string SelectedSortOption { get; set; } = default!;
 
         public List<SelectOption> Options { get; set; } = new();
 
@@ -21,6 +21,23 @@ namespace SuperDuperMart.Web.Features.Members.Products.Components
                 new SelectOption("Price Low", "Price Asc"),
                 new SelectOption("Price High", "Price Desc")
             };
+        }
+
+        private async Task HandleSortChange(ChangeEventArgs args)
+        {
+            string? value = args.Value?.ToString();
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                string[] words = value.Split(' ');
+
+                if (words.Count() > 0)
+                {
+                    string sortBy = words.First();
+                    string sortOrder = words.Last();
+
+                    await OnSortChange.InvokeAsync((sortBy, sortOrder));
+                }
+            }
         }
     }
 }
