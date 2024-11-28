@@ -1,20 +1,27 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Web.Rendering;
 
 namespace SuperDuperMart.Web.Features.Members.Products.Components
 {
     public partial class ProductSorting
     {
         [Parameter]
-        public EventCallback<string> OnSortByChange { get; set; } = default!;
+        public EventCallback<string> OnSortChange { get; set; } = default!;
 
-        public string SortBy { get; set; } = default!;
+        public string SelectedSortBy { get; set; } = default!;
 
-        public List<string> Options { get; set; } = ["Created", "Name", "Price"];
+        public List<SelectSortOption> Options { get; set; } = new();
 
-        private async void HandleSortByChange(ChangeEventArgs args)
+        protected override void OnInitialized()
         {
-            string? value = args.Value?.ToString();
-            await OnSortByChange.InvokeAsync(value);
+            Options = new List<SelectSortOption>
+            {
+                new SelectSortOption("Latest", "Created", SortOrder.Descending),
+                new SelectSortOption("Name (A-Z)", "Name", SortOrder.Ascending),
+                new SelectSortOption("Name (Z-A)", "Name", SortOrder.Descending),
+                new SelectSortOption("Price Low", "Price", SortOrder.Ascending),
+                new SelectSortOption("Price High", "Price", SortOrder.Descending),
+            };
         }
     }
 }

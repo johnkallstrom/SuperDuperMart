@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Web.Enums
+﻿namespace SuperDuperMart.Shared.Enums
 {
     public enum Position
     {

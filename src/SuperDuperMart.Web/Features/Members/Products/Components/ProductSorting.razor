@@ -1,9 +1,10 @@
 ﻿<div class="d-flex flex-row mb-3">
     <div class="me-2">
-        <select class="form-select" value="@SortBy" @onchange="HandleSortByChange">
+        <label class="form-label">Sort By</label>
+        <select class="form-select" value="@SelectedSortBy" @onchange="async (ChangeEventArgs args) => await OnSortChange.InvokeAsync(args.Value?.ToString())">
             @foreach (var option in Options)
             {
-                <option value="@option">@option</option>
+                <option value="@($"{option.Value} {option.Order}")">@option.Text</option>
             }
         </select>
     </div>

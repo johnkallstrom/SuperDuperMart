@@ -18,11 +18,18 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Loading = false;
         }
 
-        private async Task HandleSortByChange(string sortBy)
+        private async Task HandleSortByChange(string value)
         {
-            string sortOrder = "Desc";
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                string[] words = value.Split(' ');
 
-            Model = await ProductHttpService.GetAsync(Model.PageNumber, sortBy, sortOrder);
+                string sortBy = words[0];
+                string sortOrder = words[1];
+
+                Console.WriteLine(sortBy);
+                Console.WriteLine(sortOrder);
+            }
         }
 
         private async Task HandlePreviousClick(int pageNumber)

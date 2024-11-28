@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using SuperDuperMart.Shared.Enums;
 
 namespace SuperDuperMart.Web.Features.Components
 {

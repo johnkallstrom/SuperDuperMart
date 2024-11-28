@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Web.Constants
+﻿namespace SuperDuperMart.Web.Security
 {
     public static class Roles
     {

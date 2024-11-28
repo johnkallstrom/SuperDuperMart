@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Web.Enums
+﻿namespace SuperDuperMart.Web.Rendering
 {
     public enum Icon
     {
