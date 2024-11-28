@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Options;
 using SuperDuperMart.Shared.DTOs;
-using SuperDuperMart.Web.Rendering.Enums;
 
 namespace SuperDuperMart.Web.Features.Members.Products
 {
@@ -13,10 +11,9 @@ namespace SuperDuperMart.Web.Features.Members.Products
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
+        private string? SortBy;
+        private string? SortOrder;
         private bool Loading = true;
-
-        public string? SortBy { get; set; }
-        public string? SortOrder { get; set; }
 
         public List<SelectOption> Options { get; set; } = new()
         {
@@ -36,7 +33,7 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Loading = false;
         }
 
-        private async Task HandleSelection((string Value, SortOrderType Order) selection)
+        private async Task HandleSortSelection((string Value, SortOrderType Order) selection)
         {
             SortBy = selection.Value;
             SortOrder = selection.Order is SortOrderType.Descending ? "Desc" : "Asc";
