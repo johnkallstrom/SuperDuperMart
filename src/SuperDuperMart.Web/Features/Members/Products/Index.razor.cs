@@ -15,42 +15,31 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private bool Loading = true;
 
-        public string SelectedSortBy { get; set; } = "Created";
-        public string SelectedSortOrder { get; set; } = "Desc";
+        public string? SortBy { get; set; }
+        public string? SortOrder { get; set; }
 
-        public List<SelectOption> SortOptions { get; set; } = new()
+        public List<SelectOption> Options { get; set; } = new()
         {
-            new SelectOption("Latest", "Created", SortOrder.Descending),
-            new SelectOption("Name (A-Z)", "Name", SortOrder.Ascending),
-            new SelectOption("Name (Z-A)", "Name", SortOrder.Descending),
-            new SelectOption("Price Low", "Price", SortOrder.Ascending),
-            new SelectOption("Price High", "Price", SortOrder.Descending)
+            new SelectOption("Latest", "Created", SortOrderType.Descending),
+            new SelectOption("Name (A-Z)", "Name", SortOrderType.Ascending),
+            new SelectOption("Name (Z-A)", "Name", SortOrderType.Descending),
+            new SelectOption("Price Low", "Price", SortOrderType.Ascending),
+            new SelectOption("Price High", "Price", SortOrderType.Descending)
         };
 
         public PagedListDto<ProductDto> Model { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
-            Model.PageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
-            Model.PageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
-
+            InitializeDefaultValues();
             await GetProducts();
             Loading = false;
         }
 
-        private async Task HandleSortSelection((string Value, SortOrder Order) selection)
+        private async Task HandleSelection((string Value, SortOrderType Order) selection)
         {
-            SelectedSortBy = selection.Value;
-
-            switch(selection.Order)
-            {
-                case SortOrder.Ascending:
-                    SelectedSortOrder = "Asc";
-                    break;
-                case SortOrder.Descending:
-                    SelectedSortOrder = "Desc";
-                    break;
-            }
+            SortBy = selection.Value;
+            SortOrder = selection.Order is SortOrderType.Descending ? "Desc" : "Asc";
 
             await GetProducts();
         }
@@ -69,13 +58,21 @@ namespace SuperDuperMart.Web.Features.Members.Products
 
         private async Task GetProducts()
         {
-            string url = $"{Endpoints.Products}?pageNumber={Model.PageNumber}&pageSize={Model.PageSize}&sortBy={SelectedSortBy}&sortOrder={SelectedSortOrder}";
+            string url = $"{Endpoints.Products}?pageNumber={Model.PageNumber}&pageSize={Model.PageSize}&sortBy={SortBy}&sortOrder={SortOrder}";
 
             var data = await HttpService.GetAsync<PagedListDto<ProductDto>>(url);
             if (data != null)
             {
                 Model = data;
             }
+        }
+
+        private void InitializeDefaultValues()
+        {
+            SortBy = Configuration.GetValue<string>("Sorting:Products:Default:By");
+            SortOrder = Configuration.GetValue<string>("Sorting:Products:Default:Order");
+            Model.PageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
+            Model.PageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
         }
     }
 }

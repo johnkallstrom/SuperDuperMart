@@ -1,6 +1,6 @@
 ﻿namespace SuperDuperMart.Web.Rendering.Enums
 {
-    public enum SortOrder
+    public enum SortOrderType
     {
         Ascending,
         Descending

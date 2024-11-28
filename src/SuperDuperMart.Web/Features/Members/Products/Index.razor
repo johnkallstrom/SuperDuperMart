@@ -12,8 +12,8 @@ else
     @if (Model != null)
     {
         <SortDropdown 
-            Options="SortOptions" 
-            OnSelection="HandleSortSelection" />
+            Options="Options" 
+            OnSelection="HandleSelection" />
         <div class="row row-cols-4 gy-4">
             @foreach (var product in Model.Data)
             {
