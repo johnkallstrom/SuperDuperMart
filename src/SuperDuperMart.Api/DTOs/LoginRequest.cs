@@ -2,7 +2,7 @@
 
 namespace SuperDuperMart.Shared.DTOs
 {
-    public record LoginDto
+    public record LoginRequest
     {
         [Required(ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; } = default!;

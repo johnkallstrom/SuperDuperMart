@@ -1,4 +1,4 @@
-﻿namespace SuperDuperMart.Shared.Extensions
+﻿namespace SuperDuperMart.Web.Extensions
 {
     public static class DateTimeFormatting
     {

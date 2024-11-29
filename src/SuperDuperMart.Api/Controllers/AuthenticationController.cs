@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SuperDuperMart.Shared.DTOs;
+﻿using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Api.Controllers
 {
@@ -7,40 +6,22 @@ namespace SuperDuperMart.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
-        private readonly IJwtProvider _jwtProvider;
+        private readonly IUserRepository<User> _userRepository;
 
-        public AuthenticationController(
-            IJwtProvider jwtProvider, 
-            UserManager<User> userManager, 
-            SignInManager<User> signInManager)
+        public AuthenticationController(IUserRepository<User> userRepository)
         {
-            _jwtProvider = jwtProvider;
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginDto model)
+        public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
-            if (!signInResult.Succeeded)
-            {
-                return BadRequest(new { Message = "Incorrect password" });
-            }
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            string token = _jwtProvider.GenerateToken(user, roles.ToArray());
-            return Ok(token);
+            var result = await _userRepository.LoginAsync(model.Email, model.Password);
+            return Ok(new LoginResponse(
+                result.Succeeded, 
+                result.Token, 
+                result.Errors));
         }
     }
 }

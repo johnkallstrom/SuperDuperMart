@@ -13,5 +13,6 @@
         Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
         Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(TUser user);
         Task<(bool Succeeded, IEnumerable<string> Errors)> DeleteAsync(TUser user);
+        Task<(bool Succeeded, string Token, IEnumerable<string> Errors)> LoginAsync(string email, string password);
     }
 }

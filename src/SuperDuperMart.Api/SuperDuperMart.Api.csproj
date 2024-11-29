@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuperDuperMart.Core\SuperDuperMart.Core.csproj" />
-    <ProjectReference Include="..\SuperDuperMart.Shared\SuperDuperMart.Shared.csproj" />
   </ItemGroup>
 
 </Project>

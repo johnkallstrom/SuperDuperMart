@@ -10,6 +10,7 @@ namespace SuperDuperMart.Shared.DTOs.Users
 
         [Required(ErrorMessage = "Please enter email")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; } = default!;
 
         [Required(ErrorMessage = "Please enter valid password")]

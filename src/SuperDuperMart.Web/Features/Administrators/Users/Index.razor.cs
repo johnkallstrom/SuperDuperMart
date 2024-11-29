@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.DTOs;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {

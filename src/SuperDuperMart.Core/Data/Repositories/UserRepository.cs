@@ -5,19 +5,25 @@ namespace SuperDuperMart.Core.Data.Repositories
 {
     public class UserRepository : IUserRepository<User>
     {
+        private readonly IJwtProvider _jwtProvider;
         private readonly Faker _faker = new();
+        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
         private readonly SuperDuperMartDbContext _context;
 
         public UserRepository(
-            SuperDuperMartDbContext context, 
-            UserManager<User> userManager, 
-            RoleManager<Role> roleManager)
+            SuperDuperMartDbContext context,
+            UserManager<User> userManager,
+            RoleManager<Role> roleManager,
+            SignInManager<User> signInManager,
+            IJwtProvider jwtProvider)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
+            _jwtProvider = jwtProvider;
         }
 
         public async Task<IEnumerable<User>> GetAsync()
@@ -157,6 +163,26 @@ namespace SuperDuperMart.Core.Data.Repositories
             {
                 await _userManager.AddToRoleAsync(user, role);
             }
+        }
+
+        public async Task<(bool Succeeded, string Token, IEnumerable<string> Errors)> LoginAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is null)
+            {
+                return (false, string.Empty, ["User email does not exist"]);
+            }
+
+            var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
+            if (!signInResult.Succeeded)
+            {
+                return (false, string.Empty, ["Incorrect password"]);
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            string token = _jwtProvider.GenerateToken(user, roles.ToArray());
+
+            return (true, token, Enumerable.Empty<string>());
         }
     }
 }
