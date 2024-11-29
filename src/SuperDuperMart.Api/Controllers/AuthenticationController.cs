@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Shared.DTOs;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

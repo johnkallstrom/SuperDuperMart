@@ -4,6 +4,8 @@ global using SuperDuperMart.Api.Authorization;
 global using SuperDuperMart.Api.ExceptionHandlers;
 global using SuperDuperMart.Core.Entities;
 global using SuperDuperMart.Core.Interfaces;
+global using SuperDuperMart.Shared.DTOs;
+global using SuperDuperMart.Shared.DTOs.Carts;
 global using SuperDuperMart.Shared.DTOs.Products;
 global using SuperDuperMart.Shared.DTOs.Users;
 global using AutoMapper;

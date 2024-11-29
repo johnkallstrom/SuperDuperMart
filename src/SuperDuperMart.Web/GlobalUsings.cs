@@ -8,3 +8,7 @@ global using SuperDuperMart.Web.Security;
 global using SuperDuperMart.Web.Rendering;
 global using SuperDuperMart.Web.Rendering.Enums;
 global using AutoMapper;
+global using SuperDuperMart.Shared.DTOs;
+global using SuperDuperMart.Shared.DTOs.Products;
+global using SuperDuperMart.Shared.DTOs.Carts;
+global using SuperDuperMart.Shared.DTOs.Users;
