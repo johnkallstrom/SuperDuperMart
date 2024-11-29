@@ -73,6 +73,24 @@ namespace SuperDuperMart.Core.Data.Repositories
             return user;
         }
 
+        public async Task<string?> AuthenticateAsync(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is not null)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
+                if (signInResult.Succeeded)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    string token = _jwtProvider.GenerateToken(user, roles.ToArray());
+
+                    return token;
+                }
+            }
+
+            return default;
+        }
+
         public async Task<bool> HasCartAsync(User user)
         {
             return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
@@ -163,26 +181,6 @@ namespace SuperDuperMart.Core.Data.Repositories
             {
                 await _userManager.AddToRoleAsync(user, role);
             }
-        }
-
-        public async Task<(bool Succeeded, string Token, IEnumerable<string> Errors)> LoginAsync(string email, string password)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user is null)
-            {
-                return (false, string.Empty, ["User email does not exist"]);
-            }
-
-            var signInResult = await _signInManager.PasswordSignInAsync(user, password, isPersistent: false, lockoutOnFailure: false);
-            if (!signInResult.Succeeded)
-            {
-                return (false, string.Empty, ["Incorrect password"]);
-            }
-
-            var roles = await _userManager.GetRolesAsync(user);
-            string token = _jwtProvider.GenerateToken(user, roles.ToArray());
-
-            return (true, token, Enumerable.Empty<string>());
         }
     }
 }

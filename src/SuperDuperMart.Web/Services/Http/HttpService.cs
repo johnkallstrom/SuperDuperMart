@@ -29,7 +29,7 @@ namespace SuperDuperMart.Web.Services.Http
         public async Task PostAsync(string url) => await _httpClient.PostAsync(url, null);
         public async Task PostAsync<T>(string url, T value) => await _httpClient.PostAsJsonAsync(url, value);
 
-        public async Task<string> PostAndRetrieveStringAsync<T>(string url, T value)
+        public async Task<string?> PostAndRetrieveStringAsync<T>(string url, T value)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync(url, value);
             if (httpResponse.IsSuccessStatusCode)
@@ -37,7 +37,7 @@ namespace SuperDuperMart.Web.Services.Http
                 return await httpResponse.Content.ReadAsStringAsync();
             }
 
-            return string.Empty;
+            return default;
         }
 
         public async Task PutAsync<T>(string url, T value) => await _httpClient.PutAsJsonAsync(url, value);

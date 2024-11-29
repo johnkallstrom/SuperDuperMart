@@ -15,11 +15,8 @@
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest model)
         {
-            var result = await _userRepository.LoginAsync(model.Email, model.Password);
-            return Ok(new LoginResponse(
-                result.Succeeded, 
-                result.Token, 
-                result.Errors));
+            string? token = await _userRepository.AuthenticateAsync(model.Email, model.Password);
+            return Ok(token);
         }
     }
 }

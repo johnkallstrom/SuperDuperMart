@@ -23,7 +23,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
             await HttpService.PostAsync($"{Endpoints.Products}", Model);
 
             var parameters = new ToastParameters();
-            parameters.Add(nameof(InfoToast.Message), "Saved new product");
+            parameters.Add(nameof(InfoToast.Message), "New product added");
 
             ToastService.ShowToast<InfoToast>(parameters);
         }

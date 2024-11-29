@@ -5,6 +5,7 @@
         Task<IEnumerable<TUser>> GetAsync();
         Task<PagedList<TUser>> GetAsync(IQueryParams parameters);
         Task<TUser?> GetByIdAsync(int id);
+        Task<string?> AuthenticateAsync(string email, string password);
         Task<bool> HasCartAsync(User user);
         Task<Role?> GetPrimaryRoleAsync(User user);
         Task<IEnumerable<Role>> GetRolesAsync(User user);
@@ -13,6 +14,5 @@
         Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
         Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(TUser user);
         Task<(bool Succeeded, IEnumerable<string> Errors)> DeleteAsync(TUser user);
-        Task<(bool Succeeded, string Token, IEnumerable<string> Errors)> LoginAsync(string email, string password);
     }
 }
