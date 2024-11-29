@@ -8,7 +8,7 @@ namespace SuperDuperMart.Web.Features.Components
         public List<SelectOption> Options { get; set; } = default!;
 
         [Parameter]
-        public EventCallback<(string Value, SortOrderType Order)> OnSelection { get; set; } = default!;
+        public EventCallback<(string SortBy, SortOrderType SortOrderType)> OnSelection { get; set; } = default!;
 
         public string SelectedOption { get; set; } = default!;
 
@@ -18,8 +18,8 @@ namespace SuperDuperMart.Web.Features.Components
             if (!string.IsNullOrWhiteSpace(value))
             {
                 string[] words = value.Split(' ');
-                string sortValue = words.First();
-                SortOrderType sortOrder = default;
+                string sortBy = words.First();
+                SortOrderType sortOrderType = default;
 
                 if (words.Count() > 0)
                 {
@@ -27,12 +27,12 @@ namespace SuperDuperMart.Web.Features.Components
                     {
                         if (Enum.TryParse(word, out SortOrderType result))
                         {
-                            sortOrder = result;
+                            sortOrderType = result;
                         }
                     }
                 }
 
-                await OnSelection.InvokeAsync((sortValue, sortOrder));
+                await OnSelection.InvokeAsync((sortBy, sortOrderType));
             }
         }
     }

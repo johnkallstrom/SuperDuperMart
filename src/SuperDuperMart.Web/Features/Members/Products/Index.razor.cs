@@ -33,10 +33,10 @@ namespace SuperDuperMart.Web.Features.Members.Products
             Loading = false;
         }
 
-        private async Task HandleSortSelection((string Value, SortOrderType Order) selection)
+        private async Task HandleSortSelection((string SortBy, SortOrderType SortOrderType) selection)
         {
-            SortBy = selection.Value;
-            SortOrder = selection.Order is SortOrderType.Descending ? "Desc" : "Asc";
+            SortBy = selection.SortBy;
+            SortOrder = selection.SortOrderType is SortOrderType.Descending ? "Desc" : "Asc";
 
             await GetProducts();
         }
