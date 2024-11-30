@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace SuperDuperMart.Web.Features.Administrators.Users
+﻿namespace SuperDuperMart.Web.Features.Administrators.Users
 {
     public partial class Create
     {

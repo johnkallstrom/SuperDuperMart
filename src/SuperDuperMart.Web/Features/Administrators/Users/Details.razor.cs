@@ -2,7 +2,6 @@
 using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazored.Toast.Services;
-using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Web.Features.Components.Modals;
 using SuperDuperMart.Web.Features.Components.Toasts;
 

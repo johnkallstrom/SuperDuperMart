@@ -1,6 +1,5 @@
 ﻿using Blazored.LocalStorage;
 using Blazored.Toast.Services;
-using Microsoft.AspNetCore.Components;
 
 namespace SuperDuperMart.Web.Features
 {

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-using SuperDuperMart.Shared.DTOs;
-
-namespace SuperDuperMart.Web.Features.Members.Products
+﻿namespace SuperDuperMart.Web.Features.Members.Products
 {
     public partial class Index
     {

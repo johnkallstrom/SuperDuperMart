@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace SuperDuperMart.Web.Features.Components.Toasts
+﻿namespace SuperDuperMart.Web.Features.Components.Toasts
 {
     public partial class InfoToast
     {

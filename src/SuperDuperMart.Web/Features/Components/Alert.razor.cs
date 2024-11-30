@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace SuperDuperMart.Web.Features.Components
+﻿namespace SuperDuperMart.Web.Features.Components
 {
     public partial class Alert
     {

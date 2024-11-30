@@ -1,6 +1,5 @@
 ﻿using Blazored.Toast;
 using Blazored.Toast.Services;
-using Microsoft.AspNetCore.Components;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products

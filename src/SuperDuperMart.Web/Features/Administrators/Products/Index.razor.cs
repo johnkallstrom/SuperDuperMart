@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace SuperDuperMart.Web.Features.Administrators.Products
+﻿namespace SuperDuperMart.Web.Features.Administrators.Products
 {
     public partial class Index
     {
