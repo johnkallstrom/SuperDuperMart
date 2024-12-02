@@ -12,6 +12,12 @@ namespace SuperDuperMart.Core.Data.EntityConfigurations
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Price).HasPrecision(5, 2);
             builder.Property(p => p.Created).ValueGeneratedOnAdd();
+
+            // One to Many relationship with ProductCategory
+            builder
+                .HasOne(p => p.Category)
+                .WithMany(pc => pc.Products)
+                .HasForeignKey(p => p.CategoryId);
         }
     }
 }
