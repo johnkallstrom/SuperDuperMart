@@ -27,7 +27,7 @@ else
                     <th>Email</th>
                     <th>Role</th>
                     <th>Created</th>
-                    <th>Modified</th>
+                    <th>Last modified</th>
                     <th>Details</th>
                 </tr>
             </thead>
@@ -44,15 +44,15 @@ else
                         <td>
                             <span class="@(user.Role?.Name == "Member" ? $"badge text-bg-warning" : $"badge text-bg-dark")">@user.Role?.Name</span>
                         </td>
-                        <td>@user.Created.ToCustomDateTimeFormat()</td>
+                        <td>@user.Created.ToSimplifiedDateFormat()</td>
                         <td>
                             @if (user.LastModified.HasValue)
                             {
-                                <span>@user.LastModified.Value.ToCustomDateTimeFormat()</span>
+                                <span>@user.LastModified.Value.ToSimplifiedDateFormat()</span>
                             }
                             else
                             {
-                                <span>@DateTime.MinValue.ToCustomDateTimeFormat()</span>
+                                <span>Not modified</span>
                             }
                         </td>
                         <td>
