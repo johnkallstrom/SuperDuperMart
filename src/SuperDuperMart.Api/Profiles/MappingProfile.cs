@@ -1,6 +1,4 @@
 ﻿using SuperDuperMart.Core.Results;
-using SuperDuperMart.Shared.DTOs;
-using SuperDuperMart.Shared.DTOs.Carts;
 
 namespace SuperDuperMart.Api.Profiles
 {
@@ -9,9 +7,15 @@ namespace SuperDuperMart.Api.Profiles
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+                .ReverseMap();
+
             CreateMap<ProductCreateDto, Product>();
             CreateMap<ProductUpdateDto, Product>();
+
+            // ProductCategory
+            CreateMap<ProductCategory, ProductCategoryDto>().ReverseMap();
 
             // User
             CreateMap<User, UserDto>().ReverseMap();

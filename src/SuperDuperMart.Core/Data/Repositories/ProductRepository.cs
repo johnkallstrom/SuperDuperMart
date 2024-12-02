@@ -28,7 +28,10 @@ namespace SuperDuperMart.Core.Data.Repositories
                 !parameters.PageSize.HasValue || 
                 parameters.PageNumber.Value <= 0)
             {
-                var products = await _context.Products.ToListAsync();
+                var products = await _context.Products
+                    .Include(p => p.Category)
+                    .ToListAsync();
+
                 return new PagedList<Product>(totalRecords, products);
             }
 
@@ -51,7 +54,9 @@ namespace SuperDuperMart.Core.Data.Repositories
                 .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
                 .Take(parameters.PageSize.Value);
 
-            var data = await query.ToListAsync();
+            var data = await query
+                .Include(p => p.Category)
+                .ToListAsync();
 
             return new PagedList<Product>(
                 parameters.PageNumber.Value,
