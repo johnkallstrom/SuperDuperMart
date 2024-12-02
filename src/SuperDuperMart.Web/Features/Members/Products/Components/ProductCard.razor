@@ -7,7 +7,7 @@
     }
     <div class="card-body">
         <h5 class="card-title">@Product.Name</h5>
-        <p class="card-text">@Product.Description</p>
+        <small class="text-muted d-block mb-3">@Product.Category</small>
         <Button 
             Type="ButtonType.Button" 
             Label="@Product.Price.ToCurrency("sv-SE")"
