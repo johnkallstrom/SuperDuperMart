@@ -158,9 +158,9 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CartCreateDto model)
+        public async Task<IActionResult> Create([FromBody] CartCreateDto dto)
         {
-            User? user = await _unitOfWork.UserRepository.GetByIdAsync(model.UserId);
+            User? user = await _unitOfWork.UserRepository.GetByIdAsync(dto.UserId);
             if (user is null)
             {
                 return NotFound();
@@ -168,10 +168,10 @@ namespace SuperDuperMart.Api.Controllers
 
             if (await _unitOfWork.UserRepository.HasCartAsync(user))
             {
-                return BadRequest(new { Message = $"Cart already exists on user with id: {model.UserId}" });
+                return BadRequest(new { Message = $"Cart already exists on user with id: {dto.UserId}" });
             }
 
-            var cart = _mapper.Map<Cart>(model);
+            var cart = _mapper.Map<Cart>(dto);
             var createdCart = await _unitOfWork.CartRepository.CreateAsync(cart);
             await _unitOfWork.SaveAsync();
 
@@ -179,7 +179,7 @@ namespace SuperDuperMart.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateDto model)
+        public async Task<IActionResult> Update(int id, [FromBody] CartUpdateDto dto)
         {
             Cart? cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
             if (cart is null)
@@ -187,7 +187,7 @@ namespace SuperDuperMart.Api.Controllers
                 return NotFound();
             }
 
-            cart = _mapper.Map(source: model, destination: cart);
+            cart = _mapper.Map(source: dto, destination: cart);
 
             _unitOfWork.CartRepository.Update(cart);
             await _unitOfWork.SaveAsync();

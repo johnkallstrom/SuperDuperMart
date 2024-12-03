@@ -13,9 +13,9 @@
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginRequest model)
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            string? token = await _userRepository.AuthenticateAsync(model.Email, model.Password);
+            string? token = await _userRepository.AuthenticateAsync(request.Email, request.Password);
             return Ok(token);
         }
     }

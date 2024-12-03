@@ -58,20 +58,25 @@ namespace SuperDuperMart.Api.Controllers
 
         [ConfirmPassword]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserCreateDto model)
+        public async Task<IActionResult> Create([FromBody] UserCreateDto dto)
         {
-            var user = _mapper.Map<User>(model);
+            var user = _mapper.Map<User>(dto);
 
-            var result = await _unitOfWork.UserRepository.CreateAsync(user, model.Password);
-            return Ok(new 
-            { 
-                result.Succeeded, 
-                result.Errors 
-            });
+            var result = await _unitOfWork.UserRepository.CreateAsync(user, dto.Password);
+            if (result.Succeeded)
+            {
+                var role = await _unitOfWork.RoleRepository.GetByIdAsync(dto.RoleId);
+                if (role != null)
+                {
+                    await _unitOfWork.UserRepository.AddToRoleAsync(user, role.Name);
+                }
+            }
+
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto model)
+        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto dto)
         {
             // Get user 
             var user = await _unitOfWork.UserRepository.GetByIdAsync(id);
@@ -85,9 +90,9 @@ namespace SuperDuperMart.Api.Controllers
             {
                 var newLocation = new Location
                 {
-                    StreetName = model.StreetName,
-                    ZipCode = model.ZipCode,
-                    City = model.City,
+                    StreetName = dto.StreetName,
+                    ZipCode = dto.ZipCode,
+                    City = dto.City,
                     UserId = user.Id
                 };
 
@@ -95,9 +100,9 @@ namespace SuperDuperMart.Api.Controllers
             }
             else
             {
-                user.Location.StreetName = model.StreetName;
-                user.Location.ZipCode = model.ZipCode;
-                user.Location.City = model.City;
+                user.Location.StreetName = dto.StreetName;
+                user.Location.ZipCode = dto.ZipCode;
+                user.Location.City = dto.City;
                 
                 _unitOfWork.LocationRepository.Update(user.Location);
             }
@@ -106,11 +111,11 @@ namespace SuperDuperMart.Api.Controllers
             await _unitOfWork.SaveAsync();
 
             // Update user
-            user = _mapper.Map(source: model, destination: user);
+            user = _mapper.Map(source: dto, destination: user);
             await _unitOfWork.UserRepository.UpdateAsync(user);
 
             // Get role
-            var role = await _unitOfWork.RoleRepository.GetByIdAsync(model.RoleId);
+            var role = await _unitOfWork.RoleRepository.GetByIdAsync(dto.RoleId);
             if (role is null)
             {
                 return NotFound();
