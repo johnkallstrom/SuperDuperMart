@@ -2,6 +2,7 @@
 using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazored.Toast.Services;
+using SuperDuperMart.Web.Extensions;
 using SuperDuperMart.Web.Features.Components.Modals;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
@@ -84,12 +85,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private async Task GetRoles()
         {
             var roles = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
-            if (roles != null && roles.Count() > 0)
-            {
-                RoleOptions = roles
-                    .Select(r => new SelectOption(r.Name, r.Id.ToString()))
-                    .ToList();
-            }
+            RoleOptions = roles is not null ? roles.ToSelectOptionList() : [];
         }
 
         private async Task DetermineIfCurrentUserIsBeingUpdated()
