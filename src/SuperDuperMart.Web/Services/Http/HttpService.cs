@@ -40,6 +40,21 @@ namespace SuperDuperMart.Web.Services.Http
             return default;
         }
 
+        public async Task<int?> PostAndRetrieveIntAsync<T>(string url, T value)
+        {
+            var httpResponse = await _httpClient.PostAsJsonAsync(url, value);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                string? content = await httpResponse.Content.ReadAsStringAsync();
+                if (int.TryParse(content, out int data))
+                {
+                    return data;
+                }
+            }
+
+            return default;
+        }
+
         public async Task PutAsync<T>(string url, T value) => await _httpClient.PutAsJsonAsync(url, value);
         public async Task DeleteAsync(string url) => await _httpClient.DeleteAsync(url);
     }
