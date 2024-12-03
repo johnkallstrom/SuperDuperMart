@@ -22,7 +22,7 @@ namespace SuperDuperMart.Shared.DTOs.Users
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = default!;
 
-        [Required(ErrorMessage = "Please select a role")]
-        public int RoleId { get; set; }
+        [Required(ErrorMessage = "Please choose a role")]
+        public int RoleId { get; set; } = 1;
     }
 }
