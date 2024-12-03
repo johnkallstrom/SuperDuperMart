@@ -7,37 +7,37 @@
     <div class="col-sm-8 col-lg-6">
         <div class="card shadow">
             <div class="card-body">
-                <EditForm Model="@Model" OnValidSubmit="Submit">
+                <EditForm Model="@Dto" OnValidSubmit="Submit">
                     <DataAnnotationsValidator />
                     <div class="mb-3">
                         <label class="form-label">Role</label>
-                        <InputSelect class="form-select" @bind-Value="Model.RoleId">
+                        <InputSelect class="form-select" @bind-Value="Dto.RoleId">
                             @foreach (var option in RoleOptions)
                             {
                                 <option value="@option.Value">@option.Text</option>
                             }
                         </InputSelect>
-                        <ValidationMessage For="() => Model.RoleId" />
+                        <ValidationMessage For="() => Dto.RoleId" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Username">Username</label>
-                        <InputText type="text" class="form-control" for="Model.Username" @bind-Value="Model.Username" />
-                        <ValidationMessage For="() => Model.Username" />
+                        <label class="form-label" for="@Dto.Username">Username</label>
+                        <InputText type="text" class="form-control" for="Model.Username" @bind-Value="Dto.Username" />
+                        <ValidationMessage For="() => Dto.Username" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Email">Email</label>
-                        <InputText type="email" class="form-control" for="Model.Email" @bind-Value="Model.Email" />
-                        <ValidationMessage For="() => Model.Email" />
+                        <label class="form-label" for="@Dto.Email">Email</label>
+                        <InputText type="email" class="form-control" for="Model.Email" @bind-Value="Dto.Email" />
+                        <ValidationMessage For="() => Dto.Email" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Password">Password</label>
-                        <InputText type="password" class="form-control" for="Model.Password" @bind-Value="Model.Password" />
-                        <ValidationMessage For="() => Model.Password" />
+                        <label class="form-label" for="@Dto.Password">Password</label>
+                        <InputText type="password" class="form-control" for="Model.Password" @bind-Value="Dto.Password" />
+                        <ValidationMessage For="() => Dto.Password" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.ConfirmPassword">Confirm password</label>
-                        <InputText type="password" class="form-control" for="Model.ConfirmPassword" @bind-Value="Model.ConfirmPassword" />
-                        <ValidationMessage For="() => Model.ConfirmPassword" />
+                        <label class="form-label" for="@Dto.ConfirmPassword">Confirm password</label>
+                        <InputText type="password" class="form-control" for="Model.ConfirmPassword" @bind-Value="Dto.ConfirmPassword" />
+                        <ValidationMessage For="() => Dto.ConfirmPassword" />
                     </div>
                     <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                     <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />

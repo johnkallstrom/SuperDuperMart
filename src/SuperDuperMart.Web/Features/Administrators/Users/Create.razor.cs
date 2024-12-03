@@ -1,16 +1,22 @@
-﻿using SuperDuperMart.Web.Extensions;
+﻿using Blazored.Toast;
+using Blazored.Toast.Services;
+using SuperDuperMart.Web.Extensions;
+using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Users
 {
     public partial class Create
     {
         [Inject]
+        public IToastService ToastService { get; set; } = default!;
+
+        [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        public UserCreateDto Model { get; set; } = new();
+        public UserCreateDto Dto { get; set; } = new();
 
         public List<SelectOption> RoleOptions { get; set; } = [];
 
@@ -21,8 +27,19 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task Submit()
         {
-            await HttpService.PostAsync($"{Endpoints.Users}", Model);
-            NavigationManager.NavigateTo("/manage/users");
+            int? userId = await HttpService.PostAndRetrieveIntAsync($"{Endpoints.Users}", Dto);
+            if (userId.HasValue)
+            {
+                // Todo: Give the new user a shopping caaaaaaaaaart yaass 💫
+                NavigationManager.NavigateTo("/manage/users");
+            }
+            else
+            {
+                var parameters = new ToastParameters();
+                parameters.Add(nameof(ErrorToast.Message), "Something went wrong");
+
+                ToastService.ShowToast<ErrorToast>(parameters);
+            }
         }
 
         private async Task GetRoles()
