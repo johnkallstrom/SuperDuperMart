@@ -72,7 +72,7 @@ namespace SuperDuperMart.Api.Controllers
                 }
             }
 
-            return Ok();
+            return Ok(result.UserId);
         }
 
         [HttpPut("{id}")]

@@ -11,7 +11,7 @@
         Task<IEnumerable<Role>> GetRolesAsync(User user);
         Task AddToRoleAsync(User user, string role);
         Task<(bool Succeeded, IEnumerable<string> Errors)> ClearRolesAsync(User user);
-        Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
+        Task<(bool Succeeded, int UserId, IEnumerable<string> Errors)> CreateAsync(TUser user, string password);
         Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(TUser user);
         Task<(bool Succeeded, IEnumerable<string> Errors)> DeleteAsync(TUser user);
     }

@@ -96,7 +96,7 @@ namespace SuperDuperMart.Core.Data.Repositories
             return await _context.Carts.AnyAsync(c => c.UserId == user.Id);
         }
 
-        public async Task<(bool Succeeded, IEnumerable<string> Errors)> CreateAsync(User user, string password)
+        public async Task<(bool Succeeded, int UserId, IEnumerable<string> Errors)> CreateAsync(User user, string password)
         {
             user.Avatar = _faker.Image.PlaceholderUrl(width: 640, height: 480);
             user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, password);
@@ -106,10 +106,10 @@ namespace SuperDuperMart.Core.Data.Repositories
             if (!identityResult.Succeeded)
             {
                 var errors = identityResult.Errors.Select(x => x.Description).ToList();
-                return (false, errors);
+                return (false, default, errors);
             }
 
-            return (true, Enumerable.Empty<string>());
+            return (true, user.Id, Enumerable.Empty<string>());
         }
 
         public async Task<(bool Succeeded, IEnumerable<string> Errors)> UpdateAsync(User user)
