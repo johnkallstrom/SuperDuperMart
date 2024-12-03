@@ -21,5 +21,8 @@ namespace SuperDuperMart.Shared.DTOs.Users
         [Compare(nameof(Password), ErrorMessage = "Please provide matching passwords")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; } = default!;
+
+        [Required(ErrorMessage = "Please select a role")]
+        public int RoleId { get; set; }
     }
 }

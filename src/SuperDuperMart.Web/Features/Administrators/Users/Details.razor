@@ -78,9 +78,9 @@ else
                             <div class="mb-3">
                                 <label class="form-label">Role</label>
                                 <InputSelect class="form-select" @bind-Value="Model.RoleId" disabled="@(IsCurrentUserBeingUpdated)">
-                                    @foreach (var role in Roles)
+                                    @foreach (var option in RoleOptions)
                                     {
-                                        <option value="@role.Id">@role.Name</option>
+                                        <option value="@option.Value">@option.Text</option>
                                     }
                                 </InputSelect>   
                                 <ValidationMessage For="() => Model.RoleId" />

@@ -35,7 +35,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         private bool Loading = true;
 
         public UserUpdateDto Model { get; set; } = new();
-        public IEnumerable<RoleDto> Roles { get; set; } = [];
+        public IEnumerable<SelectOption> RoleOptions { get; set; } = [];
 
         protected override async Task OnParametersSetAsync()
         {
@@ -83,10 +83,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task GetRoles()
         {
-            var roleDtos = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
-            if (roleDtos != null && roleDtos.Count() > 0)
+            var roles = await HttpService.GetAsync<IEnumerable<RoleDto>>(Endpoints.Roles);
+            if (roles != null && roles.Count() > 0)
             {
-                Roles = roleDtos;
+                RoleOptions = roles
+                    .Select(r => new SelectOption(r.Name, r.Id.ToString()))
+                    .ToList();
             }
         }
 

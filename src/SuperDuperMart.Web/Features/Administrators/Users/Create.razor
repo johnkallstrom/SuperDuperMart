@@ -10,6 +10,16 @@
                 <EditForm Model="@Model" OnValidSubmit="Submit">
                     <DataAnnotationsValidator />
                     <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <InputSelect class="form-select" @bind-Value="Model.RoleId">
+                            @foreach (var option in RoleOptions)
+                            {
+                                <option value="@option.Value">@option.Text</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="() => Model.RoleId" />
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="@Model.Username">Username</label>
                         <InputText type="text" class="form-control" for="Model.Username" @bind-Value="Model.Username" />
                         <ValidationMessage For="() => Model.Username" />
