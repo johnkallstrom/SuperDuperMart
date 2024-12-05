@@ -2,6 +2,7 @@
 
 namespace SuperDuperMart.Api.Filters
 {
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class MinimumAgeRequirement : Attribute, IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)

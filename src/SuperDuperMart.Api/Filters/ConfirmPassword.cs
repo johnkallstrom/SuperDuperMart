@@ -5,6 +5,7 @@ namespace SuperDuperMart.Api.Filters
     /// <summary>
     /// Determines if the provided password and confirm password is a match
     /// </summary>
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class ConfirmPassword : Attribute, IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
