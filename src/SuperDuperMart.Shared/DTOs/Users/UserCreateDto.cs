@@ -4,6 +4,11 @@ namespace SuperDuperMart.Shared.DTOs.Users
 {
     public record UserCreateDto
     {
+        [Required(ErrorMessage = "Please enter a first name")]
+        public string FirstName { get; set; } = default!;
+
+        [Required(ErrorMessage = "Please enter a last name")]
+        public string LastName { get; set; } = default!;
 
         [Required(ErrorMessage = "Please enter username")]
         public string Username { get; set; } = default!;
@@ -24,5 +29,9 @@ namespace SuperDuperMart.Shared.DTOs.Users
 
         [Required(ErrorMessage = "Please choose a role")]
         public int RoleId { get; set; } = 1;
+
+        [Required(ErrorMessage = "Please choose a valid birthday")]
+        [DataType(DataType.Date)]
+        public DateOnly Birthday { get; set; }
     }
 }

@@ -11,6 +11,14 @@ namespace SuperDuperMart.Core.Data.Fakers
             RuleFor(u => u.LastName, f => f.Person.LastName);
             RuleFor(u => u.UserName, f => f.Person.UserName);
             RuleFor(u => u.Email, f => f.Person.Email);
+            RuleFor(u => u.Birthday, f =>
+            {
+                var today = DateTime.Now;
+                var dateOfBirth = DateOnly.FromDateTime(f.Person.DateOfBirth);
+                int age = today.Year - dateOfBirth.Year;
+
+                return age >= 21 ? dateOfBirth : new DateOnly(2000, 1, 1);
+            });
             RuleFor(u => u.Created, f => DateTime.Now);
             RuleFor(u => u.Location, f => new Location
             {
