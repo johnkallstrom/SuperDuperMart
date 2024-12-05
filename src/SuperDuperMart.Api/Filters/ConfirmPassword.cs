@@ -11,7 +11,7 @@ namespace SuperDuperMart.Api.Filters
         {
             UserCreateDto? model = null;
 
-            if (context.ActionArguments.TryGetValue("model", out object? value))
+            if (context.ActionArguments.TryGetValue("dto", out object? value))
             {
                 model = value as UserCreateDto;
             }

@@ -56,6 +56,7 @@ namespace SuperDuperMart.Api.Controllers
             return Ok(dto);
         }
 
+        [MinimumAgeRequirement]
         [ConfirmPassword]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserCreateDto dto)
