@@ -44,13 +44,17 @@ namespace SuperDuperMart.Core.Data.Repositories
                 !parameters.PageSize.HasValue ||
                 parameters.PageNumber.Value <= 0)
             {
-                users = await _context.Users.ToListAsync();
+                users = await _context.Users
+                    .Include(u => u.Location)
+                    .ToListAsync();
+
                 return new PagedList<User>(totalRecords, users);
             }
 
             decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
 
             users = await _context.Users
+                .Include(u => u.Location)
                 .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
                 .Take(parameters.PageSize.Value)
                 .ToListAsync();

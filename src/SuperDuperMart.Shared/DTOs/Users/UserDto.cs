@@ -4,8 +4,9 @@
     {
         public int Id { get; set; }
         public string? Avatar { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string FirstName { get; set; } = default!;
+        public string LastName { get; set; } = default!;
+        public DateOnly Birthday { get; set; } = default!;
         public string Username { get; set; } = default!;
         public string Email { get; set; } = default!;
         public DateTime Created { get; set; }
