@@ -30,7 +30,15 @@
                         <AuthorizeView Roles="@Roles.Member" Context="Member">
                             <Authorized>
                                 <li class="nav-item">
-                                    <NavLink class="nav-link" href="/cart"><i class="bi bi-cart-fill"></i></NavLink>
+                                    @{
+                                        int? userId = context.User.FindUserIdentifier();
+                                        if (userId.HasValue) 
+                                        {
+                                            <NavLink class="nav-link" href="@($"/carts/{userId.Value}")">
+                                                <i class="bi bi-cart-fill"></i>
+                                            </NavLink>
+                                        }
+                                    }
                                 </li>
                             </Authorized>
                         </AuthorizeView>

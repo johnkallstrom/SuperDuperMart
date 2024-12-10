@@ -1,15 +1,22 @@
-﻿namespace SuperDuperMart.Web.Features.Members.Carts
+﻿using Blazored.Toast;
+using Blazored.Toast.Services;
+using SuperDuperMart.Web.Features.Components.Toasts;
+
+namespace SuperDuperMart.Web.Features.Members.Carts
 {
     public partial class Index
     {
         [Inject]
-        public IAuthenticationService AuthenticationService { get; set; } = default!;
+        public IToastService ToastService { get; set; } = default!;
 
         [Inject]
         public IHttpService HttpService { get; set; } = default!;
 
-        private bool _loading = true;
-        public CartDto? Model { get; set; } = default!;
+        [Parameter]
+        public int UserId { get; set; }
+
+        private bool Loading = true;
+        public CartDto Dto { get; set; } = default!;
 
         protected override async Task OnParametersSetAsync()
         {
@@ -18,14 +25,20 @@
 
         private async Task GetCart()
         {
-            var user = await AuthenticationService.GetCurrentUserAsync();
-            int? userId = user.FindUserIdentifier();
-
-            if (userId.HasValue)
+            CartDto? cart = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{UserId}?includeItems=true");
+            if (cart is null)
             {
-                Model = await HttpService.GetAsync<CartDto>($"{Endpoints.Carts}/user/{userId}?includeItems=true");
-                _loading = false;
+                var parameters = new ToastParameters();
+                parameters.Add(nameof(ErrorToast.Message), "Something went wrong");
+
+                ToastService.ShowToast<ErrorToast>(parameters);
             }
+            else
+            {
+                Dto = cart;
+            }
+
+            Loading = false;
         }
     }
 }
