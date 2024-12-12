@@ -2,6 +2,7 @@
 using Blazored.Modal.Services;
 using Blazored.Toast;
 using Blazored.Toast.Services;
+using SuperDuperMart.Web.Extensions;
 using SuperDuperMart.Web.Features.Components.Modals;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
@@ -30,10 +31,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         public bool Loading { get; set; } = true;
 
         public ProductUpdateDto Model { get; set; } = new();
+        public List<SelectOption> CategoryOptions { get; set; } = [];
 
         protected override async Task OnParametersSetAsync()
         {
             await GetProduct();
+            await GetProductCategories();
         }
 
         private async Task GetProduct()
@@ -44,6 +47,12 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
                 Model = Mapper.Map<ProductUpdateDto>(productDto);
                 Loading = false;
             }
+        }
+
+        private async Task GetProductCategories()
+        {
+            var categories = await HttpService.GetAsync<IEnumerable<ProductCategoryDto>>(Endpoints.ProductCategories);
+            CategoryOptions = categories is not null ? categories.ToSelectOptionList() : [];
         }
 
         private async Task UpdateProduct()

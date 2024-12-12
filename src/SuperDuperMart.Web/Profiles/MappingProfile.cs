@@ -5,7 +5,8 @@
         public MappingProfile()
         {
             // Product
-            CreateMap<ProductDto, ProductUpdateDto>();
+            CreateMap<ProductDto, ProductUpdateDto>()
+                .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.Category.Id));
 
             // User
             CreateMap<UserDto, UserUpdateDto>()

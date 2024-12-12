@@ -17,5 +17,8 @@ namespace SuperDuperMart.Shared.DTOs.Products
 
         [Required(ErrorMessage = "Please enter a material")]
         public string Material { get; set; } = default!;
+
+        [Required(ErrorMessage = "Please choose a category")]
+        public int CategoryId { get; set; }
     }
 }

@@ -55,7 +55,13 @@
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
             if (product is null)
             {
-                return NotFound();
+                return NotFound(new { ProductId = id });
+            }
+
+            var productCategory = await _unitOfWork.ProductCategoryRepository.GetByIdAsync(dto.CategoryId);
+            if (productCategory is null)
+            {
+                return NotFound(new { ProductCategoryId = dto.CategoryId });
             }
 
             product = _mapper.Map(source: dto, destination: product);

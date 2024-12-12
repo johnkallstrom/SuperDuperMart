@@ -15,7 +15,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<IEnumerable<Product>> GetAsync()
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .ToListAsync();
+
             return products;
         }
 
@@ -68,7 +71,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Product?> GetByIdAsync(int id)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             return product;
         }
 

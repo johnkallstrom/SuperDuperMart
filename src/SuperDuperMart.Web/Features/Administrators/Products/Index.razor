@@ -43,7 +43,7 @@ else
                         <td>@product.Name</td>
                         <td>@product.Price.ToCurrency("sv-SE")</td>
                         <td>@product.Material</td>
-                        <td>@product.Category</td>
+                        <td>@product.Category?.Name</td>
                         <td>@product.Created.ToSimplifiedDateFormat()</td>
                         <td>
                             @if (product.LastModified.HasValue)

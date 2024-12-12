@@ -7,9 +7,7 @@ namespace SuperDuperMart.Api.Profiles
         public MappingProfile()
         {
             // Product
-            CreateMap<Product, ProductDto>()
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
-                .ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
 
             CreateMap<ProductCreateDto, Product>();
             CreateMap<ProductUpdateDto, Product>();

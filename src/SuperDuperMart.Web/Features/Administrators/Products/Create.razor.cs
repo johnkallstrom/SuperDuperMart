@@ -23,10 +23,10 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         protected override async Task OnInitializedAsync()
         {
-            await GetCategories();
+            await GetProductCategories();
         }
 
-        private async Task GetCategories()
+        private async Task GetProductCategories()
         {
             var categories = await HttpService.GetAsync<IEnumerable<ProductCategoryDto>>(Endpoints.ProductCategories);
             CategoryOptions = categories is not null ? categories.ToSelectOptionList() : [];

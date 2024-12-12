@@ -8,8 +8,9 @@
         public string? Description { get; init; }
         public required decimal Price { get; init; }
         public required string Material { get; init; }
-        public required string Category { get; set; }
         public DateTime Created { get; set; }
         public DateTime? LastModified { get; set; }
+
+        public ProductCategoryDto? Category { get; set; } = default!;
     }
 }
