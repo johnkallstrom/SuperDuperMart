@@ -22,9 +22,10 @@ namespace SuperDuperMart.Core.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<ProductCategory?> GetByIdAsync(int id)
+        public async Task<ProductCategory?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var productCategory = await _context.ProductCategories.FirstOrDefaultAsync(pc => pc.Id == id);
+            return productCategory;
         }
 
         public Task<ProductCategory> CreateAsync(ProductCategory entity)

@@ -4,6 +4,8 @@ namespace SuperDuperMart.Shared.DTOs.Products
 {
     public record ProductCreateDto
     {
+        public string? Image { get; set; }
+
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; } = default!;
 

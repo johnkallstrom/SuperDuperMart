@@ -18,6 +18,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         public ProductCreateDto Model { get; set; } = new();
 
+        public ToastParameters ToastParameters { get; set; } = new();
         public List<SelectOption> CategoryOptions { get; set; } = [];
 
         protected override async Task OnInitializedAsync()
@@ -34,11 +35,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
         private async Task Submit()
         {
             await HttpService.PostAsync($"{Endpoints.Products}", Model);
-
-            var parameters = new ToastParameters();
-            parameters.Add(nameof(InfoToast.Message), "New product added");
-
-            ToastService.ShowToast<InfoToast>(parameters);
+            ToastParameters.Add(nameof(InfoToast.Message), "New product added");
+            ToastService.ShowToast<InfoToast>(ToastParameters);
         }
 
         private void Cancel() => NavigationManager.NavigateTo("/manage/products");

@@ -36,11 +36,17 @@
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductCreateDto dto)
         {
+            var productCategory = await _unitOfWork.ProductCategoryRepository.GetByIdAsync(dto.CategoryId);
+            if (productCategory is null)
+            {
+                return NotFound(new { ProductCategoryId = dto.CategoryId });
+            }
+
             var product = _mapper.Map<Product>(dto);
             var newProduct = await _unitOfWork.ProductRepository.CreateAsync(product);
             await _unitOfWork.SaveAsync();
 
-            return CreatedAtAction(nameof(GetById), new { newProduct.Id }, newProduct);
+            return CreatedAtAction(nameof(GetById), new { newProduct.Id }, _mapper.Map<ProductDto>(newProduct));
         }
 
         [HttpPut("{id}")]
