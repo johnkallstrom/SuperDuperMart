@@ -10,24 +10,31 @@
                 <EditForm Model="@Model" OnValidSubmit="Submit">
                     <DataAnnotationsValidator />
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Name">Name</label>
+                        <label class="form-label">Name</label>
                         <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
                         <ValidationMessage For="() => Model.Name" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Description">Description</label>
+                        <label class="form-label">Description</label>
                         <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
                         <ValidationMessage For="() => Model.Description" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Price">Price</label>
+                        <label class="form-label">Price</label>
                         <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
                         <ValidationMessage For="() => Model.Price" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="@Model.Material">Material</label>
+                        <label class="form-label">Material</label>
                         <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
                         <ValidationMessage For="() => Model.Material" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <InputSelect class="form-select" for="Model.CategoryId" @bind-Value="Model.CategoryId">
+                            <option>Books</option>
+                            <option>Sports</option>
+                        </InputSelect>
                     </div>
                     <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                     <Button Type="ButtonType.Button" Label="Cancel" Color="Color.Secondary" OnClick="Cancel" />

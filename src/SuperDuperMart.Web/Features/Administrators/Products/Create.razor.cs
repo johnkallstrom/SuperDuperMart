@@ -17,6 +17,18 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         public ProductCreateDto Model { get; set; } = new();
 
+        public List<SelectOption> CategoryOptions { get; set; } = [];
+
+        protected override async Task OnInitializedAsync()
+        {
+            await GetCategories();
+        }
+
+        private async Task GetCategories()
+        {
+            var categories = await HttpService.GetAsync<IEnumerable<ProductCategoryDto>>($"{Endpoints.Products}");
+        }
+
         private async Task Submit()
         {
             await HttpService.PostAsync($"{Endpoints.Products}", Model);

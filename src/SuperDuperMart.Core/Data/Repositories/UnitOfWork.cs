@@ -24,13 +24,15 @@
             RoleRepository = new RoleRepository(_context);
             LocationRepository = new LocationRepository(_context);
             CartRepository = new CartRepository(_context);
+            ProductCategoryRepository = new ProductCategoryRepository(_context);
             ProductRepository = new ProductRepository(_context);
             UserRepository = new UserRepository(_context, _userManager, _roleManager, _signInManager, _jwtProvider);
         }
 
-        public IRoleRepository<Role> RoleRepository { get; set; }
-        public ILocationRepository LocationRepository { get; set; }
+        public IRoleRepository<Role> RoleRepository { get; }
+        public ILocationRepository LocationRepository { get; }
         public ICartRepository CartRepository { get; }
+        public IRepository<ProductCategory> ProductCategoryRepository { get; }
         public IRepository<Product> ProductRepository { get; }
         public IUserRepository<User> UserRepository { get; }
 
