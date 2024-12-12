@@ -74,7 +74,10 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Product> CreateAsync(Product entity)
         {
-            entity.Image = _faker.Image.PlaceholderUrl(width: 640, height: 480);
+            if (!string.IsNullOrWhiteSpace(entity.Image))
+            {
+                entity.Image = _faker.Image.PlaceholderUrl(width: 640, height: 480);
+            }
 
             var entry = await _context.Products.AddAsync(entity);
             return entry.Entity;
