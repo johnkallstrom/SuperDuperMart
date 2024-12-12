@@ -30,7 +30,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             int? userId = await HttpService.PostAndRetrieveIntAsync($"{Endpoints.Users}", Dto);
             if (userId.HasValue)
             {
-                // Todo: Give the new user a shopping caaaaaaaaaart yaass 💫
+                await HttpService.PostAsync(Endpoints.Carts, new CartCreateDto { Purchased = false, UserId = userId.Value });
+
                 NavigationManager.NavigateTo("/manage/users");
             }
             else

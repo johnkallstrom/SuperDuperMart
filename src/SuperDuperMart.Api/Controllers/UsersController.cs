@@ -71,16 +71,6 @@ namespace SuperDuperMart.Api.Controllers
                 {
                     await _unitOfWork.UserRepository.AddToRoleAsync(user, role.Name);
                 }
-
-                var cart = new Cart
-                {
-                    Purchased = false,
-                    TotalCost = 0,
-                    UserId = result.UserId
-                };
-
-                await _unitOfWork.CartRepository.CreateAsync(cart);
-                await _unitOfWork.SaveAsync();
             }
 
             return Ok(result.UserId);
