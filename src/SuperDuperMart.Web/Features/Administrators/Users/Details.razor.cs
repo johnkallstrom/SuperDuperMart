@@ -31,7 +31,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         [Parameter]
         public int Id { get; set; }
 
-        public bool IsCurrentUserBeingUpdated { get; set; } = false;
+        public bool IsCurrentUserBeingUpdated { get; set; }
 
         private bool Loading = true;
 
@@ -42,7 +42,7 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
         {
             await GetUser();
             await GetRoles();
-            await DetermineIfCurrentUserIsBeingUpdated();
+            await CheckIfCurrentUserIsBeingUpdated();
         }
 
         private async Task GetUser()
@@ -78,7 +78,16 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             if (modalResult.Confirmed)
             {
                 await HttpService.DeleteAsync($"{Endpoints.Users}/{Id}");
-                NavigationManager.NavigateTo("/manage/users");
+
+                if (IsCurrentUserBeingUpdated)
+                {
+                    await AuthenticationService.EndUserSessionAsync();
+                    NavigationManager.NavigateTo("/login");
+                }
+                else
+                {
+                    NavigationManager.NavigateTo("/manage/users");
+                }
             }
         }
 
@@ -88,16 +97,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
             RoleOptions = roles is not null ? roles.ToSelectOptionList() : [];
         }
 
-        private async Task DetermineIfCurrentUserIsBeingUpdated()
+        private async Task CheckIfCurrentUserIsBeingUpdated()
         {
-            int userToUpdateId = Id;
+            var user = await AuthenticationService.GetCurrentUserAsync();
 
-            var currentUser = await AuthenticationService.GetCurrentUserAsync();
-            int? currentUserId = currentUser.FindUserIdentifier();
-
-            if (currentUserId.HasValue)
+            int? userId = user.FindUserIdentifier();
+            if (userId.HasValue)
             {
-                IsCurrentUserBeingUpdated = userToUpdateId.Equals(currentUserId.Value);
+                IsCurrentUserBeingUpdated = Id.Equals(userId.Value);
             }
         }
 
