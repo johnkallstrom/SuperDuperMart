@@ -1,5 +1,6 @@
 ﻿using Blazored.Toast;
 using Blazored.Toast.Services;
+using SuperDuperMart.Web.Extensions;
 using SuperDuperMart.Web.Features.Components.Toasts;
 
 namespace SuperDuperMart.Web.Features.Administrators.Products
@@ -26,7 +27,8 @@ namespace SuperDuperMart.Web.Features.Administrators.Products
 
         private async Task GetCategories()
         {
-            var categories = await HttpService.GetAsync<IEnumerable<ProductCategoryDto>>($"{Endpoints.Products}");
+            var categories = await HttpService.GetAsync<IEnumerable<ProductCategoryDto>>(Endpoints.ProductCategories);
+            CategoryOptions = categories is not null ? categories.ToSelectOptionList() : [];
         }
 
         private async Task Submit()

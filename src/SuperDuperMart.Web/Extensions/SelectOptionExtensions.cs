@@ -3,6 +3,20 @@
     public static class SelectOptionExtensions
     {
         /// <summary>
+        /// Map ProductCategoryDto to SelectOption with 'Name' as text and 'Id' as value.
+        /// </summary>
+        /// <param name="dtos"></param>
+        /// <returns></returns>
+        public static List<SelectOption> ToSelectOptionList(this IEnumerable<ProductCategoryDto> dtos)
+        {
+            ArgumentNullException.ThrowIfNull(dtos);
+
+            return dtos
+                .Select(d => new SelectOption(d.Name, d.Id.ToString()))
+                .ToList();
+        }
+
+        /// <summary>
         /// Map RoleDto to SelectOption with 'Name' as text and 'Id' as value.
         /// </summary>
         /// <param name="dtos"></param>
