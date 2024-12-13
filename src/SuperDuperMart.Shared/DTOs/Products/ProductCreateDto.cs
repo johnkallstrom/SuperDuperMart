@@ -19,6 +19,6 @@ namespace SuperDuperMart.Shared.DTOs.Products
         public string Material { get; set; } = default!;
 
         [Required(ErrorMessage = "Please choose a category")]
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } = 1;
     }
 }

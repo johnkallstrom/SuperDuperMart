@@ -4,7 +4,7 @@
     {
         public static string ToSimplifiedDateFormat(this DateTime date)
         {
-            return date.ToString("MMM dd");
+            return date.ToString("MMMM dd");
         }
     }
 }

@@ -12,9 +12,9 @@ else
     @if (Model != null)
     {
         <div class="row">
-            <div class="col-sm-8 col-lg-6">
+            <div class="col-sm-10 col-lg-8">
                 <div class="card shadow">
-                    <h5 class="card-header">Product</h5>
+                    <h5 class="card-header">Product Details</h5>
                     @if (!string.IsNullOrWhiteSpace(Model.Image))
                     {
                         <img src="@Model.Image" class="card-img-top rounded mx-3 mt-3 w-50" alt="product-image">
@@ -22,39 +22,45 @@ else
                     <div class="card-body">
                         <EditForm Model="@Model" OnValidSubmit="UpdateProduct">
                             <DataAnnotationsValidator />
-                            <div class="mb-3">
-                                <label class="form-label">Category</label>
-                                <InputSelect class="form-select" for="Model.CategoryId" @bind-Value="Model.CategoryId">
-                                    @foreach (var option in CategoryOptions)
-                                    {
-                                        <option value="@option.Value">@option.Text</option>
-                                    }
-                                </InputSelect>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Image</label>
-                                <InputText type="text" class="form-control" @bind-Value="Model.Image" />
-                                <ValidationMessage For="() => Model.Image" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Name">Name</label>
-                                <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
-                                <ValidationMessage For="() => Model.Name" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Description">Description</label>
-                                <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="5" />
-                                <ValidationMessage For="() => Model.Description" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Price">Price</label>
-                                <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
-                                <ValidationMessage For="() => Model.Price" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="@Model.Material">Material</label>
-                                <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
-                                <ValidationMessage For="() => Model.Material" />
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="@Model.Name">Name</label>
+                                        <InputText type="text" class="form-control" for="Model.Name" @bind-Value="Model.Name" />
+                                        <ValidationMessage For="() => Model.Name" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="@Model.Description">Description</label>
+                                        <InputTextArea type="text" class="form-control" for="Model.Description" @bind-Value="Model.Description" rows="8" />
+                                        <ValidationMessage For="() => Model.Description" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label class="form-label">Image</label>
+                                        <InputText type="text" class="form-control" @bind-Value="Model.Image" />
+                                        <ValidationMessage For="() => Model.Image" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Category</label>
+                                        <InputSelect class="form-select" for="Model.CategoryId" @bind-Value="Model.CategoryId">
+                                            @foreach (var option in CategoryOptions)
+                                            {
+                                                <option value="@option.Value">@option.Text</option>
+                                            }
+                                        </InputSelect>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="@Model.Price">Price</label>
+                                        <InputNumber type="number" class="form-control" for="Model.Price" @bind-Value="Model.Price" />
+                                        <ValidationMessage For="() => Model.Price" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="@Model.Material">Material</label>
+                                        <InputText type="text" class="form-control" for="Model.Material" @bind-Value="Model.Material" />
+                                        <ValidationMessage For="() => Model.Material" />
+                                    </div>
+                                </div>
                             </div>
                             <Button Type="ButtonType.Submit" Label="Save" Color="Color.Dark" />
                             <Button Type="ButtonType.Button" Label="Delete" Color="Color.Danger" OnClick="DeleteProduct" />

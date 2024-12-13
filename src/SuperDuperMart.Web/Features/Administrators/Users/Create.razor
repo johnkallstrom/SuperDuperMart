@@ -1,11 +1,12 @@
 ﻿@page "/manage/users/create"
 @attribute [Authorize(Roles = Roles.Administrator)]
 
-<PageTitle>SuperDuperMart - Create User</PageTitle>
+<PageTitle>SuperDuperMart - New User</PageTitle>
 
 <div class="row">
     <div class="col-sm-10 col-lg-8">
         <div class="card shadow">
+            <h5 class="card-header">New User</h5>
             <div class="card-body">
                 <EditForm Model="@Dto" OnValidSubmit="Submit">
                     <DataAnnotationsValidator />
