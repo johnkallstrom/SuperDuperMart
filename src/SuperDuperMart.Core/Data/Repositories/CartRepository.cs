@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -111,6 +112,11 @@ namespace SuperDuperMart.Core.Data.Repositories
                 item.Quantity--;
                 _context.CartItems.Update(item);
             }
+        }
+
+        public Task<Cart?> GetByIdAsync<TProperty>(int id, Expression<Func<Cart, TProperty>> include)
+        {
+            throw new NotImplementedException();
         }
     }
 }

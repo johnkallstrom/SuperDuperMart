@@ -42,5 +42,10 @@ namespace SuperDuperMart.Core.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Task<ProductCategory?> GetByIdAsync<TProperty>(int id, Expression<Func<ProductCategory, TProperty>> include)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

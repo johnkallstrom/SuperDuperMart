@@ -24,7 +24,7 @@
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+            var product = await _unitOfWork.ProductRepository.GetByIdAsync(id, p => p.Category);
             if (product is null)
             {
                 return NotFound();

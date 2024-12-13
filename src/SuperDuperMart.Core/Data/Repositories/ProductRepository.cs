@@ -1,5 +1,6 @@
 ﻿using Bogus;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace SuperDuperMart.Core.Data.Repositories
 {
@@ -71,8 +72,14 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<Product?> GetByIdAsync(int id)
         {
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            return product;
+        }
+
+        public async Task<Product?> GetByIdAsync<TProperty>(int id, Expression<Func<Product, TProperty>> include)
+        {
             var product = await _context.Products
-                .Include(p => p.Category)
+                .Include(include)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             return product;

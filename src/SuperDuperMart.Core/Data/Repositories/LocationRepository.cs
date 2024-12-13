@@ -47,5 +47,10 @@ namespace SuperDuperMart.Core.Data.Repositories
         }
 
         public void Delete(Location entity) => _context.Locations.Remove(entity);
+
+        public Task<Location?> GetByIdAsync<TProperty>(int id, Expression<Func<Location, TProperty>> include)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
