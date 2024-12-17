@@ -10,12 +10,16 @@
 
         public PagedListDto<UserDto> Model { get; set; } = default!;
 
-        private bool _loading = true;
+        private string? SortBy;
+        private string? SortOrder;
+        private bool Loading = true;
 
         protected override async Task OnInitializedAsync()
         {
             int pageNumber = Configuration.GetValue<int>("Pagination:Default:PageNumber");
             int pageSize = Configuration.GetValue<int>("Pagination:Default:PageSize");
+            SortBy = "Created";
+            SortOrder = "Desc";
 
             Model = new(pageNumber, pageSize);
 
@@ -24,7 +28,7 @@
 
         private async Task GetUsers(int pageNumber, int pageSize)
         {
-            string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}";
+            string url = $"{Endpoints.Users}?pageNumber={pageNumber}&pageSize={pageSize}&sortBy={SortBy}&sortOrder={SortOrder}";
 
             var result = await HttpService.GetAsync<PagedListDto<UserDto>>(url);
             if (result != null)
@@ -32,7 +36,7 @@
                 Model = result;
             }
 
-            _loading = false;
+            Loading = false;
         }
 
         private async Task HandlePreviousClick(int pageNumber)

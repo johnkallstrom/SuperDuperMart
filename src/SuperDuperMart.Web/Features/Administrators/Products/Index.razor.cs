@@ -12,7 +12,7 @@
 
         private string? SortBy;
         private string? SortOrder;
-        private bool _loading = true;
+        private bool Loading = true;
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,7 +36,7 @@
                 Model = result;
             }
 
-            _loading = false;
+            Loading = false;
         }
 
         private async Task HandlePreviousClick(int pageNumber)
