@@ -37,14 +37,14 @@ namespace SuperDuperMart.Core.Data.Repositories
 
         public async Task<PagedList<User>> GetAsync(IQueryParams parameters)
         {
-            var users = Enumerable.Empty<User>();
-            var totalRecords = await _context.Users.CountAsync();
+            var query = _context.Users.AsQueryable();
+            int totalRecords = await _context.Users.CountAsync();
 
             if (!parameters.PageNumber.HasValue ||
                 !parameters.PageSize.HasValue ||
                 parameters.PageNumber.Value <= 0)
             {
-                users = await _context.Users
+                var users = await _context.Users
                     .Include(u => u.Location)
                     .ToListAsync();
 
@@ -53,10 +53,25 @@ namespace SuperDuperMart.Core.Data.Repositories
 
             decimal totalPages = parameters.PageSize.HasValue ? Math.Ceiling((decimal)totalRecords / parameters.PageSize.Value) : 0;
 
-            users = await _context.Users
-                .Include(u => u.Location)
+            switch(parameters.SortBy)
+            {
+                case nameof(User.Created):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(u => u.Created) : query.OrderBy(u => u.Created);
+                    break;
+                case nameof(User.LastModified):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(u => u.LastModified) : query.OrderBy(u => u.LastModified);
+                    break;
+                case nameof(User.UserName):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(u => u.UserName) : query.OrderBy(u => u.UserName);
+                    break;
+            }
+
+            query = query
                 .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
-                .Take(parameters.PageSize.Value)
+                .Take(parameters.PageSize.Value);
+
+            var pagedUsers = await query
+                .Include(u => u.Location)
                 .ToListAsync();
 
             return new PagedList<User>(
@@ -64,7 +79,7 @@ namespace SuperDuperMart.Core.Data.Repositories
                 parameters.PageSize.Value,
                 (int)totalPages,
                 totalRecords,
-                users);
+                pagedUsers);
         }
 
         public async Task<User?> GetByIdAsync(int id)

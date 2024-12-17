@@ -58,7 +58,7 @@ namespace SuperDuperMart.Core.Data.Repositories
                 .Skip((parameters.PageNumber.Value - 1) * parameters.PageSize.Value)
                 .Take(parameters.PageSize.Value);
 
-            var data = await query
+            var pagedProducts = await query
                 .Include(p => p.Category)
                 .ToListAsync();
 
@@ -67,7 +67,7 @@ namespace SuperDuperMart.Core.Data.Repositories
                 parameters.PageSize.Value,
                 (int)totalPages,
                 totalRecords,
-                data);
+                pagedProducts);
         }
 
         public async Task<Product?> GetByIdAsync(int id)
