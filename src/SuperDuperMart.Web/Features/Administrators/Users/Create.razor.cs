@@ -27,10 +27,14 @@ namespace SuperDuperMart.Web.Features.Administrators.Users
 
         private async Task Submit()
         {
-            int? userId = await HttpService.PostAndRetrieveIntAsync($"{Endpoints.Users}", Dto);
+            int? userId = await HttpService.PostAndRetrieveIntAsync(Endpoints.Users, Dto);
             if (userId.HasValue && userId.Value > 0)
             {
-                await HttpService.PostAsync(Endpoints.Carts, new CartCreateDto { Purchased = false, UserId = userId.Value });
+                await HttpService.PostAsync(Endpoints.Carts, new CartCreateDto 
+                { 
+                    Purchased = false, 
+                    UserId = userId.Value 
+                });
 
                 NavigationManager.NavigateTo("/manage/users");
             }
