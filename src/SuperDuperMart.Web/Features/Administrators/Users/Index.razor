@@ -21,7 +21,6 @@ else
         <table class="table table-bordered">
             <thead class="table-light">
                 <tr>
-                    <th>#</th>
                     <th>Avatar</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -35,7 +34,6 @@ else
                 @foreach (var user in Model.Data)
                 {
                     <tr>
-                        <td>@user.Id</td>
                         <td>
                             <img src="@user.Avatar" width="30" height="30" />
                         </td>
