@@ -1,6 +1,6 @@
 ﻿namespace SuperDuperMart.Web.Features.Components
 {
-    public partial class SortDropdown
+    public partial class SortableDropdown
     {
         [Parameter, EditorRequired]
         public List<SelectOption> Options { get; set; } = default!;

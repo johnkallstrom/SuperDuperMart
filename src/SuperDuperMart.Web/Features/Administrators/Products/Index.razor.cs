@@ -39,9 +39,12 @@
             Loading = false;
         }
 
-        private void HandleTableHeaderClick()
+        private async void HandleSortableTableHeaderClick((string SortBy, string SortOrder) result)
         {
-            Console.WriteLine("Table Header Clicked!");
+            SortBy = result.SortBy;
+            SortOrder = result.SortOrder;
+
+            await GetProducts(Model.PageNumber, Model.PageSize);
         }
 
         private async Task HandlePreviousClick(int pageNumber)

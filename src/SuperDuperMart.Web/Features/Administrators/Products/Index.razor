@@ -26,12 +26,11 @@ else
                     <th>Price</th>
                     <th>Material</th>
                     <th>Category</th>
-                    <th>
-                        <div class="d-inline" role="button" @onclick=HandleTableHeaderClick>
-                            <span>Created</span>
-                            <i class="bi bi-caret-down-fill"></i>
-                        </div>
-                    </th>
+                    <SortableTableHeader 
+                        Label="Created" 
+                        SortBy="@SortBy" 
+                        SortOrder="@SortOrder" 
+                        OnClick="HandleSortableTableHeaderClick" />
                     <th>Last modified</th>
                     <th>Details</th>
                 </tr>

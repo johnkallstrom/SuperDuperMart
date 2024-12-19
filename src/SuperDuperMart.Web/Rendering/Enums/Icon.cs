@@ -2,10 +2,12 @@
 {
     public enum Icon
     {
+        None,
+        CaretUp,
+        CaretDown,
         Plus,
         Pencil,
         Dash,
-        Trash,
-        None
+        Trash
     }
 }

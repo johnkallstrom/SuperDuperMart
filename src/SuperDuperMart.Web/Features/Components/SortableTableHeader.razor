@@ -1,0 +1,14 @@
+﻿<th>
+    <div class="d-inline" role="button" @onclick="HandleClick">
+        <span class="me-1">@Label</span>
+        @switch (Icon)
+        {
+            case Icon.CaretUp:
+                <i class="bi bi-caret-up-fill"></i>
+                break;
+            case Icon.CaretDown:
+                <i class="bi bi-caret-down-fill"></i>
+                break;
+        }
+    </div>
+</th>
