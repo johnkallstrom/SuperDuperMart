@@ -39,6 +39,11 @@
             Loading = false;
         }
 
+        private void HandleTableHeaderClick()
+        {
+            Console.WriteLine("Table Header Clicked!");
+        }
+
         private async Task HandlePreviousClick(int pageNumber)
         {
             Model.PageNumber = pageNumber;

@@ -46,6 +46,9 @@ namespace SuperDuperMart.Core.Data.Repositories
                 case nameof(Product.Created):
                     query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.Created) : query.OrderBy(p => p.Created);
                     break;
+                case nameof(Product.LastModified):
+                    query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.LastModified) : query.OrderBy(p => p.LastModified);
+                    break;
                 case nameof(Product.Name):
                     query = parameters.SortOrder == "Desc" ? query.OrderByDescending(p => p.Name) : query.OrderBy(p => p.Name);
                     break;
