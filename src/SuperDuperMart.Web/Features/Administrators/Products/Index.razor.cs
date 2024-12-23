@@ -39,12 +39,10 @@
             Loading = false;
         }
 
-        private async void HandleSortableTableHeaderClick((string SortBy, string SortOrder) result)
+        private void HandleTableHeaderClick(string? value)
         {
-            SortBy = result.SortBy;
-            SortOrder = result.SortOrder;
-
-            await GetProducts(Model.PageNumber, Model.PageSize);
+            if (!string.IsNullOrWhiteSpace(value)) Console.WriteLine(value);
+            else Console.WriteLine("Empty...");
         }
 
         private async Task HandlePreviousClick(int pageNumber)
