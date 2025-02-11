@@ -10,3 +10,4 @@ global using SuperDuperMart.Shared.DTOs.Products;
 global using SuperDuperMart.Shared.DTOs.Users;
 global using AutoMapper;
 global using SuperDuperMart.Core.Parameters;
+global using Serilog;

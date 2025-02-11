@@ -3,7 +3,12 @@ using SuperDuperMart.Core.Extensions;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSerilog();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
