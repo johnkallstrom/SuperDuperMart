@@ -1,5 +1,6 @@
 ﻿namespace SuperDuperMart.Api.Controllers
 {
+    [HasAccess]
     [Route("api/product-categories")]
     [ApiController]
     public class ProductCategoriesController : ControllerBase

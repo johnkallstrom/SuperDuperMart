@@ -1,6 +1,4 @@
-﻿using SuperDuperMart.Shared.DTOs.Carts;
-
-namespace SuperDuperMart.Api.Controllers
+﻿namespace SuperDuperMart.Api.Controllers
 {
     [HasAccess]
     [Route("api/[controller]")]
