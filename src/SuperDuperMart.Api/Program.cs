@@ -3,12 +3,12 @@ using SuperDuperMart.Core.Extensions;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
-Log.Logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateLogger();
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSerilog();
+builder.Services.AddSerilog(config =>
+{
+    config.ReadFrom.Configuration(builder.Configuration);
+    config.WriteTo.Console();
+});
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -41,6 +41,8 @@ builder.Services.AddProblemDetails();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
+
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
