@@ -4,8 +4,17 @@ namespace SuperDuperMart.Api.ExceptionHandlers
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {
+        private readonly ILogger<GlobalExceptionHandler> _logger;
+
+        public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
+        {
+            _logger = logger;
+        }
+
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
+            _logger.Log(LogLevel.Error, exception.Message);
+
             var problemDetails = new ProblemDetails
             {
                 Title = "Internal Server Error",
